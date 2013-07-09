@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       js: {
-        src: ['external_source/external.js','barista/barista.js'],
+        src: ['external_source/external.js','source/barista.js'],
         dest: '<%= pkg.name %>.main.min.js'
       }
     },
