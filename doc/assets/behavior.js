@@ -23,11 +23,11 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         {
           "type": "heading",
           "data": {
-            "level": 3,
-            "title": "Connectivity Map and LINCS javascript components",
-            "slug": "connectivity-map-and-lincs-javascript-components"
+            "level": 2,
+            "title": "### Connectivity Map and LINCS javascript components",
+            "slug": "-connectivity-map-and-lincs-javascript-components"
           },
-          "depth": 3
+          "depth": 2
         }
       ]
     }, {
