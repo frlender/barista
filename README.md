@@ -2,6 +2,15 @@
 
 # **Barista.js**
 ### Connectivity Map and LINCS javascript components
+------
 
+## **Models**
 
-use the search box and table of contents at right to explore barista source code and documentation
+## **Views**
+
+## **Collections**
+
+## **Utils**
+
+[Developer Documentation](http://url.com/)
+
