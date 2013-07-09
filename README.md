@@ -12,5 +12,5 @@
 
 ## **Utils**
 
-[Developer Documentation](http://cmap.github.io/barista/)
+[Developer Documentation](http://cmap.github.io/barista/doc)
 
