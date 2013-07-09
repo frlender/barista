@@ -1,0 +1,74 @@
+.cmap-shadow{
+	-webkit-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
+	-moz-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
+	box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
+	min-height: 160px;
+}
+
+.cmap-spacer{
+	min-height: 10px;
+}
+
+.cmap-link{
+	font-family: Tahoma;
+	font-size: 9pt;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.cmap-brand-text{
+	font-family:Memphis LT Std; 
+	font-weight: bold; 
+	font-size: 13pt; 
+	letter-spacing: 2pt;  
+	color: #FF6633; 
+	text-transform: uppercase;
+}
+
+.cmap-header-link{
+	font-size: 13pt; 
+	letter-spacing: 2pt;
+	color: #FF6633;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.cmap-title-text{
+	font-family:Helvetica Neue; 
+	font-weight: medium; 
+	font-size: 36pt; 
+	text-transform: uppercase;
+}
+
+.cmap-subhead-text{
+	font-family:Helvetica Neue; 
+	font-weight: regular; 
+	font-size: 14pt; 
+	text-transform: capitalize;
+}
+
+.cmap-center-text{
+	text-align: center;
+}
+
+.cmap-right-text{
+	text-align: right;
+}
+
+.cmap-footer-image{
+	width: 40px;
+	height: 40px;
+}
+
+/*svg axis styling*/
+/*.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}*/

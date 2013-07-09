@@ -11,43 +11,43 @@ module.exports = function(grunt) {
         separator: '\n'
       },
       js_barista_utils: {
-        src: ['barista/utils/**/*.js','!barista/utils/utils.main.js'],
-        dest: 'barista/utils/utils.main.js'
+        src: ['source/utils/**/*.js','!source/utils/utils.main.js'],
+        dest: 'source/utils/utils.main.js'
       },
       js_barista_models: {
-        src: ['barista/models/**/*.js','!barista/models/models.main.js'],
-        dest: 'barista/models/models.main.js'
+        src: ['source/models/**/*.js','!source/models/models.main.js'],
+        dest: 'source/models/models.main.js'
       },
       js_barista_views: {
-        src: ['barista/views/**/*.js','!barista/views/views.main.js'],
-        dest: 'barista/views/views.main.js'
+        src: ['source/views/**/*.js','!source/views/views.main.js'],
+        dest: 'source/views/views.main.js'
       },
       js_barista_collections: {
-        src: ['barista/collections/**/*.js','!barista/collections/collections.main.js'],
-        dest: 'barista/collections/collections.main.js'
+        src: ['source/collections/**/*.js','!source/collections/collections.main.js'],
+        dest: 'source/collections/collections.main.js'
       },
       js_barista_main: {
-        src: ['barista/utils/utils.main.js',
-              'barista/models/models.main.js',
-              'barista/views/views.main.js',
-              'barista/collections/collections.main.js',
-              'barista/tile.js',
+        src: ['source/utils/utils.main.js',
+              'source/models/models.main.js',
+              'source/views/views.main.js',
+              'source/collections/collections.main.js',
+              'source/tile.js'
               ],
-        dest: 'barista/barista.js'
+        dest: 'source/barista.js'
       },
       js_external: {
-        src: ['external/backgrid.min.js',
-              'external/chardinjs.min.js',
-              'external/d3.parcoords.js',
-              'external/FileSaver.min.js',
-              'external/handlebars.js',
-              'external/intro.min.js',
-              'external/rgbcolor.js',
-              'external/canvg.js',
-              'external/Blob.js',
-              'external/canvas-toBlob.js'
+        src: ['external_source/backgrid.min.js',
+              'external_source/chardinjs.min.js',
+              'external_source/d3.parcoords.js',
+              'external_source/FileSaver.min.js',
+              'external_source/handlebars.js',
+              'external_source/intro.min.js',
+              'external_source/rgbcolor.js',
+              'external_source/canvg.js',
+              'external_source/Blob.js',
+              'external_source/canvas-toBlob.js'
               ],
-        dest: 'external/external.js'
+        dest: 'external_source/external.js'
       }
     },
 
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       js: {
-        src: ['external/external.js','barista/barista.js'],
+        src: ['external_source/external.js','barista/barista.js'],
         dest: '<%= pkg.name %>.main.min.js'
       }
     },
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
                                   'css/external/tipsy.css']
         }
       },
-      cf_internal: {
+      internal: {
         files: {
           'css/internal.css': ['css/internal/barista.css']
         }
@@ -87,11 +87,11 @@ module.exports = function(grunt) {
 
     // configure the generation of docs with groc
     groc: {
-      javascript: ["barista/**/*.js","README.md"],
+      javascript: ["source/**/*.js","README.md"],
       options: {
         index: 'README.md',
-        out: "./",
-        except: ['barista/**/*.main.js','barista/barista.js']
+        strip: 'source',
+        except: ['source/**/*.main.js','source/barista.js']
       }
     },
 
