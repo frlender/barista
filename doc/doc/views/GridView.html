@@ -12,6 +12,8 @@ build the clickable row</p></div></div><div class="code"><div class="wrapper">  
       <span class="p">},</span>
       <span class="nx">onClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="nx">Backbone</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;grid:RowClick&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.cmap-active-grid-row&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;cmap-active-grid-row&quot;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;cmap-active-grid-row&quot;</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>build the grid</p></div></div><div class="code"><div class="wrapper">    <span class="k">this</span><span class="p">.</span><span class="nx">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Backgrid</span><span class="p">.</span><span class="nx">Grid</span><span class="p">({</span>
       <span class="nx">row</span><span class="o">:</span> <span class="nx">ClickableRow</span><span class="p">,</span>
