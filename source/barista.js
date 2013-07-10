@@ -2073,12 +2073,17 @@ TickView = Backbone.View.extend({
 
 		this.vis.select('.axis').selectAll("text")
 			.style("font-family","sans-serif")
-			.style("font-size","11px")
+			.style("font-size","11px");
 
-		// grab data from the model
+		// grab data from the model and sort it according to the values
 		var data_array = _.pairs(this.model.get('data_object'));
-		var keys = []
-		var values = []
+		data_array.sort(function(a,b){
+			if (a < b) return 1;
+			if (a > b) return -1;
+			return 0;
+		});
+		var keys = [];
+		var values = [];
 		data_array.forEach(function(category){
 			keys.push(category[0]);
 			values.push(category[1]);
