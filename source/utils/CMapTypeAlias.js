@@ -21,4 +21,4 @@ CMapPertTypeAlias = function(input_type){
 		default:
 			return {name: input_type, acronym: input_type};
 	}
-}
+};
