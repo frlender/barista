@@ -150,7 +150,7 @@ PertSearchBar = Backbone.View.extend({
 			},
 
 			// custom highlighter argument to display matched types.  
-			// Display type aliases for known pert_types
+			// Display type aliases for known pert_types.
 			highlighter: function(item){
 				if (self.cell_lines.indexOf(item) != -1){
 					return '<div><span class="label" style="background-color: #CC79A7">Cellular Context</span>  ' + item  +  '</div>';
