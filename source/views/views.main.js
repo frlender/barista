@@ -543,6 +543,8 @@ GridView = Backbone.View.extend({
 			},
 			onClick: function () {
 				Backbone.trigger("grid:RowClick", this.model);
+				$(".cmap-active-grid-row").removeClass("cmap-active-grid-row");
+				this.$el.addClass("cmap-active-grid-row");
 			}
 		});
 
