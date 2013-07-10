@@ -255,6 +255,7 @@ TickView = Backbone.View.extend({
 
 		// draw the static category text
 		// this.vis.selectAll('.category_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.category_text').data([]).exit().remove();
 		this.category_text_selection = this.fg_layer.selectAll('.category_text').data(keys)
 		this.category_text_selection.enter().append("text")
 							.attr("class","category_text")
