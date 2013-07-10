@@ -152,14 +152,18 @@ PertSearchBar = Backbone.View.extend({
 			// custom highlighter argument to display matched types.  
 			// Display type aliases for known pert_types.
 			highlighter: function(item){
+				var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"]
 				if (self.cell_lines.indexOf(item) != -1){
 					return '<div><span class="label" style="background-color: #CC79A7">Cellular Context</span>  ' + item  +  '</div>';
 				}
-				if (object_map[item].pert_type === 'trt_sh' || object_map[item].pert_type === 'trt_oe'){
+				if (genetic_types.indexOf(object_map[item].pert_type) != -1){
 					return '<div><span class="label" style="background-color: #0072B2">Genetic Reagent</span>  ' + item  +  '</div>';
 				}
 				if (object_map[item].pert_type === 'trt_cp' ){
 					return '<div><span class="label" style="background-color: #E69F00">Chemical Reagent</span>  ' + item  +  '</div>';
+				}
+				if (object_map[item].pert_type === 'trt_sh.css' ){
+					return '<div><span class="label" style="background-color: #009E73">Seed Sequence</span>  ' + item  +  '</div>';
 				}else{
 					return '<div><span class="label">' + object_map[item].pert_type + '</span>  ' + item  +  '</div>';
 				}
