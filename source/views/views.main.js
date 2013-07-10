@@ -1681,6 +1681,7 @@ TickView = Backbone.View.extend({
 			if (a[1] > b[1]) return -1;
 			return 0;
 		});
+		console.log(data_array);
 		var keys = [];
 		var values = [];
 		data_array.forEach(function(category){
