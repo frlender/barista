@@ -1917,6 +1917,8 @@ PertSearchBar = Backbone.View.extend({
 				}
 				if (object_map[item].pert_type === 'trt_cp' ){
 					return '<div><span class="label" style="background-color: #E69F00">Chemical Reagent</span>  ' + item  +  '</div>';
+				}else{
+					return '<div><span class="label">' + object_map[item].pert_type + '</span>  ' + item  +  '</div>';
 				}
 			}
 

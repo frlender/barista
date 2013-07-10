@@ -125,6 +125,8 @@ in the highlighter function below</p></div></div><div class="code"><div class="w
         <span class="p">}</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">object_map</span><span class="p">[</span><span class="nx">item</span><span class="p">].</span><span class="nx">pert_type</span> <span class="o">===</span> <span class="s1">&#39;trt_cp&#39;</span> <span class="p">){</span>
           <span class="k">return</span> <span class="s1">&#39;&lt;div&gt;&lt;span class=&quot;label&quot; style=&quot;background-color: #E69F00&quot;&gt;Chemical Reagent&lt;/span&gt;  &#39;</span> <span class="o">+</span> <span class="nx">item</span>  <span class="o">+</span>  <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+          <span class="k">return</span> <span class="s1">&#39;&lt;div&gt;&lt;span class=&quot;label&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">object_map</span><span class="p">[</span><span class="nx">item</span><span class="p">].</span><span class="nx">pert_type</span> <span class="o">+</span> <span class="s1">&#39;&lt;/span&gt;  &#39;</span> <span class="o">+</span> <span class="nx">item</span>  <span class="o">+</span>  <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
         <span class="p">}</span>
       <span class="p">}</span>
 
