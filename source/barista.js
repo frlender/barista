@@ -2093,7 +2093,6 @@ TickView = Backbone.View.extend({
 			if (arrayAverage(a[1]) > arrayAverage(b[1])) return -1;
 			return 0;
 		});
-		console.log(data_array);
 		var keys = [];
 		var values = [];
 		data_array.forEach(function(category){
@@ -2165,10 +2164,15 @@ TickView = Backbone.View.extend({
 
 	//		tick_view.render();
 	render: function(){
-		// grab data from the model
+		// grab data from the model and sort it according to the values in the object
 		var data_array = _.pairs(this.model.get('data_object'));
-		var keys = []
-		var values = []
+		data_array = data_array.sort(function(a,b){
+			if (arrayAverage(a[1]) < arrayAverage(b[1])) return 1;
+			if (arrayAverage(a[1]) > arrayAverage(b[1])) return -1;
+			return 0;
+		});
+		var keys = [];
+		var values = [];
 		data_array.forEach(function(category){
 			keys.push(category[0]);
 			values.push(category[1]);
