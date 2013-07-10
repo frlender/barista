@@ -1674,7 +1674,7 @@ TickView = Backbone.View.extend({
 			.style("font-family","sans-serif")
 			.style("font-size","11px");
 
-		// grab data from the model and sort it according to the values
+		// grab data from the model and sort it according to the values in the object
 		var data_array = _.pairs(this.model.get('data_object'));
 		data_array.sort(function(a,b){
 			if (a < b) return 1;
