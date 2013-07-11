@@ -94,20 +94,20 @@ FlatTreeMapView = Backbone.View.extend({
 		this.draw_text();
 
 		// add an invisible overlay to catch mouse events
-		this.vis_overlay.data([this.data]).selectAll("rect").data([]).exit().remove();
-		this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
-			.enter().append("rect")
-			.attr("class",this.div_string + "_cell")
-			.attr("fill",this.fg_color)
-			.attr("opacity",0)
-			.attr("x", function(d) {return d.x;})
-			.attr("y", function(d) {return d.y;})
-			.attr("width", function(d) {return d.dx;})
-			.attr("height", function(d) {return d.dy;})
-			.attr("count", function(d) {return d.count;})
-			.attr("_id", function(d) {return d._id;})
-			.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
-			.on("mouseout", function() { self.fadeOut_popover(); });
+		// this.vis_overlay.data([this.data]).selectAll("rect").data([]).exit().remove();
+		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
+		// 	.enter().append("rect")
+		// 	.attr("class",this.div_string + "_cell")
+		// 	.attr("fill",this.fg_color)
+		// 	.attr("opacity",0)
+		// 	.attr("x", function(d) {return d.x;})
+		// 	.attr("y", function(d) {return d.y;})
+		// 	.attr("width", function(d) {return d.dx;})
+		// 	.attr("height", function(d) {return d.dy;})
+		// 	.attr("count", function(d) {return d.count;})
+		// 	.attr("_id", function(d) {return d._id;})
+		// 	.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
+		// 	.on("mouseout", function() { self.fadeOut_popover(); });
 
 		// add a div for tooltips
 		this.top_svg.selectAll("." + this.div_string + "tooltips").data([]).exit().remove();
@@ -194,16 +194,16 @@ FlatTreeMapView = Backbone.View.extend({
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;});
 
-		this.vis_overlay.data([this.data]).selectAll("rect")
-			.transition().ease("cubic out").duration(500)
-			.attr("x", function(d) {return d.x;})
-			.attr("y", function(d) {return d.y;})
-			.attr("width", function(d) {return d.dx;})
-			.attr("height", function(d) {return d.dy;});
+		// this.vis_overlay.data([this.data]).selectAll("rect")
+		// 	.transition().ease("cubic out").duration(500)
+		// 	.attr("x", function(d) {return d.x;})
+		// 	.attr("y", function(d) {return d.y;})
+		// 	.attr("width", function(d) {return d.dx;})
+		// 	.attr("height", function(d) {return d.dy;});
 
 		// exit old elements
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
-		this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
+		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
