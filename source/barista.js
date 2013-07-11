@@ -410,7 +410,27 @@ TickModel = Backbone.Model.extend({
 		data_object: {}
 	}
 });
+// # **BubbleView**
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+
+// basic use:
+
+//		bubble_view = new BubbleView({el: $("target_selector")});
+
+// optional arguments:
+
+// 3.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
+// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span4"*
+
+//		bubble_view = new BubbleView({el: $("target_selector"),
+//									fg_color: "#1b9e77",
+//									span_class: "span4"});
+
 BubbleView = Backbone.View.extend({
+	// ### initialize
+	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	// template, bind model changes to view updates, and render the view
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
@@ -439,6 +459,8 @@ BubbleView = Backbone.View.extend({
 		$(window).resize(function() {self.render();} );
 	},
 
+	// ### compile_template
+	// use Handlebars to compile the template for the view
 	compile_template: function(template_string){
 		if (template_string === undefined){
 			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
@@ -450,6 +472,8 @@ BubbleView = Backbone.View.extend({
 		this.$el.append(compiled_template());
 	},
 
+	// ### render
+	// draw the view from scratch
 	render: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -761,7 +785,7 @@ FlatTreeMapView = Backbone.View.extend({
 		// grab the data from the model and plot the state of the treemap
 		this.data = this.model.get('tree_object');
 
-		// if there are no cildren in the tree_object, dim the view
+		// if there are no children in the tree_object, dim the view
 		if (this.data.children[0] === undefined){
 			this.vis.transition().duration(1).attr("opacity",0);
 		}else{
@@ -785,22 +809,24 @@ FlatTreeMapView = Backbone.View.extend({
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
-			.attr("stroke-width", 2);
-
-		//add new data if it is there
-		this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
-			.enter().append("rect")
-			.attr("class",this.div_string + "_cell")
-			.attr("fill",this.fg_color)
-			.attr("opacity",0)
-			.attr("x", function(d) {return d.x;})
-			.attr("y", function(d) {return d.y;})
-			.attr("count", function(d) {return d.count;})
-			.attr("_id", function(d) {return d._id;})
-			.attr("width", function(d) {return d.dx;})
-			.attr("height", function(d) {return d.dy;})
+			.attr("stroke-width", 2)
 			.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
 			.on("mouseout", function() { self.fadeOut_popover(); });
+
+		// //add new data if it is there
+		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
+		// 	.enter().append("rect")
+		// 	.attr("class",this.div_string + "_cell")
+		// 	.attr("fill",this.fg_color)
+		// 	.attr("opacity",0)
+		// 	.attr("x", function(d) {return d.x;})
+		// 	.attr("y", function(d) {return d.y;})
+		// 	.attr("count", function(d) {return d.count;})
+		// 	.attr("_id", function(d) {return d._id;})
+		// 	.attr("width", function(d) {return d.dx;})
+		// 	.attr("height", function(d) {return d.dy;})
+		// 	.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
+		// 	.on("mouseout", function() { self.fadeOut_popover(); });
 
 		// transition elements
 		this.vis.data([this.data]).selectAll("rect")
@@ -1235,11 +1261,16 @@ PertCountView = Backbone.View.extend({
 		this.compiled_template = compiled_template;
 		this.$el.append(compiled_template());
 	},
+
+	// ### redraw
+	// completely redraw the view.
 	redraw: function(){
 		this.init_panel();
 		this.render();
 	},
 
+	// ### init_panel
+	// initialize the static parts of the view's panel
 	init_panel: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -1395,7 +1426,7 @@ PertCountView = Backbone.View.extend({
 // A Backbone.View that shows the name and short description of a single purturbagen.  This view is
 // frequently paired with a PertDetailModel.
 
-//		pert_detail_view = new PertDetailView();
+//		pert_detail_view = new PertDetailView({el: $("target_selector")});
 
 // optional arguments:
 

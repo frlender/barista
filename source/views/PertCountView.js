@@ -82,11 +82,16 @@ PertCountView = Backbone.View.extend({
 		this.compiled_template = compiled_template;
 		this.$el.append(compiled_template());
 	},
+
+	// ### redraw
+	// completely redraw the view.
 	redraw: function(){
 		this.init_panel();
 		this.render();
 	},
 
+	// ### init_panel
+	// initialize the static parts of the view's panel
 	init_panel: function(){
 		// stuff this into a variable for later use
 		var self = this;

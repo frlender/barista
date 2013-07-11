@@ -3,7 +3,7 @@
 // A Backbone.View that shows the name and short description of a single purturbagen.  This view is
 // frequently paired with a PertDetailModel.
 
-//		pert_detail_view = new PertDetailView();
+//		pert_detail_view = new PertDetailView({el: $("target_selector")});
 
 // optional arguments:
 

@@ -142,7 +142,7 @@ FlatTreeMapView = Backbone.View.extend({
 		// grab the data from the model and plot the state of the treemap
 		this.data = this.model.get('tree_object');
 
-		// if there are no cildren in the tree_object, dim the view
+		// if there are no children in the tree_object, dim the view
 		if (this.data.children[0] === undefined){
 			this.vis.transition().duration(1).attr("opacity",0);
 		}else{
@@ -166,22 +166,24 @@ FlatTreeMapView = Backbone.View.extend({
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
-			.attr("stroke-width", 2);
-
-		//add new data if it is there
-		this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
-			.enter().append("rect")
-			.attr("class",this.div_string + "_cell")
-			.attr("fill",this.fg_color)
-			.attr("opacity",0)
-			.attr("x", function(d) {return d.x;})
-			.attr("y", function(d) {return d.y;})
-			.attr("count", function(d) {return d.count;})
-			.attr("_id", function(d) {return d._id;})
-			.attr("width", function(d) {return d.dx;})
-			.attr("height", function(d) {return d.dy;})
+			.attr("stroke-width", 2)
 			.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
 			.on("mouseout", function() { self.fadeOut_popover(); });
+
+		// //add new data if it is there
+		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
+		// 	.enter().append("rect")
+		// 	.attr("class",this.div_string + "_cell")
+		// 	.attr("fill",this.fg_color)
+		// 	.attr("opacity",0)
+		// 	.attr("x", function(d) {return d.x;})
+		// 	.attr("y", function(d) {return d.y;})
+		// 	.attr("count", function(d) {return d.count;})
+		// 	.attr("_id", function(d) {return d._id;})
+		// 	.attr("width", function(d) {return d.dx;})
+		// 	.attr("height", function(d) {return d.dy;})
+		// 	.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
+		// 	.on("mouseout", function() { self.fadeOut_popover(); });
 
 		// transition elements
 		this.vis.data([this.data]).selectAll("rect")

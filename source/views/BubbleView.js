@@ -1,4 +1,24 @@
+// # **BubbleView**
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+
+// basic use:
+
+//		bubble_view = new BubbleView({el: $("target_selector")});
+
+// optional arguments:
+
+// 3.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
+// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span4"*
+
+//		bubble_view = new BubbleView({el: $("target_selector"),
+//									fg_color: "#1b9e77",
+//									span_class: "span4"});
+
 BubbleView = Backbone.View.extend({
+	// ### initialize
+	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	// template, bind model changes to view updates, and render the view
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
@@ -27,6 +47,8 @@ BubbleView = Backbone.View.extend({
 		$(window).resize(function() {self.render();} );
 	},
 
+	// ### compile_template
+	// use Handlebars to compile the template for the view
 	compile_template: function(template_string){
 		if (template_string === undefined){
 			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
@@ -38,6 +60,8 @@ BubbleView = Backbone.View.extend({
 		this.$el.append(compiled_template());
 	},
 
+	// ### render
+	// draw the view from scratch
 	render: function(){
 		// stuff this into a variable for later use
 		var self = this;
