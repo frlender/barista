@@ -170,7 +170,7 @@ FlatTreeMapView = Backbone.View.extend({
 			.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
 			.on("mouseout", function() { self.fadeOut_popover(); });
 
-		// //add new data if it is there
+		// //add new data if it is there 
 		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
 		// 	.enter().append("rect")
 		// 	.attr("class",this.div_string + "_cell")
