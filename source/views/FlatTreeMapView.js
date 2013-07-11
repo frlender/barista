@@ -22,7 +22,7 @@ FlatTreeMapView = Backbone.View.extend({
 						.attr("width",this.width)
 						.attr("height",this.height);
 		this.vis = this.top_svg.append("g");
-		this.vis_overlay = this.top_svg.append("g");
+		// this.vis_overlay = this.top_svg.append("g");
 
 		// render the vis
 		this.render();
