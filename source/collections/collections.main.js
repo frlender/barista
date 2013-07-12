@@ -6,7 +6,7 @@
 
 // optional arguments:
 
-// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *Backbone.Model*
+// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
 // 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'data.json'*
 // 3.  {String}  **skip**  the skip parameter used in method calls when the collection is updated. defaults to *0*
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
@@ -18,7 +18,7 @@
 GenericJSONCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
-	model: new Backbone.Model(),
+	model: PertModel,
 
 	// #### url
     // the url from which model data is fetched
@@ -55,7 +55,7 @@ GenericJSONCollection = Backbone.Collection.extend({
 	    // fetch data from the given url
 	    $.getJSON(this.url,function(res){
             res.forEach(function(o){
-                self.add(new Backbone.Model(o));
+                self.add(new PertModel(o));
             })
         });
 	}
