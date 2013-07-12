@@ -14,7 +14,7 @@
 //											skip: 0,
 //											isLoading: false});
 
-var SummlyResultCollection = Backbone.Collection.extend({
+SummlyResultCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
 	model: SummlyResultModel,

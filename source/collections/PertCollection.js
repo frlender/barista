@@ -48,8 +48,8 @@ var PertCollection = Backbone.Collection.extend({
         this.isLoading = true;
 
         // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-        this.search_string = search_string;
-        this.search_type = search_type;
+        this.search_string = (search_string !== undefined) ? search_string : '';
+        this.search_type = (search_type !== undefined) ? search_type : '';
         this.limit = (limit !== undefined) ? limit : 30;
 
         // depending on the type of query we are making, set up the q param for the api call.
