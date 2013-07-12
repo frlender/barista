@@ -54,7 +54,7 @@ module.exports = function(grunt) {
     // configure uglification of files
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
       },
       js: {
         src: ['external_source/external.js','source/barista.js'],
