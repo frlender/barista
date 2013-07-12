@@ -2344,7 +2344,8 @@ GenericJSONCollection = Backbone.Collection.extend({
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
     getData: function(search_string,search_type,limit){
-    	// set **isLoading** to true so we don't constantly make api calls before the data comes back
+    	var self = this;
+        // set **isLoading** to true so we don't constantly make api calls before the data comes back
 	    this.isLoading = true;
 
 	    // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
@@ -2353,7 +2354,9 @@ GenericJSONCollection = Backbone.Collection.extend({
 	    this.limit = (limit !== undefined) ? limit : 30;
 
 	    // fetch data from the given url
-	    this.fetch();
+	    $.getJSON(this.url,function(res){
+            self.add(res);
+        });
 	}
 });
 // # **PertCollection**
