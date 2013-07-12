@@ -67,9 +67,9 @@ GridView = Backbone.View.extend({
 		this.collection.reset();
 		this.collection.skip = 0;
 		this.collection.getData(this.search_val,this.search_type);
-		this.resize_div();
 		this.listenToOnce(this.collection,"add", function(){
 			this.trigger("grid:ReplaceCollection");
+			this.resize_div();
 		});
 	},
 
