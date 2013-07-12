@@ -30,7 +30,7 @@ CMapFooterView = Backbone.View.extend({
 		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "http://lincscloud.org/terms-and-conditions/";
 		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['http://coreyflynn.github.io/Bellhop/img/broad_logo_small.png','http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png'];
 		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['http://www.broadinstitute.org/','http://lincscloud.org/'];
-		this.template = (this.options.template !== undefined) ? this.options.template : "../templates/CMapFooter.handlebars";
+		this.template = (this.options.template !== undefined) ? this.options.template : "http://cmap.github.io/barista/templates/CMapFooter.handlebars";
 
 		// compile the default template for the view
 		this.compile_template();
