@@ -2356,7 +2356,7 @@ GenericJSONCollection = Backbone.Collection.extend({
 	    // fetch data from the given url
 	    $.getJSON(this.url,function(res){
             res.forEach(function(o){
-                self.add(new Backbone.Model());
+                self.add(new Backbone.Model(o));
             })
         });
 	}
