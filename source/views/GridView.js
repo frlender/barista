@@ -9,7 +9,7 @@ GridView = Backbone.View.extend({
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
 
 		// set up the template to use
-		this.template = (this.options.template !== undefined) ? this.options.template : "../templates/CMapBaseGrid.handlebars";
+		this.template = (this.options.template !== undefined) ? this.options.template : "http://cmap.github.io/barista/templates/CMapBaseGrid.handlebars";
 
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new PertCollection();
