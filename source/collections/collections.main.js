@@ -53,12 +53,7 @@ GenericJSONCollection = Backbone.Collection.extend({
 	    this.limit = (limit !== undefined) ? limit : 30;
 
 	    // fetch data from the given url
-	    $.getJSON(this.url,function(res){
-            console.log(res)
-            res.forEach(function(o){
-                self.add(new Backbone.Model());
-            })
-        });
+	    this.fetch();
 	}
 });
 // # **PertCollection**
