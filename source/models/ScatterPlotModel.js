@@ -4,7 +4,7 @@
 // data object should contain attributes for each meta data category and an array of values matching the size
 // of the points in the data.  for example:
 
-// 		meta_data = {'dose: [1,2,3]', timepoint: ['6H','6H','6H']}
+//		meta_data = {'dose: [1,2,3]', timepoint: ['6H','6H','6H']}
 
 // usage:
 

@@ -4,7 +4,7 @@
 
 // basic use:
 
-// 		scatter_plot_view = new ScatterPlotView();
+//		scatter_plot_view = new ScatterPlotView();
 
 // optional arguments:
 
@@ -23,7 +23,7 @@
 //									scale_by: undefined,
 //									x_range: undefined,
 //									y_range: undefined,
-//									template: "../templates/d3_target.handlebars",});
+//									template: "templates/d3_target.handlebars",});
 
 ScatterPlotView = Backbone.View.extend({
 	// ### initialize
@@ -42,7 +42,7 @@ ScatterPlotView = Backbone.View.extend({
 		this.scale_by = (this.options.scale_by !== undefined) ? this.options.scale_by : undefined;
 
 		// set up the handlebars template to use
-		this.template = (this.options.template !== undefined) ? this.options.template : "../templates/d3_target.handlebars";
+		this.template = (this.options.template !== undefined) ? this.options.template : "templates/d3_target.handlebars";
 
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
@@ -51,7 +51,7 @@ ScatterPlotView = Backbone.View.extend({
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
-		this.compile_template();
+		this.compile_template_and_draw();
 
 		// define the location where d3 will build its plot
 		this.width = $("#" + this.div_string).outerWidth();
