@@ -70,17 +70,30 @@ PertCountView = Backbone.View.extend({
 		$(window).resize(function() {self.redraw();} );
 	},
 
-	// ### compile_template
-	// use Handlebars to compile the template for the view
-	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:180px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+	// ### compile_template_and_draw
+	// use Handlebars to compile the template for the view and draw it for the first time
+	compile_template_and_draw: function(){
+		var self = this;
+		this.isCompiling = true;
+		$.ajax({
+			url: self.template,
+			datatype: "html",
+			success: function(raw_template){
+				// build the template with a random div id
+				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+				self.compiled_template = Handlebars.compile(raw_template);
+				self.$el.append(self.compiled_template({div_string: self.div_string, span_class: self.span_class}));
+
+				// define the location where d3 will build its plot
+				self.vis = d3.select("#" + self.div_string).append("svg")
+								.attr("width",self.width)
+								.attr("height",self.height);
+
+				self.isCompiling = false;
+				// draw the plot for the first time
+				self.redraw();
+			}
+		});
 	},
 
 	// ### redraw
@@ -137,7 +150,7 @@ PertCountView = Backbone.View.extend({
 							.attr("font-family","'Helvetica Neue',Helvetica,Arial,sans-serif")
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
-							.text(pert_count)
+							.text(pert_count);
 
 		// for each sub-category, draw a bar graph
 		this.category_rect_selection = this.vis.selectAll('.category_rect_well');

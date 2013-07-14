@@ -11,7 +11,7 @@
 
 // optional arguments:
 
-// 1.  {string}  **template**  The path to a handlebars template to use. Defaults to *../templates/CMapFooter.handlebars*
+// 1.  {string}  **template**  The path to a handlebars template to use. Defaults to *../templates/d3_target.handlebars*
 // 2.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#bdbdbd*
 // 3.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
 
@@ -100,7 +100,7 @@ TickView = Backbone.View.extend({
 	init_view: function(){
 		// stuff "this" into a variable for use inside of scoped funcitons
 		var self = this;
-		
+
 		// check to see if the container is visible, if not, make it visible, but transparent so we draw it with
 		// the proper dimensions
 		if (this.$el.is(":hidden")){
