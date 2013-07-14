@@ -1762,7 +1762,7 @@ ScatterPlotView = Backbone.View.extend({
 
 		// plot the data points
 		this.bg_layer.selectAll('.data_point').data([]).exit().remove();
-		this.bg_layer.selectAll('.data_point').data(this.x_data).enter().append('circle')
+		this.bg_layer.selectAll('.data_point').data(this.model.get('x_data')).enter().append('circle')
 			.attr("class","data_point")
 			.attr("cx",this.x_scale)
 			.attr("cx",function(d,i){return this.y_scale(this.y_data[i]);})
