@@ -44,9 +44,9 @@ build the clickable row</p></div></div><div class="code"><div class="wrapper">  
     <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">skip</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">search_val</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">search_type</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">resize_div</span><span class="p">();</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">listenToOnce</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">,</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;grid:ReplaceCollection&quot;</span><span class="p">);</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">resize_div</span><span class="p">();</span>
     <span class="p">});</span>
   <span class="p">},</span>
 
