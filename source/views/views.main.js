@@ -1646,7 +1646,9 @@ ScatterPlotView = Backbone.View.extend({
 				// build the template with a random div id
 				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string, span_class: self.span_class}));
+				self.$el.append(self.compiled_template({div_string: self.div_string, 
+														span_class: self.span_class,
+														height: 400}));
 
 				// define the location where d3 will build its plot
 				self.vis = d3.select("#" + self.div_string).append("svg")
@@ -1675,13 +1677,14 @@ ScatterPlotView = Backbone.View.extend({
 
 		// check to see if the container is visible, if not, make it visible, but transparent so we draw it with
 		// the proper dimensions
+		$("#" + this.div_string).animate({height:400},1);
 		if (this.$el.is(":hidden")){
 			this.$el.animate({opacity:0},1);
 			this.$el.show();
 		}
 
 		// set up scaling and margin parameters for the vis
-		this.margin = 25;
+		this.margin = 50;
 		if (this.x_range === undefined){
 			this.x_range = [_.max(this.model.get('x_data')),_.max(this.model.get('x_data'))];
 		}
@@ -1689,7 +1692,7 @@ ScatterPlotView = Backbone.View.extend({
 			this.y_range = [_.max(this.model.get('y_data')),_.max(this.model.get('y_data'))];
 		}
 		this.x_scale=d3.scale.linear().domain([this.x_range[0],this.x_range[1]]).range([this.margin, this.width - this.margin]);
-		this.y_scale=d3.scale.linear().domain([this.y_range[0],this.y_range[1]]).range([this.margin, this.height - this.margin]);
+		this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
 
 		// set up drawing layers
 		this.vis.selectAll('.bg_layer').data([]).exit().remove();
@@ -1734,26 +1737,26 @@ ScatterPlotView = Backbone.View.extend({
 			.call(yAxis);
 
 		// style the axes
-		this.vis.select('.axis').selectAll("path")
+		this.vis.selectAll('.axis').selectAll("path")
 			.style("fill","none")
 			.style("stroke","black")
 			.style("shape-rendering", "crispEdges");
 
-		this.vis.select('.axis').selectAll("line")
+		this.vis.selectAll('.axis').selectAll("line")
 			.style("fill","none")
 			.style("stroke","black")
 			.style("shape-rendering", "crispEdges");
 
-		this.vis.select('.axis').selectAll("text")
+		this.vis.selectAll('.axis').selectAll("text")
 			.style("font-family","sans-serif")
 			.style("font-size","11px");
 
 		// build a scaling function
 		if (this.scale_by !== undefined){
-			this.scale_data = _.pluck(this.model.get('meta_data'),this.scale_by);
+			this.scale_data = this.model.get('meta_data')[this.scale_by];
 			var size_min = Math.sqrt(_.min(this.scale_data)/Math.PI);
 			var size_max = Math.sqrt(_.max(this.scale_data)/Math.PI);
-			this.size_scale=d3.scale.linear().domain([size_min,size_max]).range([10, 100]);
+			this.size_scale=d3.scale.linear().domain([size_min,size_max]).range([5, 20]);
 			this.dot_scaler = function(val){
 				r = Math.sqrt(val/Math.PI);
 				return self.size_scale(r);
@@ -1767,14 +1770,43 @@ ScatterPlotView = Backbone.View.extend({
 		this.bg_layer.selectAll('.data_point').data(this.x_data).enter().append('circle')
 			.attr("class","data_point")
 			.attr("cx",this.x_scale)
-			.attr("cx",function(d,i){return this.y_scale(this.y_data[i]);})
+			.attr("cy",function(d,i){return self.y_scale(self.y_data[i]);})
+			.attr("opacity",0.5)
 			.attr("r",function(d,i){
-				if (this.scale_by === undefined){
-					return 20;
-				}else{}
-					return this.size_scale(this.scale_data[i]);
-				})
+				if (self.scale_by === undefined){
+					return 10;
+				}else{
+					return self.dot_scaler(self.scale_data[i]);
+				}})
 			.attr("fill",this.fg_color);
+
+		// plot the x axis title
+		this.bg_layer.selectAll('.x_axis_label').data([]).exit().remove();
+		this.bg_layer.selectAll('.x_axis_label').data([1]).enter().append('text')
+			.attr("class","x_axis_label axis_label")
+			.attr("x",this.width/2)
+			.attr("y",this.height-10)
+			.style("text-anchor","middle")
+			.text(this.model.get('x_axis_title'));
+
+		// plot the y axis label
+		this.bg_layer.selectAll('.y_axis_label').data([]).exit().remove();
+		this.bg_layer.selectAll('.y_axis_label').data([1]).enter().append('text')
+			.attr("class","y_axis_label axis_label")
+			.attr("transform", "rotate(-90)")
+			.attr("y", this.margin/2)
+			.attr("x", - this.height/2)
+			.style("text-anchor","middle")
+			.text(this.model.get('y_axis_title'));
+
+		// plot the title
+		this.bg_layer.selectAll('.title').data([]).exit().remove();
+		this.bg_layer.selectAll('.title').data([1]).enter().append('text')
+			.attr("class","title title")
+			.attr("x",this.width/2)
+			.attr("y",this.margin/2)
+			.style("text-anchor","middle")
+			.text(this.model.get('title'));
 
 	}
 });

@@ -126,4 +126,7 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['concat','uglify','cssmin','groc']);
 
+  // nodoc task
+  grunt.registerTask('nodoc', ['concat','uglify','cssmin']);
+
 };
