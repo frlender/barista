@@ -1710,8 +1710,8 @@ ScatterPlotView = Backbone.View.extend({
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
-		this.vis.transition().duration(1).attr("width",this.width);
-		this.vis.transition().duration(1).attr("height",this.height);
+		this.vis.transition().attr("width",this.width);
+		this.vis.transition().attr("height",this.height);
 
 		// draw the background of the panel
 		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
@@ -1868,8 +1868,8 @@ ScatterPlotView = Backbone.View.extend({
 	// save the current state of the view into a png image
 	save_png: function(){
 		// build a canvas element to store the image temporarily while we save it
-		var width = this.vis.attr("width");
-		var height = this.vis.attr("height");
+		var width = this.width;
+		var height = this.height;
 		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
 		$('body').append(html_snippet);
 
