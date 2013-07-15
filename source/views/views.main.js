@@ -1711,6 +1711,7 @@ ScatterPlotView = Backbone.View.extend({
 
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
+		this.vis.transition().duration(1).attr("height",this.height);
 
 		// draw the background of the panel
 		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
@@ -1883,7 +1884,7 @@ ScatterPlotView = Backbone.View.extend({
 
 		// save the contents of the canvas to file and remove the canvas element
 		var canvas = $("#tmpCanvas")[0];
-		var filename = "cmapTickView" + new Date().getTime() + ".png";
+		var filename = "cmapScatterView" + new Date().getTime() + ".png";
 		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
 		$('#tmpCanvas').remove();
 
