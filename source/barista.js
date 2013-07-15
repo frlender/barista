@@ -1257,12 +1257,12 @@ PertCountView = Backbone.View.extend({
 		// get categories from model and determine the maximum category count
 		// this.categories = this.model.get('pert_types');
 		this.max_category_count = _.max(_.pluck(this.categories,'count'));
-
+		
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
-		this.compile_template_and_draw();
+		this.compile_template();
 
 		// define the location where d3 will build its plot
 		this.width = $("#" + this.div_string).outerWidth();
@@ -1279,30 +1279,17 @@ PertCountView = Backbone.View.extend({
 		$(window).resize(function() {self.redraw();} );
 	},
 
-	// ### compile_template_and_draw
-	// use Handlebars to compile the template for the view and draw it for the first time
-	compile_template_and_draw: function(){
-		var self = this;
-		this.isCompiling = true;
-		$.ajax({
-			url: self.template,
-			datatype: "html",
-			success: function(raw_template){
-				// build the template with a random div id
-				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string, span_class: self.span_class}));
-
-				// define the location where d3 will build its plot
-				self.vis = d3.select("#" + self.div_string).append("svg")
-								.attr("width",self.width)
-								.attr("height",self.height);
-
-				self.isCompiling = false;
-				// draw the plot for the first time
-				self.redraw();
-			}
-		});
+	// ### compile_template
+	// use Handlebars to compile the template for the view
+	compile_template: function(template_string){
+		if (template_string === undefined){
+			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:300px"></div>';
+		}
+		var compiled_template = Handlebars.compile(template_string);
+		this.template_string = template_string;
+		this.compiled_template = compiled_template;
+		this.$el.append(compiled_template());
 	},
 
 	// ### redraw
