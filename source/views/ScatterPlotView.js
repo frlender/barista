@@ -14,6 +14,7 @@
 // 4.  {string}  **scale_by**  an attribute in the model's meta data object to scale points by, defaults to *undefined*
 // 5.  {Array}  **x_range**  a two element array specifying the x plotting bounds of the plot, defaults to *[min(x_data),max(x_data)]*
 // 6.  {Array}  **y_range**  a two element array specifying the y plotting bounds of the plot, defaults to *[min(y_data),max(y_data)]*
+// 6.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 // 7.  {string}  **template**  The path to a handlebars template to use. Defaults to *../templates/d3_target.handlebars*
 
 //		scatter_plot_view = new ScatterPlotView({el: $("target_selector",
@@ -23,6 +24,7 @@
 //									scale_by: undefined,
 //									x_range: undefined,
 //									y_range: undefined,
+//									plot_height: 120,
 //									template: "templates/d3_target.handlebars",});
 
 ScatterPlotView = Backbone.View.extend({
@@ -40,6 +42,9 @@ ScatterPlotView = Backbone.View.extend({
 
 		// set up the scale_by parameter
 		this.scale_by = (this.options.scale_by !== undefined) ? this.options.scale_by : undefined;
+
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
 
 		// set up the handlebars template to use
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/d3_target.handlebars";
@@ -84,7 +89,7 @@ ScatterPlotView = Backbone.View.extend({
 				self.compiled_template = Handlebars.compile(raw_template);
 				self.$el.append(self.compiled_template({div_string: self.div_string,
 														span_class: self.span_class,
-														height: 400}));
+														height: self.plot_height}));
 
 				// define the location where d3 will build its plot
 				self.vis = d3.select("#" + self.div_string).append("svg")
