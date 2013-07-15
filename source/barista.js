@@ -2108,7 +2108,7 @@ ScatterPlotView = Backbone.View.extend({
 	// completely redraw the view.
 	redraw: function(){
 		this.init_panel();
-		// this.render();
+		this.render();
 	},
 
 	// ### init_panel
@@ -2211,15 +2211,10 @@ ScatterPlotView = Backbone.View.extend({
 		this.bg_layer.selectAll('.data_point').data([]).exit().remove();
 		this.bg_layer.selectAll('.data_point').data(this.x_data).enter().append('circle')
 			.attr("class","data_point")
-			.attr("cx",this.x_scale)
-			.attr("cy",function(d,i){return self.y_scale(self.y_data[i]);})
+			.attr("cx",this.x_scale(0))
+			.attr("cy",this.y_scale(0))
 			.attr("opacity",0.5)
-			.attr("r",function(d,i){
-				if (self.scale_by === undefined){
-					return 10;
-				}else{
-					return self.dot_scaler(self.scale_data[i]);
-				}})
+			.attr("r",0)
 			.attr("fill",this.fg_color);
 
 		// plot the x axis title
@@ -2250,9 +2245,49 @@ ScatterPlotView = Backbone.View.extend({
 			.style("text-anchor","middle")
 			.text(this.model.get('title'));
 
+	},
+
+	// ### render
+	// update the dynamic potions of the view
+	render: function(){
+	// build a scaling function
+	var self = this;
+	if (this.scale_by !== undefined){
+		this.scale_data = this.model.get('meta_data')[this.scale_by];
+		var size_min = Math.sqrt(_.min(this.scale_data)/Math.PI);
+		var size_max = Math.sqrt(_.max(this.scale_data)/Math.PI);
+		this.size_scale=d3.scale.linear().domain([size_min,size_max]).range([5, 20]);
+		this.dot_scaler = function(val){
+			r = Math.sqrt(val/Math.PI);
+			return self.size_scale(r);
+		};
+	}
+
+	// plot the data points
+	this.x_data = this.model.get('x_data');
+	this.y_data = this.model.get('y_data');
+	this.points_selection = this.bg_layer.selectAll('.data_point').data(this.x_data);
+	this.points_selection.enter().append('circle')
+		.attr("class","data_point")
+		.attr("cx",this.x_scale(0))
+		.attr("cy",this.y_scale(0))
+		.attr("opacity",0.5)
+		.attr("r",0)
+		.attr("fill",this.fg_color);
+
+		this.points_selection.transition().duration(500)
+			.attr("cx",this.x_scale)
+			.attr("cy",function(d,i){return self.y_scale(self.y_data[i]);})
+			.attr("r",function(d,i){
+			if (self.scale_by === undefined){
+				return 10;
+			}else{
+				return self.dot_scaler(self.scale_data[i]);
+			}});
+
+		this.points_selection.exit().remove();
 	}
 });
-
 // # **TickView**
 
 // A Backbone.View that displays a Connectivity Map tick view.  The view is must be paired with a CMapTickModel that
