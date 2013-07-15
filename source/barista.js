@@ -1262,7 +1262,7 @@ PertCountView = Backbone.View.extend({
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
-		this.compile_template();
+		this.compile_template_and_draw();
 
 		// define the location where d3 will build its plot
 		this.width = $("#" + this.div_string).outerWidth();
