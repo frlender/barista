@@ -113,7 +113,6 @@ ScatterPlotView = Backbone.View.extend({
 
 		// check to see if the container is visible, if not, make it visible, but transparent so we draw it with
 		// the proper dimensions
-		$("#" + this.div_string).animate({height:400},1);
 		if (this.$el.is(":hidden")){
 			this.$el.animate({opacity:0},1);
 			this.$el.show();
