@@ -1,0 +1,10 @@
+<hr>
+<div class="row-fluid">
+	<p class="offset1 span3 pull-left">&copy {{ year }} {{ organization }} all rights reserved</p>
+	<p class="span4 cmap-center-text"><a href="{{ terms_url }}">terms and conditions</a></p>
+	<div class="span3">
+	{{#each logo_objects}}
+		<a href="{{ url }}"><img class="pull-right cmap-footer-image" src="{{ logo }}"></a>
+	{{/each}}
+	</div>
+</div>
