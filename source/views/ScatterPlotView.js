@@ -99,7 +99,7 @@ ScatterPlotView = Backbone.View.extend({
 	},
 
 	// ### redraw
-	// completely redraw the view.
+	// completely redraw the view. Updates both static and dynamic content in the view.
 	redraw: function(){
 		this.init_panel();
 		this.render();
