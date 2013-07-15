@@ -82,7 +82,7 @@ ScatterPlotView = Backbone.View.extend({
 				// build the template with a random div id
 				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string, 
+				self.$el.append(self.compiled_template({div_string: self.div_string,
 														span_class: self.span_class,
 														height: 400}));
 
