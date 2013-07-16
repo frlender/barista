@@ -36,7 +36,8 @@ module.exports = function(grunt) {
         dest: 'source/barista.js'
       },
       js_external: {
-        src: ['external_source/backgrid.min.js',
+        src: ['external_source/d3.v3.min.js',
+              'external_source/backgrid.min.js',
               'external_source/chardinjs.min.js',
               'external_source/d3.parcoords.js',
               'external_source/FileSaver.min.js',

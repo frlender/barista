@@ -24,8 +24,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "type": "heading",
           "data": {
             "level": 2,
-            "title": "### Connectivity Map and LINCS javascript components",
-            "slug": "-connectivity-map-and-lincs-javascript-components"
+            "title": "### Connectivity Map javascript components",
+            "slug": "-connectivity-map-javascript-components"
           },
           "depth": 2
         }

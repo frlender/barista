@@ -14,8 +14,10 @@
 // 4.  {string}  **scale_by**  an attribute in the model's meta data object to scale points by, defaults to *undefined*
 // 5.  {Array}  **x_range**  a two element array specifying the x plotting bounds of the plot, defaults to *[min(x_data),max(x_data)]*
 // 6.  {Array}  **y_range**  a two element array specifying the y plotting bounds of the plot, defaults to *[min(y_data),max(y_data)]*
-// 6.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
-// 7.  {string}  **template**  The path to a handlebars template to use. Defaults to *../templates/d3_target.handlebars*
+// 7.  {Bool}  **x_log**  if set to true, plots the x axis on a log scale, defaults to *false*
+// 8.  {Bool}  **y_log**  if set to true, plots the y axis on a log scale, defaults to *false*
+// 9.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
+// 10.  {string}  **template**  The path to a handlebars template to use. Defaults to *../templates/d3_target.handlebars*
 
 //		scatter_plot_view = new ScatterPlotView({el: $("target_selector",
 //									bg_color:"#ffffff", 
@@ -24,6 +26,8 @@
 //									scale_by: undefined,
 //									x_range: undefined,
 //									y_range: undefined,
+//									x_log: false,
+//									y_log: false,
 //									plot_height: 120,
 //									template: "templates/d3_target.handlebars",});
 
@@ -39,6 +43,10 @@ ScatterPlotView = Backbone.View.extend({
 		// set up x and y range
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
 		this.y_range = (this.options.y_range !== undefined) ? this.options.y_range : undefined;
+
+		// set up x and y log flags
+		this.x_log = (this.options.x_log !== undefined) ? this.options.x_log : false;
+		this.y_log = (this.options.y_log !== undefined) ? this.options.y_log : false;
 
 		// set up the scale_by parameter
 		this.scale_by = (this.options.scale_by !== undefined) ? this.options.scale_by : undefined;
@@ -123,16 +131,28 @@ ScatterPlotView = Backbone.View.extend({
 			this.$el.show();
 		}
 
-		// set up scaling and margin parameters for the vis
+		// set up the margin
 		this.margin = 50;
+
+		// set up x and y ranges
 		if (this.x_range === undefined){
 			this.x_range = [_.max(this.model.get('x_data')),_.max(this.model.get('x_data'))];
 		}
 		if (this.y_range === undefined){
 			this.y_range = [_.max(this.model.get('y_data')),_.max(this.model.get('y_data'))];
 		}
-		this.x_scale=d3.scale.linear().domain([this.x_range[0],this.x_range[1]]).range([this.margin, this.width - this.margin]);
-		this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
+
+		// set up scaling
+		if (x_log){
+			this.x_scale=d3.scale.log().domain([this.x_range[0],this.x_range[1]]).range([this.margin, this.width - this.margin]);
+		}else{
+			this.x_scale=d3.scale.linear().domain([this.x_range[0],this.x_range[1]]).range([this.margin, this.width - this.margin]);
+		}
+		if (y_log){
+			this.y_scale=d3.scale.log().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
+		}else{
+			this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
+		}
 
 		// set up drawing layers
 		this.vis.selectAll('.bg_layer').data([]).exit().remove();
