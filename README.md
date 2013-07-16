@@ -9,10 +9,17 @@ Barista provides a library of components for working with data provided by the C
 All of barista's dependencies are included in the main barista css and javascript files which we provide via a CDN, so all you need is
 
 			<link href="http://cmap.github.io/barista/barista.main.min.css" rel="stylesheet">
-			
 
+and
+
+			<script src="http://cmap.github.io/barista/barista.main.min.js"></script>
+
+in your HTML and you're all set.
+
+If you want to use only parts of the library or roll your own extensions to it, go right ahead!  Just download the code or fork it and go wild!  We welcome pull requests and feedback. 
 
 ## **Models**
+Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an [example model](http://cmap.github.io/barista/doc/models/CellCountModel.html "Example Model") to get a feel for what models provide
 
 ## **Views**
 
@@ -20,6 +27,6 @@ All of barista's dependencies are included in the main barista css and javascrip
 
 ## **Utils**
 
-
-[Developer Documentation](http://cmap.github.io/barista/doc)
+## **Developer Documentation**
+We've only just given you a peak so far. Want the nuts and bolts? dig into the **[Developer Documentation](http://cmap.github.io/barista/doc)**
 
