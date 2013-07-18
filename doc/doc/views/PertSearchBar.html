@@ -83,13 +83,7 @@
 <span class="cm">     @default &#39;&lt;div class=&quot;input-append span10&quot;&gt;&lt;input class=&quot;span12&quot; autocomplete=&quot;off&quot; type=&quot;text&quot; placeholder=&quot;search gene, compound, or cell type name; separate compound searches with :&quot; data-provide=&quot;typeahead&quot; id=&quot;search&quot;&gt;&lt;span class=&quot;add-on&quot;&gt;Search 1,209,824 profiles&lt;/span&gt;&lt;/div&gt;&#39;</span>
 <span class="cm">     @type String</span>
 <span class="cm">     **/</span>
-  <span class="nx">template</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">template_string</span><span class="p">){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">template_string</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">){</span>
-      <span class="nx">template_string</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;input-append span10&quot;&gt;&lt;input class=&quot;span12&quot; autocomplete=&quot;off&quot; type=&quot;text&quot; placeholder=&quot;search gene, compound, or cell type name; separate compound searches with :&quot; data-provide=&quot;typeahead&quot; id=&quot;search&quot;&gt;&lt;span class=&quot;add-on&quot;&gt;Search 1,209,824 profiles&lt;/span&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kd">var</span> <span class="nx">compiled_template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">template_string</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">compiled_template</span><span class="p">;</span>
-  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="nx">BaristaTemplates</span><span class="p">.</span><span class="nx">CMapPertSearchBar</span><span class="p">,</span>
 
   <span class="cm">/**</span>
 <span class="cm">    renders the view</span>
