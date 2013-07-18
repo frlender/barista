@@ -52,13 +52,30 @@ module.exports = function(grunt) {
       }
     },
 
+    // configure the compilation of handlebars tempaltes
+    handlebars: {
+      compile: {
+        options: {
+          namespace: "BaristaTemplates",
+          processName: function(path) {
+            parts = path.split('/');
+            fname = parts[parts.length - 1].replace('.handlebars','');
+            return fname;
+          }
+        },
+        files: {
+          "templates/barista_templates.js": ["templates/*.handlebars"]
+        }
+      }
+    },
+
     // configure uglification of files
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
       },
       js: {
-        src: ['external_source/external.js','source/barista.js'],
+        src: ['external_source/external.js','templates/barista_templates.js','source/barista.js'],
         dest: '<%= pkg.name %>.main.min.js'
       }
     },
@@ -121,13 +138,18 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "groc" task.
   grunt.loadNpmTasks('grunt-groc');
 
+  // Load the plugin that provides the "handlebars" task.
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
+
   // load the plugin that provides the "watch" task
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat','uglify','cssmin','groc']);
+  grunt.registerTask('default', ['concat','handlebars','uglify','cssmin','groc']);
 
   // nodoc task
-  grunt.registerTask('nodoc', ['concat','uglify','cssmin']);
+  grunt.registerTask('nodoc', ['concat','handlebars','uglify','cssmin']);
+
+  // nodoc task
 
 };
