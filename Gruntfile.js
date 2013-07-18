@@ -5,6 +5,23 @@ module.exports = function(grunt) {
     // grab info from the package.json file
     pkg: grunt.file.readJSON('package.json'),
 
+    // configure the compilation of handlebars tempaltes
+    handlebars: {
+      compile: {
+        options: {
+          namespace: "BaristaTemplates",
+          processName: function(path) {
+            parts = path.split('/');
+            fname = parts[parts.length - 1].replace('.handlebars','');
+            return fname;
+          }
+        },
+        files: {
+          "templates/barista_templates.js": ["templates/*.handlebars"]
+        }
+      }
+    },
+
     // configure concatination of files
     concat: {
       options: {
@@ -26,7 +43,7 @@ module.exports = function(grunt) {
         src: ['source/collections/**/*.js','!source/collections/collections.main.js'],
         dest: 'source/collections/collections.main.js'
       },
-      js_barista_main: {
+      js_barista: {
         src: ['source/utils/utils.main.js',
               'source/models/models.main.js',
               'source/views/views.main.js',
@@ -41,7 +58,7 @@ module.exports = function(grunt) {
               'external_source/chardinjs.min.js',
               'external_source/d3.parcoords.js',
               'external_source/FileSaver.min.js',
-              'external_source/handlebars.js',
+              'external_source/handlebars_runtime.js',
               'external_source/intro.min.js',
               'external_source/rgbcolor.js',
               'external_source/canvg.js',
@@ -49,24 +66,14 @@ module.exports = function(grunt) {
               'external_source/canvas-toBlob.js'
               ],
         dest: 'external_source/external.js'
-      }
-    },
-
-    // configure the compilation of handlebars tempaltes
-    handlebars: {
-      compile: {
-        options: {
-          namespace: "BaristaTemplates",
-          processName: function(path) {
-            parts = path.split('/');
-            fname = parts[parts.length - 1].replace('.handlebars','');
-            return fname;
-          }
-        },
-        files: {
-          "templates/barista_templates.js": ["templates/*.handlebars"]
-        }
-      }
+      },
+      js_barista_main: {
+        src: ['external_source/external.js',
+              'templates/barista_templates.js',
+              'source/barista.js'
+              ],
+        dest: 'barista.main.js'
+      },
     },
 
     // configure uglification of files
@@ -75,7 +82,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
       },
       js: {
-        src: ['external_source/external.js','templates/barista_templates.js','source/barista.js'],
+        src: ['barista.main.js'],
         dest: '<%= pkg.name %>.main.min.js'
       }
     },
@@ -145,10 +152,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat','handlebars','uglify','cssmin','groc']);
+  grunt.registerTask('default', ['handlebars','concat','uglify','cssmin','groc']);
 
   // nodoc task
-  grunt.registerTask('nodoc', ['concat','handlebars','uglify','cssmin']);
+  grunt.registerTask('nodoc', ['handlebars','concat','uglify','cssmin']);
 
   // nodoc task
 

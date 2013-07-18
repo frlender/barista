@@ -32,15 +32,11 @@ FlatTreeMapView = Backbone.View.extend({
 		$(window).resize(function() {self.render();} );
 	},
 
-	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:300px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+	compile_template: function(){
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: 300}));
 	},
 
 	render: function(){

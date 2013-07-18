@@ -42,22 +42,17 @@ CMapFooterView = Backbone.View.extend({
 	// ### compile_template
 	// use Handlebars to compile the specified template for the view
 	compile_template: function(){
-		var self = this;
-		$.ajax({
-			url: this.template,
-			dataType: 'html',
-			success:function(raw_template){
-				self.compiled_template = Handlebars.compile(raw_template);
-				// package logos and log_urls into a set of object to iterate over
-				var logo_objects = []
-				for (var i=0; i < self.logo.length; i++){
-					logo_objects.push({logo: self.logo[i], url: self.logo_url[i]});
-				}
-				self.$el.append(self.compiled_template({organization: self.organization,
-												terms_url: self.terms_url,
-												logo_objects: logo_objects,
-												year: new Date().getFullYear()}));
-			}
-		});
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapFooter;
+
+		// package logos and log_urls into a set of object to iterate over
+		var logo_objects = []
+		for (var i=0; i < this.logo.length; i++){
+			logo_objects.push({logo: this.logo[i], url: this.logo_url[i]});
+		}
+		this.$el.append(this.compiled_template({organization: this.organization,
+										terms_url: this.terms_url,
+										logo_objects: logo_objects,
+										year: new Date().getFullYear()}));
 	}
 });

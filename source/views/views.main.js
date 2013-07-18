@@ -49,15 +49,10 @@ BubbleView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
-	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:300px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+	compile_template: function(){
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class}));
 	},
 
 	// ### render
@@ -158,23 +153,18 @@ CMapFooterView = Backbone.View.extend({
 	// ### compile_template
 	// use Handlebars to compile the specified template for the view
 	compile_template: function(){
-		var self = this;
-		$.ajax({
-			url: this.template,
-			dataType: 'html',
-			success:function(raw_template){
-				self.compiled_template = Handlebars.compile(raw_template);
-				// package logos and log_urls into a set of object to iterate over
-				var logo_objects = []
-				for (var i=0; i < self.logo.length; i++){
-					logo_objects.push({logo: self.logo[i], url: self.logo_url[i]});
-				}
-				self.$el.append(self.compiled_template({organization: self.organization,
-												terms_url: self.terms_url,
-												logo_objects: logo_objects,
-												year: new Date().getFullYear()}));
-			}
-		});
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapFooter;
+
+		// package logos and log_urls into a set of object to iterate over
+		var logo_objects = []
+		for (var i=0; i < this.logo.length; i++){
+			logo_objects.push({logo: this.logo[i], url: this.logo_url[i]});
+		}
+		this.$el.append(this.compiled_template({organization: this.organization,
+										terms_url: this.terms_url,
+										logo_objects: logo_objects,
+										year: new Date().getFullYear()}));
 	}
 });
 // # **CMapHeaderView**
@@ -216,15 +206,10 @@ CMapHeaderView = Backbone.View.extend({
 	// use Handlebars to compile the specified template for the view
 	compile_template: function(){
 		var self = this;
-		$.ajax({
-			url: this.template,
-			dataType: 'html',
-			success:function(raw_template){
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({title: self.title,
-												subtitle: self.subtitle}));
-			}
-		});
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapHeader;
+		this.$el.append(this.compiled_template({title: this.title,
+										subtitle: this.subtitle}));
 	}
 });
 
@@ -263,15 +248,11 @@ FlatTreeMapView = Backbone.View.extend({
 		$(window).resize(function() {self.render();} );
 	},
 
-	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:300px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+	compile_template: function(){
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: 300}));
 	},
 
 	render: function(){
@@ -646,9 +627,7 @@ GridView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
-		this.raw_template = $.ajax({url:this.template, dataType: 'html', async: false}).responseText;
-		this.compiled_template = Handlebars.compile(this.raw_template);
-		this.$el.append(this.compiled_template({div_string: this.div_string, span_class: this.span_class}));
+		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string, span_class: this.span_class}));
 	},
 
 	download_table: function(){
@@ -839,15 +818,11 @@ PertCountView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
-	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:300px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+	compile_template: function(){
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: 180}));
 	},
 
 	// ### redraw
@@ -1065,14 +1040,9 @@ PertDetailView = Backbone.View.extend({
 
 	//		pert_detail_view.compile_template(template\_string);
 	compile_template: function(template_string){
-		if (template_string === undefined){
-			this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-			template_string = '<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:120px"></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		this.template_string = template_string;
-		this.compiled_template = compiled_template;
-		this.$el.append(compiled_template());
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class}));
 	},
 
 	// ### redraw
@@ -1468,13 +1438,7 @@ PertSearchBar = Backbone.View.extend({
      @default '<div class="input-append span10"><input class="span12" autocomplete="off" type="text" placeholder="search gene, compound, or cell type name; separate compound searches with :" data-provide="typeahead" id="search"><span class="add-on">Search 1,209,824 profiles</span></div>'
      @type String
      **/
-	template: function(template_string){
-		if (template_string === undefined){
-			template_string = '<div class="input-append span10"><input class="span12" autocomplete="off" type="text" placeholder="search gene, compound, or cell type name; separate compound searches with :" data-provide="typeahead" id="search"><span class="add-on">Search 1,209,824 profiles</span></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		return compiled_template;
-	},
+	template: BaristaTemplates.CMapPertSearchBar,
 
 	/**
     renders the view
@@ -1615,7 +1579,7 @@ ScatterPlotView = Backbone.View.extend({
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
-		this.compile_template_and_draw();
+		this.compile_template();
 
 		// define the location where d3 will build its plot
 		this.width = $("#" + this.div_string).outerWidth();
@@ -1632,34 +1596,17 @@ ScatterPlotView = Backbone.View.extend({
 		$(window).resize(function() {self.redraw();} );
 	},
 
-	// ### compile_template_and_draw
-	// use Handlebars to compile the template for the view and draw it for the first time
+	// ### compile_template
+	// use Handlebars to compile the template for the view
 
 	//		tick_view.compile_template_and_draw();
-	compile_template_and_draw: function(){
+	compile_template: function(){
 		var self = this;
-		this.isCompiling = true;
-		$.ajax({
-			url: self.template,
-			datatype: "html",
-			success: function(raw_template){
-				// build the template with a random div id
-				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string,
-														span_class: self.span_class,
-														height: self.plot_height}));
-
-				// define the location where d3 will build its plot
-				self.vis = d3.select("#" + self.div_string).append("svg")
-								.attr("width",self.width)
-								.attr("height",self.height);
-
-				self.isCompiling = false;
-				// draw the plot for the first time
-				self.redraw();
-			}
-		});
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: this.plot_height}));
 	},
 
 	// ### redraw
@@ -1953,25 +1900,19 @@ TickView = Backbone.View.extend({
 	compile_template_and_draw: function(){
 		var self = this;
 		this.isCompiling = true;
-		$.ajax({
-			url: self.template,
-			datatype: "html",
-			success: function(raw_template){
-				// build the template with a random div id
-				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string, span_class: self.span_class}));
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class}));
 
-				// define the location where d3 will build its plot
-				self.vis = d3.select("#" + self.div_string).append("svg")
-								.attr("width",self.width)
-								.attr("height",self.height);
+		// define the location where d3 will build its plot
+		this.vis = d3.select("#" + this.div_string).append("svg")
+						.attr("width",this.width)
+						.attr("height",this.height);
 
-				self.isCompiling = false;
-				// draw the plot for the first time
-				self.redraw();
-			}
-		});
+		this.isCompiling = false;
+		// draw the plot for the first time
+		this.redraw();
 	},
 
 	// ### redraw

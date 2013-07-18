@@ -106,9 +106,7 @@ GridView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
-		this.raw_template = $.ajax({url:this.template, dataType: 'html', async: false}).responseText;
-		this.compiled_template = Handlebars.compile(this.raw_template);
-		this.$el.append(this.compiled_template({div_string: this.div_string, span_class: this.span_class}));
+		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string, span_class: this.span_class}));
 	},
 
 	download_table: function(){

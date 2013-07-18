@@ -37,15 +37,10 @@ CMapHeaderView = Backbone.View.extend({
 	// use Handlebars to compile the specified template for the view
 	compile_template: function(){
 		var self = this;
-		$.ajax({
-			url: this.template,
-			dataType: 'html',
-			success:function(raw_template){
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({title: self.title,
-												subtitle: self.subtitle}));
-			}
-		});
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapHeader;
+		this.$el.append(this.compiled_template({title: this.title,
+										subtitle: this.subtitle}));
 	}
 });
 

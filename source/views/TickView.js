@@ -52,25 +52,19 @@ TickView = Backbone.View.extend({
 	compile_template_and_draw: function(){
 		var self = this;
 		this.isCompiling = true;
-		$.ajax({
-			url: self.template,
-			datatype: "html",
-			success: function(raw_template){
-				// build the template with a random div id
-				self.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-				self.compiled_template = Handlebars.compile(raw_template);
-				self.$el.append(self.compiled_template({div_string: self.div_string, span_class: self.span_class}));
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class}));
 
-				// define the location where d3 will build its plot
-				self.vis = d3.select("#" + self.div_string).append("svg")
-								.attr("width",self.width)
-								.attr("height",self.height);
+		// define the location where d3 will build its plot
+		this.vis = d3.select("#" + this.div_string).append("svg")
+						.attr("width",this.width)
+						.attr("height",this.height);
 
-				self.isCompiling = false;
-				// draw the plot for the first time
-				self.redraw();
-			}
-		});
+		this.isCompiling = false;
+		// draw the plot for the first time
+		this.redraw();
 	},
 
 	// ### redraw

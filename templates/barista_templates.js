@@ -79,6 +79,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
+this["BaristaTemplates"]["CMapPertSearchBar"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"input-append span10\">\n	<input class=\"span12\" autocomplete=\"off\" type=\"text\" placeholder=\"search gene, compound, or cell type name; separate compound searches with :\" data-provide=\"typeahead\" id=\"search\">\n	<span class=\"add-on\">Search 1,209,824 profiles</span>\n</div>";
+  });
+
 this["BaristaTemplates"]["d3_target"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};

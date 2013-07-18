@@ -91,13 +91,7 @@ PertSearchBar = Backbone.View.extend({
      @default '<div class="input-append span10"><input class="span12" autocomplete="off" type="text" placeholder="search gene, compound, or cell type name; separate compound searches with :" data-provide="typeahead" id="search"><span class="add-on">Search 1,209,824 profiles</span></div>'
      @type String
      **/
-	template: function(template_string){
-		if (template_string === undefined){
-			template_string = '<div class="input-append span10"><input class="span12" autocomplete="off" type="text" placeholder="search gene, compound, or cell type name; separate compound searches with :" data-provide="typeahead" id="search"><span class="add-on">Search 1,209,824 profiles</span></div>';
-		}
-		var compiled_template = Handlebars.compile(template_string);
-		return compiled_template;
-	},
+	template: BaristaTemplates.CMapPertSearchBar,
 
 	/**
     renders the view
