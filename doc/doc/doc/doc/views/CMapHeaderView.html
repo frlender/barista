@@ -18,15 +18,8 @@ basic use:</p></div></div></div><div class="segment"><div class="comments"><div 
   <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="compile-template">compile_template</h3>
 
 <p>use Handlebars to compile the specified template for the view</p></div></div><div class="code"><div class="wrapper">  <span class="nx">compile_template</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-      <span class="nx">url</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">,</span>
-      <span class="nx">dataType</span><span class="o">:</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span>
-      <span class="nx">success</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">raw_template</span><span class="p">){</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">compiled_template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">raw_template</span><span class="p">);</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">compiled_template</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
-                        <span class="nx">subtitle</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">subtitle</span><span class="p">}));</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>grab the template</p></div></div><div class="code"><div class="wrapper">    <span class="k">this</span><span class="p">.</span><span class="nx">compiled_template</span> <span class="o">=</span> <span class="nx">BaristaTemplates</span><span class="p">.</span><span class="nx">CMapHeader</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">compiled_template</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+                    <span class="nx">subtitle</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">subtitle</span><span class="p">}));</span>
   <span class="p">}</span>
 <span class="p">});</span></div></div></div></div></body></html>
