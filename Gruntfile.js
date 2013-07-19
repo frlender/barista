@@ -53,7 +53,10 @@ module.exports = function(grunt) {
         dest: 'source/barista.js'
       },
       js_external: {
-        src: ['external_source/d3.v3.min.js',
+        src: ['external_source/jquery-1.9.1.min.js',
+              'external_source/underscore-min.js',
+              'external_source/d3.v3.min.js',
+              'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
               'external_source/chardinjs.min.js',
               'external_source/d3.parcoords.js',
@@ -67,12 +70,21 @@ module.exports = function(grunt) {
               ],
         dest: 'external_source/external.js'
       },
-      js_barista_main: {
+      js_barista_main_no_external: {
+        src: ['templates/barista_templates.js',
+              'source/barista.js'],
+        dest: 'source/barista.main.js'
+      },
+      js_barista_main_plus_external: {
         src: ['external_source/external.js',
               'templates/barista_templates.js',
-              'source/barista.js'
-              ],
+              'source/barista.js'],
         dest: 'barista.main.js'
+      },
+      js_barista_main_min: {
+        src: ['external_source/external.min.js',
+              'source/<%= pkg.name %>.main.min.js'],
+        dest: '<%= pkg.name %>.main.min.js'
       },
     },
 
@@ -81,9 +93,13 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
       },
-      js: {
-        src: ['barista.main.js'],
-        dest: '<%= pkg.name %>.main.min.js'
+      external: {
+        src: ['external_source/external.js'],
+        dest: 'external_source/external.min.js'
+      },
+      main: {
+        src: ['source/barista.main.js'],
+        dest: 'source/<%= pkg.name %>.main.min.js'
       }
     },
 
@@ -151,12 +167,27 @@ module.exports = function(grunt) {
   // load the plugin that provides the "watch" task
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  // nodoc task
+  grunt.registerTask('nodoc', ['handlebars','concat_internal','uglify:main','concat_main','cssmin']);
+
+  // task to concat and minimized external sources
+  grunt.registerTask('build_external',['concat:js_external','uglify:external']);
+
+  // standard internal concat task (does not concat external)
+  grunt.registerTask('concat_internal', ['concat:js_barista_utils',
+                                      'concat:js_barista_models',
+                                      'concat:js_barista_views',
+                                      'concat:js_barista_collections',
+                                      'concat:js_barista',
+                                      'concat:js_barista_main_no_external',
+                                      'concat:js_barista_main_plus_external']);
+
+  // concat_main task (combines external and internal minimized code)
+  grunt.registerTask('concat_main',['concat:js_barista_main_min']);
+
   // Default task(s).
-  grunt.registerTask('default', ['handlebars','concat','uglify','cssmin','groc']);
+  grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','cssmin','groc']);
 
-  // nodoc task
-  grunt.registerTask('nodoc', ['handlebars','concat','uglify','cssmin']);
-
-  // nodoc task
+  
 
 };
