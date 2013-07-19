@@ -24,8 +24,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "type": "heading",
           "data": {
             "level": 2,
-            "title": "### Connectivity Map javascript components",
-            "slug": "-connectivity-map-javascript-components"
+            "title": "### Connectivity Map and LINCS javascript components",
+            "slug": "-connectivity-map-and-lincs-javascript-components"
           },
           "depth": 2
         }
@@ -798,14 +798,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "compile_template",
-                "slug": "compile-template"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "redraw",
                 "slug": "redraw"
               },
@@ -946,14 +938,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "compile_template",
-                "slug": "compile-template"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "redraw",
                 "slug": "redraw"
               },
@@ -964,22 +948,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "init_panel",
                 "slug": "init-panel"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "render",
-                "slug": "render"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "savePng",
-                "slug": "savepng"
               },
               "depth": 3
             }
