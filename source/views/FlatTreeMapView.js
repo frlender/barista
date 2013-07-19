@@ -63,9 +63,9 @@ FlatTreeMapView = Backbone.View.extend({
 
 		// if there are no cildren in the tree_object, dim the view
 		if (this.data.children[0] === undefined){
-			this.vis.transition().duration(1).attr("opacity",0);
+			this.top_svg.transition().duration(1).attr("opacity",0);
 		}else{
-			this.vis.transition().duration(500).attr("opacity",1);
+			this.top_svg.transition().duration(500).attr("opacity",1);
 		}
 
 		// set up an alpha scaling
@@ -140,9 +140,9 @@ FlatTreeMapView = Backbone.View.extend({
 
 		// if there are no children in the tree_object, dim the view
 		if (this.data.children[0] === undefined){
-			this.vis.transition().duration(1).attr("opacity",0);
+			this.top_svg.transition().duration(1).attr("opacity",0);
 		}else{
-			this.vis.transition().duration(500).attr("opacity",1);
+			this.top_svg.transition().duration(500).attr("opacity",1);
 		}
 
 		// set up an alpha scaling
