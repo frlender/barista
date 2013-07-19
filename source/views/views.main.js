@@ -613,14 +613,14 @@ GridView = Backbone.View.extend({
 
 	resize_div: function(){
 		var self = this;
-		var height = self.collection.length * 30 + 40;
-		if (height < 300){
+		var container_height =  $("#" + this.div_string).height();
+		if (container_height < 300){
 			setTimeout(function(){
-				var height = self.collection.length * 30 + 40;
-				var height = (height > 300) ? 300 : height;
+				var data_height = self.collection.length * 30 + 40;
+				var target_height = (data_height > 300) ? 300 : data_height;
 				
 				$("#" + self.div_string).stop();
-				$("#" + self.div_string).animate({height:height},500);
+				$("#" + self.div_string).animate({height:target_height},500);
 			},500);
 		}
 	},
