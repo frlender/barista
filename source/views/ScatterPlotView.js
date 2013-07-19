@@ -83,8 +83,6 @@ ScatterPlotView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
-
-	//		tick_view.compile_template_and_draw();
 	compile_template: function(){
 		var self = this;
 		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
