@@ -55,6 +55,7 @@ module.exports = function(grunt) {
       js_external: {
         src: ['external_source/jquery-1.9.1.min.js',
               'external_source/underscore-min.js',
+              'external_source/bootstrap.min.js',
               'external_source/d3.v3.min.js',
               'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
@@ -132,7 +133,25 @@ module.exports = function(grunt) {
       options: {
         index: 'README.md',
         strip: 'source',
-        except: ['source/**/*.main.js','source/barista.js']
+        except: ['source/**/*.main.js',
+                'source/barista.js',
+                'source/barista.main.js',
+                'source/barista.main.min.js',
+                'source/templates/*']
+      }
+    },
+
+    // configure the generation of docs with docco
+    docco: {
+      options: {
+        layout: "parallel",
+        output: "docs/"
+      },
+      all:{
+        files:{
+          src: ["source/**/*.js"],
+          except: ['source/**/*.main.js','source/barista.js']
+        }
       }
     },
 
@@ -160,6 +179,9 @@ module.exports = function(grunt) {
 
   // Load the plugin that provides the "groc" task.
   grunt.loadNpmTasks('grunt-groc');
+
+  // Load the plugin that provides the "groc" task.
+  grunt.loadNpmTasks('grunt-docco-multi');
 
   // Load the plugin that provides the "handlebars" task.
   grunt.loadNpmTasks('grunt-contrib-handlebars');

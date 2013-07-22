@@ -1,4 +1,4 @@
-// # **HeatmapView**
+// # **HeatMapView**
 
 // A Backbone.View that displays a simple heatmap.  The view is normally paired with 
 // a *HeatmapModel*, but works with any model that provides *data*, *rid*, *cid*, and

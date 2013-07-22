@@ -10,6 +10,7 @@
     "grunt-groc": "~0.3.0",
     "grunt-contrib-handlebars": "~0.5.10",
     "grunt-contrib-watch": "~0.4.4",
-    "karma": "~0.8.7"
+    "karma": "~0.8.7",
+    "grunt-docco-multi": "0.0.2"
   }
 }

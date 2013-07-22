@@ -279,6 +279,32 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/HeatmapModel.js",
+            "projectPath": "source/models/HeatmapModel.js",
+            "targetPath": "models/HeatmapModel",
+            "title": "HeatmapModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
             "sourcePath": "/Users/cflynn/Code/barista/source/models/PertCellBreakdownModel.js",
             "projectPath": "source/models/PertCellBreakdownModel.js",
             "targetPath": "models/PertCellBreakdownModel",
@@ -768,6 +794,80 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "htmlcell"
               },
               "depth": 2
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/HeatMapView.js",
+            "projectPath": "source/views/HeatMapView.js",
+            "targetPath": "views/HeatMapView",
+            "title": "HeatMapView"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "compile_template",
+                "slug": "compile-template"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "redraw",
+                "slug": "redraw"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "init_panel",
+                "slug": "init-panel"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "render",
+                "slug": "render"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "unravel_data",
+                "slug": "unravel-data"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "savePng",
+                "slug": "savepng"
+              },
+              "depth": 3
             }
           ]
         }, {

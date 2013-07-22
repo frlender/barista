@@ -1352,7 +1352,7 @@ HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
     return this;
   }
 });
-// # **HeatmapView**
+// # **HeatMapView**
 
 // A Backbone.View that displays a simple heatmap.  The view is normally paired with 
 // a *HeatmapModel*, but works with any model that provides *data*, *rid*, *cid*, and
@@ -2352,15 +2352,6 @@ PertSearchBar = Backbone.View.extend({
 	},
 
 	/**
-     the html template to be used as the views code
-     
-     @property template
-     @default '<div class="input-append span10"><input class="span12" autocomplete="off" type="text" placeholder="search gene, compound, or cell type name; separate compound searches with :" data-provide="typeahead" id="search"><span class="add-on">Search 1,209,824 profiles</span></div>'
-     @type String
-     **/
-	template: BaristaTemplates.CMapPertSearchBar,
-
-	/**
     renders the view
     
     @method render
@@ -2368,7 +2359,7 @@ PertSearchBar = Backbone.View.extend({
 	render: function(){
 		var self = this;
 		// load the template into the view's el tag
-		this.$el.html(this.template());
+		this.$el.html(BaristaTemplates.CMapPertSearchBar());
 
 		// configure the typeahead to autocomplete off of RESTful calls to pertinfo
 		var auto_data = [];
