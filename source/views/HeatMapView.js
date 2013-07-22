@@ -37,17 +37,17 @@ HeatmapView = Backbone.View.extend({
 		this.low_color = (this.options.low_color !== undefined) ? this.options.low_color : "#0000ff";
 		this.high_color = (this.options.high_color !== undefined) ? this.options.high_color : "#ff0000";
 		this.color_scale = (this.options.color_scale !== undefined) ? this.options.color_scale : undefined;
-		
+
 		// set up the defualt plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
 		// set up the default template
 		this.template = (this.options.template !== undefined) ? this.options.template : BaristaTemplates.d3_target;
-		
+
 		// set up the default span class
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "#span12";
 
 		// bind render to model changes
-		this.listenTo(this.model,'change', this.redraw);
+		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view and draw it for the first time
 		this.compile_template();
@@ -122,12 +122,191 @@ HeatmapView = Backbone.View.extend({
 			.attr("height",this.height)
 			.attr("width",this.width)
 			.attr("fill",this.bg_color);
+
+		// determine the height and width of cells in the heatmap
+		this.cell_height = (this.height - this.margin) / this.model.get('data').length;
+		this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+
+		// map the data into a flattened array of objects with array indices and value as attributes
+		this.unraveled_data = this.unravel_data(this.model.get('data'));
+
+		// set up the color scale
+		if (this.color_scale === undefined){
+			var values = _.pluck(this.unraveled_data,'value');
+			data_min = _.min(values);
+			data_max = _.max(values);
+			this.color = d3.scale.linear().domain([data_min,data_max]).range([this.low_color, this.high_color]);
+		}else{
+			this.color = this.color_scale;
+		}
+
+		// draw the heatmap cells
+		this.fg_layer.selectAll('.heatmap_cell').data([]).exit().remove();
+		this.fg_layer.selectAll('.heatmap_cell').data(this.unraveled_data).enter().append('rect')
+			.attr('class','heatmap_cell')
+			.attr('x',function(d){return self.cell_width*d.i + self.margin;})
+			.attr('y',function(d){return self.cell_height*d.j + self.margin;})
+			.attr('width',this.cell_width)
+			.attr('height',this.cell_height)
+			.attr('value',function(d){return d.value;})
+			.attr('stroke','white')
+			.attr('stroke-width',1)
+			.attr('fill',function(d){return self.color(d.value);});
+
+		// draw the row labels
+		this.fg_layer.selectAll('.heatmap_rid').data([]).exit().remove();
+		this.fg_layer.selectAll('.heatmap_rid').data(this.model.get('rid')).enter().append('text')
+			.attr('class','heatmap_rid')
+			.attr('x',this.margin)
+			.attr('y',function(d,i){return self.cell_height*i + self.cell_height/2 + self.margin;})
+			.attr('text-anchor','end')
+			.attr('dx','-.2em')
+			.text(function(d){return d;});
+
+		// draw the column labels
+		this.fg_layer.selectAll('.heatmap_cid').data([]).exit().remove();
+		this.fg_layer.selectAll('.heatmap_cid').data(this.model.get('cid')).enter().append('text')
+			.attr('class','heatmap_cid')
+			.attr('y',this.margin)
+			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.margin;})
+			.attr('text-anchor','middle')
+			.attr('dy','-.2em')
+			.text(function(d){return d;});
+
+		// add a png export overlay
+		this.fg_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.fg_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 10)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
 	},
 
 	// ### render
 	// update the dynamic potions of the view
 	render: function(){
-		return this;
-	}
+		var self = this;
+		// determine the height and width of cells in the heatmap
+		this.cell_height = (this.height - this.margin) / this.model.get('data').length;
+		this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
 
+		// map the data into a flattened array of objects with array indices and value as attributes
+		this.unraveled_data = this.unravel_data(this.model.get('data'));
+
+		// set up the color scale
+		if (this.color_scale === undefined){
+			var values = _.pluck(this.unraveled_data,'value');
+			data_min = _.min(values);
+			data_max = _.max(values);
+			this.color = d3.scale.linear().domain([data_min,data_max]).range([this.low_color, this.high_color]);
+		}else{
+			this.color = this.color_scale;
+		}
+
+		// draw the heatmap cells
+		var cell_selection = this.fg_layer.selectAll('.heatmap_cell').data(this.unraveled_data);
+		cell_selection.enter().append('rect')
+			.attr('class','heatmap_cell')
+			.attr('x',(this.width - this.margin)/2)
+			.attr('y',(this.height - this.margin)/2)
+			.attr('width',0)
+			.attr('height',0)
+			.attr('opacity',0)
+			.attr('value',function(d){return d.value;})
+			.attr('stroke','white')
+			.attr('stroke-width',1)
+			.attr('fill',function(d){return self.color(d.value);});
+
+		cell_selection.transition().duration(500)
+			.attr('x',function(d){return self.cell_width*d.i + self.margin;})
+			.attr('y',function(d){return self.cell_height*d.j + self.margin;})
+			.attr('width',this.cell_width)
+			.attr('height',this.cell_height)
+			.attr('opacity',1)
+			.attr('fill',function(d){return self.color(d.value);});
+
+		cell_selection.exit().remove();
+
+		// draw the row labels
+		rid_selection = this.fg_layer.selectAll('.heatmap_rid').data(this.model.get('rid'));
+		rid_selection.enter().append('text')
+			.attr('class','heatmap_rid')
+			.attr('x',this.margin)
+			.attr('y',(this.height - this.margin)/2)
+			.attr('opacity',0)
+			.attr('text-anchor','end')
+			.attr('dx','-.2em')
+			.text(function(d){return d;});
+
+		rid_selection.transition().duration(500)
+			.attr('opacity',1)
+			.attr('y',function(d,i){return self.cell_height*i + self.cell_height/2 + self.margin;})
+			.text(function(d){return d;});
+
+		rid_selection.exit().remove();
+
+		// draw the column labels
+		cid_selection = this.fg_layer.selectAll('.heatmap_cid').data(this.model.get('cid'));
+		cid_selection.enter().append('text')
+			.attr('class','heatmap_cid')
+			.attr('y',this.margin)
+			.attr('x',(this.width - this.margin)/2)
+			.attr('opacity',0)
+			.attr('text-anchor','middle')
+			.attr('dy','-.2em')
+			.text(function(d){return d;});
+
+		cid_selection.transition().duration(500)
+			.attr('opacity',1)
+			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.margin;})
+			.text(function(d){return d;});
+
+		cid_selection.exit().remove();
+	},
+
+	// ### unravel_data
+	// internal utility function to express 2D array data as a flat data array of objects with array
+	// coordinates and data value as attributes.
+	unravel_data: function(data){
+		unraveled_data = [];
+		data.forEach(function(i_e,i){
+			i_e.forEach(function(j_e,j){
+				unraveled_data.push({i:j, j:i, value:j_e});
+			});
+		});
+		return unraveled_data;
+	},
+
+	// ### savePng
+	// save the current state of the view into a png image
+	save_png: function(){
+		// build a canvas element to store the image temporarily while we save it
+		var width = this.width;
+		var height = this.height;
+		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
+		$('body').append(html_snippet);
+
+		// dim the png label on the image
+		var png_selection = this.vis.selectAll(".no_png_export");
+		var png_opacity = png_selection.attr("opacity");
+		png_selection.attr("opacity",0);
+
+		// grab the content of the target svg and place it in the canvas element
+		var svg_snippet = this.vis.node().parentNode.innerHTML;
+		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+
+		// save the contents of the canvas to file and remove the canvas element
+		var canvas = $("#tmpCanvas")[0];
+		var filename = "cmapHeatmapView" + new Date().getTime() + ".png";
+		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);});}
+		$('#tmpCanvas').remove();
+
+		// make the png label on the image visible again
+		png_selection.attr("opacity",png_opacity);
+	}
 });
