@@ -1352,7 +1352,7 @@ HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
     return this;
   }
 });
-// # **HeatMapView**
+// # **HeatmapView**
 
 // A Backbone.View that displays a simple heatmap.  The view is normally paired with 
 // a *HeatmapModel*, but works with any model that provides *data*, *rid*, *cid*, and
@@ -1478,8 +1478,17 @@ HeatmapView = Backbone.View.extend({
 			.attr("fill",this.bg_color);
 
 		// determine the height and width of cells in the heatmap
-		this.cell_height = (this.height - this.margin) / this.model.get('data').length;
-		this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+		if (this.height < this.width){
+			this.cell_height = (this.height - this.margin) / this.model.get('data').length;
+			this.cell_width = (this.height - this.margin) / this.model.get('data')[0].length;
+		}else{
+			this.cell_height = (this.width - this.margin) / this.model.get('data').length;
+			this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+		}
+
+		// determine the plot offset to center the plot in its container
+		this.x_center = this.width / 2;
+		this.x_offset = this.x_center - (this.cell_width * this.model.get('data')[0].length / 2);
 
 		// map the data into a flattened array of objects with array indices and value as attributes
 		this.unraveled_data = this.unravel_data(this.model.get('data'));
@@ -1498,7 +1507,7 @@ HeatmapView = Backbone.View.extend({
 		this.fg_layer.selectAll('.heatmap_cell').data([]).exit().remove();
 		this.fg_layer.selectAll('.heatmap_cell').data(this.unraveled_data).enter().append('rect')
 			.attr('class','heatmap_cell')
-			.attr('x',function(d){return self.cell_width*d.i + self.margin;})
+			.attr('x',function(d){return self.cell_width*d.i + self.x_offset;})
 			.attr('y',function(d){return self.cell_height*d.j + self.margin;})
 			.attr('width',this.cell_width)
 			.attr('height',this.cell_height)
@@ -1511,7 +1520,7 @@ HeatmapView = Backbone.View.extend({
 		this.fg_layer.selectAll('.heatmap_rid').data([]).exit().remove();
 		this.fg_layer.selectAll('.heatmap_rid').data(this.model.get('rid')).enter().append('text')
 			.attr('class','heatmap_rid')
-			.attr('x',this.margin)
+			.attr('x',this.x_offset)
 			.attr('y',function(d,i){return self.cell_height*i + self.cell_height/2 + self.margin;})
 			.attr('text-anchor','end')
 			.attr('dx','-.2em')
@@ -1522,7 +1531,7 @@ HeatmapView = Backbone.View.extend({
 		this.fg_layer.selectAll('.heatmap_cid').data(this.model.get('cid')).enter().append('text')
 			.attr('class','heatmap_cid')
 			.attr('y',this.margin)
-			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.margin;})
+			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.x_offset;})
 			.attr('text-anchor','middle')
 			.attr('dy','-.2em')
 			.text(function(d){return d;});
@@ -1531,9 +1540,10 @@ HeatmapView = Backbone.View.extend({
 		this.fg_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
 		this.fg_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
 			.attr("class", this.div_string + "png_export no_png_export")
-			.attr("x",10)
+			.attr("x",this.x_offset)
 			.attr("y",this.height - 10)
 			.attr("opacity",0.25)
+			.attr('text-anchor','end')
 			.style("cursor","pointer")
 			.text("png")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
@@ -1546,8 +1556,17 @@ HeatmapView = Backbone.View.extend({
 	render: function(){
 		var self = this;
 		// determine the height and width of cells in the heatmap
-		this.cell_height = (this.height - this.margin) / this.model.get('data').length;
-		this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+		if (this.height < this.width){
+			this.cell_height = (this.height - this.margin) / this.model.get('data').length;
+			this.cell_width = (this.height - this.margin) / this.model.get('data')[0].length;
+		}else{
+			this.cell_height = (this.width - this.margin) / this.model.get('data').length;
+			this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+		}
+
+		// determine the plot offset to center the plot in its container
+		this.x_center = this.width / 2;
+		this.x_offset = this.x_center - (this.cell_width * this.model.get('data')[0].length / 2);
 
 		// map the data into a flattened array of objects with array indices and value as attributes
 		this.unraveled_data = this.unravel_data(this.model.get('data'));
@@ -1566,7 +1585,7 @@ HeatmapView = Backbone.View.extend({
 		var cell_selection = this.fg_layer.selectAll('.heatmap_cell').data(this.unraveled_data);
 		cell_selection.enter().append('rect')
 			.attr('class','heatmap_cell')
-			.attr('x',(this.width - this.margin)/2)
+			.attr('x',this.x_center)
 			.attr('y',(this.height - this.margin)/2)
 			.attr('width',0)
 			.attr('height',0)
@@ -1577,7 +1596,7 @@ HeatmapView = Backbone.View.extend({
 			.attr('fill',function(d){return self.color(d.value);});
 
 		cell_selection.transition().duration(500)
-			.attr('x',function(d){return self.cell_width*d.i + self.margin;})
+			.attr('x',function(d){return self.cell_width*d.i + self.x_offset;})
 			.attr('y',function(d){return self.cell_height*d.j + self.margin;})
 			.attr('width',this.cell_width)
 			.attr('height',this.cell_height)
@@ -1590,7 +1609,7 @@ HeatmapView = Backbone.View.extend({
 		rid_selection = this.fg_layer.selectAll('.heatmap_rid').data(this.model.get('rid'));
 		rid_selection.enter().append('text')
 			.attr('class','heatmap_rid')
-			.attr('x',this.margin)
+			.attr('x',this.x_offset)
 			.attr('y',(this.height - this.margin)/2)
 			.attr('opacity',0)
 			.attr('text-anchor','end')
@@ -1609,7 +1628,7 @@ HeatmapView = Backbone.View.extend({
 		cid_selection.enter().append('text')
 			.attr('class','heatmap_cid')
 			.attr('y',this.margin)
-			.attr('x',(this.width - this.margin)/2)
+			.attr('x',this.x_center)
 			.attr('opacity',0)
 			.attr('text-anchor','middle')
 			.attr('dy','-.2em')
@@ -1617,7 +1636,7 @@ HeatmapView = Backbone.View.extend({
 
 		cid_selection.transition().duration(500)
 			.attr('opacity',1)
-			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.margin;})
+			.attr('x',function(d,i){return self.cell_width*i + self.cell_width/2 + self.x_offset;})
 			.text(function(d){return d;});
 
 		cid_selection.exit().remove();
