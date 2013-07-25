@@ -1,24 +1,23 @@
-// # **ScatterPlotView**
-// A Backbone.View that displays a scatter plot.  the view's model is assumed to have the same defaults
+// # **ViolinPlotView**
+// A Backbone.View that displays a single scatter plot.  the view's model is assumed to have the same defaults
 // as specified in **ScatterPlotModel**
 
 // basic use:
 
-//		scatter_plot_view = new ScatterPlotView();
+//		violin_plot_view = new ViolinPlotView();
 
 // optional arguments:
 
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
 // 2.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
 // 3.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
-// 4.  {string}  **scale_by**  an attribute in the model's meta data object to scale points by, defaults to *undefined*
-// 5.  {Array}  **x_range**  a two element array specifying the x plotting bounds of the plot, defaults to *[min(x_data),max(x_data)]*
-// 6.  {Array}  **y_range**  a two element array specifying the y plotting bounds of the plot, defaults to *[min(y_data),max(y_data)]*
-// 7.  {Bool}  **x_log**  if set to true, plots the x axis on a log scale, defaults to *false*
-// 8.  {Bool}  **y_log**  if set to true, plots the y axis on a log scale, defaults to *false*
-// 9.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
+// 4.  {Array}  **x_range**  a two element array specifying the x plotting bounds of the plot, defaults to *[min(x_data),max(x_data)]*
+// 5.  {Array}  **y_range**  a two element array specifying the y plotting bounds of the plot, defaults to *[min(y_data),max(y_data)]*
+// 6.  {Bool}  **x_log**  if set to true, plots the x axis on a log scale, defaults to *false*
+// 7.  {Bool}  **y_log**  if set to true, plots the y axis on a log scale, defaults to *false*
+// 8.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
-//		scatter_plot_view = new ScatterPlotView({el: $("target_selector",
+//		violin_plot_view = new ViolinPlotView({el: $("target_selector",
 //									bg_color:"#ffffff", 
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -28,8 +27,7 @@
 //									x_log: false,
 //									y_log: false,
 //									plot_height: 120});
-
-ScatterPlotView = Backbone.View.extend({
+ViolinPlotView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -168,11 +166,6 @@ ScatterPlotView = Backbone.View.extend({
 			.attr("transform", "translate(0," + (this.height - this.margin) + ")")
 			.call(xAxis);
 
-		this.bg_layer.append("g")
-			.attr("class", "axis")
-			.attr("transform", "translate(" + this.margin + ",0)")
-			.call(yAxis);
-
 		// style the axes
 		this.vis.selectAll('.axis').selectAll("path")
 			.style("fill","none")
@@ -188,29 +181,40 @@ ScatterPlotView = Backbone.View.extend({
 			.style("font-family","sans-serif")
 			.style("font-size","11px");
 
-		// build a scaling function
-		if (this.scale_by !== undefined){
-			this.scale_data = this.model.get('meta_data')[this.scale_by];
-			var size_min = Math.sqrt(_.min(this.scale_data)/Math.PI);
-			var size_max = Math.sqrt(_.max(this.scale_data)/Math.PI);
-			this.size_scale=d3.scale.linear().domain([size_min,size_max]).range([5, 20]);
-			this.dot_scaler = function(val){
-				r = Math.sqrt(val/Math.PI);
-				return self.size_scale(r);
-			};
-		}
+		// define an area generator for use in plotting data
+		this.upper_area_generator = d3.svg.area()
+			.x(function(d) { return self.x_scale(d.x); })
+			.y0(this.y_scale(0))
+			.y1(function(d) { return self.y_scale(d.y); })
+			.interpolate('basis');
+		this.lower_area_generator = d3.svg.area()
+			.x(function(d) { return self.x_scale(d.x); })
+			.y0(this.y_scale(0))
+			.y1(function(d) { return self.y_scale(d.y * -1); })
+			.interpolate('basis');
 
-		// plot the data points
+		// grab data from the model and package it such that we can iterate over it
+		// and generate an area. The packaged data will be sorted by the x_data attribute
 		this.x_data = this.model.get('x_data');
 		this.y_data = this.model.get('y_data');
-		this.bg_layer.selectAll('.data_point').data([]).exit().remove();
-		this.bg_layer.selectAll('.data_point').data(this.x_data).enter().append('circle')
-			.attr("class","data_point")
-			.attr("cx",this.x_scale(0))
-			.attr("cy",this.y_scale(0))
+		this.path_data = [];
+		this.x_data.forEach(function(x,i){ self.path_data.push({x: x, y: self.y_data[i]});});
+		this.path_data.sort(this.path_data_sorter);
+
+		// plot the data
+		this.bg_layer.selectAll('.upper_violin').data([]).exit().remove();
+		this.bg_layer.selectAll('.upper_violin').data([1]).enter().append('path')
+			.attr("class","upper_violin")
 			.attr("opacity",0.5)
-			.attr("r",0)
-			.attr("fill",this.fg_color);
+			.attr("fill",this.fg_color)
+			.attr('d',this.upper_area_generator(this.path_data));
+		this.bg_layer.selectAll('.lower_violin').data([]).exit().remove();
+		this.bg_layer.selectAll('.lower_violin').data([1]).enter().append('path')
+			.attr("class","lower_violin")
+			.attr("opacity",0.5)
+			.attr("fill",this.fg_color)
+			.attr('d',this.lower_area_generator(this.path_data));
+
 
 		// plot the x axis title
 		this.bg_layer.selectAll('.x_axis_label').data([]).exit().remove();
@@ -220,16 +224,6 @@ ScatterPlotView = Backbone.View.extend({
 			.attr("y",this.height-10)
 			.style("text-anchor","middle")
 			.text(this.model.get('x_axis_title'));
-
-		// plot the y axis label
-		this.bg_layer.selectAll('.y_axis_label').data([]).exit().remove();
-		this.bg_layer.selectAll('.y_axis_label').data([1]).enter().append('text')
-			.attr("class","y_axis_label axis_label")
-			.attr("transform", "rotate(-90)")
-			.attr("y", this.margin/2)
-			.attr("x", - this.height/2)
-			.style("text-anchor","middle")
-			.text(this.model.get('y_axis_title'));
 
 		// plot the title
 		this.bg_layer.selectAll('.title').data([]).exit().remove();
@@ -258,69 +252,16 @@ ScatterPlotView = Backbone.View.extend({
 	// ### render
 	// update the dynamic potions of the view
 	render: function(){
-	// build a scaling function
-	var self = this;
-	if (this.scale_by !== undefined){
-		this.scale_data = this.model.get('meta_data')[this.scale_by];
-		var size_min = Math.sqrt(_.min(this.scale_data)/Math.PI);
-		var size_max = Math.sqrt(_.max(this.scale_data)/Math.PI);
-		this.size_scale=d3.scale.linear().domain([size_min,size_max]).range([5, 20]);
-		this.dot_scaler = function(val){
-			r = Math.sqrt(val/Math.PI);
-			return self.size_scale(r);
-		};
-	}
-
-	// plot the data points
-	this.x_data = this.model.get('x_data');
-	this.y_data = this.model.get('y_data');
-	this.points_selection = this.bg_layer.selectAll('.data_point').data(this.x_data);
-	this.points_selection.enter().append('circle')
-		.attr("class","data_point")
-		.attr("cx",this.x_scale(0))
-		.attr("cy",this.y_scale(0))
-		.attr("opacity",0.5)
-		.attr("r",0)
-		.attr("fill",this.fg_color);
-
-		this.points_selection.transition().duration(500)
-			.attr("cx",this.x_scale)
-			.attr("cy",function(d,i){return self.y_scale(self.y_data[i]);})
-			.attr("r",function(d,i){
-			if (self.scale_by === undefined){
-				return 10;
-			}else{
-				return self.dot_scaler(self.scale_data[i]);
-			}});
-
-		this.points_selection.exit().remove();
+		return;
 	},
 
-	// ### savePng
-	// save the current state of the view into a png image
-	save_png: function(){
-		// build a canvas element to store the image temporarily while we save it
-		var width = this.width;
-		var height = this.height;
-		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
-		$('body').append(html_snippet);
-
-		// dim the png label on the image
-		var png_selection = this.vis.selectAll(".no_png_export");
-		var png_opacity = png_selection.attr("opacity");
-		png_selection.attr("opacity",0);
-
-		// grab the content of the target svg and place it in the canvas element
-		var svg_snippet = this.vis.node().parentNode.innerHTML;
-		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
-
-		// save the contents of the canvas to file and remove the canvas element
-		var canvas = $("#tmpCanvas")[0];
-		var filename = "cmapScatterView" + new Date().getTime() + ".png";
-		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
-		$('#tmpCanvas').remove();
-
-		// make the png label on the image visible again
-		png_selection.attr("opacity",png_opacity);
+	// ### path data sorter
+	// internal method used to sort path_data list elements by the x attribute
+	path_data_sorter: function(a,b) {
+		if (a.x < b.x){
+			return -1;
+		}else{
+			return 1;
+		}
 	}
 });
