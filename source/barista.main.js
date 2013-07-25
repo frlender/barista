@@ -1265,6 +1265,9 @@ GridView = Backbone.View.extend({
 				names.forEach(function(n){
 					if (n == "pert_type_label"){
 						line_data.push(CMapPertTypeAlias(r["pert_type"]).acronym);
+					}
+					if ($(String(r[n])).length === 1){
+						line_data.push($(r[n]).text());
 					}else{
 						line_data.push(r[n]);
 					}
