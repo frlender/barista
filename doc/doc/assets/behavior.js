@@ -23,11 +23,11 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         {
           "type": "heading",
           "data": {
-            "level": 2,
-            "title": "### Connectivity Map javascript components",
-            "slug": "-connectivity-map-javascript-components"
+            "level": 3,
+            "title": "Connectivity Map javascript components",
+            "slug": "connectivity-map-javascript-components"
           },
-          "depth": 2
+          "depth": 3
         }
       ]
     }, {
@@ -536,22 +536,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           ]
         }
       ]
-    }, {
-      "type": "file",
-      "data": {
-        "language": {
-          "nameMatchers": [".js"],
-          "pygmentsLexer": "javascript",
-          "singleLineComment": ["//"],
-          "name": "JavaScript"
-        },
-        "sourcePath": "/Users/cflynn/Code/barista/source/tile.js",
-        "projectPath": "source/tile.js",
-        "targetPath": "tile",
-        "title": "tile"
-      },
-      "depth": 1,
-      "outline": []
     }, {
       "type": "folder",
       "data": {
