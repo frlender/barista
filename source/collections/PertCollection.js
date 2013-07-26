@@ -1,5 +1,5 @@
 // # **PertCollection**
-// A Backbone.Collection that represents a set of perturbagen names.  This collection is suitable for 
+// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
 // internal use in GridView.
 
 // optional arguments:

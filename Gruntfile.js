@@ -137,7 +137,8 @@ module.exports = function(grunt) {
                 'source/barista.js',
                 'source/barista.main.js',
                 'source/barista.main.min.js',
-                'source/templates/*']
+                'source/templates/*',
+                'source/tile.js']
       }
     },
 
