@@ -43,20 +43,26 @@ GenericJSONCollection = Backbone.Collection.extend({
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
     getData: function(search_string,search_type,limit){
-    	var self = this;
+        var self = this;
         // set **isLoading** to true so we don't constantly make api calls before the data comes back
-	    this.isLoading = true;
+        this.isLoading = true;
 
-	    // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-	    this.search_string = (search_string !== undefined) ? search_string : '';
-	    this.search_type = (search_type !== undefined) ? search_type : '';
-	    this.limit = (limit !== undefined) ? limit : 30;
+        // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
+        this.search_string = (search_string !== undefined) ? search_string : '';
+        this.search_type = (search_type !== undefined) ? search_type : '';
+        this.limit = (limit !== undefined) ? limit : 30;
 
-	    // fetch data from the given url
-	    $.getJSON(this.url,function(res){
-            res.forEach(function(o){
-                self.add(new PertModel(o));
-            })
-        });
+        // fetch data from the given url.  If the url attribute is a string, fetch data via an ajax
+        // request. Read each returned item in the response into a new PertModel.  If it is an object, 
+        // assume it is an array of data and read each array item into a new PertModel
+        if (typeof(this.url) == 'object'){
+            this.url.forEach(function(o){self.add(new PertModel(o));});
+        }else{
+            $.getJSON(this.url,function(res){
+                res.forEach(function(o){
+                    self.add(new PertModel(o));
+                });
+            });
+        }
 	}
 });
