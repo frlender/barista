@@ -7789,6 +7789,34 @@ ViolinPlotView = Backbone.View.extend({
 		}else{
 			return 1;
 		}
+	},
+
+	// ### savePng
+	// save the current state of the view into a png image
+	save_png: function(){
+		// build a canvas element to store the image temporarily while we save it
+		var width = this.width;
+		var height = this.height;
+		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
+		$('body').append(html_snippet);
+
+		// dim the png label on the image
+		var png_selection = this.vis.selectAll(".no_png_export");
+		var png_opacity = png_selection.attr("opacity");
+		png_selection.attr("opacity",0);
+
+		// grab the content of the target svg and place it in the canvas element
+		var svg_snippet = this.vis.node().parentNode.innerHTML;
+		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+
+		// save the contents of the canvas to file and remove the canvas element
+		var canvas = $("#tmpCanvas")[0];
+		var filename = "cmapScatterView" + new Date().getTime() + ".png";
+		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
+		$('#tmpCanvas').remove();
+
+		// make the png label on the image visible again
+		png_selection.attr("opacity",png_opacity);
 	}
 });
 
