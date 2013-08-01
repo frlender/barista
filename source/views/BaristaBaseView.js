@@ -1,0 +1,204 @@
+// # **BaristaBaseView**
+// A Backbone.View the serves as the base view for other views in the barista library.  BaristaBaseView provides common
+// functionality for views including standard initialization, redraw, render, template compilation, and png export functions.
+// This view by itself will construct a single panel with a png export option, but it is meant to be used as the base view
+// that more complex views extend
+
+// basic use:
+
+//		base_view = new BaristaBaseView();
+
+// optional arguments:
+
+// 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
+// 2.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
+// 3.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
+// 4.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
+
+//		base_view = new ViolinPlotView({el: $("target_selector",
+//									bg_color:"#ffffff", 
+//									fg_color: "#1b9e77",
+//									span_class: "span4",
+//									plot_height: 120});
+
+// to extend BaristaBaseView, use
+
+//		extended_view = BaristaBaseView.extend({
+//										...
+//										});
+BaristaBaseView = Backbone.View.extend({
+	// ### initialize
+	// initialize the viewview.  Views that extend BaristaBaseView should impliment code overiding this method.
+	// If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should
+	// call it in their redraw method.  As an example:
+
+	//		initialize: function(){
+	//					this.base_initialize();
+	//					//your code here
+	//					}
+	//
+
+	initialize: function(){
+		this.base_initialize();
+	},
+
+	// ### base_initialize
+	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	// template, bind model changes to view updates, and render the view.  This method is provided so it 
+	// can be used in view that extend BaristaBaseView
+	base_initialize: function(){
+		// give the view a name to be used throughout the View's functions when it needs to do some self-discovery
+		this.name = "BaristaBaseView";
+
+		// set up color options.  default if not specified
+		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
+		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
+
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
+
+		// set up the span size
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
+
+		// bind render to model changes
+		this.listenTo(this.model,'change', this.render);
+
+		// compile the default template for the view
+		this.compile_template();
+
+		// define the location where d3 will build its plot
+		this.width = $("#" + this.div_string).outerWidth();
+		this.height = $("#" + this.div_string).outerHeight();
+		this.vis = d3.select("#" + this.div_string).append("svg")
+						.attr("width",this.width)
+						.attr("height",this.height);
+
+		// render the vis
+		this.redraw();
+
+		// bind window resize events to redraw
+		var self = this;
+		$(window).resize(function() {self.redraw();} );
+
+		return this;
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the template for the view
+	compile_template: function(){
+		var self = this;
+		this.div_string = 'barista_view' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: this.plot_height}));
+	},
+
+	// ### redraw
+	// completely redraw the view. Updates both static and dynamic content in the view.  Views
+	// that extend BaristaBaseView should impliment draw code overiding this method.  If extended
+	// BaristaBaseViews want to use the built in base_redraw method of BaristaBaseView, they should
+	// call it in their redraw method.  As an example:
+
+	//		redraw: function(){
+	//					this.base_redraw();
+	//					//your code here
+	//					}
+	//
+
+	redraw: function(){
+		this.base_redraw();
+	},
+
+	// ### base_redraw
+	// completely redraw the view. Updates both static and dynamic content in the view.
+	// This method is provided so it can be used in view that extend BaristaBaseView
+	base_redraw: function(){
+		// stuff this into a variable for later use
+		var self = this;
+
+		// check to see if the container is visible, if not, make it visible, but transparent so we draw it with
+		// the proper dimensions
+		if (this.$el.is(":hidden")){
+			this.$el.animate({opacity:0},1);
+			this.$el.show();
+		}
+
+		// set up drawing layers
+		this.vis.selectAll('.bg_layer').data([]).exit().remove();
+		this.bg_layer = this.vis.append("g").attr("class", "bg_layer");
+
+		this.vis.selectAll('.fg_layer').data([]).exit().remove();
+		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
+
+		this.vis.selectAll('.controls_layer').data([]).exit().remove();
+		this.controls_layer = this.vis.append("g").attr("class", "controls_layer");
+
+		// set up the panel's width and height
+		this.width = $("#" + this.div_string).outerWidth();
+		this.height = $("#" + this.div_string).outerHeight();
+
+		// rescale the width of the vis
+		this.vis.transition().attr("width",this.width);
+		this.vis.transition().attr("height",this.height);
+
+		// draw the background of the panel
+		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
+		this.bg_layer.selectAll('.bg_panel').data([1]).enter().append('rect')
+			.attr("class","bg_panel")
+			.attr("height",this.height)
+			.attr("width",this.width)
+			.attr("fill",this.bg_color);
+
+		// add a png export overlay
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 10)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
+	},
+
+	// ### render
+	// update the dynamic potions of the view
+	render: function(){
+		return this;
+	},
+
+	// ### savePng
+	// save the current state of the view into a png image
+	save_png: function(){
+		// build a canvas element to store the image temporarily while we save it
+		var width = this.width;
+		var height = this.height;
+		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
+		$('body').append(html_snippet);
+
+		// dim the png label on the image
+		var png_selection = this.vis.selectAll(".no_png_export");
+		var png_opacity = png_selection.attr("opacity");
+		png_selection.attr("opacity",0);
+
+		// grab the content of the target svg and place it in the canvas element
+		var svg_snippet = this.vis.node().parentNode.innerHTML;
+		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+
+		// save the contents of the canvas to file and remove the canvas element
+		var canvas = $("#tmpCanvas")[0];
+		var filename = this.name + new Date().getTime() + ".png";
+		if (canvas.toBlob){
+			canvas.toBlob(function(blob){
+				saveAs(blob,filename);
+				});
+		}
+		$('#tmpCanvas').remove();
+
+		// make the png label on the image visible again
+		png_selection.attr("opacity",png_opacity);
+	}
+});

@@ -27,15 +27,11 @@
 //									x_log: false,
 //									y_log: false,
 //									plot_height: 120});
-ViolinPlotView = Backbone.View.extend({
+ViolinPlotView = BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	initialize: function(){
-		// set up color options.  default if not specified
-		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
-		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
-
 		// set up x and y range
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
 		this.y_range = (this.options.y_range !== undefined) ? this.options.y_range : undefined;
@@ -47,47 +43,15 @@ ViolinPlotView = Backbone.View.extend({
 		// set up the scale_by parameter
 		this.scale_by = (this.options.scale_by !== undefined) ? this.options.scale_by : undefined;
 
-		// set up the default height for the plot
-		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
-
-		// set up the span size
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
-
-		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
-
-		// compile the default template for the view
-		this.compile_template();
-
-		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
-						.attr("width",this.width)
-						.attr("height",this.height);
-
-		// render the vis
-		this.redraw();
-
-		// bind window resize events to redraw
-		var self = this;
-		$(window).resize(function() {self.redraw();} );
-	},
-
-	// ### compile_template
-	// use Handlebars to compile the template for the view
-	compile_template: function(){
-		var self = this;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
-		this.compiled_template = BaristaTemplates.d3_target;
-		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
-												span_class: this.span_class,
-												height: this.plot_height}));
+		// run BaristaBaseView's base_initialize method to handle boilerplate view construction
+		// and initial view construction
+		this.base_initialize();
 	},
 
 	// ### redraw
 	// completely redraw the view. Updates both static and dynamic content in the view.
 	redraw: function(){
+		this.base_redraw();
 		this.init_panel();
 		this.render();
 	},
@@ -97,13 +61,6 @@ ViolinPlotView = Backbone.View.extend({
 	init_panel: function(){
 		// stuff this into a variable for later use
 		var self = this;
-
-		// check to see if the container is visible, if not, make it visible, but transparent so we draw it with
-		// the proper dimensions
-		if (this.$el.is(":hidden")){
-			this.$el.animate({opacity:0},1);
-			this.$el.show();
-		}
 
 		// set up the margin
 		this.margin = 50;
@@ -127,29 +84,6 @@ ViolinPlotView = Backbone.View.extend({
 		}else{
 			this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
 		}
-
-		// set up drawing layers
-		this.vis.selectAll('.bg_layer').data([]).exit().remove();
-		this.bg_layer = this.vis.append("g").attr("class", "bg_layer");
-
-		this.vis.selectAll('.fg_layer').data([]).exit().remove();
-		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
-
-		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
-		this.height = $("#" + this.div_string).outerHeight();
-
-		// rescale the width of the vis
-		this.vis.transition().attr("width",this.width);
-		this.vis.transition().attr("height",this.height);
-
-		// draw the background of the panel
-		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
-		this.bg_layer.selectAll('.bg_panel').data([1]).enter().append('rect')
-			.attr("class","bg_panel")
-			.attr("height",this.height)
-			.attr("width",this.width)
-			.attr("fill",this.bg_color);
 
 		// build an Axes
 		var xAxis = d3.svg.axis()
@@ -234,19 +168,6 @@ ViolinPlotView = Backbone.View.extend({
 			.style("text-anchor","middle")
 			.text(this.model.get('title'));
 
-		// add a png export overlay
-		this.fg_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
-		this.fg_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
-			.attr("class", this.div_string + "png_export no_png_export")
-			.attr("x",10)
-			.attr("y",this.height - 10)
-			.attr("opacity",0.25)
-			.style("cursor","pointer")
-			.text("png")
-			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
-			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-			.on("click",function(){self.save_png();});
-
 	},
 
 	// ### render
@@ -277,33 +198,5 @@ ViolinPlotView = Backbone.View.extend({
 		}else{
 			return 1;
 		}
-	},
-
-	// ### savePng
-	// save the current state of the view into a png image
-	save_png: function(){
-		// build a canvas element to store the image temporarily while we save it
-		var width = this.width;
-		var height = this.height;
-		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
-		$('body').append(html_snippet);
-
-		// dim the png label on the image
-		var png_selection = this.vis.selectAll(".no_png_export");
-		var png_opacity = png_selection.attr("opacity");
-		png_selection.attr("opacity",0);
-
-		// grab the content of the target svg and place it in the canvas element
-		var svg_snippet = this.vis.node().parentNode.innerHTML;
-		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
-
-		// save the contents of the canvas to file and remove the canvas element
-		var canvas = $("#tmpCanvas")[0];
-		var filename = "cmapScatterView" + new Date().getTime() + ".png";
-		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
-		$('#tmpCanvas').remove();
-
-		// make the png label on the image visible again
-		png_selection.attr("opacity",png_opacity);
 	}
 });
