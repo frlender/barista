@@ -9,9 +9,9 @@ of each annotation category for the set of cell lines.</p></div></div></div><div
 <li>{Array}  <strong>pert_types</strong>  an array of objects representing pert_type categories to keep track of, defaults to <em>[{}}]</em></li>
 <li>{Date}  <strong>last_update</strong>  a timestamp of the latest model update, defaults to the current time</li>
 </ol></div></div><div class="code"><div class="wrapper">  <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;pert_count&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;pert_types&quot;</span><span class="o">:</span> <span class="p">[{}],</span>
-    <span class="s2">&quot;last_update&quot;</span><span class="o">:</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span>
+    <span class="nx">pert_count</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">pert_types</span><span class="o">:</span> <span class="p">[{}],</span>
+    <span class="nx">last_update</span><span class="o">:</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span>
   <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="initialize">initialize</h3>
 
 <p>Overides the base Model initialize method to fetch data matching an empty string</p></div></div><div class="code"><div class="wrapper">  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
