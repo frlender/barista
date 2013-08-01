@@ -17,9 +17,9 @@ CellCountModel = Backbone.Model.extend({
   // 2.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    "pert_count": 0,
-    "pert_types": [{}],
-    "last_update": (new Date()).getTime()
+    pert_count: 0,
+    pert_types: [{}],
+    last_update: (new Date()).getTime()
   },
 
   // ### initialize

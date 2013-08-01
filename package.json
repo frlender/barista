@@ -1,6 +1,6 @@
 {
   "name": "barista",
-  "yuidoc_description": "A library of components developed for working with LINCS Connectivity Map Data",
+  "description": "A library of components developed for working with LINCS Connectivity Map Data",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.1",

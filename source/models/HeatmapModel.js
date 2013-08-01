@@ -30,6 +30,7 @@ HeatmapModel = Backbone.Model.extend({
 		data: [[1,2],[3,4]],
 		rid: ['1','2'],
 		cid: ['1','2'],
-		title: ""
+		title: "",
+		last_update: (new Date()).getTime()
 	}
 })

@@ -2748,7 +2748,21 @@ ViolinPlotView = Backbone.View.extend({
 	// ### render
 	// update the dynamic potions of the view
 	render: function(){
-		return;
+		var self = this;
+		// grab data from the model and package it such that we can iterate over it
+		// and generate an area. The packaged data will be sorted by the x_data attribute
+		this.x_data = this.model.get('x_data');
+		this.y_data = this.model.get('y_data');
+		this.path_data = [];
+		this.x_data.forEach(function(x,i){ self.path_data.push({x: x, y: self.y_data[i]});});
+		this.path_data.sort(this.path_data_sorter);
+
+		// transition the data
+		var upper = this.bg_layer.selectAll('.upper_violin');
+		upper.transition().duration(500).attr('d',this.upper_area_generator(this.path_data));
+
+		var lower = this.bg_layer.selectAll('.lower_violin');
+		lower.transition().duration(500).attr('d',this.lower_area_generator(this.path_data));
 	},
 
 	// ### path data sorter

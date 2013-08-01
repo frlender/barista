@@ -10,7 +10,7 @@ describe('CellCountModel',function(){
 		});
 		it('last_update equal to (new Date()).getTime()',function(){
 			var o = new CellCountModel();
-			var diff = (new Date()).getTime() - o.get("last_update")
+			var diff = (new Date()).getTime() - o.get("last_update");
 			expect(diff).toBeLessThan(100);
 		});
 	});

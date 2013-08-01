@@ -11,14 +11,12 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   '../barista.main.js',
-  'spec/*.js'
+  'spec/**/*.js'
 ];
 
 
 // list of files to exclude
-exclude = [
-  
-];
+exclude = [];
 
 
 // test results reporter to use
@@ -55,7 +53,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it
