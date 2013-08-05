@@ -436,7 +436,7 @@ FlatTreeMapView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.top_svg = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -464,7 +464,7 @@ FlatTreeMapView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -1004,7 +1004,7 @@ HeatmapView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -1059,7 +1059,7 @@ HeatmapView = Backbone.View.extend({
 		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -1295,7 +1295,7 @@ HeatmapView = Backbone.View.extend({
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
 // 2.  {string}  **well\_color**  the hex color code to use as the backgound of the wells, defaults to *#bdbdbd*
 // 3.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
-// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span4"*
+// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-4"*
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
@@ -1318,7 +1318,7 @@ PertCountView = Backbone.View.extend({
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
 
 		// set up the span size
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span4";
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-4";
 
 		// set up static text, default if not specified
 		this.static_text = (this.options.static_text !== undefined) ? this.options.static_text : "Reagents";
@@ -1338,7 +1338,7 @@ PertCountView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -1375,7 +1375,7 @@ PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -1469,7 +1469,7 @@ PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// draw the pert count info
@@ -1553,7 +1553,7 @@ PertDetailView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -1601,7 +1601,7 @@ PertDetailView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -1975,68 +1975,106 @@ PertSearchBar = Backbone.View.extend({
 	render: function(){
 		var self = this;
 		// load the template into the view's el tag
-		this.$el.html(BaristaTemplates.CMapPertSearchBar());
-
-		// configure the typeahead to autocomplete off of RESTful calls to pertinfo
-		var auto_data = [];
-		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-		
-		// instatiate an object to serve as a pert_iname to pert_type hash
-		var object_map = {};
+		this.$el.append(BaristaTemplates.CMapPertSearchBar());
 
 		$('#search',this.$el).typeahead({
 			// only return 4 items at a time in the autocomplete dropdown
-			items: 4,
+			limit: 4,
 
-			// custom source argument to pull results from pert_info
-			source: function(query,process){
-			var val = $("#search",this.$el).val();
-			return $.getJSON(pertinfo,{q:'{"pert_iname":{"$regex":"' + val + '", "$options":"i"}}',
-										f:'{"pert_iname":1,"pert_type":1}',
-										l:100,
-										s:'{"pert_iname":1}'},
-										function(response){
-											// for each item, pull out its pert_iname and use that for the
-											// autocomplete value. Map its type to the pert_iname for use 
-											// in the highlighter function below
-											response.forEach(function(element){
-												auto_data.push(element.pert_iname);
-												object_map[element.pert_iname] = element;
-											});
+			// provide a name for the default typeahead data source
+			name: 'Reagents',
 
-											// make sure we only show unique items
-											auto_data = _.uniq(auto_data);
+			// the template to render for all results
+			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
-											// add cell lines if required
-											if (self.match_cell_lines){
-												auto_data = auto_data.concat(self.cell_lines);	
-											}
+			// use twitter's hogan.js to compile the template for the typeahead results
+			engine: Hogan,
 
-											// return the processed list of data for the autocomplete
-											return process(auto_data);
-										});
-			},
+			remote: {
+				// set the remote data source to use pertinfo with custom query params
+				url: ['http://api.lincscloud.org/a2/pertinfo?',
+					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  '&f={"pert_iname":1,"pert_type":1}',
+					  '&l=100',
+					  '&s={"pert_iname":1}'].join(''),
+				
+				dataType: 'jsonp',
 
-			// custom highlighter argument to display matched types.  
-			// Display type aliases for known pert_types.
-			highlighter: function(item){
-				var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"]
-				if (self.cell_lines.indexOf(item) != -1){
-					return '<div><span class="label" style="background-color: #CC79A7">Cellular Context</span>  ' + item  +  '</div>';
+				filter: function(response){
+					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
+					var datum_list = [];
+					var auto_data = [];
+					var object_map = {};
+
+					// for each item, pull out its pert_iname and use that for the
+					// autocomplete value. Build a datum of other relevant data
+					// for use in suggestion displays
+					response.forEach(function(element){
+						auto_data.push(element.pert_iname);
+						object_map[element.pert_iname] = element;
+					});
+
+					// make sure we only show unique items
+					auto_data = _.uniq(auto_data);
+
+					// add cell lines if required
+					// if (self.match_cell_lines){
+					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// }
+
+					// build a list of datum objects
+					auto_data.forEach(function(item){
+						var datum = {
+							value: item,
+							tokens: [item],
+							data: object_map[item]
+						}
+						if (self.cell_lines.indexOf(item) != -1){
+							_.extend(datum,{
+								type: 'Cellular Context',
+								color: '#CC79A7',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (genetic_types.indexOf(object_map[item].pert_type) != -1){
+							_.extend(datum,{
+								type: 'Genetic Reagent',
+								color: '#0072B2',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (object_map[item].pert_type === 'trt_cp' ){
+							_.extend(datum,{
+								type: 'Chemical Reagent',
+								color: '#E69F00',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (object_map[item].pert_type === 'trt_sh.css' ){
+							_.extend(datum,{
+								type: 'Seed Sequence',
+								color: '#009E73',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}else{
+							_.extend(datum,{
+								type: object_map[item].pert_type,
+								color: '#999',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+					})
+
+					// return the processed list of daums for the autocomplete
+					return datum_list;
 				}
-				if (genetic_types.indexOf(object_map[item].pert_type) != -1){
-					return '<div><span class="label" style="background-color: #0072B2">Genetic Reagent</span>  ' + item  +  '</div>';
-				}
-				if (object_map[item].pert_type === 'trt_cp' ){
-					return '<div><span class="label" style="background-color: #E69F00">Chemical Reagent</span>  ' + item  +  '</div>';
-				}
-				if (object_map[item].pert_type === 'trt_sh.css' ){
-					return '<div><span class="label" style="background-color: #009E73">Seed Sequence</span>  ' + item  +  '</div>';
-				}else{
-					return '<div><span class="label">' + object_map[item].pert_type + '</span>  ' + item  +  '</div>';
-				}
+
 			}
-
 		});
 	}
 });
@@ -2104,7 +2142,7 @@ ScatterPlotView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -2180,7 +2218,7 @@ ScatterPlotView = Backbone.View.extend({
 		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -2443,7 +2481,7 @@ TickView = Backbone.View.extend({
 	redraw: function(){
 		var self = this;
 		// set up the panel's width and height via animation
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width()();
 		$("#" + this.div_string).animate({height:_.keys(this.model.get('data_object')).length*18 + 50},500);
 
 		// once the height is determined, render the view
@@ -2646,7 +2684,7 @@ TickView = Backbone.View.extend({
 		function check_for_compiled_template(){
 			if (!self.isCompiling){
 				clearInterval(check_interval);
-				self.width = self.width = $("#" + self.div_string).outerWidth();
+				self.width = self.width = $("#" + self.div_string).width()();
 				setTimeout(function(){self.$el.hide();},duration);
 			}
 		}
@@ -2746,6 +2784,43 @@ ViolinPlotView = BaristaBaseView.extend({
 		// run BaristaBaseView's base_initialize method to handle boilerplate view construction
 		// and initial view construction
 		this.base_initialize();
+
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
+
+		// set up the span size
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
+
+		// bind render to model changes
+		this.listenTo(this.model,'change', this.render);
+
+		// compile the default template for the view
+		this.compile_template();
+
+		// define the location where d3 will build its plot
+		this.width = $("#" + this.div_string).width();
+		this.height = $("#" + this.div_string).outerHeight();
+		this.vis = d3.select("#" + this.div_string).append("svg")
+						.attr("width",this.width)
+						.attr("height",this.height);
+
+		// render the vis
+		this.redraw();
+
+		// bind window resize events to redraw
+		var self = this;
+		$(window).resize(function() {self.redraw();} );
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the template for the view
+	compile_template: function(){
+		var self = this;
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: this.plot_height}));
 	},
 
 	// ### redraw
@@ -2784,6 +2859,29 @@ ViolinPlotView = BaristaBaseView.extend({
 		}else{
 			this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
 		}
+
+		// set up drawing layers
+		this.vis.selectAll('.bg_layer').data([]).exit().remove();
+		this.bg_layer = this.vis.append("g").attr("class", "bg_layer");
+
+		this.vis.selectAll('.fg_layer').data([]).exit().remove();
+		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
+
+		// set up the panel's width and height
+		this.width = $("#" + this.div_string).width();
+		this.height = $("#" + this.div_string).outerHeight();
+
+		// rescale the width of the vis
+		this.vis.transition().attr("width",this.width);
+		this.vis.transition().attr("height",this.height);
+
+		// draw the background of the panel
+		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
+		this.bg_layer.selectAll('.bg_panel').data([1]).enter().append('rect')
+			.attr("class","bg_panel")
+			.attr("height",this.height)
+			.attr("width",this.width)
+			.attr("fill",this.bg_color);
 
 		// build an Axes
 		var xAxis = d3.svg.axis()

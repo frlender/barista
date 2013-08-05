@@ -13,7 +13,7 @@
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
 // 2.  {string}  **well\_color**  the hex color code to use as the backgound of the wells, defaults to *#bdbdbd*
 // 3.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
-// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span4"*
+// 4.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-4"*
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
@@ -36,7 +36,7 @@ PertCountView = Backbone.View.extend({
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
 
 		// set up the span size
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span4";
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-4";
 
 		// set up static text, default if not specified
 		this.static_text = (this.options.static_text !== undefined) ? this.options.static_text : "Reagents";
@@ -56,7 +56,7 @@ PertCountView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -93,7 +93,7 @@ PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis
@@ -187,7 +187,7 @@ PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// draw the pert count info

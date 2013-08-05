@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       js_external: {
         src: ['external_source/jquery-1.9.1.min.js',
               'external_source/underscore-min.js',
-              'external_source/bootstrap.min.js',
+              'external_source/bootstrap.main.min.js',
               'external_source/d3.v3.min.js',
               'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
@@ -109,10 +109,10 @@ module.exports = function(grunt) {
       external: {
         files: {
           'css/external.css': ['css/external/backgrid.min.css',
-                                  'css/external/chardinjs.css',
                                   'css/external/d3.parcoords.css',
                                   'css/external/introjs.min.css',
-                                  'css/external/tipsy.css']
+                                  'css/external/bootstrap.css',
+                                  'css/external/typeahead.js-bootstrap.css']
         }
       },
       internal: {
@@ -146,7 +146,7 @@ module.exports = function(grunt) {
     docco: {
       options: {
         layout: "parallel",
-        output: "docs/"
+        output: "foo/"
       },
       all:{
         files:{

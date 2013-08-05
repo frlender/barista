@@ -31,7 +31,7 @@ PertDetailView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
@@ -79,7 +79,7 @@ PertDetailView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width();
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// rescale the width of the vis

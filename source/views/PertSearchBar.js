@@ -92,68 +92,106 @@ PertSearchBar = Backbone.View.extend({
 	render: function(){
 		var self = this;
 		// load the template into the view's el tag
-		this.$el.html(BaristaTemplates.CMapPertSearchBar());
-
-		// configure the typeahead to autocomplete off of RESTful calls to pertinfo
-		var auto_data = [];
-		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-		
-		// instatiate an object to serve as a pert_iname to pert_type hash
-		var object_map = {};
+		this.$el.append(BaristaTemplates.CMapPertSearchBar());
 
 		$('#search',this.$el).typeahead({
 			// only return 4 items at a time in the autocomplete dropdown
-			items: 4,
+			limit: 4,
 
-			// custom source argument to pull results from pert_info
-			source: function(query,process){
-			var val = $("#search",this.$el).val();
-			return $.getJSON(pertinfo,{q:'{"pert_iname":{"$regex":"' + val + '", "$options":"i"}}',
-										f:'{"pert_iname":1,"pert_type":1}',
-										l:100,
-										s:'{"pert_iname":1}'},
-										function(response){
-											// for each item, pull out its pert_iname and use that for the
-											// autocomplete value. Map its type to the pert_iname for use 
-											// in the highlighter function below
-											response.forEach(function(element){
-												auto_data.push(element.pert_iname);
-												object_map[element.pert_iname] = element;
-											});
+			// provide a name for the default typeahead data source
+			name: 'Reagents',
 
-											// make sure we only show unique items
-											auto_data = _.uniq(auto_data);
+			// the template to render for all results
+			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
-											// add cell lines if required
-											if (self.match_cell_lines){
-												auto_data = auto_data.concat(self.cell_lines);	
-											}
+			// use twitter's hogan.js to compile the template for the typeahead results
+			engine: Hogan,
 
-											// return the processed list of data for the autocomplete
-											return process(auto_data);
-										});
-			},
+			remote: {
+				// set the remote data source to use pertinfo with custom query params
+				url: ['http://api.lincscloud.org/a2/pertinfo?',
+					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  '&f={"pert_iname":1,"pert_type":1}',
+					  '&l=100',
+					  '&s={"pert_iname":1}'].join(''),
+				
+				dataType: 'jsonp',
 
-			// custom highlighter argument to display matched types.  
-			// Display type aliases for known pert_types.
-			highlighter: function(item){
-				var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"]
-				if (self.cell_lines.indexOf(item) != -1){
-					return '<div><span class="label" style="background-color: #CC79A7">Cellular Context</span>  ' + item  +  '</div>';
+				filter: function(response){
+					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
+					var datum_list = [];
+					var auto_data = [];
+					var object_map = {};
+
+					// for each item, pull out its pert_iname and use that for the
+					// autocomplete value. Build a datum of other relevant data
+					// for use in suggestion displays
+					response.forEach(function(element){
+						auto_data.push(element.pert_iname);
+						object_map[element.pert_iname] = element;
+					});
+
+					// make sure we only show unique items
+					auto_data = _.uniq(auto_data);
+
+					// add cell lines if required
+					// if (self.match_cell_lines){
+					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// }
+
+					// build a list of datum objects
+					auto_data.forEach(function(item){
+						var datum = {
+							value: item,
+							tokens: [item],
+							data: object_map[item]
+						}
+						if (self.cell_lines.indexOf(item) != -1){
+							_.extend(datum,{
+								type: 'Cellular Context',
+								color: '#CC79A7',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (genetic_types.indexOf(object_map[item].pert_type) != -1){
+							_.extend(datum,{
+								type: 'Genetic Reagent',
+								color: '#0072B2',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (object_map[item].pert_type === 'trt_cp' ){
+							_.extend(datum,{
+								type: 'Chemical Reagent',
+								color: '#E69F00',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+						if (object_map[item].pert_type === 'trt_sh.css' ){
+							_.extend(datum,{
+								type: 'Seed Sequence',
+								color: '#009E73',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}else{
+							_.extend(datum,{
+								type: object_map[item].pert_type,
+								color: '#999',
+							});
+							datum_list.push(datum);
+							return datum_list;
+						}
+					})
+
+					// return the processed list of daums for the autocomplete
+					return datum_list;
 				}
-				if (genetic_types.indexOf(object_map[item].pert_type) != -1){
-					return '<div><span class="label" style="background-color: #0072B2">Genetic Reagent</span>  ' + item  +  '</div>';
-				}
-				if (object_map[item].pert_type === 'trt_cp' ){
-					return '<div><span class="label" style="background-color: #E69F00">Chemical Reagent</span>  ' + item  +  '</div>';
-				}
-				if (object_map[item].pert_type === 'trt_sh.css' ){
-					return '<div><span class="label" style="background-color: #009E73">Seed Sequence</span>  ' + item  +  '</div>';
-				}else{
-					return '<div><span class="label">' + object_map[item].pert_type + '</span>  ' + item  +  '</div>';
-				}
+
 			}
-
 		});
 	}
 });

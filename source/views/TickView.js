@@ -75,7 +75,7 @@ TickView = Backbone.View.extend({
 	redraw: function(){
 		var self = this;
 		// set up the panel's width and height via animation
-		this.width = $("#" + this.div_string).outerWidth();
+		this.width = $("#" + this.div_string).width()();
 		$("#" + this.div_string).animate({height:_.keys(this.model.get('data_object')).length*18 + 50},500);
 
 		// once the height is determined, render the view
@@ -278,7 +278,7 @@ TickView = Backbone.View.extend({
 		function check_for_compiled_template(){
 			if (!self.isCompiling){
 				clearInterval(check_interval);
-				self.width = self.width = $("#" + self.div_string).outerWidth();
+				self.width = self.width = $("#" + self.div_string).width()();
 				setTimeout(function(){self.$el.hide();},duration);
 			}
 		}

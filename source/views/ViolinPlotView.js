@@ -46,6 +46,43 @@ ViolinPlotView = BaristaBaseView.extend({
 		// run BaristaBaseView's base_initialize method to handle boilerplate view construction
 		// and initial view construction
 		this.base_initialize();
+
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
+
+		// set up the span size
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
+
+		// bind render to model changes
+		this.listenTo(this.model,'change', this.render);
+
+		// compile the default template for the view
+		this.compile_template();
+
+		// define the location where d3 will build its plot
+		this.width = $("#" + this.div_string).width();
+		this.height = $("#" + this.div_string).outerHeight();
+		this.vis = d3.select("#" + this.div_string).append("svg")
+						.attr("width",this.width)
+						.attr("height",this.height);
+
+		// render the vis
+		this.redraw();
+
+		// bind window resize events to redraw
+		var self = this;
+		$(window).resize(function() {self.redraw();} );
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the template for the view
+	compile_template: function(){
+		var self = this;
+		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.compiled_template = BaristaTemplates.d3_target;
+		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
+												span_class: this.span_class,
+												height: this.plot_height}));
 	},
 
 	// ### redraw
@@ -84,6 +121,29 @@ ViolinPlotView = BaristaBaseView.extend({
 		}else{
 			this.y_scale=d3.scale.linear().domain([this.y_range[1],this.y_range[0]]).range([this.margin, this.height - this.margin]);
 		}
+
+		// set up drawing layers
+		this.vis.selectAll('.bg_layer').data([]).exit().remove();
+		this.bg_layer = this.vis.append("g").attr("class", "bg_layer");
+
+		this.vis.selectAll('.fg_layer').data([]).exit().remove();
+		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
+
+		// set up the panel's width and height
+		this.width = $("#" + this.div_string).width();
+		this.height = $("#" + this.div_string).outerHeight();
+
+		// rescale the width of the vis
+		this.vis.transition().attr("width",this.width);
+		this.vis.transition().attr("height",this.height);
+
+		// draw the background of the panel
+		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
+		this.bg_layer.selectAll('.bg_panel').data([1]).enter().append('rect')
+			.attr("class","bg_panel")
+			.attr("height",this.height)
+			.attr("width",this.width)
+			.attr("fill",this.bg_color);
 
 		// build an Axes
 		var xAxis = d3.svg.axis()
