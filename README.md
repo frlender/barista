@@ -28,6 +28,8 @@ Views handle the display of data that is exposed in models and collections. A gi
 
 
 ### Example View Code
+A minimal view can be instantiated using [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html).  This view serves as the basis for
+many more complicated views in barista and handles common tasks such as standard initialization, redraw, render, template compilation, and png export functions.
 
 ```html
 <html>
