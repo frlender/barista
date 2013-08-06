@@ -67,7 +67,8 @@ module.exports = function(grunt) {
               'external_source/rgbcolor.js',
               'external_source/canvg.js',
               'external_source/Blob.js',
-              'external_source/canvas-toBlob.js'
+              'external_source/canvas-toBlob.js',
+              'external_source/typeahead.min.js'
               ],
         dest: 'external_source/external.js'
       },
