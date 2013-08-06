@@ -5828,7 +5828,7 @@ GridView = Backbone.View.extend({
 				this.delegateEvents();
 
 				// if the row's model is active, highlight it
-				if (this.model.get('pert_type') == 'trt_cp'){
+				if (this.model.get('active_row')){
 					this.$el.addClass("cmap-active-grid-row");
 				}
 
