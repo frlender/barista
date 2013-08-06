@@ -15,7 +15,7 @@ in your HTML and you're all set.
 If you want to use only parts of the library or roll your own extensions to it, go right ahead!  Just download the code or fork it and go wild!  We welcome pull requests and feedback. 
 
 # **Components**
-Barista provides models, collections, views, and utility functions out of the box.  These components can be extended using [standard extension mechanisms](http://backbonejs.org/#Model-extend "Extension") in backbone.js and underscore.js
+Barista provides [models](#models), [collections](#collections), [views](#views), and [utility functions](#utils) out of the box.  These components can be extended using [standard extension mechanisms](http://backbonejs.org/#Model-extend "Extension") in backbone.js and underscore.js
 
 ## **Models**
 Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an [example model](http://cmap.github.io/barista/doc/models/CellCountModel.html "Example Model") to get a feel for what models provide
@@ -27,7 +27,7 @@ Collections build on top of models.  A Collection represents a group of models t
 Views handle the display of data that is exposed in models and collections. A given model or collection could be used in multiple different views provided that the view is able to consume the data that it needs from the paired model or collection.  Views also handle much of the controller behavior in a typical MVC framework.  Think of the views as handling all rendering and UI responsibilities. If the User sees it, it is built through a view.  Views also transparently respond to changes in the underlying data model as it changes.
 
 
-### Example View Code
+### Instantiating a Minimal View
 A minimal view can be instantiated using [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html).  This view serves as the basis for
 many more complicated views in barista and handles common tasks such as standard initialization, redraw, render, template compilation, and png export functions.
 
@@ -56,6 +56,17 @@ many more complicated views in barista and handles common tasks such as standard
 </script>
 </html>
 ```  
+
+### Extending a Minimal View
+[BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) is not very exciting in of itself since it is meant to be a bare bones view.  To contruct a more interesting view, [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) can be extended using the following
+
+```javascript
+MySweetView = BaristaBaseView.extend({
+	// your sweet code here 
+});
+```
+
+To see this in action, check out one of the views built on top of [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) such as [ViolinPlotView](http://cmap.github.io/barista/doc/views/ViolinPlotView.html)
 
 ## **Utils**
 There are a small set of utility functions that do not fit cleanly as a model, collection, or view.  Think of these as mechanisms through which we abstract away mundane processing of data.  For example, the function [CMapPertTypeAlias](http://cmap.github.io/barista/doc/utils/CMapTypeAlias.html "CMapPertTypeAlias") returns an object of standard names and acronyms when given a Connectivity Map perturbagen type
