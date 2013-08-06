@@ -490,13 +490,13 @@ TickModel = Backbone.Model.extend({
 
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
 // 2.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
-// 3.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
+// 3.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-12"*
 // 4.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
-//		base_view = new ViolinPlotView({el: $("target_selector",
+//		base_view = new BaristaBaseView({el: $("target_selector",
 //									bg_color:"#ffffff", 
 //									fg_color: "#1b9e77",
-//									span_class: "span4",
+//									span_class: "col-lg-12",
 //									plot_height: 120});
 
 // to extend BaristaBaseView, use
@@ -520,6 +520,12 @@ BaristaBaseView = Backbone.View.extend({
 		this.base_initialize();
 	},
 
+	// ### model
+	// default model to Backbone.Model.  This default is only provided to make the view
+	// functional as a un-extended standalone.  An appropriate data model should be
+	// supplied for all views that extend BaristaBaseView
+	model: new Backbone.Model(),
+
 	// ### base_initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view.  This method is provided so it 
@@ -536,7 +542,7 @@ BaristaBaseView = Backbone.View.extend({
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
 
 		// set up the span size
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-12";
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
