@@ -1,11 +1,7 @@
-![barista.js](http://coreyflynn.github.io/Bellhop/img/cmap_broad_logo_small.png)
+# **Overview**
+Barista.js provides a library of components for working with data provided by the Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in [Backbone.js](http://backbonejs.org/ "Backbone").  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. 
 
-# **Barista.js**
-### Connectivity Map javascript components
-
-Barista provides a library of components for working with data provided by the Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in [Backbone.js](http://backbonejs.org/ "Backbone").  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. 
-
-## **Installation**
+# **Installation**
 All of barista's dependencies are included in the main barista css and javascript files which we provide via a CDN, so all you need is
 
 `<link href="http://cmap.github.io/barista/barista.main.min.css" rel="stylesheet">`
@@ -17,6 +13,9 @@ and
 in your HTML and you're all set.
 
 If you want to use only parts of the library or roll your own extensions to it, go right ahead!  Just download the code or fork it and go wild!  We welcome pull requests and feedback. 
+
+# **Components**
+Barista provides models, collections, views, and utility functions out of the box.  These components can be extended using [standard extension mechanisms](http://backbonejs.org/#Model-extend "Extension") in backbone.js and underscore.js
 
 ## **Models**
 Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an [example model](http://cmap.github.io/barista/doc/models/CellCountModel.html "Example Model") to get a feel for what models provide
@@ -30,8 +29,14 @@ Views handle the display of data that is exposed in models and collections. A gi
 ## **Utils**
 There are a small set of utility functions that do not fit cleanly as a model, collection, or view.  Think of these as mechanisms through which we abstract away mundane processing of data.  For example, the function [CMapPertTypeAlias](http://cmap.github.io/barista/doc/utils/CMapTypeAlias.html "CMapPertTypeAlias") returns an object of standard names and acronyms when given a Connectivity Map perturbagen type
 
-## **Developer Documentation**
+# **Developer Documentation**
 Want the nuts and bolts? dig in!
 
 [Developer Documentation >](http://cmap.github.io/barista/doc)
+
+# **Attribution**
+barista is written and maintained by [@coreyflynn](https://github.com/coreyflynn) and the [@cmap](https://github.com/cmap) team
+
+[Photo](http://www.flickr.com/photos/47022937@N03/8107139495/in/photolist-dmpd8a-dmpoJE-dmpnjG-dmpmb1-dmpdsQ-dmpgNa-dmpiMQ-dmpkAC-dmpgty-dmpkmK-dmpg18-dmpmMG-dmphmv-dmph5k-dmpddy-dmpjCH-dmpe6x-dmpdF7-8WrvdG-9cZJgG-8tZWEP-aRKouX-8Ft19Q-9xA5r5-8qEsxq-94pTM7-9UeDnr-dY1qFR-arY4Td-esXQkc-9xWgCL-cjK6py-8Ekz9n-8gJxFo-a67vXm-agGJ62-e4H3Tf-e4BrVe-e4BrTH-e4BrSK-84vwCN-8TWGnZ-e2PF5t-a1Wc39-et1Nxh-esXH1c-et1EQo-esXB2v-esXsY8-esXDi4-esXuTV) taken from Flickr,
+licensed under Creative Commons.
 
