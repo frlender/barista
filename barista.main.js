@@ -5803,6 +5803,23 @@ GridView = Backbone.View.extend({
 				Backbone.trigger("grid:RowClick", this.model);
 				$(".cmap-active-grid-row").removeClass("cmap-active-grid-row");
 				this.$el.addClass("cmap-active-grid-row");
+			},
+			render: function () {
+				// replicate Backgrid.Row's native render method
+				this.$el.empty();
+				var fragment = document.createDocumentFragment();
+				for (var i = 0; i < this.cells.length; i++) {
+					fragment.appendChild(this.cells[i].render().el);
+				}
+				this.el.appendChild(fragment);
+				this.delegateEvents();
+
+				// if the row's model is active, highlight it
+				if (this.model.get('pert_type') == 'trt_cp'){
+					this.$el.addClass("cmap-active-grid-row");
+				}
+
+				return this;
 			}
 		});
 
@@ -5815,10 +5832,10 @@ GridView = Backbone.View.extend({
 		$("#" + this.div_string).append(this.grid.render().$el);
 
 		//bind the table to a function to check for scroll boundaries
-		$("#" + this.div_string,this.el).scroll(function(){self.checkscroll()});
+		$("#" + this.div_string,this.el).scroll(function(){self.checkscroll();});
 
 		// bind the download text to a function to download the data in the table
-		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table()});
+		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
 	},
 
 	checkscroll: function(){
@@ -5868,7 +5885,7 @@ GridView = Backbone.View.extend({
 		setTimeout(function(){
 			var data_height = self.collection.length * 30 + 40;
 			var target_height = (data_height > 300) ? 300 : data_height;
-			
+
 			$("#" + self.div_string).stop();
 			$("#" + self.div_string).animate({height:target_height},500);
 		},500);
@@ -5882,8 +5899,8 @@ GridView = Backbone.View.extend({
 	download_table: function(){
 		var self = this;
 		// indicate we are downloading something
-		$("#" + this.div_string + "_download",this.el).html('<font color="#0072B2"><i class="icon-refresh icon-spin"></i> exporting</font>')
-		
+		$("#" + this.div_string + "_download",this.el).html('<font color="#0072B2"><i class="icon-refresh icon-spin"></i> exporting</font>');
+
 		// set up api call parameters
 		var url = this.collection.url;
 		var params = {q: this.collection.q_param,
@@ -5919,13 +5936,13 @@ GridView = Backbone.View.extend({
 			var lines_string = lines.join("\n");
 			var blob = new Blob([lines_string], {type: "text/plain;charset=utf-8"});
 			var timestamp = new Date().getTime();
-			saveAs(blob, "CMapSummaryTable" + timestamp + ".txt");
+			saveAs(blob, "CMapTable" + timestamp + ".txt");
 			$("#" + self.div_string + "_download",self.el).html('<font color="#0072B2"><i class="icon-share"></i> export table</font>');
 		});
 	},
 
-	// ### show
-	// shows the view by brightening the opacity and showing it in the DOM
+	// ### hide
+	// hides the view by dimming the opacity and hiding it in the DOM
 
 	// arguments
 
