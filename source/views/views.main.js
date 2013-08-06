@@ -1946,6 +1946,13 @@ PertSearchBar = Backbone.View.extend({
 				**/
 				self.trigger("search:DidType",{val: val,type: type});
 			});
+
+			// bind a search:DidType event to the typeahead events coming out of typeahead.js
+			$(".typeahead",self.el).bind('typeahead:selected typeahead:autocompleted', function (obj,datum) {
+				var val = datum.value;
+				var type = "";
+				self.trigger("search:DidType",{val: val,type: type});
+			});
 		});
 
 	},
