@@ -2625,7 +2625,7 @@ ScatterPlotView = BaristaBaseView.extend({
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	initialize: function(){
-		// set up x and y range
+		// set up x and y range and determine if we need to draw the axes dynamically
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
 		this.y_range = (this.options.y_range !== undefined) ? this.options.y_range : undefined;
 		this.dynamic_x_range = (this.x_range == undefined) ? true : false;
