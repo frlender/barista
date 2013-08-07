@@ -44,7 +44,7 @@ ViolinPlotView = BaristaBaseView.extend({
 		this.scale_by = (this.options.scale_by !== undefined) ? this.options.scale_by : undefined;
 
 		// run BaristaBaseView's base_initialize method to handle boilerplate view construction
-		// and initial view construction
+		// and initial view rendering
 		this.base_initialize();
 
 		// set up the default height for the plot
@@ -54,7 +54,7 @@ ViolinPlotView = BaristaBaseView.extend({
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
 
 		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
+		this.listenTo(this.model,'change', this.update);
 
 		// compile the default template for the view
 		this.compile_template();
@@ -67,11 +67,11 @@ ViolinPlotView = BaristaBaseView.extend({
 						.attr("height",this.height);
 
 		// render the vis
-		this.redraw();
+		this.render();
 
-		// bind window resize events to redraw
+		// bind window resize events to render
 		var self = this;
-		$(window).resize(function() {self.redraw();} );
+		$(window).resize(function() {self.render();} );
 	},
 
 	// ### compile_template
@@ -85,17 +85,17 @@ ViolinPlotView = BaristaBaseView.extend({
 												height: this.plot_height}));
 	},
 
-	// ### redraw
-	// completely redraw the view. Updates both static and dynamic content in the view.
-	redraw: function(){
-		this.base_redraw();
-		this.init_panel();
+	// ### render
+	// completely render the view. Updates both static and dynamic content in the view.
+	render: function(){
+		this.base_render();
+		this.init_plot();
 		this.render();
 	},
 
-	// ### init_panel
+	// ### init_plot
 	// initialize the static parts of the view's panel
-	init_panel: function(){
+	init_plot: function(){
 		// stuff this into a variable for later use
 		var self = this;
 

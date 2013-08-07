@@ -67,7 +67,7 @@ BaristaBaseView = Backbone.View.extend({
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-12";
 
 		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
+		this.listenTo(this.model,'change', this.update);
 
 		// compile the default template for the view
 		this.compile_template();
@@ -80,11 +80,11 @@ BaristaBaseView = Backbone.View.extend({
 						.attr("height",this.height);
 
 		// render the vis
-		this.redraw();
+		this.render();
 
 		// bind window resize events to redraw
 		var self = this;
-		$(window).resize(function() {self.redraw();} );
+		$(window).resize(function() {self.render();} );
 
 		return this;
 	},
@@ -100,26 +100,27 @@ BaristaBaseView = Backbone.View.extend({
 												height: this.plot_height}));
 	},
 
-	// ### redraw
-	// completely redraw the view. Updates both static and dynamic content in the view.  Views
+	// ### render
+	// completely render the view. Updates both static and dynamic content in the view.  Views
 	// that extend BaristaBaseView should impliment draw code overiding this method.  If extended
-	// BaristaBaseViews want to use the built in base_redraw method of BaristaBaseView, they should
-	// call it in their redraw method.  As an example:
+	// BaristaBaseViews want to use the built in base_render method of BaristaBaseView, they should
+	// call it in their render method.  As an example:
 
-	//		redraw: function(){
+	//		render: function(){
 	//					this.base_redraw();
 	//					//your code here
 	//					}
 	//
 
-	redraw: function(){
-		this.base_redraw();
+	render: function(){
+		this.base_render();
+		return this;
 	},
 
-	// ### base_redraw
+	// ### base_render
 	// completely redraw the view. Updates both static and dynamic content in the view.
 	// This method is provided so it can be used in view that extend BaristaBaseView
-	base_redraw: function(){
+	base_render: function(){
 		// stuff this into a variable for later use
 		var self = this;
 
@@ -168,11 +169,13 @@ BaristaBaseView = Backbone.View.extend({
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
+
+		return this;
 	},
 
-	// ### render
+	// ### update
 	// update the dynamic potions of the view
-	render: function(){
+	update: function(){
 		return this;
 	},
 

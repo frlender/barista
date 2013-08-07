@@ -638,24 +638,24 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "redraw",
-                "slug": "redraw"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "base_redraw",
-                "slug": "base-redraw"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "render",
                 "slug": "render"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "base_render",
+                "slug": "base-render"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "update",
+                "slug": "update"
               },
               "depth": 3
             }, {
@@ -1112,14 +1112,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "compile_template",
-                "slug": "compile-template"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "redraw",
                 "slug": "redraw"
               },
@@ -1128,24 +1120,48 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "init_panel",
-                "slug": "init-panel"
+                "title": "init_plot",
+                "slug": "init-plot"
               },
               "depth": 3
             }, {
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "render",
-                "slug": "render"
+                "title": "update",
+                "slug": "update"
               },
               "depth": 3
             }, {
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "savePng",
-                "slug": "savepng"
+                "title": "set_ranges",
+                "slug": "set-ranges"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "set_scales",
+                "slug": "set-scales"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "build_axes",
+                "slug": "build-axes"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "style axes",
+                "slug": "style-axes"
               },
               "depth": 3
             }
@@ -1260,16 +1276,16 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "redraw",
-                "slug": "redraw"
+                "title": "render",
+                "slug": "render"
               },
               "depth": 3
             }, {
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "init_panel",
-                "slug": "init-panel"
+                "title": "init_plot",
+                "slug": "init-plot"
               },
               "depth": 3
             }, {
