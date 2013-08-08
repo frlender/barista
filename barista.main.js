@@ -7183,7 +7183,15 @@ PertSearchBar = Backbone.View.extend({
 // 6.  {Array}  **y_range**  a two element array specifying the y plotting bounds of the plot, defaults to *[min(y_data),max(y_data)]*
 // 7.  {Bool}  **x_log**  if set to true, plots the x axis on a log scale, defaults to *false*
 // 8.  {Bool}  **y_log**  if set to true, plots the y axis on a log scale, defaults to *false*
-// 9.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
+// 9. {Number} **x_min_lock** if set, locks the minimum of the x_range at the given value. Ignored if x_range is set. defaults to *undefined*
+// 10. {Number} **y_min_lock** if set, locks the minimum of the y_range at the given value. Ignored if y_range is set. defaults to *undefined*
+// 11. {Number} **x_max_lock** if set, locks the maximum of the x_range at the given value. Ignored if x_range is set. defaults to *undefined*
+// 12. {Number} **y_max_lock** if set, locks the maximum of the y_range at the given value. Ignored if y_range is set. defaults to *undefined*
+// 13. {Bool} **x_min_expand** if set, allows the minimum of the x_range to expand if data is found below it. defaults to *false*
+// 14. {Bool} **y_min_expand** if set, allows the minimum of the y_range to expand if data is found below it. defaults to *false*
+// 15. {Bool} **x_max_expand** if set, allows the maximum of the x_range to expand if data is found above it. defaults to *false*
+// 16. {Bool} **y_max_expand** if set, allows the maximum of the y_range to expand if data is found above it. defaults to *false*
+// 17.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
 //		scatter_plot_view = new ScatterPlotView({el: $("target_selector",
 //									bg_color:"#ffffff", 
@@ -7194,6 +7202,14 @@ PertSearchBar = Backbone.View.extend({
 //									y_range: undefined,
 //									x_log: false,
 //									y_log: false,
+//									x_min_lock: undefined,
+//									y_min_lock: undefined,
+//									x_max_lock: undefined,
+//									y_max_lock: undefined,
+//									x_min_expand: false,
+//									y_min_expand: false,
+//									x_max_expand: false,
+//									y_max_expand: false,
 //									plot_height: 120});
 
 ScatterPlotView = BaristaBaseView.extend({
@@ -7204,8 +7220,19 @@ ScatterPlotView = BaristaBaseView.extend({
 		// set up x and y range and determine if are going to draw the axes dynamically
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
 		this.y_range = (this.options.y_range !== undefined) ? this.options.y_range : undefined;
-		this.dynamic_x_range = (this.x_range == undefined) ? true : false;
-		this.dynamic_y_range = (this.y_range == undefined) ? true : false;
+		this.dynamic_x_range = (this.x_range === undefined) ? true : false;
+		this.dynamic_y_range = (this.y_range === undefined) ? true : false;
+
+		// set up axis expansion and lock features
+		this.x_min_lock = (this.options.x_min_lock !== undefined) ? this.options.x_min_lock : undefined;
+		this.y_min_lock = (this.options.y_min_lock !== undefined) ? this.options.y_min_lock : undefined;
+		this.x_max_lock = (this.options.x_max_lock !== undefined) ? this.options.x_max_lock : undefined;
+		this.y_max_lock = (this.options.y_max_lock !== undefined) ? this.options.y_max_lock : undefined;
+
+		this.x_min_expand = (this.options.x_min_expand !== undefined) ? this.options.x_min_expand : undefined;
+		this.y_min_expand = (this.options.y_min_expand !== undefined) ? this.options.y_min_expand : undefined;
+		this.x_max_expand = (this.options.x_max_expand !== undefined) ? this.options.x_max_expand : undefined;
+		this.y_max_expand = (this.options.y_max_expand !== undefined) ? this.options.y_max_expand : undefined;
 
 		// set up x and y log flags
 		this.x_log = (this.options.x_log !== undefined) ? this.options.x_log : false;
@@ -7380,15 +7407,73 @@ ScatterPlotView = BaristaBaseView.extend({
 	// ### set_ranges
 	// utility function used to get the x and y ranges used in the plot
 	set_ranges: function(){
-		var y_data;
-		if (this.dynamic_x_range){
-			this.x_range = [_.min(this.model.get('x_data')),_.max(this.model.get('x_data'))];
+		var x_data,y_data,min,max;
+		// calculate the x_range. If we need to caluclate it dynamically, check the lock and expand
+		// parameters for the axis
+		if (this.dynamic_x_range === true){
+			x_data = this.model.get('x_data');
+
+			// if the data is of length larger than 1, calculate the range, otherwise set the range to [0,0]
+			if (x_data.length > 0 ){
+				// check the min lock and expand flags and report the min of the range accordingly
+				if (this.x_min_lock === undefined){
+					min = _.min(x_data);
+				}else{
+					if (this.x_min_expand){
+						data_min = _.min(x_data);
+						min = (this.x_min_lock > data_min) ? data_min : this.x_min_lock;
+					}else{
+						min = this.x_min_lock;
+					}
+				}
+
+				// check the max lock and expand flags and report the max of the range accordingly
+				if (this.x_max_lock === undefined){
+					max = _.max(x_data);
+				}else{
+					if (this.x_max_expand){
+						data_max = _.max(x_data);
+						max = (this.x_max_lock < data_max) ? data_max : this.x_max_lock;
+					}else{
+						max = this.x_max_lock;
+					}
+				}
+				this.x_range = [min,max];
+			}else{
+				this.x_range = [0,0];
+			}
 		}
-		if (this.dynamic_y_range == true){
+
+		// calculate the y_range. If we need to caluclate it dynamically, check the lock and expand
+		// parameters for the axis
+		if (this.dynamic_y_range === true){
 			y_data = this.model.get('y_data');
+
+			// if the data is of length larger than 1, calculate the range, otherwise set the range to [0,0]
 			if (y_data.length > 0 ){
-				var min = _.min(y_data)
-				var max = _.max(y_data)
+				// check the min lock and expand flags and report the min of the range accordingly
+				if (this.y_min_lock === undefined){
+					min = _.min(y_data);
+				}else{
+					if (this.y_min_expand){
+						data_min = _.min(y_data);
+						min = (this.y_min_lock > data_min) ? data_min : this.y_min_lock;
+					}else{
+						min = this.y_min_lock;
+					}
+				}
+
+				// check the max lock and expand flags and report the max of the range accordingly
+				if (this.y_max_lock === undefined){
+					max = _.max(y_data);
+				}else{
+					if (this.y_max_expand){
+						data_max = _.max(y_data);
+						max = (this.y_max_lock < data_max) ? data_max : this.y_max_lock;
+					}else{
+						max = this.y_max_lock;
+					}
+				}
 				this.y_range = [min,max];
 			}else{
 				this.y_range = [0,0];
