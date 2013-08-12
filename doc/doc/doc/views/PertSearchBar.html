@@ -65,7 +65,8 @@
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
     <span class="nx">skip</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40000</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">pertinfo</span> <span class="o">=</span> <span class="s1">&#39;http://api.lincscloud.org/a2/pertinfo?callback=?&#39;</span><span class="p">;</span>
-    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="nx">f</span><span class="o">:</span><span class="s1">&#39;{&quot;pert_iname&quot;:1}&#39;</span><span class="p">,</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="nx">q</span><span class="o">:</span> <span class="s1">&#39;{&quot;pert_type&quot;:{&quot;$in&quot;:[&quot;trt_cp&quot;,&quot;trt_sh&quot;]}}&#39;</span><span class="p">,</span>
+          <span class="nx">f</span><span class="o">:</span><span class="s1">&#39;{&quot;pert_iname&quot;:1}&#39;</span><span class="p">,</span>
                     <span class="nx">l</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span>
                     <span class="nx">sk</span><span class="o">:</span><span class="nx">skip</span><span class="p">};</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">pertinfo</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
