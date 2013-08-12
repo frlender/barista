@@ -253,7 +253,11 @@ PertCountModel = Backbone.Model.extend({
         num_perts = perts.count;
       }
       var t = (new Date()).getTime();
-      self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+      params = _.omit(params,'c');
+      params = _.extend(params,{g:'pert_icollection'});
+      $.getJSON(pert_info, params, function(pert_types){
+        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+      });
     });
   }
 });
