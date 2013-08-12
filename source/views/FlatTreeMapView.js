@@ -73,7 +73,7 @@ FlatTreeMapView = Backbone.View.extend({
 		this.max_count = _.max(_.pluck(this.data.children,'count'));
 		this.opacity_map = d3.scale.linear()
 							.domain([this.min_count,this.max_count,this.max_count+1])
-							.range([0.5,1,0]);
+							.range([1,1,0]);
 
 		this.vis.data([this.data]).selectAll("rect").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes)
@@ -149,7 +149,7 @@ FlatTreeMapView = Backbone.View.extend({
 		this.min_count = _.min(_.pluck(this.data.children,'count'));
 		this.max_count = _.max(_.pluck(this.data.children,'count'));
 		this.opacity_map = d3.scale.linear().domain([this.min_count,this.max_count,this.max_count+1])
-						.range([0.5,1,0]);
+						.range([1,1,0]);
 
 		//add new data if it is there
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes)

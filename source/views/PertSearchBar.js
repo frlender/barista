@@ -76,7 +76,8 @@ PertSearchBar = Backbone.View.extend({
 		var self = this;
 		skip = Math.round(Math.random()*40000);
 		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-		params = {f:'{"pert_iname":1}',
+		params = {q: '{"pert_type":{"$in":["trt_cp","trt_sh"]}}',
+					f:'{"pert_iname":1}',
 										l:1,
 										sk:skip};
 		$.getJSON(pertinfo,params,function(res){
