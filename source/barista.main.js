@@ -2017,7 +2017,7 @@ PertCountView = Backbone.View.extend({
 		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
-												height: 180}));
+												height: 200}));
 	},
 
 	// ### redraw
@@ -2121,6 +2121,19 @@ PertCountView = Backbone.View.extend({
 			.attr("text-anchor","end")
 			.text("xhtml:div")
 			.text(function(d){return d.count.toFixed(0);});
+
+		// add a png export overlay
+		this.vis.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.vis.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 10)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
 	},
 
 	render: function(){
@@ -2149,6 +2162,9 @@ PertCountView = Backbone.View.extend({
 		pert_count = this.model.get('pert_count');
 		this.pert_types = this.model.get("pert_types");
 		this.pert_types = _.filter(this.pert_types,function(o){return self.category_ids.indexOf(o._id) != -1;});
+		var category_counts = _.pluck(this.pert_types,'count');
+		var category_sum = _.reduce(category_counts, function(memo, num){ return memo + num; }, 0);
+		this.pert_types.push({_id:'other', count:pert_count - category_sum});
 		this.categories.forEach(function(e,i,l){
 			var ids = _.pluck(self.pert_types,'_id');
 			var index = ids.indexOf(e._id);
@@ -2174,9 +2190,38 @@ PertCountView = Backbone.View.extend({
 			      this.textContent = Math.round(i(t));
 			    };
 			});
-		
+	},
 
+	// ### savePng
+	// save the current state of the view into a png image
+	save_png: function(){
+		// build a canvas element to store the image temporarily while we save it
+		var width = this.width;
+		var height = this.height;
+		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
+		$('body').append(html_snippet);
 
+		// dim the png label on the image
+		var png_selection = this.vis.selectAll(".no_png_export");
+		var png_opacity = png_selection.attr("opacity");
+		png_selection.attr("opacity",0);
+
+		// grab the content of the target svg and place it in the canvas element
+		var svg_snippet = this.vis.node().parentNode.innerHTML;
+		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+
+		// save the contents of the canvas to file and remove the canvas element
+		var canvas = $("#tmpCanvas")[0];
+		var filename = "BaristaPertCountView" + new Date().getTime() + ".png";
+		if (canvas.toBlob){
+			canvas.toBlob(function(blob){
+				saveAs(blob,filename);
+				});
+		}
+		$('#tmpCanvas').remove();
+
+		// make the png label on the image visible again
+		png_selection.attr("opacity",png_opacity);
 	}
 });
 // # **PertDetailView**
