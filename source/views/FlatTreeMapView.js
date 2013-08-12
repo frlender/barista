@@ -163,8 +163,8 @@ FlatTreeMapView = Backbone.View.extend({
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
 			.attr("stroke-width", 2)
-			.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
-			.on("mouseout", function() { self.fadeOut_popover(); });
+			// .on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
+			// .on("mouseout", function() { self.fadeOut_popover(); });
 
 		// //add new data if it is there 
 		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
