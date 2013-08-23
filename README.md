@@ -39,16 +39,16 @@ many more complicated views in barista and handles common tasks such as standard
 
 	<!-- include barista css -->
 	<link href="http://cmap.github.io/barista/barista.main.min.css" rel="stylesheet">
+
+	<!-- include barista js -->
+<script src="http://cmap.github.io/barista/barista.main.min.js"></script>
+
 </head>
 
 <body>
 	<!-- this is the div element in which we will place a BaristaBaseView instance -->
 	<div id="view_target"></div>
 </body>
-
-<!-- include barista js -->
-<script src="http://cmap.github.io/barista/barista.main.min.js"></script>
-
 
 <script type="text/javascript">
 	// generate an instance of BaristaBaseView on the div with the id "view_target"
