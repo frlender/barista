@@ -15,10 +15,10 @@
 //											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
-GenericJSONCollection = Backbone.Collection.extend({
+Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
-	model: PertModel,
+	model: Barista.Models.PertModel,
 
 	// #### url
     // the url from which model data is fetched
@@ -82,10 +82,10 @@ GenericJSONCollection = Backbone.Collection.extend({
                                           // skip: 0,
                                           // isLoading: false});`
 
-var PertCollection = Backbone.Collection.extend({
+Barista.Collections.PertCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects. 
-    model: PertModel,
+    model: Barista.Models.PertModel,
 
     // #### url
     // the url from which model data is fetched
@@ -169,10 +169,10 @@ var PertCollection = Backbone.Collection.extend({
 //											skip: 0,
 //											isLoading: false});
 
-SummlyResultCollection = Backbone.Collection.extend({
+Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
-	model: SummlyResultModel,
+	model: Barista.Models.SummlyResultModel,
 
 	// #### url
     // the url from which model data is fetched

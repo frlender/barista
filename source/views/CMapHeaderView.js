@@ -17,7 +17,7 @@
 //									title: "",
 //									subtitle: "",
 //									template: "templates/CMapHeader.handlebars"});
-CMapHeaderView = Backbone.View.extend({
+Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){

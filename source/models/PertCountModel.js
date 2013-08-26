@@ -10,7 +10,7 @@
 
 // `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
-PertCountModel = Backbone.Model.extend({
+Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 

@@ -24,9 +24,9 @@
 // ## HTMLFormatter
 // A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed
 // to the string version of the rawinput 
-HTMLFormatter = Backgrid.HTMLFormatter = function () {};
-HTMLFormatter.prototype = new Backgrid.CellFormatter();
-_.extend(HTMLFormatter.prototype, {
+Barista.HTMLFormatter = Backgrid.HTMLFormatter = function () {};
+Barista.HTMLFormatter.prototype = new Backgrid.CellFormatter();
+_.extend(Barista.HTMLFormatter.prototype, {
   fromRaw: function (rawValue) {
     if (_.isUndefined(rawValue) || _.isNull(rawValue)) return '';
     return rawValue;
@@ -35,9 +35,9 @@ _.extend(HTMLFormatter.prototype, {
 
 // ## HTMLCell
 // An extension of Backgrid.Cell to render raw html content into the target element of the cell
-HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
+Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
   className: "html-cell",
-  formatter: new HTMLFormatter(),
+  formatter: new Barista.HTMLFormatter(),
   render: function () {
     this.$el.html(this.formatter.fromRaw(this.model.get(this.column.get("name"))));
     return this;

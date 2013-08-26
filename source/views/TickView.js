@@ -24,7 +24,7 @@
 //												span_class: "span12"
 //												});
 
-TickView = Backbone.View.extend({
+Barista.Views.TickView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view

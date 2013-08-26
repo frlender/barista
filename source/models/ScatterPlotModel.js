@@ -9,7 +9,7 @@
 // usage:
 
 //		summly_result = new SummlyResultModel();
-ScatterPlotModel = Backbone.Model.extend({
+Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 	// ### defaults
 	// set of model defaults
 

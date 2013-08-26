@@ -14,10 +14,10 @@
 //											skip: 0,
 //											isLoading: false});
 
-SummlyResultCollection = Backbone.Collection.extend({
+Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
-	model: SummlyResultModel,
+	model: Barista.Models.SummlyResultModel,
 
 	// #### url
     // the url from which model data is fetched

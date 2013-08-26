@@ -45,7 +45,7 @@
 //									y_max_expand: false,
 //									plot_height: 120});
 
-ScatterPlotView = BaristaBaseView.extend({
+Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -199,7 +199,7 @@ ScatterPlotView = BaristaBaseView.extend({
 	this.set_ranges();
 
 	// set up x and y scaling
-	this.set_scales();		
+	this.set_scales();
 
 	// build Axes
 	this.build_axes();

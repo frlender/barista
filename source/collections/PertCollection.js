@@ -14,10 +14,10 @@
                                           // skip: 0,
                                           // isLoading: false});`
 
-var PertCollection = Backbone.Collection.extend({
+Barista.Collections.PertCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects. 
-    model: PertModel,
+    model: Barista.Models.PertModel,
 
     // #### url
     // the url from which model data is fetched

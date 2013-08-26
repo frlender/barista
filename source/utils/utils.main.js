@@ -10,7 +10,7 @@
 //		var pert_type_object = CMapPertTypeAlias("trt_cp");
 //		pert_type_object.name;
 //		pert_type_object.acronym;
-CMapPertTypeAlias = function(input_type){
+Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){
 		case "trt_cp":
 			return {name: "Small Molecule Compound", acronym: "SMC"};
@@ -28,8 +28,8 @@ CMapPertTypeAlias = function(input_type){
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
-function arrayAverage (arr){
+Barista.arrayArverage = function arrayAverage (arr){
 	return _.reduce(arr, function(memo, num){
 		return memo + num;
 	}, 0) / arr.length;
-}
+};

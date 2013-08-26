@@ -153,6 +153,24 @@ function program3(depth0,data) {
   if(stack1 || stack1 === 0) { return stack1; }
   else { return ''; }
   });
+//		Barista.js 0.2.0
+//		(c) 2013 Corey Flynn, Broad Institute.
+//		For all documentation:
+//		http://cmap.github.io/barista
+
+// ### Initial Setup
+// build the top level namespace.  All Barista components will be exposed through this object
+var Barista = {};
+
+// build an objects to be extended for Models, Collections, and Views
+Barista.Models = {};
+Barista.Collections = {};
+Barista.Views = {};
+
+// current version of the library, make sure this is agrees with `package.json`
+Barista.VERSION = '0.2.0';
+
+
 // # **CMapPertTypeAlias**
 
 // a utility function to convert standard perturbagen type descriptors into 
@@ -165,7 +183,7 @@ function program3(depth0,data) {
 //		var pert_type_object = CMapPertTypeAlias("trt_cp");
 //		pert_type_object.name;
 //		pert_type_object.acronym;
-CMapPertTypeAlias = function(input_type){
+Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){
 		case "trt_cp":
 			return {name: "Small Molecule Compound", acronym: "SMC"};
@@ -183,11 +201,11 @@ CMapPertTypeAlias = function(input_type){
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
-function arrayAverage (arr){
+Barista.arrayArverage = function arrayAverage (arr){
 	return _.reduce(arr, function(memo, num){
 		return memo + num;
 	}, 0) / arr.length;
-}
+};
 // # **CellCountModel**
 
 // A Backbone.Model that represents the count of a set of cell_lines.  The data model
@@ -199,7 +217,7 @@ function arrayAverage (arr){
 // 1.  {string}  **type\_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
 // `cell_count_model = new CellCountModel({type_string: '["trt_sh","trt_oe"]'})`
-CellCountModel = Backbone.Model.extend({
+Barista.Models.CellCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -302,7 +320,7 @@ CellCountModel = Backbone.Model.extend({
 // 											rid: ['1','2'],
 // 											cid: ['1','2'],
 // 											title: ""});
-HeatmapModel = Backbone.Model.extend({
+Barista.Models.HeatmapModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 
@@ -325,7 +343,7 @@ HeatmapModel = Backbone.Model.extend({
 // to the query are represented in the model
 
 // `pert_cell_breakdown_model = new PertCellBreakdownModel()`
-PertCellBreakdownModel = Backbone.Model.extend({
+Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -391,7 +409,7 @@ PertCellBreakdownModel = Backbone.Model.extend({
 
 // `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
-PertCountModel = Backbone.Model.extend({
+Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -465,7 +483,7 @@ PertCountModel = Backbone.Model.extend({
 
 // `pert_detail_model = new PertDetailModel()`
 
-PertDetailModel = Backbone.Model.extend({
+Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -528,7 +546,7 @@ PertDetailModel = Backbone.Model.extend({
 
 // A Backbone.Model that represents a single perturbagen
 // `pert_model = new PertModel()`
-PertModel = Backbone.Model.extend({
+Barista.Models.PertModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the pert_id of the perturbagen
 	initialize: function(attributes, options) {
@@ -553,7 +571,7 @@ PertModel = Backbone.Model.extend({
 // usage:
 
 //		summly_result = new SummlyResultModel();
-ScatterPlotModel = Backbone.Model.extend({
+Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 	// ### defaults
 	// set of model defaults
 
@@ -580,7 +598,7 @@ ScatterPlotModel = Backbone.Model.extend({
 // of the summly computation
 
 //		summly_result = new SummlyResultModel();
-SummlyResultModel = Backbone.Model.extend({
+Barista.Models.SummlyResultModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 
@@ -623,8 +641,8 @@ SummlyResultModel = Backbone.Model.extend({
 
 // example usage
 
-// 			tick_model = new TickModel();
-TickModel = Backbone.Model.extend({
+//			tick_model = new TickModel();
+Barista.Models.TickModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 
@@ -634,6 +652,256 @@ TickModel = Backbone.Model.extend({
 		title: "",
 		data_object: {}
 	}
+});
+// # **GenericJSONCollection**
+// A Backbone.Collection that represents and arbitrary set of objects stored
+// in a JSON file. The JSON file is assumed to contain a top level array
+// containing objects.  Each object in the array is modeled as a base
+// Backbone.Model inside of the collection
+
+// optional arguments:
+
+// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
+// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'data.json'*
+// 3.  {String}  **skip**  the skip parameter used in method calls when the collection is updated. defaults to *0*
+// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
+
+//		pert_collection = new PertCollection({model: PertModel,
+//											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+//											skip: 0,
+//											isLoading: false});
+Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
+	// ### model
+	// the model used for collection objects
+	model: Barista.Models.PertModel,
+
+	// #### url
+    // the url from which model data is fetched
+    url: 'data.json',
+
+    // #### skip
+    // the skip parameter used in api calls when the collection is updated. 
+    skip: 0,
+
+    // #### isLoading
+    // indicates wether or not the collection is in the middle of a fetch operation. 
+    isLoading: false,
+
+    // ## getData
+    // `GenericJSONCollection.getData(search_string,search_type,limit)`
+
+    // Gets additional data from the specified url and stores them as models in the collection
+
+    // arguments
+    // 
+    // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+    // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
+    // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
+    getData: function(search_string,search_type,limit){
+        var self = this;
+        // set **isLoading** to true so we don't constantly make api calls before the data comes back
+        this.isLoading = true;
+
+        // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
+        this.search_string = (search_string !== undefined) ? search_string : '';
+        this.search_type = (search_type !== undefined) ? search_type : '';
+        this.limit = (limit !== undefined) ? limit : 30;
+
+        // fetch data from the given url.  If the url attribute is a string, fetch data via an ajax
+        // request. Read each returned item in the response into a new PertModel.  If it is an object, 
+        // assume it is an array of data and read each array item into a new PertModel
+        if (typeof(this.url) == 'object'){
+            this.url.forEach(function(o){self.add(new PertModel(o));});
+        }else{
+            $.getJSON(this.url,function(res){
+                res.forEach(function(o){
+                    self.add(new PertModel(o));
+                });
+            });
+        }
+	}
+});
+// # **PertCollection**
+// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
+// internal use in GridView.
+
+// optional arguments:
+
+// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
+// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/pertinfo?callback=?'*
+// 3.  {String}  **skip**  the skip parameter used in api calls when the collection is updated. defaults to *0*
+// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
+
+// `pert_collection = new PertCollection({model: PertModel,
+                                          // url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+                                          // skip: 0,
+                                          // isLoading: false});`
+
+Barista.Collections.PertCollection = Backbone.Collection.extend({
+    // #### model
+    // the model used for the collection objects. 
+    model: Barista.Models.PertModel,
+
+    // #### url
+    // the url from which model data is fetched
+    url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+
+    // #### skip
+    // the skip parameter used in api calls when the collection is updated. 
+    skip: 0,
+
+    // #### isLoading
+    // indicates wether or not the collection is in the middle of a fetch operation. 
+    isLoading: false,
+
+    // ## getData
+    // `PertCollection.getData(search_string,search_type,limit)`
+
+    // Gets additional data from the specified url and stores them as models in the collection
+
+    // arguments
+    // 
+    // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+    // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
+    // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
+
+    getData: function(search_string,search_type,limit){
+        var self = this;
+        // set **isLoading** to true so we don't constantly make api calls before the data comes back
+        this.isLoading = true;
+
+        // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
+        this.search_string = (search_string !== undefined) ? search_string : '';
+        this.search_type = (search_type !== undefined) ? search_type : '';
+        this.limit = (limit !== undefined) ? limit : 30;
+
+        // depending on the type of query we are making, set up the q param for the api call.
+        // if we are doing a single query, match that query as a regular expression. If we are
+        // doing a multi query, match exact names. If we are doing a cell line query, only match
+        // cell\_ids
+        if (search_type === "single" || search_type === undefined){
+            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}';
+        }
+        if (search_type === "multi"){
+            search_string = '["' + search_string.split(":").join('","') + '"]';
+            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
+        }
+        if (search_type === "cell"){
+            this.q_param = '{"cell_id":"' + search_string + '"}';
+        }
+
+        // set up the sorting paramter for the colection
+        this.s_param = '{"pert_iname":1}';
+
+        // build a parameter object for the api call
+        var params = {q: this.q_param,
+            l: this.limit,
+            s: this.s_param,
+            sk: this.skip};
+
+        // make the api call and store the results as individual models in the collection.
+        // we don't remove old models in this case as we want to support continuous building
+        // of the model list from a remote api.  On success, set **isLoading** back to false
+		this.fetch({data: $.param(params),
+					remove: false,
+					success: function() {self.isLoading = false;}
+		});
+    }
+});
+// # **SummlyResultCollection**
+// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for 
+// internal use in GridView.
+
+// optional arguments:
+
+// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *SummlyResultModel*
+// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/summlyinfo?callback=?'*
+// 3.  {String}  **skip**  the skip parameter used in api calls when the collection is updated. defaults to *0*
+// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
+
+//		pert_collection = new PertCollection({model: PertModel,
+//											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+//											skip: 0,
+//											isLoading: false});
+
+Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
+	// ### model
+	// the model used for collection objects
+	model: Barista.Models.SummlyResultModel,
+
+	// #### url
+    // the url from which model data is fetched
+    url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+
+    // #### skip
+    // the skip parameter used in api calls when the collection is updated. 
+    skip: 0,
+
+    // #### isLoading
+    // indicates wether or not the collection is in the middle of a fetch operation. 
+    isLoading: false,
+
+    // ## getDataMock
+    //			PertCollection.getDataMock(limit);
+
+    // Generates additional fake data objects and stores them as models in the collection
+
+    // arguments
+    // 
+    // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
+    getData: function(search_string,search_type,limit){
+		var self = this;
+		// set **isLoading** to true so we don't constantly make api calls before the data comes back
+		this.isLoading = true;
+
+		// store the value of **search\_string**, **search\_type**, and **limit** on the collection object
+        this.search_string = search_string;
+        this.search_type = search_type;
+        this.limit = (limit !== undefined) ? limit : 30;
+
+		// depending on the type of query we are making, set up the q param for the api call.
+        // if we are doing a single query, match that query as a regular expression. If we are
+        // doing a multi query, match exact names. If we are doing a cell line query, only match
+        // cell\_ids
+        if (search_type === "single" || search_type === undefined){
+            this.q_param = '{"pert_iname":{"$regex":"' + "" + '","$options":"i"}}';
+        }
+        if (search_type === "multi"){
+            search_string = '["' + search_string.split(":").join('","') + '"]';
+            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
+        }
+
+		// build a parameter object for the api call
+        var params = {q: this.q_param,
+            l: this.limit,
+            s: '{"num_gold":1}',
+            sk: Math.round(Math.random() * (40000 - 30))};
+
+		// make the api call and store the results as individual models in the collection.
+        // we don't remove old models in this case as we want to support continuous building
+        // of the model list from a remote api.  On success, set **isLoading** back to false
+		$.getJSON(this.url,params,function(res){
+			var data = [];
+			var cell_lines = ["ASC","HA1E","HCC515","NEU","NPC","PHH","SKL",
+							"MCF7","HEPG2","VCAP","A549","A375","HT29","PC3"];
+			res.forEach(function(o){
+				var random_lines = cell_lines.slice(0, Math.round(Math.random()*14) + 1);
+				var random_line_scores = {};
+				random_lines.forEach(function(line){
+					random_line_scores[line] = [Math.random()*2 - 1];
+				});
+				data.push({query: search_string,
+							target: o.pert_iname,
+							pert_type: o.pert_type,
+							summly_score: Math.random(),
+							summly_rank: Math.random(),
+							specificity: Math.random(),
+							cell_line_scores: random_line_scores});
+			});
+			self.add(data);
+			self.isLoading = false;
+		});
+    }
 });
 // # **BaristaBaseView**
 // A Backbone.View the serves as the base view for other views in the barista library.  BaristaBaseView provides common
@@ -663,7 +931,7 @@ TickModel = Backbone.Model.extend({
 //		extended_view = BaristaBaseView.extend({
 //										...
 //										});
-BaristaBaseView = Backbone.View.extend({
+Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### initialize
 	// initialize the viewview.  Views that extend BaristaBaseView should impliment code overiding this method.
 	// If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should
@@ -865,7 +1133,7 @@ BaristaBaseView = Backbone.View.extend({
 //									fg_color: "#1b9e77",
 //									span_class: "span4"});
 
-BubbleView = Backbone.View.extend({
+Barista.Views.BubbleView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -982,7 +1250,7 @@ BubbleView = Backbone.View.extend({
 // 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
 // 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
 //									template: "../templates/CMapFooter.handlebars"});
-CMapFooterView = Backbone.View.extend({
+Barista.Views.CMapFooterView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -1036,7 +1304,7 @@ CMapFooterView = Backbone.View.extend({
 //									title: "",
 //									subtitle: "",
 //									template: "templates/CMapHeader.handlebars"});
-CMapHeaderView = Backbone.View.extend({
+Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -1064,7 +1332,7 @@ CMapHeaderView = Backbone.View.extend({
 });
 
 
-FlatTreeMapView = Backbone.View.extend({
+Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		initialize: function(){
 		// set up color options.  default if not specified
@@ -1369,7 +1637,7 @@ FlatTreeMapView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
-GridView = Backbone.View.extend({
+Barista.Views.GridView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -1383,7 +1651,7 @@ GridView = Backbone.View.extend({
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
 
 		// set up a default collection and column definition for the grid to operate on
-		this.collection = (this.options.collection !== undefined) ? this.options.collection : new PertCollection();
+		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
@@ -1593,9 +1861,9 @@ GridView = Backbone.View.extend({
 // ## HTMLFormatter
 // A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed
 // to the string version of the rawinput 
-HTMLFormatter = Backgrid.HTMLFormatter = function () {};
-HTMLFormatter.prototype = new Backgrid.CellFormatter();
-_.extend(HTMLFormatter.prototype, {
+Barista.HTMLFormatter = Backgrid.HTMLFormatter = function () {};
+Barista.HTMLFormatter.prototype = new Backgrid.CellFormatter();
+_.extend(Barista.HTMLFormatter.prototype, {
   fromRaw: function (rawValue) {
     if (_.isUndefined(rawValue) || _.isNull(rawValue)) return '';
     return rawValue;
@@ -1604,9 +1872,9 @@ _.extend(HTMLFormatter.prototype, {
 
 // ## HTMLCell
 // An extension of Backgrid.Cell to render raw html content into the target element of the cell
-HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
+Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
   className: "html-cell",
-  formatter: new HTMLFormatter(),
+  formatter: new Barista.HTMLFormatter(),
   render: function () {
     this.$el.html(this.formatter.fromRaw(this.model.get(this.column.get("name"))));
     return this;
@@ -1641,7 +1909,7 @@ HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
 //												span_class: "span12"
 //												});
 
-HeatmapView = Backbone.View.extend({
+Barista.Views.HeatmapView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -1970,7 +2238,7 @@ HeatmapView = Backbone.View.extend({
 //									categories: []});
 
 
-PertCountView = Backbone.View.extend({
+Barista.Views.PertCountView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -2244,7 +2512,7 @@ PertCountView = Backbone.View.extend({
 // 												model: PertDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "span4"});
-PertDetailView = Backbone.View.extend({
+Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -2598,7 +2866,7 @@ search view's input, a "search:DidType" event is fired.
 @constructor
 @extends Backbone.View
 **/
-PertSearchBar = Backbone.View.extend({
+Barista.Views.PertSearchBar = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 
@@ -2899,7 +3167,7 @@ PertSearchBar = Backbone.View.extend({
 //									y_max_expand: false,
 //									plot_height: 120});
 
-ScatterPlotView = BaristaBaseView.extend({
+Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -3053,7 +3321,7 @@ ScatterPlotView = BaristaBaseView.extend({
 	this.set_ranges();
 
 	// set up x and y scaling
-	this.set_scales();		
+	this.set_scales();
 
 	// build Axes
 	this.build_axes();
@@ -3254,7 +3522,7 @@ ScatterPlotView = BaristaBaseView.extend({
 //												span_class: "span12"
 //												});
 
-TickView = Backbone.View.extend({
+Barista.Views.TickView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -3589,7 +3857,7 @@ TickView = Backbone.View.extend({
 //									x_log: false,
 //									y_log: false,
 //									plot_height: 120});
-ViolinPlotView = BaristaBaseView.extend({
+Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -3823,256 +4091,6 @@ ViolinPlotView = BaristaBaseView.extend({
 	}
 });
 
-// # **GenericJSONCollection**
-// A Backbone.Collection that represents and arbitrary set of objects stored
-// in a JSON file. The JSON file is assumed to contain a top level array
-// containing objects.  Each object in the array is modeled as a base
-// Backbone.Model inside of the collection
-
-// optional arguments:
-
-// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
-// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'data.json'*
-// 3.  {String}  **skip**  the skip parameter used in method calls when the collection is updated. defaults to *0*
-// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
-
-//		pert_collection = new PertCollection({model: PertModel,
-//											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
-//											skip: 0,
-//											isLoading: false});
-GenericJSONCollection = Backbone.Collection.extend({
-	// ### model
-	// the model used for collection objects
-	model: PertModel,
-
-	// #### url
-    // the url from which model data is fetched
-    url: 'data.json',
-
-    // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
-    skip: 0,
-
-    // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
-    isLoading: false,
-
-    // ## getData
-    // `GenericJSONCollection.getData(search_string,search_type,limit)`
-
-    // Gets additional data from the specified url and stores them as models in the collection
-
-    // arguments
-    // 
-    // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
-    // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
-    // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-    getData: function(search_string,search_type,limit){
-        var self = this;
-        // set **isLoading** to true so we don't constantly make api calls before the data comes back
-        this.isLoading = true;
-
-        // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-        this.search_string = (search_string !== undefined) ? search_string : '';
-        this.search_type = (search_type !== undefined) ? search_type : '';
-        this.limit = (limit !== undefined) ? limit : 30;
-
-        // fetch data from the given url.  If the url attribute is a string, fetch data via an ajax
-        // request. Read each returned item in the response into a new PertModel.  If it is an object, 
-        // assume it is an array of data and read each array item into a new PertModel
-        if (typeof(this.url) == 'object'){
-            this.url.forEach(function(o){self.add(new PertModel(o));});
-        }else{
-            $.getJSON(this.url,function(res){
-                res.forEach(function(o){
-                    self.add(new PertModel(o));
-                });
-            });
-        }
-	}
-});
-// # **PertCollection**
-// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
-// internal use in GridView.
-
-// optional arguments:
-
-// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
-// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/pertinfo?callback=?'*
-// 3.  {String}  **skip**  the skip parameter used in api calls when the collection is updated. defaults to *0*
-// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
-
-// `pert_collection = new PertCollection({model: PertModel,
-                                          // url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
-                                          // skip: 0,
-                                          // isLoading: false});`
-
-var PertCollection = Backbone.Collection.extend({
-    // #### model
-    // the model used for the collection objects. 
-    model: PertModel,
-
-    // #### url
-    // the url from which model data is fetched
-    url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
-
-    // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
-    skip: 0,
-
-    // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
-    isLoading: false,
-
-    // ## getData
-    // `PertCollection.getData(search_string,search_type,limit)`
-
-    // Gets additional data from the specified url and stores them as models in the collection
-
-    // arguments
-    // 
-    // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
-    // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
-    // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-
-    getData: function(search_string,search_type,limit){
-        var self = this;
-        // set **isLoading** to true so we don't constantly make api calls before the data comes back
-        this.isLoading = true;
-
-        // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-        this.search_string = (search_string !== undefined) ? search_string : '';
-        this.search_type = (search_type !== undefined) ? search_type : '';
-        this.limit = (limit !== undefined) ? limit : 30;
-
-        // depending on the type of query we are making, set up the q param for the api call.
-        // if we are doing a single query, match that query as a regular expression. If we are
-        // doing a multi query, match exact names. If we are doing a cell line query, only match
-        // cell\_ids
-        if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}';
-        }
-        if (search_type === "multi"){
-            search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
-        }
-        if (search_type === "cell"){
-            this.q_param = '{"cell_id":"' + search_string + '"}';
-        }
-
-        // set up the sorting paramter for the colection
-        this.s_param = '{"pert_iname":1}';
-
-        // build a parameter object for the api call
-        var params = {q: this.q_param,
-            l: this.limit,
-            s: this.s_param,
-            sk: this.skip};
-
-        // make the api call and store the results as individual models in the collection.
-        // we don't remove old models in this case as we want to support continuous building
-        // of the model list from a remote api.  On success, set **isLoading** back to false
-		this.fetch({data: $.param(params),
-					remove: false,
-					success: function() {self.isLoading = false;}
-		});
-    }
-});
-// # **SummlyResultCollection**
-// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for 
-// internal use in GridView.
-
-// optional arguments:
-
-// 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *SummlyResultModel*
-// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/summlyinfo?callback=?'*
-// 3.  {String}  **skip**  the skip parameter used in api calls when the collection is updated. defaults to *0*
-// 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
-
-//		pert_collection = new PertCollection({model: PertModel,
-//											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
-//											skip: 0,
-//											isLoading: false});
-
-SummlyResultCollection = Backbone.Collection.extend({
-	// ### model
-	// the model used for collection objects
-	model: SummlyResultModel,
-
-	// #### url
-    // the url from which model data is fetched
-    url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
-
-    // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
-    skip: 0,
-
-    // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
-    isLoading: false,
-
-    // ## getDataMock
-    //			PertCollection.getDataMock(limit);
-
-    // Generates additional fake data objects and stores them as models in the collection
-
-    // arguments
-    // 
-    // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-    getData: function(search_string,search_type,limit){
-		var self = this;
-		// set **isLoading** to true so we don't constantly make api calls before the data comes back
-		this.isLoading = true;
-
-		// store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-        this.search_string = search_string;
-        this.search_type = search_type;
-        this.limit = (limit !== undefined) ? limit : 30;
-
-		// depending on the type of query we are making, set up the q param for the api call.
-        // if we are doing a single query, match that query as a regular expression. If we are
-        // doing a multi query, match exact names. If we are doing a cell line query, only match
-        // cell\_ids
-        if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + "" + '","$options":"i"}}';
-        }
-        if (search_type === "multi"){
-            search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
-        }
-
-		// build a parameter object for the api call
-        var params = {q: this.q_param,
-            l: this.limit,
-            s: '{"num_gold":1}',
-            sk: Math.round(Math.random() * (40000 - 30))};
-
-		// make the api call and store the results as individual models in the collection.
-        // we don't remove old models in this case as we want to support continuous building
-        // of the model list from a remote api.  On success, set **isLoading** back to false
-		$.getJSON(this.url,params,function(res){
-			var data = [];
-			var cell_lines = ["ASC","HA1E","HCC515","NEU","NPC","PHH","SKL",
-							"MCF7","HEPG2","VCAP","A549","A375","HT29","PC3"];
-			res.forEach(function(o){
-				var random_lines = cell_lines.slice(0, Math.round(Math.random()*14) + 1);
-				var random_line_scores = {};
-				random_lines.forEach(function(line){
-					random_line_scores[line] = [Math.random()*2 - 1];
-				});
-				data.push({query: search_string,
-							target: o.pert_iname,
-							pert_type: o.pert_type,
-							summly_score: Math.random(),
-							summly_rank: Math.random(),
-							specificity: Math.random(),
-							cell_line_scores: random_line_scores});
-			});
-			self.add(data);
-			self.isLoading = false;
-		});
-    }
-});
 /**
 Tile constructor
 @param {object} [options={}] options object to set properties

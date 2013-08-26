@@ -25,7 +25,7 @@
 //									categories: []});
 
 
-PertCountView = Backbone.View.extend({
+Barista.Views.PertCountView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

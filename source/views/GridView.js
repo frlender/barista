@@ -1,4 +1,4 @@
-GridView = Backbone.View.extend({
+Barista.Views.GridView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -12,7 +12,7 @@ GridView = Backbone.View.extend({
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
 
 		// set up a default collection and column definition for the grid to operate on
-		this.collection = (this.options.collection !== undefined) ? this.options.collection : new PertCollection();
+		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];

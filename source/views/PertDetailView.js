@@ -14,7 +14,7 @@
 // 												model: PertDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "span4"});
-PertDetailView = Backbone.View.extend({
+Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view

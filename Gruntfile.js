@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     // grab info from the package.json file
     pkg: grunt.file.readJSON('package.json'),
 
-    // configure the compilation of handlebars tempaltes
+    // configure the compilation of handlebars templates
     handlebars: {
       compile: {
         options: {
@@ -44,10 +44,11 @@ module.exports = function(grunt) {
         dest: 'source/collections/collections.main.js'
       },
       js_barista: {
-        src: ['source/utils/utils.main.js',
+        src: ['source/preamble.js',
+              'source/utils/utils.main.js',
               'source/models/models.main.js',
-              'source/views/views.main.js',
               'source/collections/collections.main.js',
+              'source/views/views.main.js',
               'source/tile.js'
               ],
         dest: 'source/barista.js'
@@ -135,7 +136,7 @@ module.exports = function(grunt) {
         index: 'README.md',
         strip: 'source',
         except: ['source/**/*.main.js',
-                'source/barista.js',
+                'source/preamble.js',
                 'source/barista.main.js',
                 'source/barista.main.min.js',
                 'source/templates/*',

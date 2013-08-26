@@ -2,7 +2,7 @@
 
 // A Backbone.Model that represents a single perturbagen
 // `pert_model = new PertModel()`
-PertModel = Backbone.Model.extend({
+Barista.Models.PertModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the pert_id of the perturbagen
 	initialize: function(attributes, options) {

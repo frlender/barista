@@ -8,8 +8,8 @@
 
 // example usage
 
-// 			tick_model = new TickModel();
-TickModel = Backbone.Model.extend({
+//			tick_model = new TickModel();
+Barista.Models.TickModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 

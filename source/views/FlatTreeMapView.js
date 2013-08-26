@@ -1,4 +1,4 @@
-FlatTreeMapView = Backbone.View.extend({
+Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		initialize: function(){
 		// set up color options.  default if not specified

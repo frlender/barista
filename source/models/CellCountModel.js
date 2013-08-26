@@ -9,7 +9,7 @@
 // 1.  {string}  **type\_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
 // `cell_count_model = new CellCountModel({type_string: '["trt_sh","trt_oe"]'})`
-CellCountModel = Backbone.Model.extend({
+Barista.Models.CellCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 

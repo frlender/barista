@@ -5,7 +5,7 @@
 // to the query are represented in the model
 
 // `pert_cell_breakdown_model = new PertCellBreakdownModel()`
-PertCellBreakdownModel = Backbone.Model.extend({
+Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 

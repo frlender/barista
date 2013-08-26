@@ -12,7 +12,7 @@
 
 // `pert_detail_model = new PertDetailModel()`
 
-PertDetailModel = Backbone.Model.extend({
+Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 

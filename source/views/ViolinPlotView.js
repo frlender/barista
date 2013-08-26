@@ -27,7 +27,7 @@
 //									x_log: false,
 //									y_log: false,
 //									plot_height: 120});
-ViolinPlotView = BaristaBaseView.extend({
+Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

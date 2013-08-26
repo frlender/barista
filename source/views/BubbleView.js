@@ -15,7 +15,7 @@
 //									fg_color: "#1b9e77",
 //									span_class: "span4"});
 
-BubbleView = Backbone.View.extend({
+Barista.Views.BubbleView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

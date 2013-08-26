@@ -26,7 +26,7 @@
 //		extended_view = BaristaBaseView.extend({
 //										...
 //										});
-BaristaBaseView = Backbone.View.extend({
+Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### initialize
 	// initialize the viewview.  Views that extend BaristaBaseView should impliment code overiding this method.
 	// If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should
@@ -228,7 +228,7 @@ BaristaBaseView = Backbone.View.extend({
 //									fg_color: "#1b9e77",
 //									span_class: "span4"});
 
-BubbleView = Backbone.View.extend({
+Barista.Views.BubbleView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -345,7 +345,7 @@ BubbleView = Backbone.View.extend({
 // 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
 // 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
 //									template: "../templates/CMapFooter.handlebars"});
-CMapFooterView = Backbone.View.extend({
+Barista.Views.CMapFooterView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -399,7 +399,7 @@ CMapFooterView = Backbone.View.extend({
 //									title: "",
 //									subtitle: "",
 //									template: "templates/CMapHeader.handlebars"});
-CMapHeaderView = Backbone.View.extend({
+Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -427,7 +427,7 @@ CMapHeaderView = Backbone.View.extend({
 });
 
 
-FlatTreeMapView = Backbone.View.extend({
+Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		initialize: function(){
 		// set up color options.  default if not specified
@@ -732,7 +732,7 @@ FlatTreeMapView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
-GridView = Backbone.View.extend({
+Barista.Views.GridView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -746,7 +746,7 @@ GridView = Backbone.View.extend({
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
 
 		// set up a default collection and column definition for the grid to operate on
-		this.collection = (this.options.collection !== undefined) ? this.options.collection : new PertCollection();
+		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
@@ -956,9 +956,9 @@ GridView = Backbone.View.extend({
 // ## HTMLFormatter
 // A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed
 // to the string version of the rawinput 
-HTMLFormatter = Backgrid.HTMLFormatter = function () {};
-HTMLFormatter.prototype = new Backgrid.CellFormatter();
-_.extend(HTMLFormatter.prototype, {
+Barista.HTMLFormatter = Backgrid.HTMLFormatter = function () {};
+Barista.HTMLFormatter.prototype = new Backgrid.CellFormatter();
+_.extend(Barista.HTMLFormatter.prototype, {
   fromRaw: function (rawValue) {
     if (_.isUndefined(rawValue) || _.isNull(rawValue)) return '';
     return rawValue;
@@ -967,9 +967,9 @@ _.extend(HTMLFormatter.prototype, {
 
 // ## HTMLCell
 // An extension of Backgrid.Cell to render raw html content into the target element of the cell
-HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
+Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
   className: "html-cell",
-  formatter: new HTMLFormatter(),
+  formatter: new Barista.HTMLFormatter(),
   render: function () {
     this.$el.html(this.formatter.fromRaw(this.model.get(this.column.get("name"))));
     return this;
@@ -1004,7 +1004,7 @@ HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
 //												span_class: "span12"
 //												});
 
-HeatmapView = Backbone.View.extend({
+Barista.Views.HeatmapView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -1333,7 +1333,7 @@ HeatmapView = Backbone.View.extend({
 //									categories: []});
 
 
-PertCountView = Backbone.View.extend({
+Barista.Views.PertCountView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -1607,7 +1607,7 @@ PertCountView = Backbone.View.extend({
 // 												model: PertDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "span4"});
-PertDetailView = Backbone.View.extend({
+Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -1961,7 +1961,7 @@ search view's input, a "search:DidType" event is fired.
 @constructor
 @extends Backbone.View
 **/
-PertSearchBar = Backbone.View.extend({
+Barista.Views.PertSearchBar = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 
@@ -2262,7 +2262,7 @@ PertSearchBar = Backbone.View.extend({
 //									y_max_expand: false,
 //									plot_height: 120});
 
-ScatterPlotView = BaristaBaseView.extend({
+Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -2416,7 +2416,7 @@ ScatterPlotView = BaristaBaseView.extend({
 	this.set_ranges();
 
 	// set up x and y scaling
-	this.set_scales();		
+	this.set_scales();
 
 	// build Axes
 	this.build_axes();
@@ -2617,7 +2617,7 @@ ScatterPlotView = BaristaBaseView.extend({
 //												span_class: "span12"
 //												});
 
-TickView = Backbone.View.extend({
+Barista.Views.TickView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -2952,7 +2952,7 @@ TickView = Backbone.View.extend({
 //									x_log: false,
 //									y_log: false,
 //									plot_height: 120});
-ViolinPlotView = BaristaBaseView.extend({
+Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

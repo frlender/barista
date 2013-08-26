@@ -7,7 +7,7 @@ search view's input, a "search:DidType" event is fired.
 @constructor
 @extends Backbone.View
 **/
-PertSearchBar = Backbone.View.extend({
+Barista.Views.PertSearchBar = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 

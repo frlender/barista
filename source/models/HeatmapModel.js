@@ -18,7 +18,7 @@
 // 											rid: ['1','2'],
 // 											cid: ['1','2'],
 // 											title: ""});
-HeatmapModel = Backbone.Model.extend({
+Barista.Models.HeatmapModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 

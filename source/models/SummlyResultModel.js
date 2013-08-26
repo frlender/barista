@@ -6,7 +6,7 @@
 // of the summly computation
 
 //		summly_result = new SummlyResultModel();
-SummlyResultModel = Backbone.Model.extend({
+Barista.Models.SummlyResultModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 

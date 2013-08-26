@@ -9,7 +9,7 @@
 // 1.  {string}  **type\_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
 // `cell_count_model = new CellCountModel({type_string: '["trt_sh","trt_oe"]'})`
-CellCountModel = Backbone.Model.extend({
+Barista.Models.CellCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -112,7 +112,7 @@ CellCountModel = Backbone.Model.extend({
 // 											rid: ['1','2'],
 // 											cid: ['1','2'],
 // 											title: ""});
-HeatmapModel = Backbone.Model.extend({
+Barista.Models.HeatmapModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 
@@ -135,7 +135,7 @@ HeatmapModel = Backbone.Model.extend({
 // to the query are represented in the model
 
 // `pert_cell_breakdown_model = new PertCellBreakdownModel()`
-PertCellBreakdownModel = Backbone.Model.extend({
+Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -201,7 +201,7 @@ PertCellBreakdownModel = Backbone.Model.extend({
 
 // `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
-PertCountModel = Backbone.Model.extend({
+Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -275,7 +275,7 @@ PertCountModel = Backbone.Model.extend({
 
 // `pert_detail_model = new PertDetailModel()`
 
-PertDetailModel = Backbone.Model.extend({
+Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
@@ -338,7 +338,7 @@ PertDetailModel = Backbone.Model.extend({
 
 // A Backbone.Model that represents a single perturbagen
 // `pert_model = new PertModel()`
-PertModel = Backbone.Model.extend({
+Barista.Models.PertModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the pert_id of the perturbagen
 	initialize: function(attributes, options) {
@@ -363,7 +363,7 @@ PertModel = Backbone.Model.extend({
 // usage:
 
 //		summly_result = new SummlyResultModel();
-ScatterPlotModel = Backbone.Model.extend({
+Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 	// ### defaults
 	// set of model defaults
 
@@ -390,7 +390,7 @@ ScatterPlotModel = Backbone.Model.extend({
 // of the summly computation
 
 //		summly_result = new SummlyResultModel();
-SummlyResultModel = Backbone.Model.extend({
+Barista.Models.SummlyResultModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 
@@ -433,8 +433,8 @@ SummlyResultModel = Backbone.Model.extend({
 
 // example usage
 
-// 			tick_model = new TickModel();
-TickModel = Backbone.Model.extend({
+//			tick_model = new TickModel();
+Barista.Models.TickModel = Backbone.Model.extend({
 	// ### defaults
 	// set up defaults for model values
 

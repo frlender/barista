@@ -15,10 +15,10 @@
 //											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
-GenericJSONCollection = Backbone.Collection.extend({
+Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
-	model: PertModel,
+	model: Barista.Models.PertModel,
 
 	// #### url
     // the url from which model data is fetched

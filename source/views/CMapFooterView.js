@@ -21,7 +21,7 @@
 // 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
 // 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
 //									template: "../templates/CMapFooter.handlebars"});
-CMapFooterView = Backbone.View.extend({
+Barista.Views.CMapFooterView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){

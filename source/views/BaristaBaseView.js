@@ -26,7 +26,7 @@
 //		extended_view = BaristaBaseView.extend({
 //										...
 //										});
-BaristaBaseView = Backbone.View.extend({
+Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### initialize
 	// initialize the viewview.  Views that extend BaristaBaseView should impliment code overiding this method.
 	// If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should

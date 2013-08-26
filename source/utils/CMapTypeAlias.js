@@ -10,7 +10,7 @@
 //		var pert_type_object = CMapPertTypeAlias("trt_cp");
 //		pert_type_object.name;
 //		pert_type_object.acronym;
-CMapPertTypeAlias = function(input_type){
+Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){
 		case "trt_cp":
 			return {name: "Small Molecule Compound", acronym: "SMC"};
