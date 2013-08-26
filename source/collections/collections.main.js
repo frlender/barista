@@ -56,7 +56,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
         // request. Read each returned item in the response into a new PertModel.  If it is an object, 
         // assume it is an array of data and read each array item into a new PertModel
         if (typeof(this.url) == 'object'){
-            this.url.forEach(function(o){self.add(new PertModel(o));});
+            this.url.forEach(function(o){self.add(new Barista.Models.PertModel(o));});
         }else{
             $.getJSON(this.url,function(res){
                 res.forEach(function(o){
