@@ -26,6 +26,14 @@
 
 
 Barista.Views.PertCountView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "PertCountView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.PertCountModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

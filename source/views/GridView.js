@@ -1,4 +1,8 @@
 Barista.Views.GridView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "GridView",
+
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -14,7 +18,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
-																						{name: "pert_type_label", label: "Pert Type", cell: HTMLCell, editable: false},
+																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
 
 		// build the template

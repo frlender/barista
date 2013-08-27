@@ -25,6 +25,14 @@
 //												});
 
 Barista.Views.TickView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "TickView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.TickModel(),
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -75,7 +83,7 @@ Barista.Views.TickView = Backbone.View.extend({
 	redraw: function(){
 		var self = this;
 		// set up the panel's width and height via animation
-		this.width = $("#" + this.div_string).width()();
+		this.width = $("#" + this.div_string).width();
 		$("#" + this.div_string).animate({height:_.keys(this.model.get('data_object')).length*18 + 50},500);
 
 		// once the height is determined, render the view

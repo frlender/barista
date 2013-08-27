@@ -947,6 +947,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.base_initialize();
 	},
 
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "BaristaBaseView",
+
 	// ### model
 	// default model to Backbone.Model.  This default is only provided to make the view
 	// functional as a un-extended standalone.  An appropriate data model should be
@@ -958,9 +962,6 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// template, bind model changes to view updates, and render the view.  This method is provided so it 
 	// can be used in view that extend BaristaBaseView
 	base_initialize: function(){
-		// give the view a name to be used throughout the View's functions when it needs to do some self-discovery
-		this.name = "BaristaBaseView";
-
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
@@ -1134,6 +1135,14 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 //									span_class: "span4"});
 
 Barista.Views.BubbleView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "BubbleView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.PertCellBreakdownModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -1251,6 +1260,10 @@ Barista.Views.BubbleView = Backbone.View.extend({
 // 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
 //									template: "../templates/CMapFooter.handlebars"});
 Barista.Views.CMapFooterView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapFooterView",
+
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -1305,6 +1318,10 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 //									subtitle: "",
 //									template: "templates/CMapHeader.handlebars"});
 Barista.Views.CMapHeaderView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapHeaderView",
+
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
@@ -1333,6 +1350,11 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 
 
 Barista.Views.FlatTreeMapView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "FlatTreeMapView",
+
+		model: new Barista.Models.PertCellBreakdownModel(),
 
 		initialize: function(){
 		// set up color options.  default if not specified
@@ -1638,6 +1660,10 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	}
 });
 Barista.Views.GridView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "GridView",
+
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -1653,7 +1679,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
-																						{name: "pert_type_label", label: "Pert Type", cell: HTMLCell, editable: false},
+																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
 
 		// build the template
@@ -1910,6 +1936,14 @@ Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
 //												});
 
 Barista.Views.HeatmapView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "HeatMapView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.HeatmapModel(),
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -2241,6 +2275,14 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 //												});
 
 Barista.Views.LDMapView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "LDMapView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.HeatmapModel(),
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -2554,6 +2596,14 @@ Barista.Views.LDMapView = Backbone.View.extend({
 
 
 Barista.Views.PertCountView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "PertCountView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.PertCountModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -2828,6 +2878,14 @@ Barista.Views.PertCountView = Backbone.View.extend({
 // 												bg_color: "#ffffff",
 // 												span_class: "span4"});
 Barista.Views.PertDetailView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "PertDetailView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.PertDetailModel(),
+	
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -3182,6 +3240,10 @@ search view's input, a "search:DidType" event is fired.
 @extends Backbone.View
 **/
 Barista.Views.PertSearchBar = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "PertSearchBar",
+
 	initialize: function(){
 		var self = this;
 
@@ -3483,6 +3545,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 //									plot_height: 120});
 
 Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.ScatterPlotModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -3838,6 +3904,14 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 //												});
 
 Barista.Views.TickView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "TickView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.TickModel(),
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -3888,7 +3962,7 @@ Barista.Views.TickView = Backbone.View.extend({
 	redraw: function(){
 		var self = this;
 		// set up the panel's width and height via animation
-		this.width = $("#" + this.div_string).width()();
+		this.width = $("#" + this.div_string).width();
 		$("#" + this.div_string).animate({height:_.keys(this.model.get('data_object')).length*18 + 50},500);
 
 		// once the height is determined, render the view
@@ -4173,6 +4247,10 @@ Barista.Views.TickView = Backbone.View.extend({
 //									y_log: false,
 //									plot_height: 120});
 Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.ScatterPlotModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -4235,7 +4313,7 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	render: function(){
 		this.base_render();
 		this.init_plot();
-		this.render();
+		this.update();
 	},
 
 	// ### init_plot
@@ -4375,9 +4453,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	},
 
-	// ### render
+	// ### update
 	// update the dynamic potions of the view
-	render: function(){
+	update: function(){
 		var self = this;
 		// grab data from the model and package it such that we can iterate over it
 		// and generate an area. The packaged data will be sorted by the x_data attribute

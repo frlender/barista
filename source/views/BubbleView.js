@@ -16,6 +16,14 @@
 //									span_class: "span4"});
 
 Barista.Views.BubbleView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "BubbleView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.PertCellBreakdownModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view

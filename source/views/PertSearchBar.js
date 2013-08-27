@@ -8,6 +8,10 @@ search view's input, a "search:DidType" event is fired.
 @extends Backbone.View
 **/
 Barista.Views.PertSearchBar = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "PertSearchBar",
+
 	initialize: function(){
 		var self = this;
 

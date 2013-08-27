@@ -28,6 +28,10 @@
 //									y_log: false,
 //									plot_height: 120});
 Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.ScatterPlotModel(),
+
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
@@ -90,7 +94,7 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	render: function(){
 		this.base_render();
 		this.init_plot();
-		this.render();
+		this.update();
 	},
 
 	// ### init_plot
@@ -230,9 +234,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	},
 
-	// ### render
+	// ### update
 	// update the dynamic potions of the view
-	render: function(){
+	update: function(){
 		var self = this;
 		// grab data from the model and package it such that we can iterate over it
 		// and generate an area. The packaged data will be sorted by the x_data attribute
