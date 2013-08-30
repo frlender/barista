@@ -5,13 +5,13 @@ describe('PertCellBreakdownModel',function(){
 
 		// filter
 		it('filter equal to ""',function(){
-			var o = new PertCellBreakdownModel();
+			var o = new Barista.Models.PertCellBreakdownModel();
 			expect(o.get('filter')).toEqual("");
 		});
 
 		// tree object
 		it ('tree object equal to {children:{}}',function(){
-			var o = new PertCellBreakdownModel();
+			var o = new Barista.Models.PertCellBreakdownModel();
 			expect(o.get('tree_object')).toEqual({children:[]});
 		});
 

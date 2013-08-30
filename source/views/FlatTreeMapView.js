@@ -1,4 +1,9 @@
 Barista.Views.FlatTreeMapView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "FlatTreeMapView",
+
+		model: new Barista.Models.PertCellBreakdownModel(),
 
 		initialize: function(){
 		// set up color options.  default if not specified

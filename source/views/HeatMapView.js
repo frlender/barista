@@ -28,6 +28,14 @@
 //												});
 
 Barista.Views.HeatmapView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "HeatMapView",
+
+	// ### model
+	// set up the view's default model
+	model: new Barista.Models.HeatmapModel(),
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view

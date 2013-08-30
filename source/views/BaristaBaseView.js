@@ -42,6 +42,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.base_initialize();
 	},
 
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "BaristaBaseView",
+
 	// ### model
 	// default model to Backbone.Model.  This default is only provided to make the view
 	// functional as a un-extended standalone.  An appropriate data model should be
@@ -53,9 +57,6 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// template, bind model changes to view updates, and render the view.  This method is provided so it 
 	// can be used in view that extend BaristaBaseView
 	base_initialize: function(){
-		// give the view a name to be used throughout the View's functions when it needs to do some self-discovery
-		this.name = "BaristaBaseView";
-
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
