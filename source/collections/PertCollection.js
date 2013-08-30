@@ -57,11 +57,11 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}';
+            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
+            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "cell"){
             this.q_param = '{"cell_id":"' + search_string + '"}';

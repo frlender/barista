@@ -97,10 +97,10 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(":").join('","') + '"]';
-      pert_params = {q:'{"pert_iname":{"$in":' + search_string + '}}', d:"cell_id"};
+      pert_params = {q:'{"pert_iname":{"$in":' + search_string + '},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      pert_params = {q:'{"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}', d:"cell_id"};
+      pert_params = {q:'{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "cell") {
       pert_params = {q:'{"cell_id":"' + search_string + '"}', f:'{"cell_id":1}', l:1};
@@ -629,11 +629,11 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}';
+            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"}}';
+            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "cell"){
             this.q_param = '{"cell_id":"' + search_string + '"}';
@@ -3261,7 +3261,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',
 					  '&s={"pert_iname":1}'].join(''),
