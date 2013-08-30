@@ -21,10 +21,10 @@ Barista provides [models](#models), [collections](#collections), [views](#views)
 Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an [example model](http://cmap.github.io/barista/doc/models/CellCountModel.html "Example Model") to get a feel for what models provide.  You can find models under `Barista.Models`.
 
 ## **Collections**
-Collections build on top of models.  A Collection represents a group of models that will be operated on as a whole. As an example, rather than handling a set of [PertModels](http://cmap.github.io/barista/doc/models/PertModel.html "PertModel") indivudually it is convient to use a [PertCollection](http://cmap.github.io/barista/doc/collections/PertCollection.html "PertCollection").  This allows you to interact with the models as a set instead of handling them one at a time. Certain views such as the [GridView](http://cmap.github.io/barista/doc/views/GridView.html "GridView") are built on top of collections
+Collections build on top of models.  A Collection represents a group of models that will be operated on as a whole. As an example, rather than handling a set of [PertModels](http://cmap.github.io/barista/doc/models/PertModel.html "PertModel") indivudually it is convient to use a [PertCollection](http://cmap.github.io/barista/doc/collections/PertCollection.html "PertCollection").  This allows you to interact with the models as a set instead of handling them one at a time. Certain views such as the [GridView](http://cmap.github.io/barista/doc/views/GridView.html "GridView") are built on top of collections. You can find collections under `Barista.Collections`.
 
 ## **Views**
-Views handle the display of data that is exposed in models and collections. A given model or collection could be used in multiple different views provided that the view is able to consume the data that it needs from the paired model or collection.  Views also handle much of the controller behavior in a typical MVC framework.  Think of the views as handling all rendering and UI responsibilities. If the User sees it, it is built through a view.  Views also transparently respond to changes in the underlying data model as it changes.
+Views handle the display of data that is exposed in models and collections. A given model or collection could be used in multiple different views provided that the view is able to consume the data that it needs from the paired model or collection.  Views also handle much of the controller behavior in a typical MVC framework.  Think of the views as handling all rendering and UI responsibilities. If the User sees it, it is built through a view.  Views also transparently respond to changes in the underlying data model as it changes. You can find views under `Barista.Views`
 
 
 ### Instantiating a Minimal View
@@ -52,7 +52,7 @@ many more complicated views in barista and handles common tasks such as standard
 
 <script type="text/javascript">
 	// generate an instance of BaristaBaseView on the div with the id "view_target"
-	base_view = new BaristaBaseView({el: $("#view_target")});
+	base_view = new Barista.Views.BaristaBaseView({el: $("#view_target")});
 </script>
 </html>
 ```  
@@ -61,7 +61,7 @@ many more complicated views in barista and handles common tasks such as standard
 [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) is not very exciting in of itself since it is meant to be a bare bones view.  To contruct a more interesting view, [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) can be extended using the following
 
 ```javascript
-MySweetView = BaristaBaseView.extend({
+MySweetView = Barista.Views.BaristaBaseView.extend({
 	// your sweet code here 
 });
 ```
@@ -69,7 +69,7 @@ MySweetView = BaristaBaseView.extend({
 To see this in action, check out one of the views built on top of [BaristaBaseView](http://cmap.github.io/barista/doc/views/BaristaBaseView.html) such as [ViolinPlotView](http://cmap.github.io/barista/doc/views/ViolinPlotView.html)
 
 ## **Utils**
-There are a small set of utility functions that do not fit cleanly as a model, collection, or view.  Think of these as mechanisms through which we abstract away mundane processing of data.  For example, the function [CMapPertTypeAlias](http://cmap.github.io/barista/doc/utils/CMapTypeAlias.html "CMapPertTypeAlias") returns an object of standard names and acronyms when given a Connectivity Map perturbagen type
+There are a small set of utility functions that do not fit cleanly as a model, collection, or view.  Think of these as mechanisms through which we abstract away mundane processing of data.  For example, the function [CMapPertTypeAlias](http://cmap.github.io/barista/doc/utils/CMapTypeAlias.html "CMapPertTypeAlias") returns an object of standard names and acronyms when given a Connectivity Map perturbagen type.  Utility functions are registered under the top-level `Barista` object.
 
 # **Developer Documentation**
 Want the nuts and bolts? dig in!
