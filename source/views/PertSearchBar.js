@@ -122,10 +122,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["profiled","core"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&f={"cell_id":1,"cell_type":1}',
 					  '&l=4',
-					  '&s={"pert_iname":1}'].join(''),
+					  '&s={"cell_id":1}'].join(''),
 				
 				dataType: 'jsonp',
 
