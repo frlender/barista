@@ -191,6 +191,8 @@ Barista.CMapPertTypeAlias = function(input_type){
 			return {name: "Knock Down", acronym: "KD"};
 		case "trt_oe":
 			return {name: "Over Expression", acronym: "OE"};
+		case "trt_oe.mut":
+			return {name: "Variant", acronym: "VAR"};
 		default:
 			return {name: input_type, acronym: input_type};
 	}
@@ -416,11 +418,13 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 1.  {String}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
   // 2.  {Number}  **pert\_count**  the number of perturbagens matching an api query, defaults to *0*
   // 3.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
-  // 4.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
+  // 4.  {String}  **pert\_type\_field**  a field name over which to look for pert_types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert_icollection'*
+  // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    "type_string": '["trt_sh","trt_oe"]',
+    "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
     "pert_count": 0,
     "pert_types": [{}],
+    "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
   },
 
@@ -462,7 +466,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
       }
       var t = (new Date()).getTime();
       params = _.omit(params,'c');
-      params = _.extend(params,{g:'pert_icollection'});
+      params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(pert_info, params, function(pert_types){
         self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
       });
@@ -2694,7 +2698,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.attr("font-family","'Helvetica Neue',Helvetica,Arial,sans-serif")
 			.attr("font-weight","normal")
 			.attr("font-size","12pt")
-			.text(function(d){return d._id;});
+			.text(function(d){return Barista.CMapPertTypeAlias(d._id).name;});
 
 		// for each sub-category, add a value
 		this.vis.selectAll('.category_value').data([]).exit().remove();

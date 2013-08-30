@@ -1789,7 +1789,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.attr("font-family","'Helvetica Neue',Helvetica,Arial,sans-serif")
 			.attr("font-weight","normal")
 			.attr("font-size","12pt")
-			.text(function(d){return d._id;});
+			.text(function(d){return Barista.CMapPertTypeAlias(d._id).name;});
 
 		// for each sub-category, add a value
 		this.vis.selectAll('.category_value').data([]).exit().remove();

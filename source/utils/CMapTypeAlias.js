@@ -18,6 +18,8 @@ Barista.CMapPertTypeAlias = function(input_type){
 			return {name: "Knock Down", acronym: "KD"};
 		case "trt_oe":
 			return {name: "Over Expression", acronym: "OE"};
+		case "trt_oe.mut":
+			return {name: "Variant", acronym: "VAR"};
 		default:
 			return {name: input_type, acronym: input_type};
 	}
