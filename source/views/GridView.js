@@ -154,7 +154,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				// content to plain text where required
 				names.forEach(function(n){
 					if (n == "pert_type_label"){
-						line_data.push(CMapPertTypeAlias(r["pert_type"]).acronym);
+						line_data.push(Barista.CMapPertTypeAlias(r["pert_type"]).acronym);
 					}
 					if ($(String(r[n])).length === 1){
 						line_data.push($(r[n]).text());
@@ -184,7 +184,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	hide: function(duration){
 		var self = this;
 		this.$el.animate({opacity:0},duration);
-		setTimeout(function(){self.$el.hide()},duration);
+		setTimeout(function(){self.$el.hide();},duration);
 	},
 
 	// ### show

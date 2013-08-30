@@ -910,7 +910,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				// content to plain text where required
 				names.forEach(function(n){
 					if (n == "pert_type_label"){
-						line_data.push(CMapPertTypeAlias(r["pert_type"]).acronym);
+						line_data.push(Barista.CMapPertTypeAlias(r["pert_type"]).acronym);
 					}
 					if ($(String(r[n])).length === 1){
 						line_data.push($(r[n]).text());
