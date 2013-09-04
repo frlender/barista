@@ -14,7 +14,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " backgrid-container\" height=\"300\"></div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -1728,6 +1728,9 @@ Barista.Views.GridView = Backbone.View.extend({
 		});
 		$("#" + this.div_string).append(this.grid.render().$el);
 
+		// add a button to scroll to the top of the grid once it is scroll down
+		this.add_scroll_to_top_button();
+
 		//bind the table to a function to check for scroll boundaries
 		$("#" + this.div_string,this.el).scroll(function(){self.checkscroll();});
 
@@ -1736,12 +1739,28 @@ Barista.Views.GridView = Backbone.View.extend({
 	},
 
 	checkscroll: function(){
+		if ($("#" + this.div_string).scrollTop() > 30) {
+			this.show_scroll_to_top_button();
+		}else{
+			this.hide_scroll_to_top_button();
+		}
+
 		var triggerPoint = 100;
 		var pos = $("#" + this.div_string).scrollTop() + $("#" + this.div_string).height() + triggerPoint;
 		if (!this.collection.isLoading && pos > $("#" + this.div_string)[0].scrollHeight){
 			this.collection.skip += 30;
 			this.update_collection();
 		}
+	},
+
+	// ### add_scroll_to_top_button
+	// adds a UI control to scroll the top of the grid
+	add_scroll_to_top_button: function(){
+		var self = this;
+		this.scroll_to_top_button_id = this.div_string + 'scroll_button';
+		this.$el.append('<button id="' + this.scroll_to_top_button_id + '" class="cmap_grid_to_top_button">Scroll to Top</button>');
+		$("#" + this.scroll_to_top_button_id).click(function(){self.scroll_to_top();});
+		this.hide_scroll_to_top_button();
 	},
 
 	// ### scroll_to_top
@@ -1752,6 +1771,30 @@ Barista.Views.GridView = Backbone.View.extend({
 	scroll_to_top: function(duration){
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.div_string).animate({scrollTop:0},duration);
+		this.hide_scroll_to_top_button();
+	},
+
+	// ### show_scroll_to_top_button
+	// shows the scroll to top button
+	// argurments:
+
+	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+	show_scroll_to_top_button: function(duration){
+		duration = (duration !== undefined) ? duration : 500;
+		$("#" + this.scroll_to_top_button_id).clearQueue();
+		$("#" + this.scroll_to_top_button_id).animate({opacity:0.5},duration);
+	},
+
+	// ### hide_scroll_to_top_button
+	// hides the scroll to top button
+	// argurments:
+
+	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+	hide_scroll_to_top_button: function(duration){
+		var self= this;
+		duration = (duration !== undefined) ? duration : 500;
+		$("#" + this.scroll_to_top_button_id).clearQueue();
+		$("#" + this.scroll_to_top_button_id).animate({opacity:0},duration);
 	},
 
 	replace_collection: function(search_val,search_type){

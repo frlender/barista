@@ -14,7 +14,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " backgrid-container\" height=\"300\"></div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)

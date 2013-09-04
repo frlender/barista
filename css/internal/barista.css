@@ -63,3 +63,17 @@
 .cmap-active-grid-row{
 	background-color: #BDBDBD;
 }
+
+.cmap_grid_to_top_button {
+	position: relative;
+	width: 55px;
+	height: 55px;
+	bottom: 90px;
+	right: -50%;
+	cursor: default;
+	background-color: #DDD;
+	color: #333;
+	opacity: 0;
+	border: 1px solid transparent;
+	border-radius: 50%;
+}
