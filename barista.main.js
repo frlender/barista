@@ -6270,7 +6270,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	hide: function(duration){
 		var self = this;
 		this.$el.animate({opacity:0},duration);
-		setTimeout(function(){self.$el.hide()},duration);
+		setTimeout(function(){self.$el.hide();},duration);
 	},
 
 	// ### show
@@ -7690,7 +7690,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 			self.render();
 
 			// once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
-			$("#search",self.el).bind('input propertychange change', function () {
+			var change_callback = function () {
 				var val  = $("#search",self.el).val();
 				var type = "";
 				if (self.cell_lines.indexOf(val) != -1 && self.match_cell_lines){
@@ -7706,7 +7706,9 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 				@param {String} [msg.type=""] the type of message being passed, either "" or "cell". "cell" is passed, if the string matches a cell line and match\_cell\_lines is set
 				**/
 				self.trigger("search:DidType",{val: val,type: type});
-			});
+			};
+
+			$("#search",self.el).bind('input propertychange change', _.throttle(change_callback,500));
 
 			// bind a search:DidType event to the typeahead events coming out of typeahead.js
 			$(".typeahead",self.el).bind('typeahead:selected typeahead:autocompleted', function (obj,datum) {
