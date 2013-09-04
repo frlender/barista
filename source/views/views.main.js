@@ -873,7 +873,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	show_scroll_to_top_button: function(duration){
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.scroll_to_top_button_id).clearQueue();
-		$("#" + this.scroll_to_top_button_id).animate({opacity:0.5},duration);
+		$("#" + this.scroll_to_top_button_id).animate({opacity:0.75},duration);
 	},
 
 	// ### hide_scroll_to_top_button
