@@ -2,19 +2,17 @@
 captures both the total count of perturbagens that meet a search criteria and the count
 of each annotation category for the set of perturbagens.</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>optional arguments:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
 <li>{string}  <strong>type<em>string</strong>  the string of pert</em>types that will be search upon fetching data, defaults to <em>'["trt_sh","trt_oe"]'</em></li>
-</ol></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p><code>pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})</code></p></div></div><div class="code"><div class="wrapper"><span class="nx">Barista</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">PertCountModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="defaults">defaults</h3>
+</ol></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p><code>pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})</code></p></div></div><div class="code"><div class="wrapper"><span class="nx">PertCountModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="defaults">defaults</h3>
 
 <p>describes the model's default parameters</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
 <li>{String}  <strong>type<em>string</strong>  the string of pert</em>types that will be search upon fetching data, defaults to <em>'["trt_sh","trt_oe"]'</em></li>
 <li>{Number}  <strong>pert_count</strong>  the number of perturbagens matching an api query, defaults to <em>0</em></li>
 <li>{Array}  <strong>pert_types</strong>  an array of objects representing pert_type categories to keep track of, defaults to <em>[{}}]</em></li>
-<li>{String}  <strong>pert_type_field</strong>  a field name over which to look for pert<em>types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert</em>icollection'*</li>
 <li>{Date}  <strong>last_update</strong>  a timestamp of the latest model update, defaults to the current time</li>
 </ol></div></div><div class="code"><div class="wrapper">  <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type_string&quot;</span><span class="o">:</span> <span class="s1">&#39;[&quot;trt_sh&quot;,&quot;trt_oe&quot;,&quot;trt_oe.mut&quot;]&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;type_string&quot;</span><span class="o">:</span> <span class="s1">&#39;[&quot;trt_sh&quot;,&quot;trt_oe&quot;]&#39;</span><span class="p">,</span>
     <span class="s2">&quot;pert_count&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;pert_types&quot;</span><span class="o">:</span> <span class="p">[{}],</span>
-    <span class="s2">&quot;pert_type_field&quot;</span><span class="o">:</span> <span class="s2">&quot;pert_icollection&quot;</span><span class="p">,</span>
     <span class="s2">&quot;last_update&quot;</span><span class="o">:</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span>
   <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="initialize">initialize</h3>
 
@@ -46,11 +44,7 @@ cell_ids</p></div></div><div class="code"><div class="wrapper">    <span class="
         <span class="nx">num_perts</span> <span class="o">=</span> <span class="nx">perts</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">();</span>
-      <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">);</span>
-      <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">g</span><span class="o">:</span><span class="nx">self</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;pert_type_field&#39;</span><span class="p">)});</span>
-      <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">pert_info</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pert_types</span><span class="p">){</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">pert_count</span><span class="o">:</span> <span class="nx">num_perts</span><span class="p">,</span> <span class="nx">pert_types</span><span class="o">:</span> <span class="nx">pert_types</span><span class="p">,</span> <span class="nx">last_update</span><span class="o">:</span> <span class="nx">t</span><span class="p">});</span>
-      <span class="p">});</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">pert_count</span><span class="o">:</span> <span class="nx">num_perts</span><span class="p">,</span> <span class="nx">pert_types</span><span class="o">:</span> <span class="p">[{}],</span> <span class="nx">last_update</span><span class="o">:</span> <span class="nx">t</span><span class="p">});</span>
     <span class="p">});</span>
   <span class="p">}</span>
 <span class="p">});</span></div></div></div></div></body></html>
