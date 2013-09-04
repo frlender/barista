@@ -1045,6 +1045,14 @@ build the clickable row</p></div></div><div class="code"><div class="wrapper">  
       <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">skip</span> <span class="o">+=</span> <span class="mi">30</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">update_collection</span><span class="p">();</span>
     <span class="p">}</span>
+  <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="scroll_to_top">scroll<em>to</em>top</h3>
+
+<p>scrolls the grid to the top of its container
+argurments:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
+<li>{number}  <strong>duration</strong>  the duration of the scroll animation in ms, defaults to <em>500</em></li>
+</ol></div></div><div class="code"><div class="wrapper">  <span class="nx">scroll_to_top</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">){</span>
+    <span class="nx">duration</span> <span class="o">=</span> <span class="p">(</span><span class="nx">duration</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">duration</span> <span class="o">:</span> <span class="mi">500</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">div_string</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span><span class="nx">scrollTop</span><span class="o">:</span><span class="mi">0</span><span class="p">},</span><span class="nx">duration</span><span class="p">);</span>
   <span class="p">},</span>
 
   <span class="nx">replace_collection</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">search_val</span><span class="p">,</span><span class="nx">search_type</span><span class="p">){</span>
