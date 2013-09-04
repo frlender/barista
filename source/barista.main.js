@@ -1744,6 +1744,16 @@ Barista.Views.GridView = Backbone.View.extend({
 		}
 	},
 
+	// ### scroll_to_top
+	// scrolls the grid to the top of its container
+	// argurments:
+
+	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+	scroll_to_top: function(duration){
+		duration = (duration !== undefined) ? duration : 500;
+		$("#" + this.div_string).animate({scrollTop:0},duration);
+	},
+
 	replace_collection: function(search_val,search_type){
 		var self = this;
 		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
