@@ -6096,7 +6096,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.search_type = "single";
 
 		// set up the span size
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span12";
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
 
 		// set up the template to use
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
