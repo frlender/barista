@@ -829,7 +829,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
 	},
 
-	checkscroll: function(){
+	checkscroll: _.debounce(function(){
 		if ($("#" + this.div_string).scrollTop() > 30) {
 			this.show_scroll_to_top_button();
 		}else{
@@ -842,7 +842,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.collection.skip += 30;
 			this.update_collection();
 		}
-	},
+	},100),
 
 	// ### add_scroll_to_top_button
 	// adds a UI control to scroll the top of the grid
