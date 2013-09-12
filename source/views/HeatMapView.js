@@ -190,6 +190,24 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			.attr('dy','-.2em')
 			.text(function(d){return d;});
 
+		// set up the y scale
+		this.set_scale();
+
+		// build Axis
+		this.build_axis();
+
+		// add an axis
+		this.fg_layer.append("g")
+			.attr("class", "axis y-axis")
+			.attr("transform", "translate(" + (this.width - this.margin/2) + ",0)")
+			.call(this.yAxis);
+
+		// style the axis
+		this.style_axes();
+
+		// add the cells for the look up table
+		this.add_lookup_table();
+
 		// add a png export overlay
 		this.fg_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
 		this.fg_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
@@ -203,6 +221,69 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
+	},
+
+	// ### add look up table
+	// adds a simple color lookup table based on the heatmap's color_scale
+	add_lookup_table: function(){
+		var self, data, scale_range, scale_domain, scale_unit, domain_unit;
+		self = this;
+		data = d3.range(50);
+		scale_range = this.y_scale.range();
+		scale_domain = this.y_scale.domain();
+		scale_unit = (scale_range[1] - scale_range[0]) / data.length;
+		domain_unit = (scale_domain[0] - scale_domain[1]) / data.length;
+
+		this.fg_layer.selectAll('.lut_cell').data(data).enter().append('rect')
+			.attr('class','lut_cell')
+			.attr('x',self.width - self.margin/2 - 10)
+			.attr('y',function(d,i){return i*scale_unit + self.margin;})
+			.attr('width',10)
+			.attr('height',scale_unit)
+			.attr('fill',function(d,i){return self.color(scale_domain[0] - i*domain_unit);});
+
+	},
+
+	// ### set_scale
+	// utility function used to get the y scale used in the plot
+	set_scale: function(){
+			var domain, range_min, range_max, range;
+			// get the current data domain from this.color
+			domain = this.color.domain();
+
+			// calculate the range for the scale
+			range_min = this.margin;
+			range_max = this.height - this.margin;
+			range = [range_min,range_max];
+
+			// set the y_scale
+			this.y_scale=d3.scale.linear().domain([domain[domain.length-1],domain[0]]).range(range);
+	},
+
+	// ### build_axis
+	// utility function used to build y axis for the look up table
+	build_axis: function(){
+		this.yAxis = d3.svg.axis()
+			.scale(this.y_scale)
+			.orient("right");
+	},
+
+	// ### style axes
+	// utility function to apply custom styles to axis components
+	style_axes: function(){
+		this.vis.selectAll('.axis').selectAll("path")
+			.style("fill","none")
+			.style("stroke","black")
+			.style("shape-rendering", "crispEdges");
+
+		this.vis.selectAll('.axis').selectAll("line")
+			.style("fill","none")
+			.style("stroke","black")
+			.style("shape-rendering", "crispEdges");
+
+		this.vis.selectAll('.axis').selectAll("text")
+			.style("font-family","sans-serif")
+			.style("font-size","11px");
 	},
 
 	// ### render
