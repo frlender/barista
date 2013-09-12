@@ -31,6 +31,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }
       ]
     }, {
+<<<<<<< HEAD
       "type": "file",
       "data": {
         "language": {
@@ -1067,6 +1068,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }
       ]
     }, {
+=======
+>>>>>>> 702d49d6a47d3f4dc1b867394a38d7dbec69a41c
       "type": "folder",
       "data": {
         "path": "collections",
@@ -1650,14 +1653,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "model",
                 "slug": "model"
               },
@@ -1732,22 +1727,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -1790,14 +1769,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -1832,14 +1803,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -1869,17 +1832,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "FlatTreeMapView"
           },
           "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
+          "outline": []
         }, {
           "type": "file",
           "data": {
@@ -1897,14 +1850,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -1976,6 +1921,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+<<<<<<< HEAD
                 "title": "name",
                 "slug": "name"
               },
@@ -2114,6 +2060,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+=======
+>>>>>>> 702d49d6a47d3f4dc1b867394a38d7dbec69a41c
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2188,22 +2136,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2232,14 +2164,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "init-panel"
               },
               "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "savePng",
-                "slug": "savepng"
-              },
-              "depth": 3
             }
           ]
         }, {
@@ -2259,22 +2183,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2355,17 +2263,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "PertSearchBar"
           },
           "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
+          "outline": []
         }, {
           "type": "file",
           "data": {
@@ -2383,14 +2281,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2476,22 +2366,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2566,14 +2440,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2606,8 +2472,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "update",
-                "slug": "update"
+                "title": "render",
+                "slug": "render"
               },
               "depth": 3
             }, {
