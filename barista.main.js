@@ -5215,13 +5215,17 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
             this.q_param = '{"cell_id":"' + search_string + '"}';
         }
 
-        // set up the sorting paramter for the colection
+        // set up the sorting paramter for the api call
         this.s_param = '{"pert_iname":1}';
+
+        // set up a filtering parameter for the api call
+        this.f_param = '{"pert_iname":1,"pert_type":1,"pert_id":1,"num_sig":1}';
 
         // build a parameter object for the api call
         var params = {q: this.q_param,
             l: this.limit,
             s: this.s_param,
+            f: this.f_param,
             sk: this.skip};
 
         // make the api call and store the results as individual models in the collection.
@@ -6159,7 +6163,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
 	},
 
-	checkscroll: function(){
+	checkscroll: _.debounce(function(){
 		if ($("#" + this.div_string).scrollTop() > 30) {
 			this.show_scroll_to_top_button();
 		}else{
@@ -6172,7 +6176,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.collection.skip += 30;
 			this.update_collection();
 		}
-	},
+	},100),
 
 	// ### add_scroll_to_top_button
 	// adds a UI control to scroll the top of the grid
@@ -6203,7 +6207,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	show_scroll_to_top_button: function(duration){
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.scroll_to_top_button_id).clearQueue();
-		$("#" + this.scroll_to_top_button_id).animate({opacity:0.5},duration);
+		$("#" + this.scroll_to_top_button_id).animate({opacity:1},duration);
 	},
 
 	// ### hide_scroll_to_top_button

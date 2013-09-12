@@ -67,13 +67,17 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
             this.q_param = '{"cell_id":"' + search_string + '"}';
         }
 
-        // set up the sorting paramter for the colection
+        // set up the sorting paramter for the api call
         this.s_param = '{"pert_iname":1}';
+
+        // set up a filtering parameter for the api call
+        this.f_param = '{"pert_iname":1,"pert_type":1,"pert_id":1,"num_sig":1}';
 
         // build a parameter object for the api call
         var params = {q: this.q_param,
             l: this.limit,
             s: this.s_param,
+            f: this.f_param,
             sk: this.skip};
 
         // make the api call and store the results as individual models in the collection.
