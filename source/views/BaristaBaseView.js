@@ -28,7 +28,7 @@
 //										});
 Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### initialize
-	// initialize the viewview.  Views that extend BaristaBaseView should impliment code overiding this method.
+	// initialize the view.  Views that extend BaristaBaseView should impliment code overiding this method.
 	// If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should
 	// call it in their redraw method.  As an example:
 
