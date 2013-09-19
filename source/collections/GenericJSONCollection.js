@@ -32,6 +32,10 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
 
+    // ### maxCount
+    // the maximum size of the collection. defaults to Infinity
+    maxCount: Infinity,
+
     // ## getData
     // `GenericJSONCollection.getData(search_string,search_type,limit)`
 

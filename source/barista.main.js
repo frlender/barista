@@ -810,6 +810,10 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
 
+    // ### maxCount
+    // the maximum size of the collection. defaults to Infinity
+    maxCount: Infinity,
+
     // ## getData
     // `GenericJSONCollection.getData(search_string,search_type,limit)`
 
@@ -881,6 +885,10 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
 
+    // ### maxCount
+    // the maximum size of the collection. defaults to Infinity
+    maxCount: Infinity,
+
     // ## getData
     // `PertCollection.getData(search_string,search_type,limit)`
 
@@ -940,11 +948,13 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
-        params = _.omit(params,['l','s','f','sk']);
-        params = _.extend(params,{c: true});
-        $.getJSON(this.url,params,function(res){
-            self.maxCount = res.count;
-        });
+        if (this.maxCount == Infinity){
+            params = _.omit(params,['l','s','f','sk']);
+            params = _.extend(params,{c: true});
+            $.getJSON(this.url,params,function(res){
+                self.maxCount = res.count;
+            });
+        }
     }
 });
 // # **SignatureCollection**
@@ -979,6 +989,10 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
+
+    // ### maxCount
+    // the maximum size of the collection. defaults to Infinity
+    maxCount: Infinity,
 
     // ### getData
     // `SignatureCollection.getData(search_string,search_type,limit)`
@@ -1039,11 +1053,13 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
-        params = _.omit(params,['l','s','f','sk']);
-        params = _.extend(params,{c: true});
-        $.getJSON(this.url,params,function(res){
-            self.maxCount = res.count;
-        });
+        if (this.maxCount == Infinity){
+            params = _.omit(params,['l','s','f','sk']);
+            params = _.extend(params,{c: true});
+            $.getJSON(this.url,params,function(res){
+                self.maxCount = res.count;
+            });
+        }
     }
 });
 // # **SummlyResultCollection**
@@ -1078,6 +1094,10 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
+
+    // ### maxCount
+    // the maximum size of the collection. defaults to Infinity
+    maxCount: Infinity,
 
     // ## getDataMock
     //			PertCollection.getDataMock(limit);
@@ -1142,11 +1162,13 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
-        params = _.omit(params,['l','s','f','sk']);
-        params = _.extend(params,{c: true});
-        $.getJSON(this.url,params,function(res){
-            self.maxCount = res.count;
-        });
+        if (this.maxCount == Infinity){
+            params = _.omit(params,['l','s','f','sk']);
+            params = _.extend(params,{c: true});
+            $.getJSON(this.url,params,function(res){
+                self.maxCount = res.count;
+            });
+        }
     }
 });
 // # **BaristaBaseView**
