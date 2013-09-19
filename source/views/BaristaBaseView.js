@@ -183,6 +183,9 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### savePng
 	// save the current state of the view into a png image
 	save_png: function(){
+		// do any pre save work that the child class may require
+		this.save_png_pre();
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
@@ -210,5 +213,52 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 
 		// make the png label on the image visible again
 		png_selection.attr("opacity",png_opacity);
+
+		// do any post save work that the child class may require
+		this.save_png_post();
+	},
+
+	// ### save_png_pre
+	// dummy method that should be overiden if there is any work to do before
+	// saving the png image of the view.  For example, removing elements that
+	// will not render properly could be done before saving the image.  This
+	// function is called as the first step of *save_png*
+	save_png_pre: function(){},
+
+	// ### save_png_post
+	// dummy method that should be overiden if there is any work to do after
+	// saving the png image of the view.  For example, restoring elements that
+	// were removed before saving could be done after saving the image.  This
+	// function is called as the last step of *save_png*
+	save_png_pre: function(){},
+
+
+	// ### hide
+	// hides the view by dimming the opacity and hiding it in the DOM
+
+	// arguments
+
+	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *1*
+
+	//		pert_detail_view.hide(duration);
+	hide: function(duration){
+		duration = (duration !== undefined) ? duration : 1;
+		var self = this;
+		this.$el.animate({opacity:0},duration);
+		setTimeout(function(){self.$el.hide()},duration);
+	},
+
+	// ### show
+	// shows the view by brightening the opacity and showing it in the DOM
+
+	// arguments
+
+	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *1*
+
+	//		pert_detail_view.show(duration);
+	show: function(duration){
+		duration = (duration !== undefined) ? duration : 1;
+		this.$el.show();
+		this.$el.animate({opacity:1},duration);
 	}
 });
