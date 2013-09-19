@@ -91,5 +91,13 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 			self.add(data);
 			self.isLoading = false;
 		});
+
+        // make a second api call to find the maximum number of items in the collection
+        // and set that as an attribute on it
+        params = _.omit(params,['l','s','f','sk']);
+        params = _.extend(params,{c: true});
+        $.getJSON(this.url,params,function(res){
+            self.maxCount = res.count;
+        });
     }
 });

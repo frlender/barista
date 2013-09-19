@@ -1,27 +1,27 @@
-// # **PertCollection**
-// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
+// # **SignatureCollection**
+// A Backbone.Collection that represents a set of signatures.  This collection is suitable for 
 // internal use in GridView.
 
 // optional arguments:
 
 // 1.  {Backbone.Model}  **model**  the model used for the collection objects. defaults to *PertModel*
-// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/pertinfo?callback=?'*
+// 2.  {String}  **url**  the url from which model data is fetched. defaults  to *'http://api.lincscloud.org/a2/siginfo?callback=?'*
 // 3.  {String}  **skip**  the skip parameter used in api calls when the collection is updated. defaults to *0*
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
-// `pert_collection = new PertCollection({model: PertModel,
-                                          // url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+// `pert_collection = new SignatureCollection({model: PertModel,
+                                          // url: 'http://api.lincscloud.org/a2/siginfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
-Barista.Collections.PertCollection = Backbone.Collection.extend({
+Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects. 
-    model: Barista.Models.PertModel,
+    model: Barista.Models.SignatureModel,
 
     // #### url
     // the url from which model data is fetched
-    url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+    url: 'http://api.lincscloud.org/a2/siginfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated. 
@@ -31,8 +31,8 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     // indicates wether or not the collection is in the middle of a fetch operation. 
     isLoading: false,
 
-    // ## getData
-    // `PertCollection.getData(search_string,search_type,limit)`
+    // ### getData
+    // `SignatureCollection.getData(search_string,search_type,limit)`
 
     // Gets additional data from the specified url and stores them as models in the collection
 
@@ -48,30 +48,30 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         this.isLoading = true;
 
         // store the value of **search\_string**, **search\_type**, and **limit** on the collection object
-        this.search_string = (search_string !== undefined) ? search_string : '';
-        this.search_type = (search_type !== undefined) ? search_type : '';
+        this.search_string = (search_string !== undefined) ? search_string : "";
+        this.search_type = (search_type !== undefined) ? search_type : "";
         this.limit = (limit !== undefined) ? limit : 30;
 
         // depending on the type of query we are making, set up the q param for the api call.
         // if we are doing a single query, match that query as a regular expression. If we are
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
-        if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+        if (search_type === "single" || search_type === ""){
+            this.q_param = '{"pert_id":"' + search_string + '"}';
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_iname":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "cell"){
             this.q_param = '{"cell_id":"' + search_string + '"}';
         }
 
         // set up the sorting paramter for the api call
-        this.s_param = '{"pert_iname":1}';
+        this.s_param = '{"pert_id":1}';
 
         // set up a filtering parameter for the api call
-        this.f_param = '{"pert_iname":1,"pert_type":1,"pert_id":1,"num_sig":1}';
+        this.f_param = '{"pert_id":1,"pert_type":1,"pert_iname":1,"pert_itime":1,"pert_idose":1,"cell_id":1,"sig_id":1,"is_gold":1,"distil_ss":1,"distil_cc_q75":1}';
 
         // build a parameter object for the api call
         var params = {q: this.q_param,

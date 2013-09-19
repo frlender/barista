@@ -57,11 +57,15 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
         // assume it is an array of data and read each array item into a new PertModel
         if (typeof(this.url) == 'object'){
             this.url.forEach(function(o){self.add(new Barista.Models.PertModel(o));});
+            // set the collection's maxCount attribute to the length of the collection
+            this.maxCount = this.models.length;
         }else{
             $.getJSON(this.url,function(res){
                 res.forEach(function(o){
                     self.add(new PertModel(o));
                 });
+                // set the collection's maxCount attribute to the length of the collection
+                this.maxCount = this.models.length;
             });
         }
 	}

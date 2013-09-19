@@ -1197,20 +1197,26 @@ Barista.Views.GridView = Backbone.View.extend({
 	},
 
 	update_collection: function(search_val,search_type){
-		var self = this;
-		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
-		this.search_type = (search_type !== undefined) ? search_type : this.search_type;
-		$("#" + this.div_string).show();
-		$("#" + this.div_string).animate({opacity:1},500);
-		this.collection.getData(this.search_val,this.search_type);
-		this.resize_div();
+		if (this.collection.models.length < this.collection.maxCount){
+			var self = this;
+			this.search_val = (search_val !== undefined) ? search_val : this.search_val;
+			this.search_type = (search_type !== undefined) ? search_type : this.search_type;
+			$("#" + this.div_string).show();
+			$("#" + this.div_string).animate({opacity:1},500);
+			this.collection.getData(this.search_val,this.search_type);
+			this.resize_div();
+		}
 	},
 
 	clear_collection: function(){
 		var self = this;
 		this.collection.skip = 0;
 		$("#" + this.div_string).animate({opacity:0},500);
-		window.setTimeout(function(){self.collection.reset(); $("#" + this.div_string).hide();},500);
+		window.setTimeout(function(){
+			self.collection.reset();
+			self.collection.maxCount = Infinity;
+			$("#" + this.div_string).hide();
+		},500);
 	},
 
 	resize_div: function(){
