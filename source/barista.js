@@ -879,7 +879,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         this.s_param = '{"pert_id":1}';
 
         // set up a filtering parameter for the api call
-        this.f_param = '{"pert_id":1,"pert_type":1,"pert_iname":1,"pert_itime":1,"pert_idose":1,"cell_id":1,"sig_id":1,"is_gold":1,"distil_ss":1,"distil_cc_q75":1}';
+        this.f_param = '{"pert_id":1,"pert_type":1,"pert_iname":1,"pert_itime":1,"pert_idose":1,"cell_id":1,"sig_id":1,"is_gold":1,"distil_ss":1,"distil_cc_q75":1,"ngenes_modulated_dn_lm":1,"ngenes_modulated_up_lm":1}';
 
         // build a parameter object for the api call
         var params = {q: this.q_param,
@@ -1007,7 +1007,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
-        if (this.maxCount == Infinity){
+        if (this.maxCount < Infinity){
             params = _.omit(params,['l','s','f','sk']);
             params = _.extend(params,{c: true});
             $.getJSON(this.url,params,function(res){
@@ -2199,30 +2199,38 @@ Barista.Views.GridView = Backbone.View.extend({
 		$("#" + this.scroll_to_top_button_id).animate({opacity:0},duration);
 	},
 
-	replace_collection: function(search_val,search_type){
+	replace_collection: function(search_val,search_type,limit){
 		var self = this;
 		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 		this.search_type = (search_type !== undefined) ? search_type : this.search_type;
+		this.limit = (limit !== undefined) ? limit : 30;
 		$("#" + this.div_string).show();
 		$("#" + this.div_string).animate({opacity:1},500);
 		this.collection.reset();
 		this.collection.skip = 0;
-		this.collection.getData(this.search_val,this.search_type);
+		self.collection.maxCount = Infinity;
+		this.collection.getData(this.search_val,this.search_type,this.limit);
 		this.listenToOnce(this.collection,"add", function(){
 			this.trigger("grid:ReplaceCollection");
+			this.trigger("grid:Add");
 			this.resize_div();
 		});
 	},
 
-	update_collection: function(search_val,search_type){
+	update_collection: function(search_val,search_type,limit){
 		if (this.collection.models.length < this.collection.maxCount){
 			var self = this;
 			this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 			this.search_type = (search_type !== undefined) ? search_type : this.search_type;
+			this.limit = (limit !== undefined) ? limit : 30;
 			$("#" + this.div_string).show();
 			$("#" + this.div_string).animate({opacity:1},500);
-			this.collection.getData(this.search_val,this.search_type);
+			this.collection.getData(this.search_val,this.search_type,this.limit);
 			this.resize_div();
+			this.listenToOnce(this.collection,"add", function(){
+				this.trigger("grid:UpdateCollection");
+				this.trigger("grid:Add");
+			});
 		}
 	},
 

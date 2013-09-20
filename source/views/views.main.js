@@ -1181,30 +1181,38 @@ Barista.Views.GridView = Backbone.View.extend({
 		$("#" + this.scroll_to_top_button_id).animate({opacity:0},duration);
 	},
 
-	replace_collection: function(search_val,search_type){
+	replace_collection: function(search_val,search_type,limit){
 		var self = this;
 		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 		this.search_type = (search_type !== undefined) ? search_type : this.search_type;
+		this.limit = (limit !== undefined) ? limit : 30;
 		$("#" + this.div_string).show();
 		$("#" + this.div_string).animate({opacity:1},500);
 		this.collection.reset();
 		this.collection.skip = 0;
-		this.collection.getData(this.search_val,this.search_type);
+		self.collection.maxCount = Infinity;
+		this.collection.getData(this.search_val,this.search_type,this.limit);
 		this.listenToOnce(this.collection,"add", function(){
 			this.trigger("grid:ReplaceCollection");
+			this.trigger("grid:Add");
 			this.resize_div();
 		});
 	},
 
-	update_collection: function(search_val,search_type){
+	update_collection: function(search_val,search_type,limit){
 		if (this.collection.models.length < this.collection.maxCount){
 			var self = this;
 			this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 			this.search_type = (search_type !== undefined) ? search_type : this.search_type;
+			this.limit = (limit !== undefined) ? limit : 30;
 			$("#" + this.div_string).show();
 			$("#" + this.div_string).animate({opacity:1},500);
-			this.collection.getData(this.search_val,this.search_type);
+			this.collection.getData(this.search_val,this.search_type,this.limit);
 			this.resize_div();
+			this.listenToOnce(this.collection,"add", function(){
+				this.trigger("grid:UpdateCollection");
+				this.trigger("grid:Add");
+			});
 		}
 	},
 

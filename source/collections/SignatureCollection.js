@@ -75,7 +75,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         this.s_param = '{"pert_id":1}';
 
         // set up a filtering parameter for the api call
-        this.f_param = '{"pert_id":1,"pert_type":1,"pert_iname":1,"pert_itime":1,"pert_idose":1,"cell_id":1,"sig_id":1,"is_gold":1,"distil_ss":1,"distil_cc_q75":1}';
+        this.f_param = '{"pert_id":1,"pert_type":1,"pert_iname":1,"pert_itime":1,"pert_idose":1,"cell_id":1,"sig_id":1,"is_gold":1,"distil_ss":1,"distil_cc_q75":1,"ngenes_modulated_dn_lm":1,"ngenes_modulated_up_lm":1}';
 
         // build a parameter object for the api call
         var params = {q: this.q_param,
