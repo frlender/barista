@@ -98,7 +98,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
-        if (this.maxCount == Infinity){
+        if (this.maxCount < Infinity){
             params = _.omit(params,['l','s','f','sk']);
             params = _.extend(params,{c: true});
             $.getJSON(this.url,params,function(res){
