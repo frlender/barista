@@ -49,6 +49,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// set up static text, default if not specified
 		this.static_text = (this.options.static_text !== undefined) ? this.options.static_text : "Reagents";
 
+		// set up the default plot height
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
+
 		// set up default categories to display
 		this.categories = (this.options.categories !== undefined) ? this.options.categories : [];
 		this.category_ids = _.pluck(this.categories,'_id');
@@ -84,7 +87,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
-												height: 200}));
+												height: this.plot_height}));
 	},
 
 	// ### redraw

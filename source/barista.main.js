@@ -696,6 +696,74 @@ Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 		meta_data: {}
 	}
 });
+// # **SigCountModel**
+
+// A Backbone.Model that represents the count of a set of signatures.  The data model
+// captures both the total count of signatures that meet a search criteria and the count
+// of each annotation category for the set of signatures.
+
+// optional arguments:
+
+// 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
+
+// `pert_count_model = new SigCountModel({type_string: '["trt_sh","trt_oe"]'})`
+
+Barista.Models.SigCountModel = Backbone.Model.extend({
+  // ### defaults
+  // describes the model's default parameters
+
+  // 1.  {String}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
+  // 2.  {Number}  **sig\_count**  the number of perturbagens matching an api query, defaults to *0*
+  // 3.  {Array}  **sig\_types**  an array of objects representing sig\_type categories to keep track of, defaults to *[{}}]*
+  // 4.  {String}  **sig\_type\_field**  a field name over which to look for pert_types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert_icollection'*
+  // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
+  defaults: {
+    "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
+    "pert_count": 0,
+    "pert_types": [{}],
+    "pert_type_field": "pert_icollection",
+    "last_update": (new Date()).getTime()
+  },
+
+  // ### fetch
+  // fetches new data from the sig_info api.  the count and sig_types data
+  // is replaced with new data coming from the api call
+  fetch: function(search_string,search_type){
+    // depending on the type of query we are making, set up the q param for the api call.
+    // if we are doing a single query, match that query as a regular expression. If we are
+    // doing a multi query, match exact names. If we are doing a cell line query, only match
+    // cell\_ids
+    var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
+    var params = {};
+    if (search_type === "multi") {
+      search_string = '["' + search_string.split(":").join('","') + '"]';
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
+    }
+    if (search_type === "single" || search_type === undefined){
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+    }
+    if (search_type === "cell") {
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
+    }
+
+    // run the api request
+    var self = this;
+    var num_perts;
+    $.getJSON(sig_info,params,function(perts) {
+      if (perts === 0){
+        num_perts = 0;
+      }else{
+        num_perts = perts.count;
+      }
+      var t = (new Date()).getTime();
+      params = _.omit(params,'c');
+      params = _.extend(params,{g:self.get('pert_type_field')});
+      $.getJSON(sig_info, params, function(pert_types){
+        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+      });
+    });
+  }
+});
 // # **SignatureModel**
 
 // A Backbone.Model that represents a single signature
@@ -1086,6 +1154,10 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // the maximum size of the collection. defaults to Infinity
     maxCount: Infinity,
 
+    // ### gold_only
+    // boolean flag telling the collection to only include gold Connectivity Map signatures
+    gold_only: true,
+
     // ### getData
     // `SignatureCollection.getData(search_string,search_type,limit)`
 
@@ -1112,14 +1184,26 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === ""){
-            this.q_param = '{"pert_id":"' + search_string + '"}';
+            if (this.gold_only){
+                this.q_param = '{"pert_id":"' + search_string + '","is_gold":1}';
+            }else{
+                this.q_param = '{"pert_id":"' + search_string + '"}';
+            }
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            if (this.gold_only){
+                this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"is_gold":1,"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            }else{
+                this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            }
         }
         if (search_type === "cell"){
-            this.q_param = '{"cell_id":"' + search_string + '"}';
+            if (this.gold_only){
+                this.q_param = '{"cell_id":"' + search_string + '","is_gold":1}';
+            }else{
+                this.q_param = '{"cell_id":"' + search_string + '"}';
+            }
         }
 
         // set up the sorting paramter for the api call
@@ -1327,7 +1411,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
 
 		// set up the default height for the plot
-		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-12";
@@ -2145,7 +2229,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.render_summary({summary_string: this.model.get('pert_summary'),
 								 top: 36,
 								 bottom: 136,
-								 left: this.model.get('pert_iname').length*36*.7});
+								 left: this.model.get('pert_iname').length*36*.85});
 		}else{
 			this.clear_summary();
 		}
@@ -2225,7 +2309,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// compute the number of characters per line we will allow and how
 		// many lines the summary would need if we rendered all of it
 		this.line_width = right_edge - left_edge;
-		this.num_char = Math.floor(this.line_width / 13 / .7);
+		this.num_char = Math.floor(this.line_width / 13 / .75);
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
 		// compute the line splits to display in the wiki summary
@@ -2245,12 +2329,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.enter()
 				.append("text")
 				.attr("class",self.div_string + "summary_text")
-				.attr("x",(right_edge - left_edge) / 2 + left_edge)
+				.attr("x",left_edge)
 				.attr("y",function(d,i){return top_edge + 13 + i*15;})
 				.attr("font-family","Helvetica Neue")
 				.attr("font-size","13pt")
 				.attr("fill","#777777")
-				.attr("text-anchor", "middle")
+				// .attr("text-anchor", "middle")
 				.text(function(d){return d;});
 	},
 
@@ -3711,6 +3795,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// set up static text, default if not specified
 		this.static_text = (this.options.static_text !== undefined) ? this.options.static_text : "Reagents";
 
+		// set up the default plot height
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
+
 		// set up default categories to display
 		this.categories = (this.options.categories !== undefined) ? this.options.categories : [];
 		this.category_ids = _.pluck(this.categories,'_id');
@@ -3746,7 +3833,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
-												height: 200}));
+												height: this.plot_height}));
 	},
 
 	// ### redraw

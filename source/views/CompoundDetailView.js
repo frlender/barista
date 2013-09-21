@@ -93,7 +93,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.render_summary({summary_string: this.model.get('pert_summary'),
 								 top: 36,
 								 bottom: 136,
-								 left: this.model.get('pert_iname').length*36*.7});
+								 left: this.model.get('pert_iname').length*36*.85});
 		}else{
 			this.clear_summary();
 		}
@@ -173,7 +173,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// compute the number of characters per line we will allow and how
 		// many lines the summary would need if we rendered all of it
 		this.line_width = right_edge - left_edge;
-		this.num_char = Math.floor(this.line_width / 13 / .7);
+		this.num_char = Math.floor(this.line_width / 13 / .75);
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
 		// compute the line splits to display in the wiki summary
@@ -193,12 +193,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.enter()
 				.append("text")
 				.attr("class",self.div_string + "summary_text")
-				.attr("x",(right_edge - left_edge) / 2 + left_edge)
+				.attr("x",left_edge)
 				.attr("y",function(d,i){return top_edge + 13 + i*15;})
 				.attr("font-family","Helvetica Neue")
 				.attr("font-size","13pt")
 				.attr("fill","#777777")
-				.attr("text-anchor", "middle")
+				// .attr("text-anchor", "middle")
 				.text(function(d){return d;});
 	},
 

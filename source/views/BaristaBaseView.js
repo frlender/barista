@@ -62,7 +62,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
 
 		// set up the default height for the plot
-		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : undefined;
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-12";

@@ -35,6 +35,10 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // the maximum size of the collection. defaults to Infinity
     maxCount: Infinity,
 
+    // ### gold_only
+    // boolean flag telling the collection to only include gold Connectivity Map signatures
+    gold_only: true,
+
     // ### getData
     // `SignatureCollection.getData(search_string,search_type,limit)`
 
@@ -61,14 +65,26 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === ""){
-            this.q_param = '{"pert_id":"' + search_string + '"}';
+            if (this.gold_only){
+                this.q_param = '{"pert_id":"' + search_string + '","is_gold":1}';
+            }else{
+                this.q_param = '{"pert_id":"' + search_string + '"}';
+            }
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
-            this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            if (this.gold_only){
+                this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"is_gold":1,"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            }else{
+                this.q_param = '{"pert_id":{"$in":"' + search_string + '"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            }
         }
         if (search_type === "cell"){
-            this.q_param = '{"cell_id":"' + search_string + '"}';
+            if (this.gold_only){
+                this.q_param = '{"cell_id":"' + search_string + '","is_gold":1}';
+            }else{
+                this.q_param = '{"cell_id":"' + search_string + '"}';
+            }
         }
 
         // set up the sorting paramter for the api call
