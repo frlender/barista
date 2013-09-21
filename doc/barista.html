@@ -96,6 +96,12 @@ cell_ids</p></div></div><div class="code"><div class="wrapper">    <span class="
       <span class="p">});</span>
      <span class="p">}</span>
   <span class="p">}</span>
+<span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="cellmodel"><strong>CellModel</strong></h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>A Backbone.Model that represents a single perturbagen
+<code>pert_model = new CellModel()</code></p></div></div><div class="code"><div class="wrapper"><span class="nx">Barista</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">CellModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="initialize">initialize</h3>
+
+<p>Overides the base Model's initialize method to set the model's cid to the cell_id of the perturbagen</p></div></div><div class="code"><div class="wrapper">  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">attributes</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;cell_id&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="compounddetailmodel"><strong>CompoundDetailModel</strong></h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>A Backbone.Model that represents a single compound's description.  The data
 model captures a number of fields including</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
 <li>pert_id: the compound's perturbagen identifier</li>
@@ -435,6 +441,54 @@ to display in each row. An example data object might look like this:</p></div></
     <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="nx">data_object</span><span class="o">:</span> <span class="p">{}</span>
   <span class="p">}</span>
+<span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="cellcollection"><strong>CellCollection</strong></h1>
+
+<p>A Backbone.Collection that represents a set of cell types.  This collection is suitable for 
+internal use in GridView.</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>optional arguments:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
+<li>{Backbone.Model}  <strong>model</strong>  the model used for the collection objects. defaults to <em>PertModel</em></li>
+<li>{String}  <strong>url</strong>  the url from which model data is fetched. defaults  to <em>'http://api.lincscloud.org/a2/pertinfo?callback=?'</em></li>
+<li>{String}  <strong>skip</strong>  the skip parameter used in api calls when the collection is updated. defaults to <em>0</em></li>
+<li>{Boolean}  <strong>isLoading</strong>  indicates wether or not the collection is in the middle of a fetch operation. defaults to <em>false</em></li>
+</ol></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p><code>pert_collection = new CellCollection({model: PertModel,
+url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+skip: 0,
+isLoading: false});</code></p></div></div><div class="code"><div class="wrapper"><span class="nx">Barista</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">CellCollection</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="model">model</h4>
+
+<p>the model used for the collection objects. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">model</span><span class="o">:</span> <span class="nx">Barista</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">CellModel</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="url">url</h4>
+
+<p>the url from which model data is fetched</p></div></div><div class="code"><div class="wrapper">    <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://api.lincscloud.org/a2/cellinfo?callback=?&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="skip">skip</h4>
+
+<p>the skip parameter used in api calls when the collection is updated. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">skip</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="isloading">isLoading</h4>
+
+<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdata">getData</h2>
+
+<p><code>PertCollection.getData(search_string,search_type,limit)</code></p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Gets additional data from the specified url and stores them as models in the collection</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p>
+
+<ol>
+<li>{string}  <strong>search_string</strong>  the string on which a regex search into the api at the collections url will be performed, defaults to <em>""</em></li>
+<li>{string}  <strong>search_column</strong>  the column to query the search<em>string against, defaults to "cell</em>id"</li>
+<li>{string}  <strong>search_type</strong>  the type of search that will be performed, defaults to <em>"single"</em></li>
+<li>{number}  <strong>limit</strong>  the number of models to be fetched, defaults to <em>30</em></li>
+</ol></div></div><div class="code"><div class="wrapper">    <span class="nx">getData</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">search_string</span><span class="p">,</span><span class="nx">search_column</span><span class="p">,</span><span class="nx">limit</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>set <strong>isLoading</strong> to true so we don't constantly make api calls before the data comes back</p></div></div><div class="code"><div class="wrapper">        <span class="k">this</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">search_string</span> <span class="o">=</span> <span class="p">(</span><span class="nx">search_string</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">search_string</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">search_column</span> <span class="o">=</span> <span class="p">(</span><span class="nx">search_column</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">search_column</span> <span class="o">:</span> <span class="s1">&#39;cell_id&#39;</span><span class="p">;</span>
+        <span class="c1">//TODO big hack to adapt to GridView implementation</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">search_column</span> <span class="o">==</span> <span class="s1">&#39;single&#39;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">search_column</span> <span class="o">=</span> <span class="s1">&#39;cell_id&#39;</span><span class="p">;</span>
+        <span class="p">}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>this.search<em>type = (search</em>type !== undefined) ? search_type : '';</p></div></div><div class="code"><div class="wrapper">        <span class="k">this</span><span class="p">.</span><span class="nx">limit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">limit</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">limit</span> <span class="o">:</span> <span class="mi">30</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">q_param</span> <span class="o">=</span> <span class="s1">&#39;{&quot;lincs_status&quot;:{&quot;$in&quot;:[&quot;profiled&quot;,&quot;core&quot;]},&quot;&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">search_column</span> <span class="o">+</span> <span class="s1">&#39;&quot;:&#39;</span> <span class="o">+</span> <span class="s1">&#39;{&quot;$regex&quot;:&quot;&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">search_string</span> <span class="o">+</span> <span class="s1">&#39;&quot;,&quot;$options&quot;:&quot;i&quot;}}&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>build a parameter object for the api call
+TODO-remove: alert(this.q_param);</p></div></div><div class="code"><div class="wrapper">        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="nx">q</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">q_param</span><span class="p">,</span>
+            <span class="nx">l</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>s: this.s_param, // no sorting yet</p></div></div><div class="code"><div class="wrapper">            <span class="nx">sk</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">skip</span><span class="p">};</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">data</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="nx">params</span><span class="p">),</span>
+              <span class="nx">remove</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+              <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>alert("fetch success");</p></div></div><div class="code"><div class="wrapper">              <span class="p">},</span>
+              <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>alert("fetch failed");</p></div></div><div class="code"><div class="wrapper">              <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="genericjsoncollection"><strong>GenericJSONCollection</strong></h1>
 
 <p>A Backbone.Collection that represents and arbitrary set of objects stored
@@ -457,7 +511,9 @@ Backbone.Model inside of the collection</p></div></div></div><div class="segment
 
 <p>the skip parameter used in api calls when the collection is updated. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">skip</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="isloading">isLoading</h4>
 
-<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdata">getData</h2>
+<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="maxcount">maxCount</h3>
+
+<p>the maximum size of the collection. defaults to Infinity</p></div></div><div class="code"><div class="wrapper">    <span class="nx">maxCount</span><span class="o">:</span> <span class="kc">Infinity</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdata">getData</h2>
 
 <p><code>GenericJSONCollection.getData(search_string,search_type,limit)</code></p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Gets additional data from the specified url and stores them as models in the collection</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p>
 
@@ -499,7 +555,9 @@ isLoading: false});</code></p></div></div><div class="code"><div class="wrapper"
 
 <p>the skip parameter used in api calls when the collection is updated. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">skip</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="isloading">isLoading</h4>
 
-<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdata">getData</h2>
+<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="maxcount">maxCount</h3>
+
+<p>the maximum size of the collection. defaults to Infinity</p></div></div><div class="code"><div class="wrapper">    <span class="nx">maxCount</span><span class="o">:</span> <span class="kc">Infinity</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdata">getData</h2>
 
 <p><code>PertCollection.getData(search_string,search_type,limit)</code></p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Gets additional data from the specified url and stores them as models in the collection</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p>
 
@@ -532,11 +590,13 @@ of the model list from a remote api.  On success, set <strong>isLoading</strong>
           <span class="nx">remove</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
           <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="nx">self</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;}</span>
     <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make a second api call to find the maximum number of items in the collection
-and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
-        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
-        <span class="p">});</span>
+and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">==</span> <span class="kc">Infinity</span><span class="p">){</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="signaturecollection"><strong>SignatureCollection</strong></h1>
 
@@ -557,7 +617,9 @@ isLoading: false});</code></p></div></div><div class="code"><div class="wrapper"
 
 <p>the skip parameter used in api calls when the collection is updated. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">skip</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="isloading">isLoading</h4>
 
-<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="getdata">getData</h3>
+<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="maxcount">maxCount</h3>
+
+<p>the maximum size of the collection. defaults to Infinity</p></div></div><div class="code"><div class="wrapper">    <span class="nx">maxCount</span><span class="o">:</span> <span class="kc">Infinity</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="getdata">getData</h3>
 
 <p><code>SignatureCollection.getData(search_string,search_type,limit)</code></p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Gets additional data from the specified url and stores them as models in the collection</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p>
 
@@ -590,11 +652,13 @@ of the model list from a remote api.  On success, set <strong>isLoading</strong>
           <span class="nx">remove</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
           <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="nx">self</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;}</span>
     <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make a second api call to find the maximum number of items in the collection
-and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
-        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
-        <span class="p">});</span>
+and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">==</span> <span class="kc">Infinity</span><span class="p">){</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="summlyresultcollection"><strong>SummlyResultCollection</strong></h1>
 
@@ -616,7 +680,9 @@ internal use in GridView.</p></div></div></div><div class="segment"><div class="
 
 <p>the skip parameter used in api calls when the collection is updated. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">skip</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="isloading">isLoading</h4>
 
-<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdatamock">getDataMock</h2>
+<p>indicates wether or not the collection is in the middle of a fetch operation. </p></div></div><div class="code"><div class="wrapper">    <span class="nx">isLoading</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="maxcount">maxCount</h3>
+
+<p>the maximum size of the collection. defaults to Infinity</p></div></div><div class="code"><div class="wrapper">    <span class="nx">maxCount</span><span class="o">:</span> <span class="kc">Infinity</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="getdatamock">getDataMock</h2>
 
 <pre><code>    PertCollection.getDataMock(limit);
 </code></pre></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Generates additional fake data objects and stores them as models in the collection</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p>
@@ -661,11 +727,13 @@ of the model list from a remote api.  On success, set <strong>isLoading</strong>
       <span class="nx">self</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
     <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make a second api call to find the maximum number of items in the collection
-and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
-        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
-        <span class="p">});</span>
+and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">==</span> <span class="kc">Infinity</span><span class="p">){</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
+            <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="baristabaseview"><strong>BaristaBaseView</strong></h1>
 
@@ -944,6 +1012,202 @@ basic use:</p></div></div></div><div class="segment"><div class="comments"><div 
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>grab the template</p></div></div><div class="code"><div class="wrapper">    <span class="k">this</span><span class="p">.</span><span class="nx">compiled_template</span> <span class="o">=</span> <span class="nx">BaristaTemplates</span><span class="p">.</span><span class="nx">CMapHeader</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">compiled_template</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
                     <span class="nx">subtitle</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">subtitle</span><span class="p">}));</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+
+<span class="cm">/**</span>
+<span class="cm">A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete</span>
+<span class="cm">functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the</span>
+<span class="cm">search view&#39;s input, a &quot;search:DidType&quot; event is fired.</span>
+
+<span class="cm">@class PertSearchBar</span>
+<span class="cm">@constructor</span>
+<span class="cm">@extends Backbone.View</span>
+<span class="cm">**/</span>
+<span class="nx">Barista</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">CellSearchBar</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="name">name</h3>
+
+<p>give the view a name to be used throughout the View's functions when it needs to know what its class name is</p></div></div><div class="code"><div class="wrapper">  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;PertSearchBar&quot;</span><span class="p">,</span>
+
+  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">    determines whether or not the search view will match cell lines for autocomplete</span>
+
+<span class="cm">    @property match_cell_lines</span>
+<span class="cm">    @default true</span>
+<span class="cm">    @type Boolean</span>
+<span class="cm">    **/</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>determine whether or not we will match cell line strings in the autocomplete</p></div></div><div class="code"><div class="wrapper">    <span class="k">this</span><span class="p">.</span><span class="nx">match_cell_lines</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">match_cell_lines</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">match_cell_lines</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>grab cell_ids and store them as an atribute of the view</p></div></div><div class="code"><div class="wrapper">    <span class="kd">var</span> <span class="nx">cellinfo</span> <span class="o">=</span> <span class="s1">&#39;http://api.lincscloud.org/a2/cellinfo?callback=?&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="s1">&#39;{&quot;cell_id&quot;:{&quot;$regex&quot;:&quot;&quot;}}&#39;</span><span class="p">,</span><span class="nx">d</span><span class="o">:</span><span class="s2">&quot;cell_id&quot;</span><span class="p">};</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">cellinfo</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">cell_lines</span> <span class="o">=</span> <span class="nx">res</span><span class="p">;</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>once the view is rendered, bind a change event to trigger a "search:DidType" event from the view</p></div></div><div class="code"><div class="wrapper">      <span class="kd">var</span> <span class="nx">change_callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">val</span>  <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search&quot;</span><span class="p">,</span><span class="nx">self</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">cell_lines</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">self</span><span class="p">.</span><span class="nx">match_cell_lines</span><span class="p">){</span>
+          <span class="nx">type</span> <span class="o">=</span> <span class="s2">&quot;cell&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/**</span>
+<span class="cm">        Fired when the text in the view&#39;s search box changes</span>
+
+<span class="cm">        @event search:DidType</span>
+<span class="cm">        @param {Object} [msg={val:&quot;&quot;,type:&quot;&quot;}] an object containing the message of the event</span>
+<span class="cm">        @param {String} [msg.val=&quot;&quot;] the string val of the views search bar at the time of the event</span>
+<span class="cm">        @param {String} [msg.type=&quot;&quot;] the type of message being passed, either &quot;&quot; or &quot;cell&quot;. &quot;cell&quot; is passed, if the string matches a cell line and match\_cell\_lines is set</span>
+<span class="cm">        **/</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;search:DidType&quot;</span><span class="p">,{</span><span class="nx">val</span><span class="o">:</span> <span class="nx">val</span><span class="p">,</span><span class="nx">search_column</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">});</span>
+      <span class="p">};</span>
+
+      <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search&quot;</span><span class="p">,</span><span class="nx">self</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;input propertychange change&#39;</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">throttle</span><span class="p">(</span><span class="nx">change_callback</span><span class="p">,</span><span class="mi">500</span><span class="p">));</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>bind a search:DidType event to the typeahead events coming out of typeahead.js</p></div></div><div class="code"><div class="wrapper">      <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.typeahead&quot;</span><span class="p">,</span><span class="nx">self</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;typeahead:selected typeahead:autocompleted&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">datum</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">search_column</span> <span class="o">=</span> <span class="nx">datum</span><span class="p">.</span><span class="nx">search_column</span><span class="p">;</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;search:DidType&quot;</span><span class="p">,{</span><span class="nx">val</span><span class="o">:</span> <span class="nx">val</span><span class="p">,</span><span class="nx">search_column</span><span class="o">:</span> <span class="nx">search_column</span><span class="p">});</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+  <span class="p">},</span>
+
+
+  <span class="cm">/**</span>
+<span class="cm">    Gets the current text entered in the view&#39;s search bar</span>
+<span class="cm">    </span>
+<span class="cm">    @method get_val</span>
+<span class="cm">    **/</span>
+  <span class="nx">get_val</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+  <span class="p">},</span>
+
+  <span class="cm">/**</span>
+<span class="cm">    fills the view&#39;s search bar with a random pert_iname and triggers a &quot;search:DidType&quot; event</span>
+<span class="cm">    </span>
+<span class="cm">    @method random_val</span>
+<span class="cm">    **/</span>
+  <span class="nx">random_val</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="nx">skip</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40000</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">pertinfo</span> <span class="o">=</span> <span class="s1">&#39;http://api.lincscloud.org/a2/pertinfo?callback=?&#39;</span><span class="p">;</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="nx">q</span><span class="o">:</span> <span class="s1">&#39;{&quot;pert_type&quot;:{&quot;$in&quot;:[&quot;trt_cp&quot;,&quot;trt_sh&quot;]}}&#39;</span><span class="p">,</span>
+          <span class="nx">f</span><span class="o">:</span><span class="s1">&#39;{&quot;pert_iname&quot;:1}&#39;</span><span class="p">,</span>
+                    <span class="nx">l</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="nx">sk</span><span class="o">:</span><span class="nx">skip</span><span class="p">};</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">pertinfo</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">pert_iname</span><span class="p">;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;search:DidType&quot;</span><span class="p">,{</span><span class="nx">val</span><span class="o">:</span> <span class="nx">val</span><span class="p">,</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;single&#39;</span><span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="nx">set_val</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">new_val</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">new_val</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;search:DidType&quot;</span><span class="p">,{</span><span class="nx">val</span><span class="o">:</span> <span class="nx">new_val</span><span class="p">,</span><span class="nx">search_column</span><span class="o">:</span> <span class="kc">undefined</span> <span class="p">});</span> <span class="c1">//TODO need to find search column info</span>
+  <span class="p">},</span>
+
+  <span class="cm">/**</span>
+<span class="cm">    renders the view</span>
+<span class="cm">    </span>
+<span class="cm">    @method render</span>
+<span class="cm">    **/</span>
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>load the template into the view's el tag</p></div></div><div class="code"><div class="wrapper">    <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">BaristaTemplates</span><span class="p">.</span><span class="nx">CMapPertSearchBar</span><span class="p">());</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#search&#39;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">).</span><span class="nx">typeahead</span><span class="p">([{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>only return 4 items at a time in the autocomplete dropdown</p></div></div><div class="code"><div class="wrapper">      <span class="nx">limit</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>provide a name for the default typeahead data source</p></div></div><div class="code"><div class="wrapper">      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Cellular Contexts&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the template to render for all results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;span class=&quot;label&quot; style=&quot;background-color: {{ color }}&quot;&gt;{{ type }}&lt;/span&gt; {{ value }}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>use twitter's hogan.js to compile the template for the typeahead results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">engine</span><span class="o">:</span> <span class="nx">Hogan</span><span class="p">,</span>
+
+      <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>set the remote data source to use pertinfo with custom query params</p></div></div><div class="code"><div class="wrapper">        <span class="nx">url</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://api.lincscloud.org/a2/cellinfo?&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;q={&quot;lincs_status&quot;:{&quot;$in&quot;:[&quot;profiled&quot;,&quot;core&quot;]},&quot;cell_id&quot;:{&quot;$regex&quot;:&quot;%QUERY&quot;, &quot;$options&quot;:&quot;i&quot;}}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>'&amp;f={"cell<em>id":1,"cell</em>type":1}',</p></div></div><div class="code"><div class="wrapper">            <span class="s1">&#39;&amp;l=10&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&amp;s={&quot;cell_id&quot;:1}&#39;</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+        
+        <span class="nx">dataType</span><span class="o">:</span> <span class="s1">&#39;jsonp&#39;</span><span class="p">,</span>
+
+        <span class="nx">filter</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+          <span class="kd">var</span> <span class="nx">datum_list</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">auto_data</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">object_map</span> <span class="o">=</span> <span class="p">{};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each item, pull out its cell_id and use that for the
+autocomplete value. Build a datum of other relevant data
+for use in suggestion displays</p></div></div><div class="code"><div class="wrapper">          <span class="nx">response</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+            <span class="nx">auto_data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_id</span><span class="p">);</span>
+            <span class="nx">object_map</span><span class="p">[</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make sure we only show unique items</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">uniq</span><span class="p">(</span><span class="nx">auto_data</span><span class="p">);</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>build a list of datum objects</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">datum</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="nx">value</span><span class="o">:</span> <span class="nx">item</span><span class="p">,</span>
+              <span class="nx">tokens</span><span class="o">:</span> <span class="p">[</span><span class="nx">item</span><span class="p">],</span>
+              <span class="nx">data</span><span class="o">:</span> <span class="nx">object_map</span><span class="p">[</span><span class="nx">item</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">datum</span><span class="p">,{</span>
+              <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;Cell ID&#39;</span><span class="p">,</span>
+              <span class="nx">search_column</span><span class="o">:</span> <span class="s1">&#39;cell_id&#39;</span><span class="p">,</span>
+              <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#CC79A7&#39;</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="nx">datum_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">datum</span><span class="p">);</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>return the processed list of datums for the autocomplete</p></div></div><div class="code"><div class="wrapper">          <span class="k">return</span> <span class="nx">datum_list</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>only return 4 items at a time in the autocomplete dropdown</p></div></div><div class="code"><div class="wrapper">      <span class="nx">limit</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>provide a name for the default typeahead data source</p></div></div><div class="code"><div class="wrapper">      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Cellular Contexts 2&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the template to render for all results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;span class=&quot;label&quot; style=&quot;background-color: {{ color }}&quot;&gt;{{ type }}&lt;/span&gt; {{ value }}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>use twitter's hogan.js to compile the template for the typeahead results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">engine</span><span class="o">:</span> <span class="nx">Hogan</span><span class="p">,</span>
+
+      <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>set the remote data source to use pertinfo with custom query params</p></div></div><div class="code"><div class="wrapper">        <span class="nx">url</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://api.lincscloud.org/a2/cellinfo?&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;q={&quot;lincs_status&quot;:{&quot;$in&quot;:[&quot;profiled&quot;,&quot;core&quot;]},&quot;cell_lineage&quot;:{&quot;$regex&quot;:&quot;%QUERY&quot;, &quot;$options&quot;:&quot;i&quot;}}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>'&amp;f={"cell<em>id":1,"cell</em>type":1}',</p></div></div><div class="code"><div class="wrapper">            <span class="s1">&#39;&amp;l=10&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&amp;s={&quot;cell_id&quot;:1}&#39;</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+        
+        <span class="nx">dataType</span><span class="o">:</span> <span class="s1">&#39;jsonp&#39;</span><span class="p">,</span>
+
+        <span class="nx">filter</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+          <span class="kd">var</span> <span class="nx">datum_list</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">auto_data</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">object_map</span> <span class="o">=</span> <span class="p">{};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each item, pull out its cell_id and use that for the
+autocomplete value. Build a datum of other relevant data
+for use in suggestion displays</p></div></div><div class="code"><div class="wrapper">          <span class="nx">response</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+            <span class="nx">auto_data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_lineage</span><span class="p">);</span>
+            <span class="nx">object_map</span><span class="p">[</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_lineage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make sure we only show unique items</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">uniq</span><span class="p">(</span><span class="nx">auto_data</span><span class="p">);</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>build a list of datum objects</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">datum</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="nx">value</span><span class="o">:</span> <span class="nx">item</span><span class="p">,</span>
+              <span class="nx">tokens</span><span class="o">:</span> <span class="p">[</span><span class="nx">item</span><span class="p">],</span>
+              <span class="nx">data</span><span class="o">:</span> <span class="nx">object_map</span><span class="p">[</span><span class="nx">item</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">datum</span><span class="p">,{</span>
+              <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;Cell Lineage&#39;</span><span class="p">,</span>
+              <span class="nx">search_column</span><span class="o">:</span> <span class="s1">&#39;cell_lineage&#39;</span><span class="p">,</span>
+              <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#CC79A7&#39;</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="nx">datum_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">datum</span><span class="p">);</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>return the processed list of datums for the autocomplete</p></div></div><div class="code"><div class="wrapper">          <span class="k">return</span> <span class="nx">datum_list</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>only return 4 items at a time in the autocomplete dropdown</p></div></div><div class="code"><div class="wrapper">      <span class="nx">limit</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>provide a name for the default typeahead data source</p></div></div><div class="code"><div class="wrapper">      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Cellular Contexts 3&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the template to render for all results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;span class=&quot;label&quot; style=&quot;background-color: {{ color }}&quot;&gt;{{ type }}&lt;/span&gt; {{ value }}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>use twitter's hogan.js to compile the template for the typeahead results</p></div></div><div class="code"><div class="wrapper">      <span class="nx">engine</span><span class="o">:</span> <span class="nx">Hogan</span><span class="p">,</span>
+
+      <span class="nx">remote</span><span class="o">:</span> <span class="p">{</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>set the remote data source to use pertinfo with custom query params</p></div></div><div class="code"><div class="wrapper">        <span class="nx">url</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://api.lincscloud.org/a2/cellinfo?&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;q={&quot;lincs_status&quot;:{&quot;$in&quot;:[&quot;profiled&quot;,&quot;core&quot;]},&quot;cell_histology&quot;:{&quot;$regex&quot;:&quot;%QUERY&quot;, &quot;$options&quot;:&quot;i&quot;}}&#39;</span><span class="p">,</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>'&amp;f={"cell<em>id":1,"cell</em>type":1}',</p></div></div><div class="code"><div class="wrapper">            <span class="s1">&#39;&amp;l=10&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&amp;s={&quot;cell_id&quot;:1}&#39;</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+        
+        <span class="nx">dataType</span><span class="o">:</span> <span class="s1">&#39;jsonp&#39;</span><span class="p">,</span>
+
+        <span class="nx">filter</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+          <span class="kd">var</span> <span class="nx">datum_list</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">auto_data</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="kd">var</span> <span class="nx">object_map</span> <span class="o">=</span> <span class="p">{};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each item, pull out its cell_id and use that for the
+autocomplete value. Build a datum of other relevant data
+for use in suggestion displays</p></div></div><div class="code"><div class="wrapper">          <span class="nx">response</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+            <span class="nx">auto_data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_histology</span><span class="p">);</span>
+            <span class="nx">object_map</span><span class="p">[</span><span class="nx">element</span><span class="p">.</span><span class="nx">cell_histology</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make sure we only show unique items</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">uniq</span><span class="p">(</span><span class="nx">auto_data</span><span class="p">);</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>build a list of datum objects</p></div></div><div class="code"><div class="wrapper">          <span class="nx">auto_data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">datum</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="nx">value</span><span class="o">:</span> <span class="nx">item</span><span class="p">,</span>
+              <span class="nx">tokens</span><span class="o">:</span> <span class="p">[</span><span class="nx">item</span><span class="p">],</span>
+              <span class="nx">data</span><span class="o">:</span> <span class="nx">object_map</span><span class="p">[</span><span class="nx">item</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">datum</span><span class="p">,{</span>
+              <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;Cell Histology&#39;</span><span class="p">,</span>
+              <span class="nx">search_column</span><span class="o">:</span> <span class="s1">&#39;cell_histology&#39;</span><span class="p">,</span>
+              <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#CC79A7&#39;</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="nx">datum_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">datum</span><span class="p">);</span>
+          <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>return the processed list of datums for the autocomplete</p></div></div><div class="code"><div class="wrapper">          <span class="k">return</span> <span class="nx">datum_list</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}]);</span>
   <span class="p">}</span>
 <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h1 id="compounddetailview"><strong>CompoundDetailView</strong></h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>A Backbone.View that shows information about a small molecule compound.  This view is
 frequently paired with a CompoundDetailModel.</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><pre><code>pert_detail_view = new CompoundDetailView({el: $("target_selector")});
