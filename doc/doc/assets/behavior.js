@@ -31,7 +31,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }
       ]
     }, {
-<<<<<<< HEAD
       "type": "file",
       "data": {
         "language": {
@@ -1346,8 +1345,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }
       ]
     }, {
-=======
->>>>>>> 289e8d7bdf26cfb965e4725a233dc3079ff503d8
       "type": "folder",
       "data": {
         "path": "collections",
@@ -2165,6 +2162,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "model",
                 "slug": "model"
               },
@@ -2255,6 +2260,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2297,6 +2318,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2328,6 +2357,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2460,7 +2497,17 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "FlatTreeMapView"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }
+          ]
         }, {
           "type": "file",
           "data": {
@@ -2478,6 +2525,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2546,6 +2601,144 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "compile_template",
+                "slug": "compile-template"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "redraw",
+                "slug": "redraw"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "init_panel",
+                "slug": "init-panel"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "add look up table",
+                "slug": "add-look-up-table"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "set_scale",
+                "slug": "set-scale"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "build_axis",
+                "slug": "build-axis"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "style axes",
+                "slug": "style-axes"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "render",
+                "slug": "render"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "unravel_data",
+                "slug": "unravel-data"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "savePng",
+                "slug": "savepng"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/LDMapView.js",
+            "projectPath": "source/views/LDMapView.js",
+            "targetPath": "views/LDMapView",
+            "title": "LDMapView"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2623,6 +2816,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2651,6 +2860,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "init-panel"
               },
               "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "savePng",
+                "slug": "savepng"
+              },
+              "depth": 3
             }
           ]
         }, {
@@ -2670,6 +2887,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2750,7 +2983,17 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "PertSearchBar"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }
+          ]
         }, {
           "type": "file",
           "data": {
@@ -2768,6 +3011,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2919,6 +3170,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2993,6 +3260,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -3025,8 +3300,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "render",
-                "slug": "render"
+                "title": "update",
+                "slug": "update"
               },
               "depth": 3
             }, {
