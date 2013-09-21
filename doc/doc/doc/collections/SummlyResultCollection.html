@@ -62,6 +62,11 @@ of the model list from a remote api.  On success, set <strong>isLoading</strong>
       <span class="p">});</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">});</span>
+    <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>make a second api call to find the maximum number of items in the collection
+and set that as an attribute on it</p></div></div><div class="code"><div class="wrapper">        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">params</span><span class="p">,[</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;sk&#39;</span><span class="p">]);</span>
+        <span class="nx">params</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">params</span><span class="p">,{</span><span class="nx">c</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span><span class="nx">params</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">maxCount</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+        <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">});</span></div></div></div></div></body></html>
