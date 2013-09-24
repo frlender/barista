@@ -2543,18 +2543,20 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.search_val = "";
 		this.search_type = "single";
 
-		// set up the span size
+		// set up grid options
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
+		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
+		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
+		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 
-		// set up the template to use
-		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
+		
 
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
-
+		
 		// build the template
 		this.compile_template();
 
@@ -2726,7 +2728,12 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
-		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string, span_class: this.span_class}));
+		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
+													   span_class: this.span_class,
+													   legend: this.legend,
+													   no_download: this.no_download,
+													   no_legend: this.no_legend,
+													}));
 	},
 
 	download_table: function(){

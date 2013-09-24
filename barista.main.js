@@ -4424,8 +4424,56 @@ this["BaristaTemplates"] = this["BaristaTemplates"] || {};
 this["BaristaTemplates"]["CMapBaseGrid"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+function program1(depth0,data) {
+  
+  
+  return "\n		<div class=\"col-lg-2\"></div>\n	";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "_download\">\n			<font color=\"#0072B2\"><i class=\"icon-share\"></i> export table</font>\n		</p>\n	";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\n		<div class=\"col-lg-10\"></div>\n	";
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		";
+  stack1 = helpers['if'].call(depth0, depth0.legend, {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n			";
+  if (stack1 = helpers.legend) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.legend; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n		";
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  
+  return "\n			<span class=\"col-lg-10\">\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n			</span>\n		";
+  }
 
   buffer += "<div id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -4435,11 +4483,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
-  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "_download\">\n		<font color=\"#0072B2\"><i class=\"icon-share\"></i> export table</font>\n	</p>\n	<span class=\"col-lg-10\">\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n		\n	</span>\n</div>";
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>";
   return buffer;
   });
 
@@ -7119,18 +7169,20 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.search_val = "";
 		this.search_type = "single";
 
-		// set up the span size
+		// set up grid options
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
+		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
+		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
+		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 
-		// set up the template to use
-		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
+		
 
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
-
+		
 		// build the template
 		this.compile_template();
 
@@ -7302,7 +7354,12 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
-		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string, span_class: this.span_class}));
+		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
+													   span_class: this.span_class,
+													   legend: this.legend,
+													   no_download: this.no_download,
+													   no_legend: this.no_legend,
+													}));
 	},
 
 	download_table: function(){
