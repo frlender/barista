@@ -77,3 +77,47 @@
 	border: 1px solid transparent;
 	border-radius: 50%;
 }
+
+.cmap-card {
+	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.cmap-card-title-text{
+	font-family:Helvetica Neue; 
+	font-weight: bold; 
+	font-size: 36pt;
+	color: black;
+}
+
+.cmap-card-subtitle-text{
+	font-family:Helvetica Neue; 
+	font-weight: regular; 
+	font-size: 14pt; 
+	text-transform: capitalize;
+	color: black;
+}
+
+.cmap-img-responsive {
+display: block;
+height: auto;
+max-width: 100%;
+margin: 0 auto;
+}
+
+.cmap-spacer-tiny{
+	min-height: 5px;
+}
+
+.cmap-spacer-small{
+	min-height: 10px;
+}
+
+.cmap-spacer-medium{
+	min-height: 20px;
+}
+
+.cmap-spacer-large{
+	min-height: 50px;
+}
