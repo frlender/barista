@@ -103,7 +103,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
-		this.fetch({data: $.param(params),
+		var getData_promise = this.fetch({data: $.param(params),
 					remove: false,
 					success: function() {self.isLoading = false;}
 		});
@@ -117,5 +117,8 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
                 self.maxCount = res.count;
             });
         }
+
+        // return the getData_promise for use with downstream functions if we want
+        return getData_promise;
     }
 });

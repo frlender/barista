@@ -1475,6 +1475,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	},
 
 	replace_collection: function(search_val,search_type,limit){
+		var getData_promise;
 		var self = this;
 		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 		this.search_type = (search_type !== undefined) ? search_type : this.search_type;
@@ -1484,15 +1485,17 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.collection.reset();
 		this.collection.skip = 0;
 		self.collection.maxCount = Infinity;
-		this.collection.getData(this.search_val,this.search_type,this.limit);
+		getData_promise =  this.collection.getData(this.search_val,this.search_type,this.limit);
 		this.listenToOnce(this.collection,"add", function(){
 			this.trigger("grid:ReplaceCollection");
 			this.trigger("grid:Add");
 			this.resize_div();
 		});
+		return getData_promise;
 	},
 
 	update_collection: function(search_val,search_type,limit){
+		var getData_promise;
 		if (this.collection.models.length < this.collection.maxCount){
 			var self = this;
 			this.search_val = (search_val !== undefined) ? search_val : this.search_val;
@@ -1500,12 +1503,13 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.limit = (limit !== undefined) ? limit : 30;
 			$("#" + this.div_string).show();
 			$("#" + this.div_string).animate({opacity:1},500);
-			this.collection.getData(this.search_val,this.search_type,this.limit);
+			getData_promise = this.collection.getData(this.search_val,this.search_type,this.limit);
 			this.resize_div();
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
 			});
+			return getData_promise;
 		}
 	},
 
