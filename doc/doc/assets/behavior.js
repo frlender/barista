@@ -31,22 +31,15 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }
       ]
     }, {
-      "type": "file",
+      "type": "folder",
       "data": {
-        "language": {
-          "nameMatchers": [".js"],
-          "pygmentsLexer": "javascript",
-          "singleLineComment": ["//"],
-          "name": "JavaScript"
-        },
-        "sourcePath": "/Users/cflynn/Code/barista/source/barista.js",
-        "projectPath": "source/barista.js",
-        "targetPath": "barista",
-        "title": "barista"
+        "path": "collections",
+        "title": "collections"
       },
       "depth": 1,
-      "outline": [
+      "children": [
         {
+<<<<<<< HEAD
           "type": "heading",
           "data": {
             "level": 3,
@@ -283,13 +276,23 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           ]
         }, {
           "type": "heading",
+=======
+          "type": "file",
+>>>>>>> 05e16cffb516b908ca76b84960e6d184b997616a
           "data": {
-            "level": 2,
-            "title": "getData",
-            "slug": "getdata"
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/collections/GenericJSONCollection.js",
+            "projectPath": "source/collections/GenericJSONCollection.js",
+            "targetPath": "collections/GenericJSONCollection",
+            "title": "GenericJSONCollection"
           },
           "depth": 2,
-          "children": [
+          "outline": [
             {
               "type": "heading",
               "data": {
@@ -328,22 +331,29 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             }, {
               "type": "heading",
               "data": {
-                "level": 3,
-                "title": "maxCount",
-                "slug": "maxcount"
+                "level": 2,
+                "title": "getData",
+                "slug": "getdata"
               },
-              "depth": 3
+              "depth": 2
             }
           ]
         }, {
-          "type": "heading",
+          "type": "file",
           "data": {
-            "level": 2,
-            "title": "getData",
-            "slug": "getdata"
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/collections/PertCollection.js",
+            "projectPath": "source/collections/PertCollection.js",
+            "targetPath": "collections/PertCollection",
+            "title": "PertCollection"
           },
           "depth": 2,
-          "children": [
+          "outline": [
             {
               "type": "heading",
               "data": {
@@ -374,57 +384,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 4,
                 "title": "isLoading",
                 "slug": "isloading"
-              },
-              "depth": 4
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "maxCount",
-                "slug": "maxcount"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 2,
-            "title": "getData",
-            "slug": "getdata"
-          },
-          "depth": 2,
-          "children": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 4,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 4
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 4,
-                "title": "url",
-                "slug": "url"
-              },
-              "depth": 4
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 4,
-                "title": "skip",
-                "slug": "skip"
-              },
-              "depth": 4
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 4,
-                "title": "isLoading",
-                "slug": "isloading"
+<<<<<<< HEAD
               },
               "depth": 4
             }, {
@@ -2169,6 +2129,435 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "defaults",
                 "slug": "defaults"
+=======
+>>>>>>> 05e16cffb516b908ca76b84960e6d184b997616a
+              },
+              "depth": 4
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "getData",
+                "slug": "getdata"
+              },
+              "depth": 2
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/collections/SummlyResultCollection.js",
+            "projectPath": "source/collections/SummlyResultCollection.js",
+            "targetPath": "collections/SummlyResultCollection",
+            "title": "SummlyResultCollection"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "url",
+                    "slug": "url"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "skip",
+                    "slug": "skip"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "isLoading",
+                    "slug": "isloading"
+                  },
+                  "depth": 4
+                }
+              ]
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "getDataMock",
+                "slug": "getdatamock"
+              },
+              "depth": 2
+            }
+          ]
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "models",
+        "title": "models"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/CellCountModel.js",
+            "projectPath": "source/models/CellCountModel.js",
+            "targetPath": "models/CellCountModel",
+            "title": "CellCountModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+<<<<<<< HEAD
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/BaristaCardView.js",
+            "projectPath": "source/views/BaristaCardView.js",
+            "targetPath": "views/BaristaCardView",
+            "title": "BaristaCardView"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "model",
+                "slug": "model"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "compile_template",
+                    "slug": "compile-template"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "render",
+                    "slug": "render"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "update",
+                    "slug": "update"
+                  },
+                  "depth": 3
+                }
+              ]
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/BubbleView.js",
+            "projectPath": "source/views/BubbleView.js",
+            "targetPath": "views/BubbleView",
+            "title": "BubbleView"
+=======
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/HeatmapModel.js",
+            "projectPath": "source/models/HeatmapModel.js",
+            "targetPath": "models/HeatmapModel",
+            "title": "HeatmapModel"
+>>>>>>> 05e16cffb516b908ca76b84960e6d184b997616a
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/PertCellBreakdownModel.js",
+            "projectPath": "source/models/PertCellBreakdownModel.js",
+            "targetPath": "models/PertCellBreakdownModel",
+            "title": "PertCellBreakdownModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/PertCountModel.js",
+            "projectPath": "source/models/PertCountModel.js",
+            "targetPath": "models/PertCountModel",
+            "title": "PertCountModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/PertDetailModel.js",
+            "projectPath": "source/models/PertDetailModel.js",
+            "targetPath": "models/PertDetailModel",
+            "title": "PertDetailModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/PertModel.js",
+            "projectPath": "source/models/PertModel.js",
+            "targetPath": "models/PertModel",
+            "title": "PertModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/ScatterPlotModel.js",
+            "projectPath": "source/models/ScatterPlotModel.js",
+            "targetPath": "models/ScatterPlotModel",
+            "title": "ScatterPlotModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/SummlyResultModel.js",
+            "projectPath": "source/models/SummlyResultModel.js",
+            "targetPath": "models/SummlyResultModel",
+            "title": "SummlyResultModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
               },
               "depth": 3
             }, {
@@ -2190,10 +2579,43 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
+<<<<<<< HEAD
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/CompoundSearchBar.js",
+            "projectPath": "source/views/CompoundSearchBar.js",
+            "targetPath": "views/CompoundSearchBar",
+            "title": "CompoundSearchBar"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "name",
+                "slug": "name"
+              },
+              "depth": 3
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/views/FlatTreeMapView.js",
+            "projectPath": "source/views/FlatTreeMapView.js",
+            "targetPath": "views/FlatTreeMapView",
+            "title": "FlatTreeMapView"
+=======
             "sourcePath": "/Users/cflynn/Code/barista/source/models/TickModel.js",
             "projectPath": "source/models/TickModel.js",
             "targetPath": "models/TickModel",
             "title": "TickModel"
+>>>>>>> 05e16cffb516b908ca76b84960e6d184b997616a
           },
           "depth": 2,
           "outline": [
@@ -2287,14 +2709,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "model",
                 "slug": "model"
               },
@@ -2347,91 +2761,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "savepng"
               },
               "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "hide",
-                "slug": "hide"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "show",
-                "slug": "show"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/BaristaCardView.js",
-            "projectPath": "source/views/BaristaCardView.js",
-            "targetPath": "views/BaristaCardView",
-            "title": "BaristaCardView"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 2,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 2
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 2,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 2,
-              "children": [
-                {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "compile_template",
-                    "slug": "compile-template"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "render",
-                    "slug": "render"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "update",
-                    "slug": "update"
-                  },
-                  "depth": 3
-                }
-              ]
             }
           ]
         }, {
@@ -2451,22 +2780,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2512,14 +2825,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2554,14 +2859,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -2585,149 +2882,13 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/CellSearchBar.js",
-            "projectPath": "source/views/CellSearchBar.js",
-            "targetPath": "views/CellSearchBar",
-            "title": "CellSearchBar"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/CompoundDetailView.js",
-            "projectPath": "source/views/CompoundDetailView.js",
-            "targetPath": "views/CompoundDetailView",
-            "title": "CompoundDetailView"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "render",
-                "slug": "render"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "update",
-                "slug": "update"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "render_summary",
-                "slug": "render-summary"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "clear_summary",
-                "slug": "clear-summary"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/CompoundSearchBar.js",
-            "projectPath": "source/views/CompoundSearchBar.js",
-            "targetPath": "views/CompoundSearchBar",
-            "title": "CompoundSearchBar"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
             "sourcePath": "/Users/cflynn/Code/barista/source/views/FlatTreeMapView.js",
             "projectPath": "source/views/FlatTreeMapView.js",
             "targetPath": "views/FlatTreeMapView",
             "title": "FlatTreeMapView"
           },
           "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
+          "outline": []
         }, {
           "type": "file",
           "data": {
@@ -2745,14 +2906,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -2821,144 +2974,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "compile_template",
-                "slug": "compile-template"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "redraw",
-                "slug": "redraw"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "init_panel",
-                "slug": "init-panel"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "add look up table",
-                "slug": "add-look-up-table"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "set_scale",
-                "slug": "set-scale"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "build_axis",
-                "slug": "build-axis"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "style axes",
-                "slug": "style-axes"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "render",
-                "slug": "render"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "unravel_data",
-                "slug": "unravel-data"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "savePng",
-                "slug": "savepng"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/LDMapView.js",
-            "projectPath": "source/views/LDMapView.js",
-            "targetPath": "views/LDMapView",
-            "title": "LDMapView"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -3036,22 +3051,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -3080,14 +3079,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "init-panel"
               },
               "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "savePng",
-                "slug": "savepng"
-              },
-              "depth": 3
             }
           ]
         }, {
@@ -3107,22 +3098,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -3203,17 +3178,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "PertSearchBar"
           },
           "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }
-          ]
+          "outline": []
         }, {
           "type": "file",
           "data": {
@@ -3231,14 +3196,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -3313,72 +3270,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/cflynn/Code/barista/source/views/TagListView.js",
-            "projectPath": "source/views/TagListView.js",
-            "targetPath": "views/TagListView",
-            "title": "TagListView"
-          },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "collection",
-                "slug": "collection"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "render",
-                "slug": "render"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "update",
-                "slug": "update"
-              },
-              "depth": 3
-            }
-          ]
-        }, {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "singleLineComment": ["//"],
-              "name": "JavaScript"
-            },
             "sourcePath": "/Users/cflynn/Code/barista/source/views/TickView.js",
             "projectPath": "source/views/TickView.js",
             "targetPath": "views/TickView",
@@ -3387,22 +3278,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "outline": [
             {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "name",
-                "slug": "name"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
               "type": "heading",
               "data": {
                 "level": 3,
@@ -3480,14 +3355,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "model",
-                "slug": "model"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "initialize",
                 "slug": "initialize"
               },
@@ -3520,8 +3387,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "update",
-                "slug": "update"
+                "title": "render",
+                "slug": "render"
               },
               "depth": 3
             }, {
