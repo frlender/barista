@@ -4424,8 +4424,56 @@ this["BaristaTemplates"] = this["BaristaTemplates"] || {};
 this["BaristaTemplates"]["CMapBaseGrid"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+function program1(depth0,data) {
+  
+  
+  return "\n		<div class=\"col-lg-2\"></div>\n	";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "_download\">\n			<font color=\"#0072B2\"><i class=\"icon-share\"></i> export table</font>\n		</p>\n	";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\n		<div class=\"col-lg-10\"></div>\n	";
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		";
+  stack1 = helpers['if'].call(depth0, depth0.legend, {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n			";
+  if (stack1 = helpers.legend) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.legend; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n		";
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  
+  return "\n			<span class=\"col-lg-10\">\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n			</span>\n		";
+  }
 
   buffer += "<div id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -4435,11 +4483,51 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["CMapCard"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<a href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <div id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "_download\">\n		<font color=\"#0072B2\"><i class=\"icon-share\"></i> export table</font>\n	</p>\n	<span class=\"col-lg-10\">\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n		<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n		\n	</span>\n</div>";
+    + "\" class=\"";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    <div class=\"cmap-card\">\n      <div class=\"col-lg-12\" style=\"background-color: ";
+  if (stack1 = helpers.fg_color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.fg_color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        <div class=\"cmap-spacer-tiny\"></div>\n        <p class=\"cmap-center-text cmap-card-title-text\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        <div style=\"min-height:2px\"></div>\n      </div>\n        <img src=\"";
+  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" style=\"max-height: 300px\" class=\"cmap-img-responsive\" alt=\"\">\n        <h4 class=\"cmap-center-text cmap-card-subtitle-text\">";
+  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h4>\n        <div class=\"cmap-spacer-tiny\"></div>\n    </div>\n  </div>\n</a>";
   return buffer;
   });
 
@@ -6035,6 +6123,95 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.$el.animate({opacity:1},duration);
 	}
 });
+// # **BaristaCardView**
+// A Backbone View that displays a card of information wrapped in link.
+// The view is meant to be a top level entry point to other pages
+
+// basic use:
+
+//		card_view = new BaristaCardView();
+
+// optional arguments:
+
+// 1.  {string}  **url**  the link to navigate to if the card is clicked, defaults to *""*
+// 2.  {string}  **title**  the title of the card. defaults to *"title"*
+// 3.  {string}  **subtitle**  the subtitle of the card. defaults to *"subtitle"*
+// 2.  {string}  **image**  the link to an image to show as the cards main content. defaults to *""*
+// 4.  {string}  **fg\_color**  the hex color code to use as the foreground color of the view, defaults to *#1b9e77*
+// 5.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-12"*
+
+//		card_view = new BaristaCardView({el: $("target_selector",
+//									url:"",
+//									title:"",
+//									subtitle:"",
+//									fg_color: "#1b9e77",
+//									image:"",
+//									span_class: "col-lg-12"});
+Barista.Views.BaristaCardView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "BaristaCardView",
+
+	// ## model
+	// supply a base model for the view.  Overide this if you need to use it for dynamic content
+	model: new Backbone.Model(),
+
+	// ## initialize
+	// overide the view's default initialize method in order to catch options and 
+	// render a custom template
+	initialize: function(){
+		// set up color options.  default if not specified
+		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
+
+		// set up the span size
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col-lg-12";
+
+		// set up the url
+		this.url = (this.options.url !== undefined) ? this.options.url : "";
+
+		// set up the title
+		this.title = (this.options.title !== undefined) ? this.options.title : "Title";
+
+		// set up the subtitle
+		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "subtitle";
+
+		// set up the image
+		this.image = (this.options.image !== undefined) ? this.options.image : "";
+
+		// bind render to model changes
+		this.listenTo(this.model,'change', this.update);
+
+		// compile the default template for the view
+		this.compile_template();
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the template for the view
+	compile_template: function(){
+		var self = this;
+		this.div_string = 'barista_view' + Math.round(Math.random()*1000000);
+		this.$el.append(BaristaTemplates.CMapCard({div_string: this.div_string,
+												span_class: this.span_class,
+												url: this.url,
+												title: this.title,
+												subtitle: this.subtitle,
+												image: this.image,
+												fg_color: this.fg_color}));
+	},
+
+	// ### render
+	// overide this function if the view needs to do more complex rendering than
+	// simple template compilation
+	render: function(){
+
+	},
+
+	// ### update
+	// overide this function if the view needs to update
+	render: function(){
+
+	}
+});
 // # **BubbleView**
 // A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
 // model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
@@ -7282,18 +7459,20 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.search_val = "";
 		this.search_type = "single";
 
-		// set up the span size
+		// set up grid options
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
+		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
+		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
+		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 
-		// set up the template to use
-		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapBaseGrid.handlebars";
+		
 
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
-
+		
 		// build the template
 		this.compile_template();
 
@@ -7469,7 +7648,12 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
-		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string, span_class: this.span_class}));
+		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
+													   span_class: this.span_class,
+													   legend: this.legend,
+													   no_download: this.no_download,
+													   no_legend: this.no_legend,
+													}));
 	},
 
 	download_table: function(){
