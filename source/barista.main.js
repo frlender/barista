@@ -102,7 +102,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" style=\"max-height: 300px\" class=\"cmap-img-responsive\" alt=\"\">\n        <h4 class=\"cmap-center-text cmap-card-subtitle-text\">";
+    + "\" style=\"max-height: 200px\" class=\"cmap-img-responsive\" alt=\"\">\n        <h4 class=\"cmap-center-text cmap-card-subtitle-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
