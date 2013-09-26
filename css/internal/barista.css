@@ -96,7 +96,6 @@
 	font-weight: regular; 
 	font-size: 25pt; 
 	text-transform: capitalize;
-	color: black;
 }
 
 .cmap-img-responsive {
@@ -120,4 +119,8 @@ margin: 0 auto;
 
 .cmap-spacer-large{
 	min-height: 50px;
+}
+
+.cmap-card-link:link,  .cmap-card-link:visited {
+	text-decoration: none;
 }
