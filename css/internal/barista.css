@@ -87,14 +87,14 @@
 .cmap-card-title-text{
 	font-family:Helvetica Neue; 
 	font-weight: bold; 
-	font-size: 24pt;
+	font-size: 30pt;
 	color: black;
 }
 
 .cmap-card-subtitle-text{
 	font-family:Helvetica Neue; 
 	font-weight: regular; 
-	font-size: 14pt; 
+	font-size: 25pt; 
 	text-transform: capitalize;
 	color: black;
 }

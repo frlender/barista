@@ -1,14 +1,16 @@
 <a href="{{ url }}">
   <div id="{{ div_string }}" class="{{ span_class }}">
-    <div class="cmap-card">
-      <div class="col-lg-12" style="background-color: {{ fg_color }}">
+    <div class="col-lg-12" style="background-color: {{ fg_color }}">
         <div class="cmap-spacer-tiny"></div>
         <p class="cmap-center-text cmap-card-title-text">{{ title }}</p>
         <div style="min-height:2px"></div>
       </div>
-        <img src="{{ image }}" style="max-height: 200px" class="cmap-img-responsive" alt="">
-        <h4 class="cmap-center-text cmap-card-subtitle-text">{{ subtitle }}</h4>
-        <div class="cmap-spacer-tiny"></div>
+
+    <div class="col-lg-12 cmap-card">
+      
+        <img src="{{ image }}" style="max-height: 200px max-width: 200px" class="col-lg-4" alt="">
+        <h4 class="col-lg-8 cmap-card-subtitle-text">{{ subtitle }}</h4>
+        <div class="col-lg-12 cmap-spacer-tiny"></div>
     </div>
   </div>
 </a>
