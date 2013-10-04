@@ -1925,8 +1925,9 @@ Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
 // 3.  {string}  **low\_color**  the hex color code to use as lowest value color in the heatmap, defaults to *#0000ff*
 // 4.  {string}  **high\_color**  the hex color code to use as highest value color in the heatmap, defaults to *#ff0000*
 // 5.  {d3.scale}  **color_scale**  custom color scale to use in the heatmap.  If supplied, low\_color and high\_color are ignored, defaults to *undefined*
-// 6.  {Number}  **plot_height**  the height of the heatmap to generate in pixels, defaults to *300*
-// 7.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
+// 6.  {d3.scale}  **annot_color_scale**  custom color scale to use in the heatmap annotations. defaults to *undefined* and causes the annotations to be rendered with a standard color scale
+// 7.  {Number}  **plot_height**  the height of the heatmap to generate in pixels, defaults to *300*
+// 8.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
 
 // example usage:
 
@@ -1937,6 +1938,7 @@ Barista.HTMLCell = Backgrid.HTMLCell = Backgrid.Cell.extend({
 //												low_color: "#0000ff",
 //												high_color: "#ff0000",
 //												color_scale: undefined,
+//												annot_color_scale: undefined,
 //												plot_height: 300,
 //												span_class: "span12"
 //												});
@@ -1959,6 +1961,7 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 		this.low_color = (this.options.low_color !== undefined) ? this.options.low_color : "#0000ff";
 		this.high_color = (this.options.high_color !== undefined) ? this.options.high_color : "#ff0000";
 		this.color_scale = (this.options.color_scale !== undefined) ? this.options.color_scale : undefined;
+		this.annot_color_scale = (this.options.annot_color_scale !== undefined) ? this.options.annot_color_scale : undefined;
 
 		// set up the defualt plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
@@ -2047,11 +2050,11 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 
 		// determine the height and width of cells in the heatmap
 		if (this.height < this.width){
-			this.cell_height = (this.height - this.margin) / this.model.get('data').length;
-			this.cell_width = (this.height - this.margin) / this.model.get('data')[0].length;
+			this.cell_height = (this.height - this.margin*2) / this.model.get('data').length;
+			this.cell_width = (this.height - this.margin*2) / this.model.get('data')[0].length;
 		}else{
-			this.cell_height = (this.width - this.margin) / this.model.get('data').length;
-			this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+			this.cell_height = (this.width - this.margin*2) / this.model.get('data').length;
+			this.cell_width = (this.width - this.margin*2) / this.model.get('data')[0].length;
 		}
 
 		// determine the plot offset to center the plot in its container
@@ -2069,6 +2072,14 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			this.color = d3.scale.linear().domain([data_min,data_max]).range([this.low_color, this.high_color]);
 		}else{
 			this.color = this.color_scale;
+		}
+
+		// set up the annotation color scale
+		if (this.annot_color_scale === undefined){
+			var values = _.uniq(this.model.get('annots'))
+			this.annot_color = d3.scale.category10().domain(values)
+		}else{
+			this.annot_color = this.annot_color_scale;
 		}
 
 		// draw the heatmap cells
@@ -2103,6 +2114,34 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			.attr('text-anchor','middle')
 			.attr('dy','-.2em')
 			.text(function(d){return d;});
+
+		// draw the annotation categories if they are present
+		if (this.model.get('annots') !== undefined){
+			this.fg_layer.selectAll('.heatmap_annots').data([]).exit().remove();
+			this.fg_layer.selectAll('.heatmap_annots').data(this.model.get('annots')).enter().append('rect')
+				.attr('class','heatmap_annots')
+				.attr('x',function(d,i){return self.cell_width*i + self.x_offset;})
+				.attr('y',function(d){return self.cell_height*(self.model.get('data').length) + self.cell_height/4 + self.margin;})
+				.attr('width',this.cell_width)
+				.attr('height',this.cell_height/4)
+				.attr('value',function(d){return d;})
+				.attr('stroke','white')
+				.attr('stroke-width',1)
+				.attr('fill',function(d){return self.annot_color(d);});
+
+			if (this.model.get('annots_label') !== undefined){
+				// draw the annot label if it is there
+				this.fg_layer.selectAll('.heatmap_annots_label').data([]).exit().remove();
+				this.fg_layer.selectAll('.heatmap_annots_label').data([this.model.get('annots_label')]).append('text')
+					.attr('class','heatmap_annots_label')
+					.attr('x',this.x_offset)
+					.attr('y',function(d){return self.cell_height*(self.model.get('data').length) + self.cell_height/2 + self.margin;})
+					.attr('opacity',1)
+					.attr('text-anchor','end')
+					.attr('dx','-.2em')
+					.text(function(d){return d;});
+			}
+		}
 
 		// set up the y scale
 		this.set_scale();
@@ -2206,11 +2245,11 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 		var self = this;
 		// determine the height and width of cells in the heatmap
 		if (this.height < this.width){
-			this.cell_height = (this.height - this.margin) / this.model.get('data').length;
-			this.cell_width = (this.height - this.margin) / this.model.get('data')[0].length;
+			this.cell_height = (this.height - this.margin*2) / this.model.get('data').length;
+			this.cell_width = (this.height - this.margin*2) / this.model.get('data')[0].length;
 		}else{
-			this.cell_height = (this.width - this.margin) / this.model.get('data').length;
-			this.cell_width = (this.width - this.margin) / this.model.get('data')[0].length;
+			this.cell_height = (this.width - this.margin*2) / this.model.get('data').length;
+			this.cell_width = (this.width - this.margin*2) / this.model.get('data')[0].length;
 		}
 
 		// determine the plot offset to center the plot in its container
@@ -2228,6 +2267,14 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			this.color = d3.scale.linear().domain([data_min,data_max]).range([this.low_color, this.high_color]);
 		}else{
 			this.color = this.color_scale;
+		}
+
+		// set up the annotation color scale
+		if (this.annot_color_scale === undefined){
+			var values = _.uniq(this.model.get('annots'))
+			this.annot_color = d3.scale.category10().domain(values)
+		}else{
+			this.annot_color = this.annot_color_scale;
 		}
 
 		// draw the heatmap cells
@@ -2289,6 +2336,52 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 			.text(function(d){return d;});
 
 		cid_selection.exit().remove();
+
+		// draw the annotation categories if they are present
+		if (this.model.get('annots') !== undefined){
+			var label_selection = this.fg_layer.selectAll('.heatmap_annots').data(this.model.get('annots'));
+			label_selection.enter().append('rect')
+				.attr('class','heatmap_annots')
+				.attr('x',this.x_center)
+				.attr('y',(this.height - this.margin)/2)
+				.attr('width',0)
+				.attr('height',0)
+				.attr('opacity',0)
+				.attr('value',function(d){return d;})
+				.attr('stroke','white')
+				.attr('stroke-width',1)
+				.attr('fill',function(d){return self.annot_color(d);});
+
+			label_selection.transition().duration(500)
+				.attr('x',function(d,i){return self.cell_width*i + self.x_offset;})
+				.attr('y',function(d){return self.cell_height*(self.model.get('data').length) + self.cell_height/4 + self.margin;})
+				.attr('width',this.cell_width)
+				.attr('height',this.cell_height/4)
+				.attr('opacity',1)
+				.attr('fill',function(d){return self.annot_color(d);});
+
+			label_selection.exit().remove();
+
+			if (this.model.get('annots_label') !== undefined){
+				// draw the annot label if it is there
+				label_text_selection = this.fg_layer.selectAll('.heatmap_annots_label').data([this.model.get('annots_label')]);
+				label_text_selection.enter().append('text')
+					.attr('class','heatmap_annots_label')
+					.attr('x',this.x_offset)
+					.attr('y',(this.height - this.margin)/2)
+					.attr('opacity',0)
+					.attr('text-anchor','end')
+					.attr('dx','-.2em')
+					.text(function(d){return d;});
+
+				label_text_selection.transition().duration(500)
+					.attr('opacity',1)
+					.attr('y',function(d){return self.cell_height*(self.model.get('data').length) + self.cell_height/2 + self.margin;})
+					.text(function(d){return d;});
+
+				label_text_selection.exit().remove();
+			}
+		}
 	},
 
 	// ### unravel_data

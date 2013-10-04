@@ -4,22 +4,27 @@ a two dimensional array of numbers, row and columns labels, and a title.</p></di
 <li>{Array}  <strong>data</strong>  the data object to use in the heatmap. defualts to <em>[[1,2],[3,4]]</em></li>
 <li>{Array}  <strong>rid</strong>  the row labels to use in the heatmap. defualts to <em>['1','2']</em></li>
 <li>{Array}  <strong>cid</strong>  the column labels to use in the heatmap. defualts to <em>['1','2']</em></li>
+<li>{Array}  <strong>annots</strong>  optional annotations categories to show under the heatmap. defualts to <em>undefined</em></li>
+<li>{Array}  <strong>annots_label</strong>  optional label for annotations. defualts to <em>undefined</em></li>
 <li>{String}  <strong>title</strong>  the title to use in the plot, defaults to <em>""</em></li>
-</ol></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><pre><code>        heatmap_model = new HeatmapModel({data: [[1,2],[3,4]],
-                                        rid: ['1','2'],
-                                        cid: ['1','2'],
-                                        title: ""});
+</ol></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><pre><code>    heatmap_model = new HeatmapModel({data: [[1,2],[3,4]],
+                                    rid: ['1','2'],
+                                    cid: ['1','2'],
+                                    annots: ['1','2'],
+                                    title: ""});
 </code></pre></div></div><div class="code"><div class="wrapper"><span class="nx">Barista</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">HeatmapModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="defaults">defaults</h3>
 
 <p>set up defaults for model values</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
 <li>{Array}  <strong>data</strong>  the data object to use in the heatmap. defualts to <em>[[1,2],[3,4]]</em></li>
 <li>{Array}  <strong>rid</strong>  the row labels to use in the heatmap. defualts to <em>['1','2']</em></li>
 <li>{Array}  <strong>cid</strong>  the column labels to use in the heatmap. defualts to <em>['1','2']</em></li>
+<li>{Array}  <strong>annots</strong>  optional annotations categories to show under the heatmap. defualts to <em>undefined</em></li>
 <li>{String}  <strong>title</strong>  the title to use in the plot, defaults to <em>""</em></li>
 </ol></div></div><div class="code"><div class="wrapper">  <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">data</span><span class="o">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span>
     <span class="nx">rid</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">],</span>
     <span class="nx">cid</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">],</span>
+    <span class="nx">annots</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="nx">last_update</span><span class="o">:</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span>
   <span class="p">}</span>
