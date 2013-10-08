@@ -63,7 +63,7 @@ can be used in view that extend BaristaBaseView</p></div></div><div class="code"
 that extend BaristaBaseView should impliment draw code overiding this method.  If extended
 BaristaBaseViews want to use the built in base_render method of BaristaBaseView, they should
 call it in their render method.  As an example:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><pre><code>render: function(){
-            this.base_redraw();
+            this.base_render();
             //your code here
             }
 </code></pre></div></div><div class="code"><div class="wrapper">  <span class="c1">//</span>
@@ -135,7 +135,7 @@ function is called as the first step of <em>save_png</em></p></div></div><div cl
 <p>dummy method that should be overiden if there is any work to do after
 saving the png image of the view.  For example, restoring elements that
 were removed before saving could be done after saving the image.  This
-function is called as the last step of <em>save_png</em></p></div></div><div class="code"><div class="wrapper">  <span class="nx">save_png_pre</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="hide">hide</h3>
+function is called as the last step of <em>save_png</em></p></div></div><div class="code"><div class="wrapper">  <span class="nx">save_png_post</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="hide">hide</h3>
 
 <p>hides the view by dimming the opacity and hiding it in the DOM</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>arguments</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ol>
 <li>{number}  <strong>duration</strong>  the time in ms for the hide animation. defualts to <em>1</em></li>

@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         dest: 'source/models/models.main.js'
       },
       js_barista_views: {
-        src: ['source/views/**/*.js','!source/views/views.main.js'],
+        src: ['source/views/BaristaBaseView.js','source/views/**/*.js','!source/views/views.main.js'],
         dest: 'source/views/views.main.js'
       },
       js_barista_collections: {

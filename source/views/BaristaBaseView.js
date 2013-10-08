@@ -108,7 +108,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// call it in their render method.  As an example:
 
 	//		render: function(){
-	//					this.base_redraw();
+	//					this.base_render();
 	//					//your code here
 	//					}
 	//
@@ -230,7 +230,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// saving the png image of the view.  For example, restoring elements that
 	// were removed before saving could be done after saving the image.  This
 	// function is called as the last step of *save_png*
-	save_png_pre: function(){},
+	save_png_post: function(){},
 
 
 	// ### hide
