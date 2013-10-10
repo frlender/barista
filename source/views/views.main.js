@@ -484,12 +484,12 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 					.attr("class", "axis x-axis")
 					.attr("transform", "translate(0," + (self.height - self.margin) + ")")
 					.call(self.xAxis);
-			}else{
-				self.bg_layer.append("g")
-					.attr("class", "axis y-axis")
-					.attr("transform", "translate(" + self.margin + ",0)")
-					.call(self.yAxis);
-			}
+		}else{
+			self.bg_layer.append("g")
+				.attr("class", "axis y-axis")
+				.attr("transform", "translate(" + self.margin + ",0)")
+				.call(self.yAxis);
+		}
 	},
 
 	// ### style axes
@@ -597,6 +597,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 	// updates the data in the bars in vertical orientation
 	update_vertical_bars: function(){
 		var self = this;
+		// build Axes
+		this.build_axes();
+
 		// figure out how wide each bar will be
 		this.x_domain = this.x_scale.range();
 		this.bar_width = (this.x_domain[1] - this.x_domain[0]) / this.data.length;
