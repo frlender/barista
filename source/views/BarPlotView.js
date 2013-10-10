@@ -278,6 +278,20 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 			.style("text-anchor","middle")
 			.text(this.model.get('axis_title'));
 
+		// plot the labels if they are there
+		var labels = this.model.get('data_labels');
+		if (labels.length > 0){
+			this.bg_layer.selectAll('.bar_label').data([]).exit().remove();
+			this.bg_layer.selectAll('.bar_label').data(labels).enter().append('text')
+				.attr('class','bar_label')
+				.attr("x",function(d,i){return self.bar_width*i + self.margin + self.bar_width/2;})
+				.attr('y',this.height - this.margin)
+				.attr('dy','1em')
+				.attr('opacity',0)
+				.style("text-anchor","middle")
+				.text(function(d){return d;});
+		}
+
 		// style the axis
 		this.style_axes();
 	},
@@ -345,6 +359,30 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 		// remove excess points 
 		bar_selection.exit().remove();
+
+		// update the labels if they are there
+		var labels = this.model.get('data_labels');
+		if (labels.length > 0){
+			var bar_label_selection = this.bg_layer.selectAll('.bar_label').data(labels);
+			bar_label_selection.enter().append('text')
+				.attr('class','bar_label')
+				.attr("x",function(d,i){return self.bar_width*i + self.margin + self.bar_width/2;})
+				.attr('y',this.height - this.margin)
+				.attr('dy','1em')
+				.attr('opacity',0)
+				.style("text-anchor","middle")
+				.text(function(d){return d;});
+
+			bar_label_selection.transition().duration(500)
+				.attr("x",function(d,i){return self.bar_width*i + self.margin + self.bar_width/2;})
+				.attr('y',this.height - this.margin)
+				.attr('dy','1em')
+				.attr('opacity',1);
+
+			bar_label_selection.exit().remove();
+		}else{
+			this.bg_layer.selectAll('.bar_label').data([]).exit().remove();
+		}
 
 		// transition the axes
 		this.vis.selectAll('.y-axis').transition().duration(500).call(this.yAxis);
