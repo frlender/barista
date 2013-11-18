@@ -31,13 +31,17 @@ Barista.VERSION = '0.2.0';
 Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){
 		case "trt_cp":
-			return {name: "Small Molecule Compound", acronym: "SMC"};
+			return {name: "small molecule compound", acronym: "SMC"};
 		case "trt_sh":
-			return {name: "Knock Down", acronym: "KD"};
+			return {name: "knock down", acronym: "KD"};
 		case "trt_oe":
-			return {name: "Over Expression", acronym: "OE"};
+			return {name: "over expression", acronym: "OE"};
 		case "trt_oe.mut":
-			return {name: "Variant", acronym: "VAR"};
+			return {name: "variant", acronym: "VAR"};
+		case "DOS":
+			return {name: "tool compounds", acronym: "DOS"};
+		case "BIOA":
+			return {name: "drugs and bioactives", acronym: "BIOA"};
 		default:
 			return {name: input_type, acronym: input_type};
 	}
