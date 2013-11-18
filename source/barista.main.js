@@ -1794,7 +1794,7 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 		this.log = (this.options.log !== undefined) ? this.options.log : false;
 
 		// set up the margin
-		this.margin = 50;
+		this.margin = (this.options.margin !== undefined) ? this.options.margin : 50;
 
 		// set up the orientation
 		this.orientation = (this.options.orientation !== undefined) ? this.options.orientation : 'vertical';
