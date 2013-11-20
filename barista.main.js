@@ -6720,7 +6720,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.max_val = (this.options.max_val !== undefined) ? this.options.max_val : undefined;
 
 		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
+		this.listenTo(this.model,'change', this.update);
 
 		// compile the default template for the view
 		this.compile_template();
@@ -6781,7 +6781,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 						.range([5,30]);
 
 		// define the force directed graph layout
-		var force = d3.layout.force()
+		this.force = d3.layout.force()
 						.nodes(data)
 						.size([this.width, this.height])
 						.on("tick",tick)
@@ -6789,8 +6789,8 @@ Barista.Views.BubbleView = Backbone.View.extend({
 						.start();
 
 		// draw the initial layout
-		this.vis.selectAll("circle").data(force.nodes()).exit().remove();
-		this.vis.selectAll("circle").data(force.nodes())
+		this.vis.selectAll("circle").data(this.force.nodes()).exit().remove();
+		this.vis.selectAll("circle").data(this.force.nodes())
 				.enter().append("circle")
 				.attr("class",this.div_string + "_circle")
 				.attr("fill",this.fg_color)
@@ -6801,16 +6801,136 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
 
 		// specify the nodes selection so we don't have to repeat the selection on each tick
-		this.nodes = this.vis.selectAll("circle");
-		this.nodes.call(force.drag());
+        this.nodes = this.vis.selectAll("circle");
+        this.nodes.call(this.force.drag());
 
-
+		// tick function for use in the force class
 		function tick(){
 			self.nodes.attr("cx", function(d) {return d.x;})
-				.attr("cy", function(d) {return d.y;})
+                .attr("cy", function(d) {return d.y;})
+                .attr("r",function(d){return self.data_scale(d.count);});
+        }
+	},
+
+	// ### update
+	// update the plot with new data
+	update: function(){
+		// stuff this into a variable for later use
+		var self = this;
+
+		// grab the data from the model
+		var data = this.model.get('tree_object').children;
+
+		// set up some data scaling
+		var max_count, min_count;
+		if (this.max_val !== undefined){
+			max_count = this.max_val;
+		}else{
+			max_count = _.max(_.pluck(data,'count'));
+		}
+		if (this.min_val !== undefined){
+			min_count = this.min_val;
+		}else{
+			min_count = _.min(_.pluck(data,'count'));
+		}
+		this.data_scale = d3.scale.linear().domain([min_count,max_count])
+						.range([5,30]);
+
+		// define the force directed graph layout
+		// this.force = d3.layout.force()
+		//				.nodes(data)
+		//				.size([this.width, this.height])
+		//				.on("tick",tick)
+		//				.charge(function(d){return -Math.pow(self.data_scale(d.count),1.4);})
+		//				.start();
+
+		// draw the initial layout
+		this.force.nodes(data).start();
+		bubble_selection = this.vis.selectAll("circle").data(this.force.nodes())
+		bubble_selection.enter()
+				.append("circle")
+				.attr("class",this.div_string + "_circle")
+				.attr("fill",this.fg_color)
+				.attr("cx", Math.random() * 300)
+				.attr("cy", Math.random() * 300)
+				.attr("stroke","white")
+				.attr("_id",function(d){return d._id;})
+				.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
+
+		// transition bubbles
+		bubble_selection.transition().duration(500)
 				.attr("r",function(d){return self.data_scale(d.count);});
 
-		}
+		// remove bubbles with no data
+		bubble_selection.exit().remove();
+
+		// specify the nodes selection so we don't have to repeat the selection on each tick
+        this.nodes = this.vis.selectAll("circle");
+        this.nodes.call(this.force.drag());
+
+		// tick function for use in the force class
+		function tick(){
+			self.nodes.attr("cx", function(d) {return d.x;})
+                .attr("cy", function(d) {return d.y;})
+                // .attr("r",function(d){return self.data_scale(d.count);});
+        }
+
+		// var self = this;
+		// // grab the data from the model
+		// var data = this.model.get('tree_object').children;
+
+		// // set up some data scaling
+		// var max_count, min_count;
+		// if (this.max_val !== undefined){
+		//	max_count = this.max_val;
+		// }else{
+		//	max_count = _.max(_.pluck(data,'count'));
+		// }
+		// if (this.min_val !== undefined){
+		//	min_count = this.min_val;
+		// }else{
+		//	min_count = _.min(_.pluck(data,'count'));
+		// }
+		// this.data_scale = d3.scale.linear().domain([min_count,max_count])
+		//				.range([5,30]);
+
+		// this.force.nodes(data);
+
+		// // plot new bubbles where we need them
+		// bubble_selection = this.vis.selectAll("circle").data(this.force.nodes());
+		// bubble_selection.enter().append("circle")
+		//		.attr("class",this.div_string + "_circle")
+		//		.attr("fill",this.fg_color)
+		//		.attr("cx", Math.random() * 300)
+		//		.attr("cy", Math.random() * 300)
+		//		.attr("stroke","white")
+		//		.attr("_id",function(d){return d._id;})
+		//		.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
+
+		// this.nodes = this.vis.selectAll("circle");
+		// this.nodes.call(this.force.drag());
+
+		// // transition bubbles
+		// bubble_selection.transition().duration(500)
+		//		.attr("class",this.div_string + "_circle")
+		//		.attr("cx", Math.random() * 300)
+		//		.attr("cy", Math.random() * 300)
+		//		.attr("_id",function(d){return d._id;})
+		//		.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
+
+		// // remove bubbles with no data
+		// bubble_selection.exit().remove();
+
+		// // specify the nodes selection so we don't have to repeat the selection on each tick
+  //       this.nodes = this.vis.selectAll("circle");
+  //       this.nodes.call(this.force.drag());
+
+		// // tick function for use in the force class
+		// function tick(){
+		//	self.nodes.attr("cx", function(d) {return d.x;})
+  //               .attr("cy", function(d) {return d.y;})
+  //               .attr("r",function(d){return self.data_scale(d.count);});
+  //       }
 	}
 });
 // # **CMapFooterView**
