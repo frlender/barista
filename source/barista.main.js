@@ -2291,6 +2291,9 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span4";
 
+		// set up the plot height
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
@@ -2317,7 +2320,8 @@ Barista.Views.BubbleView = Backbone.View.extend({
 	compile_template: function(){
 		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
-												span_class: this.span_class}));
+												span_class: this.span_class,
+												height: this.plot_height}));
 	},
 
 	// ### render
