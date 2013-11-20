@@ -6715,6 +6715,10 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up the plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
+		// set up the bubble minimum and maximum scale values
+		this.min_val = (this.options.min_val !== undefined) ? this.options.min_val : undefined;
+		this.max_val = (this.options.max_val !== undefined) ? this.options.max_val : undefined;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
@@ -6762,8 +6766,17 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		var data = this.model.get('tree_object').children;
 
 		// set up some data scaling
-		var min_count = _.min(_.pluck(data,'count'));
-		var max_count = _.max(_.pluck(data,'count'));
+		var max_count, min_count;
+		if (this.max_val !== undefined){
+			max_count = this.max_val;
+		}else{
+			max_count = _.max(_.pluck(data,'count'));
+		}
+		if (this.min_val !== undefined){
+			min_count = this.min_val;
+		}else{
+			min_count = _.min(_.pluck(data,'count'));
+		}
 		this.data_scale = d3.scale.linear().domain([min_count,max_count])
 						.range([5,30]);
 
@@ -6784,6 +6797,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				.attr("cx", Math.random() * 300)
 				.attr("cy", Math.random() * 300)
 				.attr("stroke","white")
+				.attr("_id",function(d){return d._id;})
 				.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
 
 		// specify the nodes selection so we don't have to repeat the selection on each tick
