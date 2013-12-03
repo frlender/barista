@@ -4559,11 +4559,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " all rights reserved</p>\n	<p class=\"col-lg-4 col-md-4 col-sm-4 cmap-center-text\"><a href=\"";
-  if (stack1 = helpers.terms_url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.terms_url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">terms and conditions</a></p>\n	<div class=\"col-lg-3 col-md-3 col-sm-3\">\n	";
+    + " all rights reserved</p>\n	<p class=\"col-lg-4 col-md-4 col-sm-4 cmap-center-text\"></p>\n	<div class=\"col-lg-3 col-md-3 col-sm-3\">\n	";
   stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	</div>\n</div>";
