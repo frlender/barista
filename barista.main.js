@@ -4766,6 +4766,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   defaults: {
     pert_count: 0,
     pert_types: [{}],
+    g: "cell_type",
     last_update: (new Date()).getTime()
   },
 
@@ -4830,7 +4831,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = pert_res.length;
           var cell_lines = '["' + pert_res.join('","') + '"]';
-          var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:"cell_type"};
+          var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:self.get("g")};
           $.getJSON(cell_info,cell_params,function(cell_res){
             self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
           });
@@ -6715,6 +6716,10 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.min_val = (this.options.min_val !== undefined) ? this.options.min_val : undefined;
 		this.max_val = (this.options.max_val !== undefined) ? this.options.max_val : undefined;
 
+		// set up splitting categories
+		this.v_split = (this.options.v_split !== undefined) ? this.options.v_split : undefined;
+		this.h_split = (this.options.h_split !== undefined) ? this.options.h_split : undefined;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
 
@@ -6754,12 +6759,14 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up the panel's width and height
 		this.width = $("#" + this.div_string).outerWidth();
 		this.height = $("#" + this.div_string).outerHeight();
+		this.v_center = this.height / 2;
+		this.h_center = this.width / 2;
 
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
 
 		// grab the data from the model
-		var data = this.model.get('tree_object').children;
+		this.data = this.model.get('tree_object').children;
 
 		// set up some data scaling
 		var max_count, min_count;
@@ -6778,10 +6785,12 @@ Barista.Views.BubbleView = Backbone.View.extend({
 
 		// define the force directed graph layout
 		this.force = d3.layout.force()
-						.nodes(data)
+						.nodes(this.data)
+						.gravity(0.1)
+						.friction(0.9)
 						.size([this.width, this.height])
-						.on("tick",tick)
-						.charge(function(d){return -Math.pow(self.data_scale(d.count),1.4);})
+						.on("tick",function(e){tick(e);})
+						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/8;})
 						.start();
 
 		// draw the initial layout
@@ -6790,6 +6799,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				.enter().append("circle")
 				.attr("class",this.div_string + "_circle")
 				.attr("fill",this.fg_color)
+				.attr("v_category",function(d){
+					if (self.v_split !== undefined){
+						return d[self.v_split];
+					}else{
+						return null;
+					}
+				})
 				.attr("cx", Math.random() * 300)
 				.attr("cy", Math.random() * 300)
 				.attr("stroke","white")
@@ -6800,12 +6816,33 @@ Barista.Views.BubbleView = Backbone.View.extend({
         this.nodes = this.vis.selectAll("circle");
         this.nodes.call(this.force.drag());
 
+		// reset a damening variable for simulation
+		this.damp = 0.1;
+
 		// tick function for use in the force class
-		function tick(){
+		function tick(e){
+			self.vertical_split(e.alpha);
 			self.nodes.attr("cx", function(d) {return d.x;})
                 .attr("cy", function(d) {return d.y;})
-                .attr("r",function(d){return self.data_scale(d.count);});
+                // .attr("r",function(d){return self.data_scale(d.count);});
+
         }
+	},
+
+	// ### vertical_split
+	// push bubbles vertically based on an attribute property
+	vertical_split: function(alpha){
+		var self = this;
+		bubble_selection = this.vis.selectAll('circle');
+		bubble_selection
+			.attr("cy",function(d){
+					if (d[self.v_split] == 'up'){
+						d.y = d.y + (self.v_center - 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
+					}else{
+						d.y = d.y + (self.v_center + 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
+					}
+					return(d.y);
+			});
 	},
 
 	// ### update
@@ -6815,43 +6852,39 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		var self = this;
 
 		// grab the data from the model
-		var data = this.model.get('tree_object').children;
+		var new_data = this.model.get('tree_object').children;
 
-		// set up some data scaling
-		var max_count, min_count;
-		if (this.max_val !== undefined){
-			max_count = this.max_val;
+		// grab the current nodes
+		var nodes = this.force.nodes();
+
+		// update the nodes in this.force
+		if (this.force.nodes().length <= new_data.length){
+			this.force.nodes().forEach(function(o,i){
+				_.extend(o,new_data[i]);
+				_.extend(o,{x:nodes[i]['x'],y:nodes[i]['y']});
+			});
+			if (this.force.nodes().length < new_data.length){
+				this.force.nodes(this.force.nodes().concat(new_data.slice(this.force.nodes().length,new_data.length)));
+			}
 		}else{
-			max_count = _.max(_.pluck(data,'count'));
+			this.force.nodes(this.force.nodes().slice(0,new_data.length));
+			this.force.nodes().forEach(function(o,i){
+				_.extend(o,new_data[i]);
+				_.extend(o,{x:nodes[i]['x'],y:nodes[i]['y']});
+			});
 		}
-		if (this.min_val !== undefined){
-			min_count = this.min_val;
-		}else{
-			min_count = _.min(_.pluck(data,'count'));
-		}
-		this.data_scale = d3.scale.linear().domain([min_count,max_count])
-						.range([5,30]);
 
-		// define the force directed graph layout
-		// this.force = d3.layout.force()
-		//				.nodes(data)
-		//				.size([this.width, this.height])
-		//				.on("tick",tick)
-		//				.charge(function(d){return -Math.pow(self.data_scale(d.count),1.4);})
-		//				.start();
-
-		// draw the initial layout
-		this.force.nodes(data).start();
-		bubble_selection = this.vis.selectAll("circle").data(this.force.nodes())
+		// draw the initial layout for new bubbles
+		bubble_selection = this.vis.selectAll("circle").data(this.force.nodes());
 		bubble_selection.enter()
 				.append("circle")
 				.attr("class",this.div_string + "_circle")
 				.attr("fill",this.fg_color)
-				.attr("cx", Math.random() * 300)
-				.attr("cy", Math.random() * 300)
+				.attr("cx", function(d){return d.x;})
+				.attr("cy", function(d){return d.y;})
 				.attr("stroke","white")
 				.attr("_id",function(d){return d._id;})
-				.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
+				.attr("r",0);
 
 		// transition bubbles
 		bubble_selection.transition().duration(500)
@@ -6860,73 +6893,22 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// remove bubbles with no data
 		bubble_selection.exit().remove();
 
+		// start the simulation again
+		this.force.start();
+
 		// specify the nodes selection so we don't have to repeat the selection on each tick
         this.nodes = this.vis.selectAll("circle");
         this.nodes.call(this.force.drag());
 
-		// tick function for use in the force class
-		function tick(){
+        // tick function for use in the force class
+		function tick(e){
+			self.vertical_split(e.alpha);
 			self.nodes.attr("cx", function(d) {return d.x;})
                 .attr("cy", function(d) {return d.y;})
-                // .attr("r",function(d){return self.data_scale(d.count);});
+                .attr("r",function(d){return self.data_scale(d.count);});
+
         }
 
-		// var self = this;
-		// // grab the data from the model
-		// var data = this.model.get('tree_object').children;
-
-		// // set up some data scaling
-		// var max_count, min_count;
-		// if (this.max_val !== undefined){
-		//	max_count = this.max_val;
-		// }else{
-		//	max_count = _.max(_.pluck(data,'count'));
-		// }
-		// if (this.min_val !== undefined){
-		//	min_count = this.min_val;
-		// }else{
-		//	min_count = _.min(_.pluck(data,'count'));
-		// }
-		// this.data_scale = d3.scale.linear().domain([min_count,max_count])
-		//				.range([5,30]);
-
-		// this.force.nodes(data);
-
-		// // plot new bubbles where we need them
-		// bubble_selection = this.vis.selectAll("circle").data(this.force.nodes());
-		// bubble_selection.enter().append("circle")
-		//		.attr("class",this.div_string + "_circle")
-		//		.attr("fill",this.fg_color)
-		//		.attr("cx", Math.random() * 300)
-		//		.attr("cy", Math.random() * 300)
-		//		.attr("stroke","white")
-		//		.attr("_id",function(d){return d._id;})
-		//		.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
-
-		// this.nodes = this.vis.selectAll("circle");
-		// this.nodes.call(this.force.drag());
-
-		// // transition bubbles
-		// bubble_selection.transition().duration(500)
-		//		.attr("class",this.div_string + "_circle")
-		//		.attr("cx", Math.random() * 300)
-		//		.attr("cy", Math.random() * 300)
-		//		.attr("_id",function(d){return d._id;})
-		//		.attr("r",function(d){return Math.sqrt(self.data_scale(d.count)/Math.PI);});
-
-		// // remove bubbles with no data
-		// bubble_selection.exit().remove();
-
-		// // specify the nodes selection so we don't have to repeat the selection on each tick
-  //       this.nodes = this.vis.selectAll("circle");
-  //       this.nodes.call(this.force.drag());
-
-		// // tick function for use in the force class
-		// function tick(){
-		//	self.nodes.attr("cx", function(d) {return d.x;})
-  //               .attr("cy", function(d) {return d.y;})
-  //               .attr("r",function(d){return self.data_scale(d.count);});
-  //       }
 	}
 });
 // # **CMapFooterView**
@@ -9536,6 +9518,9 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
+
+		// set up the span class
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "#col-lg-12";
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);

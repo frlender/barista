@@ -32,6 +32,9 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
 
+		// set up the span class
+		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "#col-lg-12";
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 

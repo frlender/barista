@@ -19,6 +19,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   defaults: {
     pert_count: 0,
     pert_types: [{}],
+    g: "cell_type",
     last_update: (new Date()).getTime()
   },
 
@@ -83,7 +84,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = pert_res.length;
           var cell_lines = '["' + pert_res.join('","') + '"]';
-          var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:"cell_type"};
+          var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:self.get("g")};
           $.getJSON(cell_info,cell_params,function(cell_res){
             self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
           });
