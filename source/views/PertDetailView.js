@@ -11,9 +11,9 @@
 // 2.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector"),
-// 												model: PertDetailModel,
-// 												bg_color: "#ffffff",
-// 												span_class: "span4"});
+//												model: PertDetailModel,
+//												bg_color: "#ffffff",
+//												span_class: "span4"});
 Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
@@ -322,7 +322,7 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 		duration = (duration !== undefined) ? duration : 1;
 		var self = this;
 		this.$el.animate({opacity:0},duration);
-		setTimeout(function(){self.$el.hide()},duration);
+		setTimeout(function(){self.$el.hide();},duration);
 	},
 
 	// ### show

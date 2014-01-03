@@ -286,7 +286,7 @@ Barista.Views.TickView = Backbone.View.extend({
 		function check_for_compiled_template(){
 			if (!self.isCompiling){
 				clearInterval(check_interval);
-				self.width = self.width = $("#" + self.div_string).width()();
+				self.width = $("#" + self.div_string).width();
 				setTimeout(function(){self.$el.hide();},duration);
 			}
 		}
