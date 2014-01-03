@@ -4712,7 +4712,7 @@ Barista.CMapPertTypeAlias = function(input_type){
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
-Barista.arrayArverage = function arrayAverage (arr){
+Barista.arrayAverage = function arrayAverage (arr){
 	return _.reduce(arr, function(memo, num){
 		return memo + num;
 	}, 0) / arr.length;
