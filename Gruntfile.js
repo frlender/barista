@@ -56,7 +56,7 @@ module.exports = function(grunt) {
       js_external: {
         src: ['external_source/jquery-1.9.1.min.js',
               'external_source/underscore-min.js',
-              'external_source/bootstrap.main.min.js',
+              'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'external_source/d3.v3.min.js',
               'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
@@ -113,7 +113,7 @@ module.exports = function(grunt) {
           'css/external.css': ['css/external/backgrid.min.css',
                                   'css/external/d3.parcoords.css',
                                   'css/external/introjs.min.css',
-                                  'css/external/bootstrap.css',
+                                  'bower_components/bootstrap/dist/css/bootstrap.min.css',
                                   'css/external/typeahead.js-bootstrap.css']
         }
       },
