@@ -3210,6 +3210,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("opacity",function(d){return self.opacity_map(d.value);})
 			.attr("x", function(d) {return d.x;})
 			.attr("y", function(d) {return d.y;})
+			.attr("count", function(d) {return d.count;})
+			.attr("width", function(d) {return d.dx;})
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;});
 
