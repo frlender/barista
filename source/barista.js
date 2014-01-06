@@ -3256,6 +3256,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("font-size","12pt")
 			.attr("fill","white")
 			.attr("opacity",0)
+			.style("pointer-events","none")
 			.transition().duration(500).attr("opacity",1);
 
 		this.vis.data([this.data]).selectAll("text.count").data([]).exit().remove();
@@ -3277,6 +3278,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("font-size","12pt")
 			.attr("fill","black")
 			.attr("opacity",0)
+			.style("pointer-events","none")
 			.transition().duration(500).attr("opacity",1);
 	},
 
