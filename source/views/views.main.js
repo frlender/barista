@@ -1995,7 +1995,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		      placement: 'top',
 		      container: 'body',
 		      trigger: 'hover focus',
-		      title: $(this).attr('x')
+		      title: $(this).attr('_id'),
+		      html: $(this).attr('count')
 		    });
 		  });
 	},
