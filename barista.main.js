@@ -4583,7 +4583,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n                 		</div>\n                 		<div class=\"col-lg-1 col-md-1 col-sm-1\">\n                 			<p class=\"pull-right\">\n                 				<i class=\"icon-signout icon-large cmap-header-link\"></i>\n                 				<i class=\"icon-cog icon-large cmap-header-link\"></i>\n                 				<i data-toggle=\"modal\" href=\"#aboutModal\" class=\"icon-info-sign icon-large cmap-header-link\"></i></p>\n                 		</div>\n</div>\n\n<div class=\"row\">\n	<p class=\"col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n                 		</div>\n                 		<div class=\"col-lg-1 col-md-1 col-sm-1\">\n                 			<p class=\"pull-right\">\n                 				<i data-toggle=\"modal\" href=\"#aboutModal\" class=\"icon-info-sign icon-large cmap-header-link\"></i></p>\n                 		</div>\n</div>\n\n<div class=\"row\">\n	<p class=\"col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
