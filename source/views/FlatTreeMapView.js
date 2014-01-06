@@ -161,7 +161,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){ self.draw_text(); this.add_tooltips();},500);
+		setTimeout(function(){ self.draw_text(); self.add_tooltips();},500);
 	},
 
 	add_tooltips: function(){
