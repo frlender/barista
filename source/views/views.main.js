@@ -1993,6 +1993,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 	add_tooltips: function(){
 		$('.' + this.div_string + '_cell').each(function(){
+		    $(this).tooltip('destroy');
 		    $(this).tooltip({
 		      placement: 'top',
 		      container: 'body',
