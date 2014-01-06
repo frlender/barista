@@ -158,3 +158,17 @@ margin: 0 auto;
 @keyframes rotate {
   100% {  transform: rotate(359deg); }
   }
+
+/*custom bootsrap tooltip styling*/
+.tooltip.top .tooltip-arrow {
+	bottom: 0;
+	left: 50%;
+	margin-left: -5px;
+	border-top-color: #eee;
+	border-width: 5px 5px 0;
+}
+.tooltip-inner {
+	color: #222;
+	background: #eee;
+	border: solid 1px #eee;
+}
