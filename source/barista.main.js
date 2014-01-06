@@ -3455,12 +3455,12 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// exit old elements
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
 		
-		// add tooltips
-		this.add_tooltips();
+		// // add tooltips
+		// this.add_tooltips();
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){ self.draw_text(); },500);
+		setTimeout(function(){ self.draw_text(); this.add_tooltips();},500);
 	},
 
 	add_tooltips: function(){
