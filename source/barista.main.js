@@ -3466,15 +3466,26 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	add_tooltips: function(){
-		$('.' + this.div_string + '_cell').each(function(){
-		    $(this).tooltip('destroy');
-		    $(this).tooltip({
-		      placement: 'top',
-		      container: 'body',
-		      trigger: 'hover focus',
-		      title: $(this).attr('_id') + ' : ' + $(this).attr('count')
-		    });
-		  });
+		// make a selection of all cells in the treemap
+		var cell_selection = $('.' + this.div_string + '_cell');
+		
+		// remove existing tooltips so we don confuse the labels
+		cell_selection.each(function(){
+			$(this).tooltip('destroy');
+		});
+
+		// add new tooltips if there is more than just the base cell in
+		// in the treemap (i.e. it is a non-empty dataset)
+		if (cell_selection.length > 1){
+			cell_selection.each(function(){
+				$(this).tooltip({
+					placement: 'top',
+					container: 'body',
+					trigger: 'hover focus',
+					title: $(this).attr('_id') + ' : ' + Math.round($(this).attr('count'))
+				});
+			});
+		}
 	},
 
 	clear_text: function(){
