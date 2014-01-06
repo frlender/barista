@@ -93,36 +93,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("stroke", "white")
 			.attr("stroke-width", 2);
 		this.draw_text();
-
-		// add an invisible overlay to catch mouse events
-		// this.vis_overlay.data([this.data]).selectAll("rect").data([]).exit().remove();
-		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
-		// 	.enter().append("rect")
-		// 	.attr("class",this.div_string + "_cell")
-		// 	.attr("fill",this.fg_color)
-		// 	.attr("opacity",0)
-		// 	.attr("x", function(d) {return d.x;})
-		// 	.attr("y", function(d) {return d.y;})
-		// 	.attr("width", function(d) {return d.dx;})
-		// 	.attr("height", function(d) {return d.dy;})
-		// 	.attr("count", function(d) {return d.count;})
-		// 	.attr("_id", function(d) {return d._id;})
-		// 	.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
-		// 	.on("mouseout", function() { self.fadeOut_popover(); });
-
-		// add a div for tooltips
-		this.top_svg.selectAll("." + this.div_string + "tooltips").data([]).exit().remove();
-		this.popover = this.top_svg.append("foreignObject")
-			.attr("class", this.div_string + "tooltips")
-			.attr("x", 0)
-			.attr("y", 0)
-			.attr("opacity",0)
-			.attr("width", 600)
-			.attr("height", 100)
-			.append("xhtml:div")
-			.html('<span class="label ' + this.div_string + 'sig_id_label"></span>')
-			.append("xhtml:div")
-			.html('<span class="label label-inverse  ' + this.div_string + 'pert_desc_label"></span>');
+		this.add_tooltips();
 
 		// add a png export overlay
 		this.top_svg.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
@@ -167,24 +138,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
-			.attr("stroke-width", 2)
-			// .on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
-			// .on("mouseout", function() { self.fadeOut_popover(); });
-
-		// //add new data if it is there 
-		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes)
-		// 	.enter().append("rect")
-		// 	.attr("class",this.div_string + "_cell")
-		// 	.attr("fill",this.fg_color)
-		// 	.attr("opacity",0)
-		// 	.attr("x", function(d) {return d.x;})
-		// 	.attr("y", function(d) {return d.y;})
-		// 	.attr("count", function(d) {return d.count;})
-		// 	.attr("_id", function(d) {return d._id;})
-		// 	.attr("width", function(d) {return d.dx;})
-		// 	.attr("height", function(d) {return d.dy;})
-		// 	.on("mousemove", function() { self.fadeIn_popover(d3.mouse(this),d3.select(d3.event.target)); })
-		// 	.on("mouseout", function() { self.fadeOut_popover(); });
+			.attr("stroke-width", 2);
 
 		// transition elements
 		this.vis.data([this.data]).selectAll("rect")
@@ -195,42 +149,26 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("width", function(d) {return d.dx;})
 			.attr("height", function(d) {return d.dy;});
 
-		// this.vis_overlay.data([this.data]).selectAll("rect")
-		// 	.transition().ease("cubic out").duration(500)
-		// 	.attr("x", function(d) {return d.x;})
-		// 	.attr("y", function(d) {return d.y;})
-		// 	.attr("width", function(d) {return d.dx;})
-		// 	.attr("height", function(d) {return d.dy;});
-
 		// exit old elements
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
-		// this.vis_overlay.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
+		
+		// add tooltips
+		this.add_tooltips();
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
 		setTimeout(function(){ self.draw_text(); },500);
 	},
 
-	fadeIn_popover: function(point,rect){
-		if (point[0] > this.width/2){
-			d3.select("." + this.div_string + "tooltips").attr("x", point[0] - 60);
-		}else{
-			d3.select("." + this.div_string + "tooltips").attr("x", point[0]);
-		}
-
-		if (point[1] > this.height/2){
-			d3.select("." + this.div_string + "tooltips").attr("y", point[1] - 50);
-		}else{
-			d3.select("." + this.div_string + "tooltips").attr("y", point[1] + 20);
-		}
-
-		d3.select("." + this.div_string + "sig_id_label").text(rect.attr("_id"));
-		d3.select("." + this.div_string + "pert_desc_label").text(rect.attr("count"));
-		d3.select("." + this.div_string + "tooltips").attr("opacity",1);
-	},
-
-	fadeOut_popover: function(){
-		d3.select("." + this.div_string + "tooltips").attr("opacity",0);
+	add_tooltips: function(){
+		$('.' + this.div_string + '_cell').each(function(){
+		    $(this).tooltip({
+		      placement: 'top',
+		      container: 'body',
+		      trigger: 'hover focus',
+		      title: $(this).attr('x')
+		    });
+		  });
 	},
 
 	clear_text: function(){
