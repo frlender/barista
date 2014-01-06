@@ -1256,7 +1256,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["profiled","core"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
 					  // '&f={"cell_id":1,"cell_type":1}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
@@ -1315,7 +1315,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["profiled","core"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
 					  // '&f={"cell_id":1,"cell_type":1}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
@@ -1374,7 +1374,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["profiled","core"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
 					  // '&f={"cell_id":1,"cell_type":1}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
