@@ -1037,7 +1037,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
         // this.search_type = (search_type !== undefined) ? search_type : '';
         this.limit = (limit !== undefined) ? limit : 30;
 
-        this.q_param = '{"lincs_status":{"$in":["profiled","core"]},"' + this.search_column + '":' + '{"$regex":"' + this.search_string + '","$options":"i"}}'
+        this.q_param = '{"lincs_status":{"$in":["core_cline","core_pline"]},"' + this.search_column + '":' + '{"$regex":"' + this.search_string + '","$options":"i"}}'
 
         // build a parameter object for the api call
         // TODO-remove: alert(this.q_param);
