@@ -5288,7 +5288,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -5357,7 +5357,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -5426,7 +5426,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -6252,7 +6252,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
         // this.search_type = (search_type !== undefined) ? search_type : '';
         this.limit = (limit !== undefined) ? limit : 30;
 
-        this.q_param = '{"' + this.search_column + '":' + '{"$regex":"' + this.search_string + '","$options":"i"}}'
+        this.q_param = '{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"' + this.search_column + '":' + '{"$regex":"' + this.search_string + '","$options":"i"}}'
 
         // build a parameter object for the api call
         // TODO-remove: alert(this.q_param);
