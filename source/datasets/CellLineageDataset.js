@@ -55,7 +55,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 						_.extend(datum,{
 							type: 'Cell Lineage',
 							search_column: 'cell_lineage',
-							color: '#CC79A7',
+							color: '#DDA6C4',
 						});
 						datum_list.push(datum);
 					});

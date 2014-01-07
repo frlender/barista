@@ -55,7 +55,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 						_.extend(datum,{
 							type: 'Cell Histology',
 							search_column: 'cell_histology',
-							color: '#CC79A7',
+							color: '#BB4D8A',
 						});
 						datum_list.push(datum);
 					});
