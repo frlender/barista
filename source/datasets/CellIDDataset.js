@@ -12,7 +12,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			limit: 4,
 
 			// provide a name for the default typeahead data source
-			name: 'Cellular Contexts',
+			name: 'CellID',
 
 			// the template to render for all results
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
