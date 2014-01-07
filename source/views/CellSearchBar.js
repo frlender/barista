@@ -112,6 +112,6 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		// hook up the typeahead with backing datasets
 		$('#search',this.$el).typeahead([Barista.Datasets.CellID,
 										 Barista.Datasets.CellLineage,
-										 Barista.Datasets.cell_histology]);
+										 Barista.Datasets.CellHistology]);
 	}
 });
