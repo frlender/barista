@@ -27,6 +27,10 @@ module.exports = function(grunt) {
       options: {
         separator: '\n'
       },
+      js_barista_datasets: {
+        src: ['source/datasets/**/*.js','!source/datasets/datasets.main.js'],
+        dest: 'source/datasets/datasets.main.js'
+      },
       js_barista_utils: {
         src: ['source/utils/**/*.js','!source/utils/utils.main.js'],
         dest: 'source/utils/utils.main.js'
@@ -45,6 +49,7 @@ module.exports = function(grunt) {
       },
       js_barista: {
         src: ['source/preamble.js',
+              'source/datasets/datasets.main.js',
               'source/utils/utils.main.js',
               'source/models/models.main.js',
               'source/collections/collections.main.js',

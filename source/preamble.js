@@ -12,6 +12,9 @@ Barista.Models = {};
 Barista.Collections = {};
 Barista.Views = {};
 
+// build an array to contain backing datasets definitions
+Barista.Datasets = {};
+
 // current version of the library, make sure this is agrees with `package.json`
 Barista.VERSION = '0.2.0';
 
