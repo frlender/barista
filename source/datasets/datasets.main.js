@@ -23,7 +23,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -92,7 +92,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -161,7 +161,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
