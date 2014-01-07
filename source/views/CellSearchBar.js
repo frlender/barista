@@ -111,6 +111,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 		$('#search',this.$el).typeahead([Barista.Datasets.CellID,
 										 Barista.Datasets.CellLineage,
+      
       {
 			// only return 4 items at a time in the autocomplete dropdown
 			limit: 5,
