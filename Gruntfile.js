@@ -205,7 +205,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build_external',['concat:js_external','uglify:external']);
 
   // standard internal concat task (does not concat external)
-  grunt.registerTask('concat_internal', ['concat:js_barista_utils',
+  grunt.registerTask('concat_internal', ['concat:js_barista_datasets',
+                                      'concat:js_barista_utils',
                                       'concat:js_barista_models',
                                       'concat:js_barista_views',
                                       'concat:js_barista_collections',
