@@ -2113,12 +2113,12 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		if (this.max_val !== undefined){
 			max_count = this.max_val;
 		}else{
-			max_count = _.max(_.pluck(data,'count'));
+			max_count = _.max(_.pluck(this.data,'count'));
 		}
 		if (this.min_val !== undefined){
 			min_count = this.min_val;
 		}else{
-			min_count = _.min(_.pluck(data,'count'));
+			min_count = _.min(_.pluck(this.data,'count'));
 		}
 		this.data_scale = d3.scale.linear().domain([min_count,max_count])
 						.range([5,30]);

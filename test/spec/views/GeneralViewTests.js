@@ -20,4 +20,17 @@ views.forEach(function(current_view){
 			expect(o.name).not.toBe(undefined);
 		});
 	});
+
+	// make sure all views inherit from a primitive view
+	describe(current_view,function(){
+		it('should inherit from from a view primitive',function(){
+			var primitives = ['BaristaBaseView',
+							  'CMapFooterView',
+							  'CMapHeaderView',
+							  'GridView'
+							  ];
+			eval('var o = new Barista.Views.' + current_view + '()');
+			expect(primitives).toContain(o.__proto__.name);
+		});
+	});
 });

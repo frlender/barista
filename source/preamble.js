@@ -7,7 +7,7 @@
 // build the top level namespace.  All Barista components will be exposed through this object
 var Barista = {};
 
-// build an objects to be extended for Models, Collections, and Views
+// build objects to be extended for Models, Collections, and Views
 Barista.Models = {};
 Barista.Collections = {};
 Barista.Views = {};
