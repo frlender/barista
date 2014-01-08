@@ -5513,8 +5513,9 @@ Barista.arrayAverage = function arrayAverage (arr){
 };
 // # **getEmSizeInPixels**
 
-// a utility function to compute the size of input em to pixels
-Barista.getEmSizeInPixels = function(el) {
+// a utility function to find the size of 1em for the given element id
+Barista.getEmSizeInPixels = function(id) {
+    var el = document.getElementById(id);
     return Number(getComputedStyle(el, "").fontSize.match(/(\d+)px/)[1]);
 }
 // # **BarPlotModel**
@@ -11275,7 +11276,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	fit_height: function(){
 		// set the view's height attribute based on the number of rows in the
 		// vis
-		var EmSize = Barista.getEmSizeInPixels();
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
 		this.height = (this.row_number * 1.5 + 3.5) * EmSize;
 
 		// rescale the height of the vis

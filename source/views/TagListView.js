@@ -180,7 +180,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	fit_height: function(){
 		// set the view's height attribute based on the number of rows in the
 		// vis
-		var EmSize = Barista.getEmSizeInPixels();
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
 		this.height = (this.row_number * 1.5 + 3.5) * EmSize;
 
 		// rescale the height of the vis
