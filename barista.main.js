@@ -5502,7 +5502,7 @@ Barista.CMapPertTypeAlias = function(input_type){
 };
 // # **arrayAverage**
 
-// a utility function to to take the average of an array of numeric values
+// a utility function to take the average of an array of numeric values
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
@@ -5511,6 +5511,12 @@ Barista.arrayAverage = function arrayAverage (arr){
 		return memo + num;
 	}, 0) / arr.length;
 };
+// # **getEmSizeInPixels**
+
+// a utility function to compute the size of input em to pixels
+Barista.getEmSizeInPixels = function(el) {
+    return Number(getComputedStyle(el, "").fontSize.match(/(\d+)px/)[1]);
+}
 // # **BarPlotModel**
 // A Backbone.Model to hold the information needed to make a simple bar plot.  The model includes a title,
 // axis title, data, data_labels, and an optional object for metadata on the points in the data.  The meta
@@ -11269,7 +11275,8 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	fit_height: function(){
 		// set the view's height attribute based on the number of rows in the
 		// vis
-		this.height = this.row_number * 1.5 + 3.5 + 'em'
+		var EmSize = Barista.getEmSizeInPixels();
+		this.height = (this.row_number * 1.5 + 3.5) * EmSize;
 
 		// rescale the height of the vis
 		$("#" + this.div_string).animate({height:this.height},500);

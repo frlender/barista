@@ -30,7 +30,7 @@ Barista.CMapPertTypeAlias = function(input_type){
 };
 // # **arrayAverage**
 
-// a utility function to to take the average of an array of numeric values
+// a utility function to take the average of an array of numeric values
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
@@ -39,3 +39,9 @@ Barista.arrayAverage = function arrayAverage (arr){
 		return memo + num;
 	}, 0) / arr.length;
 };
+// # **getEmSizeInPixels**
+
+// a utility function to compute the size of input em to pixels
+Barista.getEmSizeInPixels = function(el) {
+    return Number(getComputedStyle(el, "").fontSize.match(/(\d+)px/)[1]);
+}

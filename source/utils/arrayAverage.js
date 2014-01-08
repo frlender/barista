@@ -1,6 +1,6 @@
 // # **arrayAverage**
 
-// a utility function to to take the average of an array of numeric values
+// a utility function to take the average of an array of numeric values
 
 //		//evaluates to 2
 //		var a = arrayAverage([1,2,3]);
