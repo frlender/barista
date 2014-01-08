@@ -8749,7 +8749,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		var self = this;
 		this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 		this.search_type = (search_type !== undefined) ? search_type : this.search_type;
-		this.limit = (limit !== undefined) ? limit : 30;
+		this.limit = (limit !== undefined) ? limit : this.limit;
 		$("#" + this.div_string).show();
 		$("#" + this.div_string).animate({opacity:1},500);
 		this.collection.reset();
@@ -8770,7 +8770,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			var self = this;
 			this.search_val = (search_val !== undefined) ? search_val : this.search_val;
 			this.search_type = (search_type !== undefined) ? search_type : this.search_type;
-			this.limit = (limit !== undefined) ? limit : 30;
+			this.limit = (limit !== undefined) ? limit : this.limit;
 			$("#" + this.div_string).show();
 			$("#" + this.div_string).animate({opacity:1},500);
 			getData_promise = this.collection.getData(this.search_val,this.search_type,this.limit);
