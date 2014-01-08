@@ -4584,6 +4584,10 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		// rescale the height of the vis
 		$("#" + this.div_string).animate({height:this.height},500);
 		this.vis.transition().attr("height",this.height);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1])
+			.transition(500)
+			.attr("y",this.height - 10);
+		
 	}
 });
 
