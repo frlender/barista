@@ -6202,7 +6202,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		// call BaristaBaseView's render function first so we can layer on top of it
 		this.base_render();
 		
-		// add a text element for each item in the collection
+		// add a text element for each unique item in the collection
 		this.x_offsets = [5];
 		this.row_number = 0;
 		this.y_offsets = [];
@@ -6211,6 +6211,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		this.collection.models.forEach(function(model){
 			self.tags.push(model.get(self.display_attribute));
 		});
+		this.tags = _.unique(this.tags);
 		this.fg_layer.selectAll('.tag_list_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.tag_list_text').data(this.tags).enter().append('text')
 			.attr("class","tag_list_text")
