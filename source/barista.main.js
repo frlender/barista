@@ -3618,6 +3618,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
 		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
+		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
 		
 
@@ -3689,8 +3690,8 @@ Barista.Views.GridView = Backbone.View.extend({
 		var triggerPoint = 100;
 		var pos = $("#" + this.div_string).scrollTop() + $("#" + this.div_string).height() + triggerPoint;
 		if (!this.collection.isLoading && pos > $("#" + this.div_string)[0].scrollHeight){
-			this.collection.skip += 30;
-			this.update_collection();
+			this.collection.skip += limit;
+			this.update_collection(this.search_val,this.search_type,this.limit);
 		}
 	},100),
 
