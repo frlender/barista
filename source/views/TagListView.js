@@ -57,7 +57,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		this.stopListening();
 
 		// add listeners for the collection and trigger an update when it changes
-		if (this.listeners !== undefined){
+		if (this.listener !== undefined){
 			this.listenTo(this.collection,this.listener, this.update);
 		}else{
 			this.listenTo(this.collection,'add', this.update);
