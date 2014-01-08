@@ -1259,6 +1259,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
               remove: false,
               success: function() {
                 self.isLoading = false;
+                self.trigger("fetch");
                 // alert("fetch success");
               },
               error: function() {
@@ -6133,14 +6134,21 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		// set up a tag color to use 
 		this.tag_color = (this.options.tag_color !== undefined) ? this.options.tag_color : 'black';
 
+		// look for custom listeners
+		this.listener = (this.options.listener !== undefined) ? this.options.listener : undefined;
+
 		// clear built in listeners
 		this.stopListening();
 
 		// add listeners for the collection and trigger an update when it changes
-		this.listenTo(this.collection,'add', this.update);
-		this.listenTo(this.collection,'remove', this.update);
-		this.listenTo(this.collection,'reset', this.update);
-		this.listenTo(this.collection,'sort', this.update);
+		if (this.listeners !== undefined){
+			this.listenTo(this.collection,this.listener, this.update);
+		}else{
+			this.listenTo(this.collection,'add', this.update);
+			this.listenTo(this.collection,'remove', this.update);
+			this.listenTo(this.collection,'reset', this.update);
+			this.listenTo(this.collection,'sort', this.update);
+		}
 	},
 
 	// ### render

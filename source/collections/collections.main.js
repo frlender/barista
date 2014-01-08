@@ -69,6 +69,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
               remove: false,
               success: function() {
                 self.isLoading = false;
+                self.trigger("fetch");
                 // alert("fetch success");
               },
               error: function() {
