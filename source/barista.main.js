@@ -3690,7 +3690,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		var triggerPoint = 100;
 		var pos = $("#" + this.div_string).scrollTop() + $("#" + this.div_string).height() + triggerPoint;
 		if (!this.collection.isLoading && pos > $("#" + this.div_string)[0].scrollHeight){
-			this.collection.skip += limit;
+			this.collection.skip += this.limit;
 			this.update_collection(this.search_val,this.search_type,this.limit);
 		}
 	},100),
