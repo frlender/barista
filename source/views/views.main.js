@@ -4516,6 +4516,13 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			.attr("opacity",1)
 			.attr("fill",this.tag_color);
 		return this;
+
+		// set up the panel's width and height
+		this.height = this.row_number * 1.5 + 10 + 'em'
+
+		// rescale the width of the vis
+		$("#" + this.div_string).animate({height:this.height},500);
+		this.vis.transition().attr("height",this.height);
 	},
 
 	// ### update
