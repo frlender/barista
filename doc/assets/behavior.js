@@ -44,14 +44,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "slug": "extending-a-minimal-view"
           },
           "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 1,
-            "title": "licensed under Creative Commons.",
-            "slug": "licensed-under-creative-commons"
-          },
-          "depth": 1
         }
       ]
     }, {
@@ -792,6 +784,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "vertical_split",
+                "slug": "vertical-split"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "update",
+                "slug": "update"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "name",
                 "slug": "name"
               },
@@ -1403,6 +1411,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "fit_height",
+                "slug": "fit-height"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "name",
                 "slug": "name"
               },
@@ -1875,6 +1891,64 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "depth": 2
             }
           ]
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "datasets",
+        "title": "datasets"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/datasets/CellHistologyDataset.js",
+            "projectPath": "source/datasets/CellHistologyDataset.js",
+            "targetPath": "datasets/CellHistologyDataset",
+            "title": "CellHistologyDataset"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/datasets/CellIDDataset.js",
+            "projectPath": "source/datasets/CellIDDataset.js",
+            "targetPath": "datasets/CellIDDataset",
+            "title": "CellIDDataset"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/datasets/CellLineageDataset.js",
+            "projectPath": "source/datasets/CellLineageDataset.js",
+            "targetPath": "datasets/CellLineageDataset",
+            "title": "CellLineageDataset"
+          },
+          "depth": 2,
+          "outline": []
         }
       ]
     }, {
@@ -2379,6 +2453,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           },
           "depth": 2,
           "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/utils/getEmSizeInPixels.js",
+            "projectPath": "source/utils/getEmSizeInPixels.js",
+            "targetPath": "utils/getEmSizeInPixels",
+            "title": "getEmSizeInPixels"
+          },
+          "depth": 2,
+          "outline": []
         }
       ]
     }, {
@@ -2708,6 +2798,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "render",
                 "slug": "render"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "vertical_split",
+                "slug": "vertical-split"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "update",
+                "slug": "update"
               },
               "depth": 3
             }
@@ -3586,6 +3692,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "update",
                 "slug": "update"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fit_height",
+                "slug": "fit-height"
               },
               "depth": 3
             }
