@@ -79,7 +79,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(this.template({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));

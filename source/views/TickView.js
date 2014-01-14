@@ -60,7 +60,7 @@ Barista.Views.TickView = Backbone.View.extend({
 	compile_template_and_draw: function(){
 		var self = this;
 		this.isCompiling = true;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class}));

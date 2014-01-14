@@ -94,7 +94,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + Math.round(Math.random()*1000000);
+		this.div_string = 'barista_view' + new Date().getTime();;
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
@@ -755,7 +755,7 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + Math.round(Math.random()*1000000);
+		this.div_string = 'barista_view' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapCard({div_string: this.div_string,
 												span_class: this.span_class,
 												url: this.url,
@@ -849,7 +849,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 	// ### compile_template
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
@@ -1690,7 +1690,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: 300}));
@@ -2118,7 +2118,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'backgrid_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
 													   span_class: this.span_class,
 													   legend: this.legend,
@@ -2328,7 +2328,7 @@ Barista.Views.HeatmapView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(this.template({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
@@ -2838,7 +2838,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(this.template({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
@@ -3166,7 +3166,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### compile_template
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
@@ -3443,7 +3443,7 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 
 	//		pert_detail_view.compile_template(template\_string);
 	compile_template: function(template_string){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class}));
 	},
@@ -4655,7 +4655,7 @@ Barista.Views.TickView = Backbone.View.extend({
 	compile_template_and_draw: function(){
 		var self = this;
 		this.isCompiling = true;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class}));
@@ -5017,7 +5017,7 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,

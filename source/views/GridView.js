@@ -198,7 +198,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'backgrid_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'backgrid_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
 													   span_class: this.span_class,
 													   legend: this.legend,

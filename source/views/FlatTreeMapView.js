@@ -38,7 +38,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: 300}));

@@ -65,7 +65,7 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 
 	//		pert_detail_view.compile_template(template\_string);
 	compile_template: function(template_string){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class}));
 	},

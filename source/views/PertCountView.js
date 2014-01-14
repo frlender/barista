@@ -84,7 +84,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### compile_template
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
-		this.div_string = 'd3_target' + Math.round(Math.random()*1000000);
+		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));

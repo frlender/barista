@@ -64,7 +64,7 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + Math.round(Math.random()*1000000);
+		this.div_string = 'barista_view' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapCard({div_string: this.div_string,
 												span_class: this.span_class,
 												url: this.url,

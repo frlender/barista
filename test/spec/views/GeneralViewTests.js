@@ -21,6 +21,14 @@ views.forEach(function(current_view){
 		});
 	});
 
+	// make sure that all views have a div_string attribute
+	describe(current_view,function(){
+		it('should have a div_string attribute',function(){
+			eval('var o = new Barista.Views.' + current_view + '()');
+			expect(o.div_string).not.toBe(undefined);
+		});
+	});
+
 	// make sure all views inherit from a primitive view
 	describe(current_view,function(){
 		it('should inherit from from a view primitive',function(){
