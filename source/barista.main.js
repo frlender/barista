@@ -6242,39 +6242,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			self.tags.push(model.get(self.display_attribute));
 		});
 		this.tags = _.unique(this.tags);
-		this.fg_layer.selectAll('.tag_list_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.tag_list_text').data(this.tags).enter().append('text')
-			.attr("class","tag_list_text")
-			.text(function(d){return d;})
-			.attr("x",function(d,i){
-				self.lengths.push(this.getComputedTextLength() + 15);
-				var current_x_offset = self.x_offsets[i];
-				if (current_x_offset + self.lengths[i] > self.width){
-					self.x_offsets[i] = 5;
-					self.x_offsets.push(self.lengths[i] + self.x_offsets[i]);
-					self.row_number += 1;
-				}else{
-					self.x_offsets.push(self.lengths[i] + self.x_offsets[i]);
-				}
-				self.y_offsets.push((self.row_number * 1.5 + 1));
-				return self.x_offsets[i];
-			})
-			.attr("y",function(d,i){return self.y_offsets[i] + 'em';})
-			.attr("opacity",1)
-			.attr("fill",this.fg_color);
-
-		this.bg_layer.selectAll('.tag_list_rect').data([]).exit().remove();
-		this.bg_layer.selectAll('.tag_list_rect').data(this.tags).enter().append('rect')
-			.attr("class","tag_list_rect")
-			.attr("x",function(d,i){return self.x_offsets[i] - 5;})
-			.attr("y",function(d,i){return (self.y_offsets[i] - 1) + 'em';})
-			.attr("rx",4)
-			.attr("ry",4)
-			.attr('width',function(d,i){return self.lengths[i] - 4;})
-			.attr('height','1.2em')
-			.attr("opacity",1)
-			.attr("fill",this.tag_color);
-		this.fit_height();
+		this.draw_tags();
 
 		return this;
 	},
@@ -6296,6 +6264,32 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			self.tags.push(model.get(self.display_attribute));
 		});
 		this.tags = _.unique(this.tags);
+		this.draw_tags();
+		
+		return this;
+	},
+
+	// ### fit_height
+	// fits the view height to the height taken by the tags displayed
+	fit_height: function(){
+		// set the view's height attribute based on the number of rows in the
+		// vis
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
+		this.height = (this.row_number * 1.5 + 3.5) * EmSize;
+
+		// rescale the height of the vis
+		$("#" + this.div_string).animate({height:this.height},500);
+		this.vis.transition().attr("height",this.height);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1])
+			.transition(500)
+			.attr("y",this.height - 10);
+		
+	},
+
+	// ### draw tags
+	// utility function to draw tags diven a data set.  
+	draw_tags: function(){
+		// draw the foreground text of all the tags
 		this.fg_layer.selectAll('.tag_list_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.tag_list_text').data(this.tags).enter().append('text')
 			.attr("class","tag_list_text")
@@ -6317,6 +6311,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			.attr("opacity",1)
 			.attr("fill",this.fg_color);
 
+		// draw the background of all the tags
 		this.bg_layer.selectAll('.tag_list_rect').data([]).exit().remove();
 		this.bg_layer.selectAll('.tag_list_rect').data(this.tags).enter().append('rect')
 			.attr("class","tag_list_rect")
@@ -6329,25 +6324,8 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			.attr("opacity",1)
 			.attr("fill",this.tag_color);
 		this.fit_height();
-		
-		return this;
-	},
 
-	// ### fit_height
-	// fits the view height to the height taken by the tags displayed
-	fit_height: function(){
-		// set the view's height attribute based on the number of rows in the
-		// vis
-		var EmSize = Barista.getEmSizeInPixels(this.div_string);
-		this.height = (this.row_number * 1.5 + 3.5) * EmSize;
-
-		// rescale the height of the vis
-		$("#" + this.div_string).animate({height:this.height},500);
-		this.vis.transition().attr("height",this.height);
-		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1])
-			.transition(500)
-			.attr("y",this.height - 10);
-		
+		return this
 	}
 });
 
