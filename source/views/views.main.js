@@ -1218,7 +1218,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		$.getJSON(pertinfo,params,function(res){
 			var val = res[0].pert_iname;
 			$("#search",this.el).val(val);
-			self.trigger("search:DidType",{val: val,search_column: 'single'});
+			self.trigger("search:DidType",{val: val,search_column: 'cell_id'});
 		});
 	},
 
