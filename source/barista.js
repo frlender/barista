@@ -2730,16 +2730,14 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     **/
 	random_val: function(){
 		var self = this;
-		skip = Math.round(Math.random()*40000);
-		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-		params = {q: '{"pert_type":{"$in":["trt_cp","trt_sh"]}}',
-					f:'{"pert_iname":1}',
-										l:1,
-										sk:skip};
+		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
+		
+		var skip = Math.round(Math.random()*40);
+		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id", l:1, sk:skip};
 		$.getJSON(pertinfo,params,function(res){
 			var val = res[0].pert_iname;
 			$("#search",this.el).val(val);
-			self.trigger("search:DidType",{val: val,type: 'single'});
+			self.trigger("search:DidType",{val: val,search_column: 'single'});
 		});
 	},
 
