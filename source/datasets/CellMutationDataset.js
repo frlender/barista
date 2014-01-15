@@ -20,11 +20,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			// use twitter's hogan.js to compile the template for the typeahead results
 			engine: Hogan,
 
-			remote: {
+			prefetch: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"mutations":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
 					  '&d=mutations'].join(''),
 				
 				dataType: 'jsonp',
