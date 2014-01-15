@@ -500,8 +500,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					var auto_data = response;
 
 					// filter the list based on the query
-					console.log(this.query);
-					var re = new RegExp(this.query,"i");
+					console.log(this.$element.val());
+					var re = new RegExp(this.$element.val(),"i");
 					auto_data = _.filter(auto_data,function(mutation){return re.test(mutation);});
 
 					// build a list of datum objects
