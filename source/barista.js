@@ -6074,7 +6074,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			.attr("fill",this.fg_color)
 			.style("cursor","pointer")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
-			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill",this.fg_color);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill",this.fg_color);})
 			.on("click",function(d){self.trigger("TagListView:DidSelect",{val: d});});
 
 		// draw the background of all the tags
