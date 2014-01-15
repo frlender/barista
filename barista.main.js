@@ -11315,7 +11315,11 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 			})
 			.attr("y",function(d,i){return self.y_offsets[i] + 'em';})
 			.attr("opacity",1)
-			.attr("fill",this.fg_color);
+			.attr("fill",this.fg_color)
+			.style("cursor","pointer")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill",this.fg_color);})
+			.on("click",function(d){self.trigger("TagListView:DidSelect",{val: d});});
 
 		// draw the background of all the tags
 		this.bg_layer.selectAll('.tag_list_rect').data([]).exit().remove();
