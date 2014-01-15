@@ -2973,7 +2973,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id", l:1, sk:skip};
-		$.getJSON(pertinfo,params,function(res){
+		$.getJSON(cellinfo,params,function(res){
 			var val = res[0].pert_iname;
 			$("#search",this.el).val(val);
 			self.trigger("search:DidType",{val: val,search_column: 'cell_id'});
