@@ -499,6 +499,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					var datum_list = [];
 					var auto_data = response;
 
+					// filter the list based on the query
+					console.log(this.query);
+					var re = new RegExp(this.query,"i");
+					auto_data = _.filter(auto_data,function(mutation){return re.match(mutation);});
+
 					// build a list of datum objects
 					auto_data.forEach(function(item){
 						var datum = {
