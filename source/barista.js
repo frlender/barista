@@ -6050,6 +6050,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	// ### draw tags
 	// utility function to draw tags diven a data set.  
 	draw_tags: function(){
+		var self = this;
 		// draw the foreground text of all the tags
 		this.fg_layer.selectAll('.tag_list_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.tag_list_text').data(this.tags).enter().append('text')
