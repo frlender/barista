@@ -1214,9 +1214,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
 		
 		var skip = Math.round(Math.random()*40);
-		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id", l:1, sk:skip};
+		var params = {q:'{"cell_id":{"$regex":""}}', l:1, sk:skip};
 		$.getJSON(cellinfo,params,function(res){
-			var val = res[0].pert_iname;
+			var val = res[0].cell_id;
 			$("#search",this.el).val(val);
 			self.trigger("search:DidType",{val: val,search_column: 'cell_id'});
 		});
