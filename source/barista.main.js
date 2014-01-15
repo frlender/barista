@@ -499,8 +499,9 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					var datum_list = [];
 					var auto_data = response;
 
-					// filter the list based on the query
-					console.log($(".typeahead",self.div_string).val());
+					// filter the list based on the query.  self comes from the closure in the view that calls the
+					// dataset. It shold be a reference to the view that is consuming the dataset.  That view should
+					// have a typeahead elment in it somewhere
 					var re = new RegExp($(".typeahead",self.div_string).val(),"i");
 					auto_data = _.filter(auto_data,function(mutation){return re.test(mutation);});
 
