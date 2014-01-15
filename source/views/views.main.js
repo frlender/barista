@@ -1141,7 +1141,7 @@ search view's input, a "search:DidType" event is fired.
 Barista.Views.CellSearchBar = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
-	name: "PertSearchBar",
+	name: "CellSearchBar",
 
 	initialize: function(){
 		var self = this;
@@ -1214,7 +1214,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
 		
 		var skip = Math.round(Math.random()*40);
-		var params = {q:'{"cell_id":{"$regex":""}}', l:1, sk:skip};
+		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
 		$.getJSON(cellinfo,params,function(res){
 			var val = res[0].cell_id;
 			$("#search",this.el).val(val);
