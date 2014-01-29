@@ -1,5 +1,6 @@
 ![barista.js](http://coreyflynn.github.io/Bellhop/img/cmap_broad_logo_small.png)
 
+
 # **Barista.js**
 ### Connectivity Map javascript components
 
