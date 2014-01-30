@@ -8920,7 +8920,7 @@ Barista.Views.GridView = Backbone.View.extend({
 					if ($(String(r[n])).length === 1){
 						line_data.push($(r[n]).text());
 					}else{
-						line_data.push(r[n]);
+						line_data.push(String(r[n]));
 					}
 				});
 				line_string = line_data.join('\t');
