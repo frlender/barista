@@ -56,8 +56,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 			// bind a search:DidType event to the typeahead events coming out of typeahead.js
 			$(".typeahead",self.el).bind('typeahead:selected typeahead:autocompleted', function (obj,datum) {
 				var val = datum.value;
-				var type = (datum.type == "Cellular Context") ? "cell" : "single";
-				self.trigger("search:DidType",{val: val,type: type});
+				self.trigger("search:DidType",{val: val,type: datum.type});
 			});
 		});
 
