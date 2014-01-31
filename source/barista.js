@@ -3595,8 +3595,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:Add");
 			this.resize_div();
 			// reset the slice all data button if it is present
-			window.clearTimeout(this.slice_timer);
-			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+			this.slice_defer.reject();
 		});
 		return getData_promise;
 	},
@@ -3616,8 +3615,8 @@ Barista.Views.GridView = Backbone.View.extend({
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
 				// reset the slice all data button if it is present
-				window.clearTimeout(this.slice_timer);
-				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+				this.slice_defer.reject();
+
 			});
 			return getData_promise;
 		}
@@ -3632,8 +3631,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
 			// reset the slice all data button if it is present
-			window.clearTimeout(this.slice_timer);
-			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+			this.slice_defer.reject();
 
 		},500);
 	},
@@ -3667,8 +3665,16 @@ Barista.Views.GridView = Backbone.View.extend({
 		// indicate that we are making a data slice
 		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
 
+		this.slice_defer = $.Deferred();
+		this.slice_defer.then( 
+			function(){
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
+			}, function() {
+				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+			}
+		);
 		this.slice_timer = window.setTimeout(function(){
-			$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
+			this.slice_defer.resolve();
 		},30000);
 
 	},
