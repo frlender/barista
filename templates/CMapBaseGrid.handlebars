@@ -8,13 +8,20 @@
 			<font color="#0072B2"><i class="icon-share"></i> export table</font>
 		</p>
 	{{/if}}
+	{{#if no_slice}}
+		<div class="col-lg-2"></div>
+	{{else}}
+		<p class="col-lg-2" style="cursor: pointer" id="{{ div_string }}_slice">
+			<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>
+		</p>
+	{{/if}}
 	{{#if no_legend}}
-		<div class="col-lg-10"></div>
+		<div class="col-lg-8"></div>
 	{{else}}
 		{{#if legend}}
 			{{legend}}
 		{{else}}
-			<span class="col-lg-10">
+			<span class="col-lg-8">
 				<p class="pull-right" style="padding-right: 8px"><span class="label" style="background-color: #E69F00">SMC</span> Small Molecule Compound </p>
 				<p class="pull-right" style="padding-right: 8px"><span class="label" style="background-color: #56B4E9">KD</span> Knock Down </p>
 				<p class="pull-right" style="padding-right: 8px"><span class="label" style="background-color: #D55E00">OE</span> Over Expression </p>

@@ -1932,6 +1932,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
 		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
 		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
+		this.no_slice = (this.options.no_slice !== undefined) ? this.options.no_slice : undefined;
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
@@ -1993,6 +1994,10 @@ Barista.Views.GridView = Backbone.View.extend({
 
 		// bind the download text to a function to download the data in the table
 		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
+
+		// bind the download text to a function to slice the data in the table out of the
+		// Connectivity Map database.
+		$("#" + this.div_string + "_slice",this.el).click(function(){self.slice_all_table_data();});
 	},
 
 	checkscroll: _.debounce(function(){
@@ -2070,6 +2075,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:ReplaceCollection");
 			this.trigger("grid:Add");
 			this.resize_div();
+			// reset the slice all data button if it is present
+			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 		});
 		return getData_promise;
 	},
@@ -2088,6 +2095,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
+				// reset the slice all data button if it is present
+				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 			});
 			return getData_promise;
 		}
@@ -2101,6 +2110,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.reset();
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
+			// reset the slice all data button if it is present
+			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 		},500);
 	},
 
@@ -2122,8 +2133,21 @@ Barista.Views.GridView = Backbone.View.extend({
 													   span_class: this.span_class,
 													   legend: this.legend,
 													   no_download: this.no_download,
+													   no_slice: this.no_slice,
 													   no_legend: this.no_legend,
 													}));
+	},
+
+	slice_all_table_data: function(){
+		var self = this;
+
+		// indicate that we are making a data slice
+		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
+
+		window.setTimeout(function(){
+			$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
+		},30000);
+
 	},
 
 	download_table: function(){

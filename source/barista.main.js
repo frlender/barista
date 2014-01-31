@@ -24,20 +24,31 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  
-  return "\n		<div class=\"col-lg-10\"></div>\n	";
+  var buffer = "", stack1;
+  buffer += "\n		<p class=\"col-lg-2\" style=\"cursor: pointer\" id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "_slice\">\n			<font color=\"#0072B2\"><i class=\"icon-cogs\"></i> slice all data</font>\n		</p>\n	";
+  return buffer;
   }
 
 function program7(depth0,data) {
   
+  
+  return "\n		<div class=\"col-lg-8\"></div>\n	";
+  }
+
+function program9(depth0,data) {
+  
   var buffer = "", stack1;
   buffer += "\n		";
-  stack1 = helpers['if'].call(depth0, depth0.legend, {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.legend, {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
   return buffer;
   }
-function program8(depth0,data) {
+function program10(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			";
@@ -48,10 +59,10 @@ function program8(depth0,data) {
   return buffer;
   }
 
-function program10(depth0,data) {
+function program12(depth0,data) {
   
   
-  return "\n			<span class=\"col-lg-10\">\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n			</span>\n		";
+  return "\n			<span class=\"col-lg-8\">\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n			</span>\n		";
   }
 
   buffer += "<div id=\"";
@@ -66,7 +77,10 @@ function program10(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
-  stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.no_slice, {hash:{},inverse:self.program(5, program5, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>";
   return buffer;
@@ -3690,6 +3704,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "col_lg_12";
 		this.legend = (this.options.legend !== undefined) ? this.options.legend : undefined;
 		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
+		this.no_slice = (this.options.no_slice !== undefined) ? this.options.no_slice : undefined;
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
@@ -3751,6 +3766,10 @@ Barista.Views.GridView = Backbone.View.extend({
 
 		// bind the download text to a function to download the data in the table
 		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
+
+		// bind the download text to a function to slice the data in the table out of the
+		// Connectivity Map database.
+		$("#" + this.div_string + "_slice",this.el).click(function(){self.slice_all_table_data();});
 	},
 
 	checkscroll: _.debounce(function(){
@@ -3828,6 +3847,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:ReplaceCollection");
 			this.trigger("grid:Add");
 			this.resize_div();
+			// reset the slice all data button if it is present
+			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 		});
 		return getData_promise;
 	},
@@ -3846,6 +3867,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
+				// reset the slice all data button if it is present
+				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 			});
 			return getData_promise;
 		}
@@ -3859,6 +3882,8 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.reset();
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
+			// reset the slice all data button if it is present
+			$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 		},500);
 	},
 
@@ -3880,8 +3905,21 @@ Barista.Views.GridView = Backbone.View.extend({
 													   span_class: this.span_class,
 													   legend: this.legend,
 													   no_download: this.no_download,
+													   no_slice: this.no_slice,
 													   no_legend: this.no_legend,
 													}));
+	},
+
+	slice_all_table_data: function(){
+		var self = this;
+
+		// indicate that we are making a data slice
+		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
+
+		window.setTimeout(function(){
+			$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
+		},30000);
+
 	},
 
 	download_table: function(){
