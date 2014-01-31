@@ -3670,11 +3670,11 @@ Barista.Views.GridView = Backbone.View.extend({
 			function(){
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
 			}, function() {
-				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 			}
 		);
 		this.slice_timer = window.setTimeout(function(){
-			this.slice_defer.resolve();
+			self.slice_defer.resolve();
 		},30000);
 
 	},
