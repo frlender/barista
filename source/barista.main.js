@@ -8,7 +8,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n		<div class=\"col-lg-2\"></div>\n	";
+  return "\n	";
   }
 
 function program3(depth0,data) {
@@ -73,13 +73,13 @@ function program12(depth0,data) {
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	";
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<div class=\"col-lg-4\">\n	";
   stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
   stack1 = helpers['if'].call(depth0, depth0.no_slice, {hash:{},inverse:self.program(5, program5, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n	";
+  buffer += "\n	</div>\n\n	";
   stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>";
