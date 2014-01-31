@@ -943,7 +943,7 @@ Barista.Models.SignatureModel = Backbone.Model.extend({
 			case "trt_cp": this.set({pert_type_label: '<span class="label" style="background-color: #E69F00">SMC</span>'}); break;
 			case "trt_oe": this.set({pert_type_label: '<span class="label" style="background-color: #D55E00">OE</span>'}); break;
 			case "trt_sh": this.set({pert_type_label: '<span class="label" style="background-color: #56B4E9">KD</span>'}); break;
-			default: this.set({pert_type_label: '<span class="label">' + pert_type + '</span>'});
+			default: this.set({pert_type_label: '<span class="label" style="background-color: #BDBDBD">' + pert_type + '</span>'});
 		}
 
 		// generate an html label for is_gold
