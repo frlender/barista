@@ -3848,7 +3848,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:Add");
 			this.resize_div();
 			// reset the slice all data button if it is present
-			this.slice_defer.reject();
+			if (this.slice_defer){
+				this.slice_defer.reject();
+			}
 		});
 		return getData_promise;
 	},
@@ -3868,8 +3870,9 @@ Barista.Views.GridView = Backbone.View.extend({
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
 				// reset the slice all data button if it is present
-				this.slice_defer.reject();
-
+				if (this.slice_defer){
+					this.slice_defer.reject();
+				}
 			});
 			return getData_promise;
 		}
@@ -3884,7 +3887,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
 			// reset the slice all data button if it is present
-			this.slice_defer.reject();
+			if (self.slice_defer){
+				self.slice_defer.reject();
+			}
 
 		},500);
 	},
