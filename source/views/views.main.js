@@ -3219,8 +3219,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### redraw
 	// completely redraw the view.
 	redraw: function(){
-		self.init_panel();
-		self.render();
+		this.init_panel();
+		this.render();
 	},
 
 	// ### init_panel
