@@ -9973,11 +9973,12 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// bind window resize events to redraw.  Wrap it in a timeout event to
 		// avoid incomplete rendering if resize events get called too often
 		var self = this;
-		var debounced_redraw = _.debounce(function(){
+		var resize_callback = function(){
 			self.init_panel();
 			self.render();
-		},300);
-		$(window).resize(debounced_redraw(self));
+		}
+		var debounced_resize = _.debounce(resize_callback,300);
+		$(window).resize(debounced_resize);
 	},
 
 	// ### compile_template
