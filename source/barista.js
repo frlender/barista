@@ -4712,15 +4712,20 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// render the vis
 		this.redraw();
 
-		// bind window resize events to redraw
+		// bind window resize events to redraw.  Wrap it in a timeout event to
+		// avoid incomplete rendering if resize events get called too often
 		var self = this;
-		$(window).resize(function() {self.redraw();} );
+		$(window).resize(function() {
+			if(self.redrawTO !== false)
+				clearTimeout(TO);
+			self.redrawTO = setTimeout(self.redraw(), 200);
+		});
 	},
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
-		this.div_string = 'd3_target' + new Date().getTime();;
+		this.div_string = 'd3_target' + new Date().getTime();
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
