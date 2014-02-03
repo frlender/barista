@@ -4965,18 +4965,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// render the vis
 		this.redraw();
 
-		// bind window resize events to redraw.  Wrap it in a timeout event to
-		// avoid incomplete rendering if resize events get called too often
+		// bind window resize events to redraw.
 		var self = this;
-		var resize_callback = function(){
-			if(self.resizeTO !== false)
-				clearTimeout(self.resizeTO);
-			self.resizeTO = setTimeout(function(){
-				self.init_panel();
-				self.render();
-			},200);
-		};
-		$(window).resize(resize_callback());
+		$(window).resize(self.redraw());
 	},
 
 	// ### compile_template
@@ -5008,17 +4999,27 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
 
+		// set up drawing layers
+		this.vis.selectAll('.bg_layer').data([]).exit().remove();
+		this.bg_layer = this.vis.append("g").attr("class", "bg_layer");
+
+		this.vis.selectAll('.fg_layer').data([]).exit().remove();
+		this.fg_layer = this.vis.append("g").attr("class", "fg_layer");
+
+		this.vis.selectAll('.controls_layer').data([]).exit().remove();
+		this.controls_layer = this.vis.append("g").attr("class", "controls_layer");
+
 		// draw the background of the panel
-		this.vis.selectAll('.bg_panel').data([]).exit().remove();
-		this.vis.selectAll('.bg_panel').data([1]).enter().append('rect')
+		this.bg_layer.selectAll('.bg_panel').data([]).exit().remove();
+		this.bg_layer.selectAll('.bg_panel').data([1]).enter().append('rect')
 			.attr("class","bg_panel")
 			.attr("height",this.height)
 			.attr("width",this.width)
 			.attr("fill",this.bg_color);
 
 		// draw the static Text
-		this.vis.selectAll('.static_text').data([]).exit().remove();
-		this.vis.selectAll('.static_text').data([1])
+		this.fg_layer.selectAll('.static_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.static_text').data([1])
 							.enter().append("text")
 							.attr("class","static_text")
 							.attr("x",10)
@@ -5033,8 +5034,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		if (pert_count === undefined){
 			pert_count = 0;
 		}
-		var pert_count_text = this.vis.selectAll('.pert_count').data([]).exit().remove();
-		pert_count_text = this.vis.selectAll('.pert_count').data([1])
+		var pert_count_text = this.fg_layer.selectAll('.pert_count').data([]).exit().remove();
+		pert_count_text = this.fg_layer.selectAll('.pert_count').data([1])
 							.enter().append("text")
 							.attr("class","pert_count")
 							.attr("x",10)
@@ -5045,7 +5046,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 							.text(pert_count);
 
 		// for each sub-category, draw a bar graph well
-		this.category_rect_selection = this.vis.selectAll('.category_rect_well');
+		this.category_rect_selection = this.fg_layer.selectAll('.category_rect_well');
 		this.category_rect_selection.data([]).exit().remove();
 		this.category_rect_selection.data(this.categories).enter().append('rect')
 			.attr("class","category_rect_well")
@@ -5056,7 +5057,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.attr("fill",this.well_color);
 
 		// for each sub-category, draw a bar graph
-		this.category_rect_selection = this.vis.selectAll('.category_rect');
+		this.category_rect_selection = this.fg_layer.selectAll('.category_rect');
 		this.category_rect_selection.data([]).exit().remove();
 		this.category_rect_selection.data(this.categories).enter().append('rect')
 			.attr("class","category_rect")
@@ -5067,8 +5068,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.attr("fill",this.fg_color);
 
 		// for each sub-category, add a name
-		this.vis.selectAll('.category_name').data([]).exit().remove();
-		this.vis.selectAll('.category_name').data(this.categories).enter().append("text")
+		this.fg_layer.selectAll('.category_name').data([]).exit().remove();
+		this.fg_layer.selectAll('.category_name').data(this.categories).enter().append("text")
 			.attr("class","category_name")
 			.attr("x",10)
 			.attr("y",function(d,i){return i*35 + 105;})
@@ -5078,8 +5079,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.text(function(d){return Barista.CMapPertTypeAlias(d._id).name;});
 
 		// for each sub-category, add a value
-		this.vis.selectAll('.category_value').data([]).exit().remove();
-		this.vis.selectAll('.category_value').data(this.categories).enter().append("text")
+		this.fg_layer.selectAll('.category_value').data([]).exit().remove();
+		this.fg_layer.selectAll('.category_value').data(this.categories).enter().append("text")
 			.attr("class","category_value")
 			.attr("x",this.width - 10)
 			.attr("y",function(d,i){return i*35 + 105;})
@@ -5091,8 +5092,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.text(function(d){return d.count.toFixed(0);});
 
 		// add a png export overlay
-		this.vis.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
-		this.vis.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
 			.attr("class", this.div_string + "png_export no_png_export")
 			.attr("x",10)
 			.attr("y",this.height - 10)
@@ -5144,12 +5145,12 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		});
 		this.max_category_count = _.max(_.pluck(this.categories,'count'));
 		this.max_category_count = (this.max_category_count < 1) ? 1 : this.max_category_count;
-		var category_update_selection = this.vis.selectAll('.category_rect').data(this.categories);
+		var category_update_selection = this.fg_layer.selectAll('.category_rect').data(this.categories);
 		category_update_selection.transition().duration(500)
 			.attr("width",function(d){return (self.width - 20) * (d.count / self.max_category_count);});
 
 		// transition the updated category labels
-		this.vis.selectAll('.category_value').data(this.categories)
+		this.fg_layer.selectAll('.category_value').data(this.categories)
 			.transition().duration(500)
 			.tween("text", function(d,i) {
 				var count = d.count.toFixed(0);
