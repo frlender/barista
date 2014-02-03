@@ -3198,7 +3198,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 		$(window).resize(function() {
 			if(self.redrawTO !== false)
-				clearTimeout(slef.redrawTO);
+				clearTimeout(self.redrawTO);
 			self.redrawTO = setTimeout(self.redraw(), 200);
 		});
 	},
