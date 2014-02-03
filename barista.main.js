@@ -9968,7 +9968,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 						.attr("height",this.height);
 
 		// render the vis
-		this.redraw();
+		this.init_panel();
+		this.render();
 
 		// bind window resize events to redraw.  Wrap it in a timeout event to
 		// avoid incomplete rendering if resize events get called too often
@@ -9993,7 +9994,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// completely redraw the view.
 	redraw: function(){
 		this.init_panel();
-		this.render();
+		// this.render();
 	},
 
 	// ### init_panel
@@ -10045,7 +10046,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 							.attr("font-size","36pt")
 							.text(pert_count);
 
-		// for each sub-category, draw a bar graph
+		// for each sub-category, draw a bar graph well
 		this.category_rect_selection = this.vis.selectAll('.category_rect_well');
 		this.category_rect_selection.data([]).exit().remove();
 		this.category_rect_selection.data(this.categories).enter().append('rect')
