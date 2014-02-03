@@ -4969,11 +4969,14 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// avoid incomplete rendering if resize events get called too often
 		var self = this;
 		var resize_callback = function(){
-			self.init_panel();
-			self.render();
-		}
-		var debounced_resize = _.debounce(resize_callback,300);
-		$(window).resize(debounced_resize);
+			if(self.resizeTO !== false)
+				clearTimeout(self.resizeTO);
+			self.resizeTO = setTimeout(function(){
+				self.init_panel();
+				self.render();
+			},200);
+		};
+		$(window).resize(resize_callback());
 	},
 
 	// ### compile_template
