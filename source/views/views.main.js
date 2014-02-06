@@ -2170,7 +2170,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// message asking the user to try again
 		sig_slice = 'http://prefix:8080/a2/sigslice?callback=?';
 		$.ajax({
-			dataType: 'jsonp',
+			dataType: 'json',
 			url: sig_slice,
 			data: {q: self.collection.q_param,l: 1000},
 			success: function(res){
@@ -2198,6 +2198,14 @@ Barista.Views.GridView = Backbone.View.extend({
 				// ajax call normally
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
 				this.slice_defer.resolve();
+			},
+			statusCode: {
+				404: function(){
+					// if we can't find the url, update the button with an error message and 
+					// resolve the deferred to indicate we finished the ajax call normally
+					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+					this.slice_defer.resolve();
+				}
 			}
 		});
 	},
