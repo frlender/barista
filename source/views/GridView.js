@@ -287,7 +287,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// resolve the deferred to indicate we finished the 
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
 		setTimeout(function(){
-			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
 			self.slice_defer.resolve();
 		},60000);
 	},
