@@ -251,7 +251,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// message asking the user to try again
 		sig_slice = 'http://prefix:8080/a2/sigslice?callback=?';
 		$.ajax({
-			dataType: 'json',
+			dataType: 'jsonp',
 			url: sig_slice,
 			data: {q: self.collection.q_param,l: 1000},
 			success: function(res){
