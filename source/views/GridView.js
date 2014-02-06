@@ -253,7 +253,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		$.ajax({
 			dataType: 'json',
 			url: sig_slice,
-			data: q_param,
+			data: self.collection.q_param,
 			success: function(res){
 				if (res.file_url){
 					// construct an html sting to expose the link
