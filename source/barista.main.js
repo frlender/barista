@@ -3923,18 +3923,55 @@ Barista.Views.GridView = Backbone.View.extend({
 		// indicate that we are making a data slice
 		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
 
+		// create a Deferred on the object to handle interaction with the slicing
+		// operation.  This allows us to resolve the Deffered later in another
+		// method before the ajax call returns if we need to
 		this.slice_defer = $.Deferred();
-		this.slice_defer.then( 
-			function(){
-				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-share"></i> download slice</font>');
-			}, function() {
+		
+		// . If the Deferred resolves successfully, leave the button alone and let other the ajax call
+		// below manipulate it.  If it is rejected, set the button back up to its original state.
+		this.slice_defer.fail(function() {
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 			}
 		);
-		this.slice_timer = window.setTimeout(function(){
-			self.slice_defer.resolve();
-		},30000);
-
+		
+		// grab the API 'q' query parameter from the grid's collection and send it
+		// to sig_slice API.  if the slice job completes, check the return for a 
+		// file_url attribute and change the link in the slice button to expose the
+		// link.  If it does not exist, the slice failed and we display a failure
+		// message asking the user to try again
+		sig_slice = 'http://prefix:8080/a2/sigslice?callback=?';
+		$.ajax({
+			dataType: 'json',
+			url: sig_slice,
+			data: q_param,
+			success: function(res){
+				if (res.file_url){
+					// construct an html sting to expose the link
+					var html_string = ['<a href="',
+									   res.file_url,
+									   '">',
+									   '<font color="#0072B2"><i class="icon-link"></i> downlad slice</font></a>'].join('');
+					// update the button and resolve the deferred to 
+					// indicate we finished the ajax call normally
+					$("#" + self.div_string + "_slice",self.el).html(html_string);
+					this.slice_defer.resolve();
+				}else{
+					// update the button with an error message and 
+					// resolve the deferred to indicate we finished the 
+					// ajax call normally
+					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+					this.slice_defer.resolve();
+				}
+			},
+			error: function(){
+				// update the button with an error message and 
+				// resolve the deferred to indicate we finished the 
+				// ajax call normally
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+				this.slice_defer.resolve();
+			}
+		});
 	},
 
 	download_table: function(){
