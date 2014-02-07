@@ -3594,9 +3594,11 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:ReplaceCollection");
 			this.trigger("grid:Add");
 			this.resize_div();
-			// reset the slice all data button if it is present
-			if (this.slice_defer){
-				this.slice_defer.reject();
+			// reset the slice all data button and reject the slice
+			// deferred if it is present
+			self.change_slice_button_state("slice");
+			if (self.slice_defer){
+				self.slice_defer.reject();
 			}
 		});
 		return getData_promise;
@@ -3616,9 +3618,12 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
-				// reset the slice all data button if it is present
-				if (this.slice_defer){
-					this.slice_defer.reject();
+				
+				// reset the slice all data button and reject the slice
+				// deferred if it is present
+				self.change_slice_button_state("slice");
+				if (self.slice_defer){
+					self.slice_defer.reject();
 				}
 			});
 			return getData_promise;
@@ -3633,7 +3638,10 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.reset();
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
-			// reset the slice all data button if it is present
+			
+			// reset the slice all data button and reject the slice
+			// deferred if it is present
+			self.change_slice_button_state("slice");
 			if (self.slice_defer){
 				self.slice_defer.reject();
 			}

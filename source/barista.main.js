@@ -18,7 +18,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "_download\">\n			<font color=\"#0072B2\"><i class=\"icon-share\"></i> export table</font>\n		</p>\n	";
+    + "_download\">\n			<font color=\"#0072B2\"><i class=\"icon-download\"></i> export table</font>\n		</p>\n	";
   return buffer;
   }
 
@@ -3847,9 +3847,11 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.trigger("grid:ReplaceCollection");
 			this.trigger("grid:Add");
 			this.resize_div();
-			// reset the slice all data button if it is present
-			if (this.slice_defer){
-				this.slice_defer.reject();
+			// reset the slice all data button and reject the slice
+			// deferred if it is present
+			self.change_slice_button_state("slice");
+			if (self.slice_defer){
+				self.slice_defer.reject();
 			}
 		});
 		return getData_promise;
@@ -3869,9 +3871,12 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
-				// reset the slice all data button if it is present
-				if (this.slice_defer){
-					this.slice_defer.reject();
+				
+				// reset the slice all data button and reject the slice
+				// deferred if it is present
+				self.change_slice_button_state("slice");
+				if (self.slice_defer){
+					self.slice_defer.reject();
 				}
 			});
 			return getData_promise;
@@ -3886,7 +3891,10 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.reset();
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
-			// reset the slice all data button if it is present
+			
+			// reset the slice all data button and reject the slice
+			// deferred if it is present
+			self.change_slice_button_state("slice");
 			if (self.slice_defer){
 				self.slice_defer.reject();
 			}
