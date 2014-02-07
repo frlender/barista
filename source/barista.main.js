@@ -3850,6 +3850,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			// reset the slice all data button if it is present
 			if (this.slice_defer){
 				this.slice_defer.reject();
+				clearTimeout(self.slice_timeout);
 			}
 		});
 		return getData_promise;
@@ -3872,6 +3873,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				// reset the slice all data button if it is present
 				if (this.slice_defer){
 					this.slice_defer.reject();
+					clearTimeout(self.slice_timeout);
 				}
 			});
 			return getData_promise;
@@ -3889,6 +3891,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			// reset the slice all data button if it is present
 			if (self.slice_defer){
 				self.slice_defer.reject();
+				clearTimeout(self.slice_timeout);
 			}
 
 		},500);
@@ -3961,6 +3964,7 @@ Barista.Views.GridView = Backbone.View.extend({
 					// indicate we finished the ajax call normally
 					$("#" + self.div_string + "_slice",self.el).html(html_string);
 					self.slice_defer.resolve();
+					clearTimeout(self.slice_timeout);
 				}else{
 					// update the button with an error message and 
 					// resolve the deferred to indicate we finished the 
@@ -3968,6 +3972,7 @@ Barista.Views.GridView = Backbone.View.extend({
 					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 					$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 					self.slice_defer.resolve();
+					clearTimeout(self.slice_timeout);
 				}
 			},
 			error: function(){
@@ -3977,6 +3982,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 				self.slice_defer.resolve();
+				clearTimeout(self.slice_timeout);
 			}
 		});
 		
@@ -3984,7 +3990,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// update the button with an error message and 
 		// resolve the deferred to indicate we finished the 
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
-		setTimeout(function(){
+		this.slice_timeout = setTimeout(function(){
 			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 			$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 			self.slice_defer.resolve();
