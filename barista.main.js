@@ -8970,7 +8970,7 @@ Barista.Views.GridView = Backbone.View.extend({
 					// update the button with an error message and 
 					// resolve the deferred to indicate we finished the 
 					// ajax call normally
-					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 					$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 					this.slice_defer.resolve();
 				}
@@ -8979,7 +8979,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				// update the button with an error message and 
 				// resolve the deferred to indicate we finished the 
 				// ajax call normally
-				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 				this.slice_defer.resolve();
 			}
@@ -8990,7 +8990,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// resolve the deferred to indicate we finished the 
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
 		setTimeout(function(){
-			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
 			$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 			self.slice_defer.resolve();
 		},60000);
