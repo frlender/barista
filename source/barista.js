@@ -3618,13 +3618,6 @@ Barista.Views.GridView = Backbone.View.extend({
 			this.listenToOnce(this.collection,"add", function(){
 				this.trigger("grid:UpdateCollection");
 				this.trigger("grid:Add");
-				
-				// reset the slice all data button and reject the slice
-				// deferred if it is present
-				self.change_slice_button_state("slice");
-				if (self.slice_defer){
-					self.slice_defer.reject();
-				}
 			});
 			return getData_promise;
 		}
