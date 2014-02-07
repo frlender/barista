@@ -3669,24 +3669,18 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	slice_all_table_data: function(){
 		var self = this;
-
-		// indicate that we are making a data slice
-		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
-
-		// unbind all handlers so that we can't click the while while we are slicing
-		$("#" + this.div_string + "_slice",this.el).unbind();
+		// change the button state to progress
+		this.change_slice_button_state("progress");
 
 		// create a Deferred on the object to handle interaction with the slicing
 		// operation.  This allows us to resolve the Deffered later in another
 		// method before the ajax call returns if we need to
 		this.slice_defer = $.Deferred();
 		
-		// . If the Deferred resolves successfully, leave the button alone and let other the ajax call
+		// If the Deferred resolves successfully, leave the button alone and let other the ajax call
 		// below manipulate it.  If it is rejected, set the button back up to its original state.
 		this.slice_defer.fail(function() {
-				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
-				// rebind the click event
-				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
+				self.change_slice_button_state("slice");
 			}
 		);
 		
@@ -3702,34 +3696,13 @@ Barista.Views.GridView = Backbone.View.extend({
 			data: {q: self.collection.q_param,l: 1000},
 			success: function(res){
 				if (res.file_url){
-					// construct an html sting to expose the link
-					var html_string = ['<a href="',
-									   res.file_url,
-									   '">',
-									   '<font color="#0072B2"><i class="icon-link"></i> downlad slice</font></a>'].join('');
-					// update the button and resolve the deferred to 
-					// indicate we finished the ajax call normally
-					$("#" + self.div_string + "_slice",self.el).html(html_string);
-					self.slice_defer.resolve();
-					clearTimeout(self.slice_timeout);
+					self.change_slice_button_state("link",res.file_url);
 				}else{
-					// update the button with an error message and 
-					// resolve the deferred to indicate we finished the 
-					// ajax call normally
-					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
-					$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
-					self.slice_defer.resolve();
-					clearTimeout(self.slice_timeout);
+					self.change_slice_button_state("fail");
 				}
 			},
 			error: function(){
-				// update the button with an error message and 
-				// resolve the deferred to indicate we finished the 
-				// ajax call normally
-				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
-				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
-				self.slice_defer.resolve();
-				clearTimeout(self.slice_timeout);
+				self.change_slice_button_state("fail");
 			}
 		});
 		
@@ -3738,10 +3711,58 @@ Barista.Views.GridView = Backbone.View.extend({
 		// resolve the deferred to indicate we finished the 
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
 		this.slice_timeout = setTimeout(function(){
-			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
-			$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
-			self.slice_defer.resolve();
+			self.change_slice_button_state("fail");
 		},60000);
+	},
+
+	change_slice_button_state: function (state,link){
+		var self = this;
+		// unbind an handlers on the button
+		$("#" + self.div_string + "_slice",self.el).unbind();
+
+		// handle the re-binding of handlers and update the button text and icon
+		switch (state){
+			case "slice":
+				// update the slice button to show an available data slice
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+				
+				// rebind the click event and clear a timeout if present
+				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
+				clearTimeout(self.slice_timeout);
+				break;
+
+			case "progress":
+				// indicate that we are making a data slice
+				$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
+
+				// unbind all handlers so that we can't click the while while we are slicing
+				$("#" + this.div_string + "_slice",this.el).unbind();
+				break;
+
+			case "link":
+				// construct an html string to expose the link
+				var html_string = ['<a href="',
+								   link,
+								   '">',
+								   '<font color="#0072B2"><i class="icon-link"></i> downlad slice</font></a>'].join('');
+				
+				// update the button and resolve the deferred to 
+				// indicate we finished the ajax call normally
+				$("#" + self.div_string + "_slice",self.el).html(html_string);
+				self.slice_defer.resolve();
+				clearTimeout(self.slice_timeout);
+				break;
+
+			case "fail":
+				// update the button with an error message,
+				// resolve the deferred and clear the Timeout
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation"></i> slice failed. try again?</font>');
+				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
+				self.slice_defer.resolve();
+				clearTimeout(self.slice_timeout);
+				break;
+		}
+
 	},
 
 	download_table: function(){
