@@ -8928,6 +8928,9 @@ Barista.Views.GridView = Backbone.View.extend({
 		// indicate that we are making a data slice
 		$("#" + this.div_string + "_slice",this.el).html('<font color="#0072B2"><i class="icon-cog icon-spin"></i> slicing</font>');
 
+		// unbind all handlers so that we can't click the while while we are slicing
+		$("#" + this.div_string + "_slice",this.el).unbind();
+
 		// create a Deferred on the object to handle interaction with the slicing
 		// operation.  This allows us to resolve the Deffered later in another
 		// method before the ajax call returns if we need to
@@ -8937,6 +8940,8 @@ Barista.Views.GridView = Backbone.View.extend({
 		// below manipulate it.  If it is rejected, set the button back up to its original state.
 		this.slice_defer.fail(function() {
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
+				// rebind the click event
+				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 			}
 		);
 		
@@ -8965,7 +8970,8 @@ Barista.Views.GridView = Backbone.View.extend({
 					// update the button with an error message and 
 					// resolve the deferred to indicate we finished the 
 					// ajax call normally
-					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+					$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+					$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 					this.slice_defer.resolve();
 				}
 			},
@@ -8973,7 +8979,8 @@ Barista.Views.GridView = Backbone.View.extend({
 				// update the button with an error message and 
 				// resolve the deferred to indicate we finished the 
 				// ajax call normally
-				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-frown-o"></i> slice failed. try again?</font>');
+				$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 				this.slice_defer.resolve();
 			}
 		});
@@ -8984,6 +8991,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
 		setTimeout(function(){
 			$("#" + self.div_string + "_slice",self.el).html('<font color="#D55E00"><i class="icon-exclamation-circle"></i> slice failed. try again?</font>');
+			$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
 			self.slice_defer.resolve();
 		},60000);
 	},
