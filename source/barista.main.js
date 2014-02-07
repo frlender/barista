@@ -3769,7 +3769,7 @@ Barista.Views.GridView = Backbone.View.extend({
 
 		// bind the download text to a function to slice the data in the table out of the
 		// Connectivity Map database.
-		$("#" + this.div_string + "_slice",this.el).click(function(){self.slice_all_table_data();});
+		self.change_slice_button_state("slice");
 	},
 
 	checkscroll: _.debounce(function(){
@@ -3850,7 +3850,6 @@ Barista.Views.GridView = Backbone.View.extend({
 			// reset the slice all data button if it is present
 			if (this.slice_defer){
 				this.slice_defer.reject();
-				clearTimeout(self.slice_timeout);
 			}
 		});
 		return getData_promise;
@@ -3873,7 +3872,6 @@ Barista.Views.GridView = Backbone.View.extend({
 				// reset the slice all data button if it is present
 				if (this.slice_defer){
 					this.slice_defer.reject();
-					clearTimeout(self.slice_timeout);
 				}
 			});
 			return getData_promise;
@@ -3891,7 +3889,6 @@ Barista.Views.GridView = Backbone.View.extend({
 			// reset the slice all data button if it is present
 			if (self.slice_defer){
 				self.slice_defer.reject();
-				clearTimeout(self.slice_timeout);
 			}
 
 		},500);
@@ -3980,7 +3977,7 @@ Barista.Views.GridView = Backbone.View.extend({
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
 				
 				// rebind the click event and clear a timeout if present
-				$("#" + self.div_string + "_slice",self.el).click(function(){self.slice_all_table_data();});
+				$("#" + this.div_string + "_slice",this.el).click(function(){self.slice_all_table_data();});
 				clearTimeout(self.slice_timeout);
 				break;
 
