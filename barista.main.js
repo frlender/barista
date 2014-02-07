@@ -5188,7 +5188,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"input-group col-lg-12\">\n	<input class=\"typeahead form-control\" autocomplete=\"off\" type=\"text\" placeholder=\"search gene, compound, or cell type name; separate compound searches with :\" data-provide=\"typeahead\" id=\"search\">\n	<span class=\"input-group-addon\">Search Connectivity Map</span>\n</div>\n";
+  return "<div class=\"input-group col-lg-12\">\n	<input class=\"typeahead form-control\" autocomplete=\"off\" type=\"text\" placeholder=\"search gene, compound, or cell type name\" data-provide=\"typeahead\" id=\"search\">\n</div>\n";
   });
 
 this["BaristaTemplates"]["TypeaheadItem"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
