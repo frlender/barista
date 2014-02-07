@@ -10,10 +10,12 @@
 }
 
 .cmap-link{
-	font-family: Tahoma;
-	font-size: 9pt;
 	cursor: pointer;
 	cursor: hand;
+}
+
+.cmap-link:hover {
+	text-decoration: none;
 }
 
 .cmap-brand-text{

@@ -3994,8 +3994,8 @@ Barista.Views.GridView = Backbone.View.extend({
 				// construct an html string to expose the link
 				var html_string = ['<a href="',
 								   link,
-								   '">',
-								   '<font color="#0072B2"><i class="icon-link"></i> downlad slice</font></a>'].join('');
+								   '" class="cmap-link">',
+								   '<font color="#0072B2"><i class="icon-link"></i> download slice</font></a>'].join('');
 				
 				// update the button and resolve the deferred to 
 				// indicate we finished the ajax call normally
