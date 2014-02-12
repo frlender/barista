@@ -51,12 +51,6 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     last_update: (new Date()).getTime()
   },
 
-  // ### initialize
-  // Overides the base Model initialize method to fetch data matching an empty string
-  initialize: function () {
-    this.fetch("");
-  },
-
   // ### fetch
   // fetches new data from the cell_info api.  the count and pert_types data
   // is replaced with new data coming from the api call
@@ -282,12 +276,6 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     "tree_object": {children:[]}
   },
 
-  // ### initialize
-  // overrides the model's default initialize method to fetch data with a filter of ""
-  initialize: function () {
-    this.fetch("");
-  },
-
   // ### fetch
   // fetches new data from the pert_info api.  the tree_object data is updated
   fetch: function(search_string,search_type){
@@ -418,13 +406,6 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
     short_description: "",
     long_description: "",
     gene_wiki_link: ""
-  },
-
-  // ### initialize
-  // Overides the base Model initialize method to fetch data matching an empty string
-  //    pert_count_view.initialize();
-  initialize: function () {
-    this.fetch("");
   },
 
   // ### fetch

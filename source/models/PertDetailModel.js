@@ -25,13 +25,6 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
     gene_wiki_link: ""
   },
 
-  // ### initialize
-  // Overides the base Model initialize method to fetch data matching an empty string
-  //    pert_count_view.initialize();
-  initialize: function () {
-    this.fetch("");
-  },
-
   // ### fetch
   // fetches new data from the pert_info api.  the short_description and long_description
   // are replaced with new data coming from the api call

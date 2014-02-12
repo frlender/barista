@@ -16,12 +16,6 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     "tree_object": {children:[]}
   },
 
-  // ### initialize
-  // overrides the model's default initialize method to fetch data with a filter of ""
-  initialize: function () {
-    this.fetch("");
-  },
-
   // ### fetch
   // fetches new data from the pert_info api.  the tree_object data is updated
   fetch: function(search_string,search_type){
