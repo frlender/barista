@@ -6528,6 +6528,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // of the model list from a remote api.  On success, set **isLoading** back to false
 		$.getJSON(this.url, params, function(res){
             self.set(res);
+            self.isLoading = false;
         });
 
   //       this.fetch({data: $.param(params),
