@@ -354,7 +354,7 @@ Barista.setUserKey = function(key) {
 	});
 
 	// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
-	key_request.done(function(){
+	key_request.always(function(){
 			$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
 			var re = new RegExp('api.lincscloud.org');
 			if (re.test(options.url)){
