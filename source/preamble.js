@@ -17,11 +17,3 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
-
-// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
-$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
-	var re = new RegExp('api.lincscloud.org');
-	if (re.test(options.url)){
-		options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
-	}
-});
