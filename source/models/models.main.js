@@ -354,12 +354,6 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     "last_update": (new Date()).getTime()
   },
 
-  // ### initialize
-  // Overides the base Model initialize method to fetch data matching an empty string
-  initialize: function () {
-    this.fetch("");
-  },
-
   // ### fetch
   // fetches new data from the pert_info api.  the count and pert_types data
   // is replaced with new data coming from the api call
