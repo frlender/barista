@@ -57,9 +57,10 @@ Barista.getEmSizeInPixels = function(id) {
 Barista.setUserKey = function(key) {
 	// grab the user_key from the url given by string passed in 'key' or set the string itself
 	// as user_key if an ajax call to the string fails
-	var key_request = $.getJSON(key,function(res){
+	var key_request = $.ajax(key,{dataType: 'json',async: false});
+	key_request.done(function(res){
 		Barista.user_key = res.user_key;
-	},{async: false});
+	});
 	key_request.fail(function(){
 		Barista.user_key = key;
 	});
