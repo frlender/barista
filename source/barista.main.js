@@ -270,6 +270,14 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
+$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
+	var re = new RegExp('api.lincscloud.org');
+	if (re.test(options.url)){
+		options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
+	}
+});
 // # **CellHistologyDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -596,14 +604,6 @@ Barista.getEmSizeInPixels = function(id) {
 // 
 // 1.  {string}  **key**  The user_key to use or a path to a JSON file containing a user_key attribute, defaults to *""*
 Barista.setUserKey = function(key) {
-	// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
-	$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
-		var re = new RegExp('api.lincscloud.org');
-		if (re.test(options.url)){
-			options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
-		}
-	});
-
 	// grab the user_key from the url given by string passed in 'key' or set the string itself
 	// as user_key if an ajax call to the string fails
 	var key_request = $.ajax(key,{dataType: 'json',async: false});
