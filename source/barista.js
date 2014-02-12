@@ -1089,16 +1089,11 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
             l: this.limit,
             // s: this.s_param, // no sorting yet
             sk: this.skip};
-        this.fetch({data: $.param(params),
-              remove: false,
-              success: function() {
-                self.isLoading = false;
-                self.trigger("fetch");
-                // alert("fetch success");
-              },
-              error: function() {
-                // alert("fetch failed");
-              }
+        
+        $.getJSON(this.url, params, function(res){
+            self.set(res,{remove: false});
+            self.isLoading = false;
+            self.trigger("fetch");
         });
     }
 });
@@ -1273,11 +1268,6 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
             self.isLoading = false;
         });
 
-  //       this.fetch({data: $.param(params),
-		// 			remove: false,
-		// 			success: function() {self.isLoading = false;}
-		// });
-
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
         if (this.maxCount == Infinity){
@@ -1394,10 +1384,10 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
-		var getData_promise = this.fetch({data: $.param(params),
-					remove: false,
-					success: function() {self.isLoading = false;}
-		});
+		var getData_promise = $.getJSON(this.url, params, function(res){
+            self.set(res,{remove: false});
+            self.isLoading = false;
+        });
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it

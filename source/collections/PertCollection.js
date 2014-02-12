@@ -92,11 +92,6 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
             self.isLoading = false;
         });
 
-  //       this.fetch({data: $.param(params),
-		// 			remove: false,
-		// 			success: function() {self.isLoading = false;}
-		// });
-
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
         if (this.maxCount == Infinity){

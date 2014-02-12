@@ -69,16 +69,11 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
             l: this.limit,
             // s: this.s_param, // no sorting yet
             sk: this.skip};
-        this.fetch({data: $.param(params),
-              remove: false,
-              success: function() {
-                self.isLoading = false;
-                self.trigger("fetch");
-                // alert("fetch success");
-              },
-              error: function() {
-                // alert("fetch failed");
-              }
+        
+        $.getJSON(this.url, params, function(res){
+            self.set(res,{remove: false});
+            self.isLoading = false;
+            self.trigger("fetch");
         });
     }
 });
