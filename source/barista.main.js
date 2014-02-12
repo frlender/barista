@@ -598,22 +598,20 @@ Barista.getEmSizeInPixels = function(id) {
 Barista.setUserKey = function(key) {
 	// grab the user_key from the url given by string passed in 'key' or set the string itself
 	// as user_key if an ajax call to the string fails
+	// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
+	$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
+		var re = new RegExp('api.lincscloud.org');
+		if (re.test(options.url)){
+			options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
+		}
+	});
+	
 	var key_request = $.ajax(key,{dataType: 'json',async: false});
 	key_request.done(function(res){
 		Barista.user_key = res.user_key;
 	});
 	key_request.fail(function(){
 		Barista.user_key = key;
-	});
-
-	// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
-	key_request.always(function(){
-			$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
-			var re = new RegExp('api.lincscloud.org');
-			if (re.test(options.url)){
-				options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
-			}
-		});
 	});
 };
 // # **BarPlotModel**
