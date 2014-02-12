@@ -1268,10 +1268,14 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
-		this.fetch({data: $.param(params),
-					remove: false,
-					success: function() {self.isLoading = false;}
-		});
+		$.getJSON(this.url, params, function(res){
+            self.set(res);
+        });
+
+  //       this.fetch({data: $.param(params),
+		// 			remove: false,
+		// 			success: function() {self.isLoading = false;}
+		// });
 
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
