@@ -165,8 +165,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellLineage: 
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 2 items at a time in the autocomplete dropdown
+			limit: 2,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
@@ -280,6 +280,81 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					});
 
 					// return the processed list of datums for the autocomplete
+					return datum_list;
+				}
+			}
+		}
+	}
+);
+// # **PRISMPertINameDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// Perturbation IDs available in the Connectivity Map
+
+// PRISMPertINameDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+	{ PRISMPertIName:
+			{
+			// only return 2 items at a time in the autocomplete dropdown
+			limit: 2,
+
+			// provide a name for the default typeahead data source
+			name: 'PRISMPertIName',
+
+			// the template to render for all results
+			template: '<span class="label" style="background-color: #8387e6">PRISM</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+			// use twitter's hogan.js to compile the template for the typeahead results
+			engine: Hogan,
+
+			remote: {
+				// set the remote data source to use cellinfo with custom query params
+				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
+					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  '&f={"pert_iname":1}',
+					  '&l=100',
+					  '&s={"pert_iname":1}'].join(''),
+				
+				dataType: 'jsonp',
+
+				filter: function(response){
+					var datum_list = [];
+					var auto_data = [];
+					var object_map = {};
+
+					// for each item, pull out its pert_iname and use that for the
+					// autocomplete value. Build a datum of other relevant data
+					// for use in suggestion displays
+					response.forEach(function(element){
+						auto_data.push(element.pert_iname);
+						object_map[element.pert_iname] = element;
+					});
+
+					// make sure we only show unique items
+					auto_data = _.uniq(auto_data);
+
+					// add cell lines if required
+					// if (self.match_cell_lines){
+					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// }
+
+					// build a list of datum objects
+					auto_data.forEach(function(item){
+						var datum = {
+							value: item,
+							tokens: [item],
+							data: object_map[item]
+						}
+						_.extend(datum,{
+							type: 'Chemical Reagent',
+							color: '#E69F00',
+						});
+						datum_list.push(datum);
+						return datum_list;
+					});
+
+					// return the processed list of daums for the autocomplete
 					return datum_list;
 				}
 			}
@@ -5511,6 +5586,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		@default true
 		@type Boolean
 		**/
+		
+		// set up custom Datasets if they are passed in the constructor
+		this.datasets = (this.options.datasets !== undefined) ? this.options.datasets : [Barista.Datasets.CellID,Barista.Datasets.PertIName];
+
 		// determine wether or not we will match cell line strings in the autocomplete
 		this.match_cell_lines = (this.options.match_cell_lines !== undefined) ? this.options.match_cell_lines : true;
 
@@ -5596,8 +5675,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		// load the template into the view's el tag
 		this.$el.append(BaristaTemplates.CMapPertSearchBar());
 
-		$('#search',this.$el).typeahead([Barista.Datasets.CellID,
-										 Barista.Datasets.PertIName]);
+		$('#search',this.$el).typeahead(self.datasets);
 	}
 });
 // # **ScatterPlotView**

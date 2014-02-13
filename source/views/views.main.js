@@ -3896,6 +3896,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		@default true
 		@type Boolean
 		**/
+		
+		// set up custom Datasets if they are passed in the constructor
+		this.datasets = (this.options.datasets !== undefined) ? this.options.datasets : [Barista.Datasets.CellID,Barista.Datasets.PertIName];
+
 		// determine wether or not we will match cell line strings in the autocomplete
 		this.match_cell_lines = (this.options.match_cell_lines !== undefined) ? this.options.match_cell_lines : true;
 
@@ -3981,8 +3985,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		// load the template into the view's el tag
 		this.$el.append(BaristaTemplates.CMapPertSearchBar());
 
-		$('#search',this.$el).typeahead([Barista.Datasets.CellID,
-										 Barista.Datasets.PertIName]);
+		$('#search',this.$el).typeahead(self.datasets);
 	}
 });
 // # **ScatterPlotView**
