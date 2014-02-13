@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellMutation: 
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 2 items at a time in the autocomplete dropdown
+			limit: 2,
 
 			// provide a name for the default typeahead data source
 			name: 'CellMutation',

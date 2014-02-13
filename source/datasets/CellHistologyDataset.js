@@ -9,7 +9,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology: 
 			{
 			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			limit: 2,
 
 			// provide a name for the default typeahead data source
 			name: 'CellHistology',
