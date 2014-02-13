@@ -693,7 +693,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
 
 // `generic_count_model = new GenericCountModel()`
 
-Barista.Models.PertCountModel = Backbone.Model.extend({
+Barista.Models.GenericCountModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
