@@ -26,7 +26,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // ## initialize
   // custom initialization to make sure we have the correct url for jsonp
   initialize: function(){
-    var re = new RegExp("?callback=?");
+    var re = new RegExp("/?callback=/?");
     if (!re.test(this.get("url"))){
       this.set({"url": this.get("url") + "?callback=?"});
     }
