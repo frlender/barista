@@ -286,81 +286,6 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
-// # **PRISMPertINameDataset**
-// An object that extends Barista.Datasets to specify a backing dataset for
-// Perturbation IDs available in the Connectivity Map
-
-// PRISMPertINameDataset is typically not used directly, rather it's content
-// is extracted from Barista.Datasets in views such as CMapSearchView
-
-Barista.Datasets = _.extend(Barista.Datasets,
-	{ PRISMPertIName:
-			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
-
-			// provide a name for the default typeahead data source
-			name: 'PRISMPertIName',
-
-			// the template to render for all results
-			template: '<span class="label" style="background-color: #8387e6">PRISM</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
-
-			// use twitter's hogan.js to compile the template for the typeahead results
-			engine: Hogan,
-
-			remote: {
-				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
-				dataType: 'jsonp',
-
-				filter: function(response){
-					var datum_list = [];
-					var auto_data = [];
-					var object_map = {};
-
-					// for each item, pull out its pert_iname and use that for the
-					// autocomplete value. Build a datum of other relevant data
-					// for use in suggestion displays
-					response.forEach(function(element){
-						auto_data.push(element.pert_iname);
-						object_map[element.pert_iname] = element;
-					});
-
-					// make sure we only show unique items
-					auto_data = _.uniq(auto_data);
-
-					// add cell lines if required
-					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
-					// }
-
-					// build a list of datum objects
-					auto_data.forEach(function(item){
-						var datum = {
-							value: item,
-							tokens: [item],
-							data: object_map[item]
-						}
-						_.extend(datum,{
-							type: 'Chemical Reagent',
-							color: '#E69F00',
-						});
-						datum_list.push(datum);
-						return datum_list;
-					});
-
-					// return the processed list of daums for the autocomplete
-					return datum_list;
-				}
-			}
-		}
-	}
-);
 // # **PertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
@@ -753,6 +678,62 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+    });
+  }
+});
+// # **GenericCountModel**
+
+// A Backbone.Model that represents the count of a set CMap databbase items.  The data model
+// captures the total count of perturbagens that meet a search criteria.
+
+// optional arguments:
+
+// 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
+// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+
+// `generic_count_model = new GenericCountModel()`
+
+Barista.Models.PertCountModel = Backbone.Model.extend({
+  // ### defaults
+  // describes the model's default parameters
+
+  // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
+  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+  defaults: {
+    "search_field": "pert_iname",
+    "url": "http://api.lincscloud.org/a2/pertinfo",
+    "count": 0,
+    "last_update": (new Date()).getTime()
+  },
+
+  // ## initialize
+  // custom initialization to make sure we have the correct url for jsonp
+  initialize: function(){
+    var re = new RegExp("?callback=?");
+    if (!re.test(this.get("url"))){
+      this.set({"url": this.get("url") + "?callback=?"});
+    }
+  },
+
+  // ### fetch
+  // fetches new data from the API.  the count is updated with a new 
+  // count based on the results of the api call
+  fetch: function(search_string){
+    // set up API call parameters
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+              c:true};
+
+    // run the api request
+    var self = this;
+    var count;
+    $.getJSON(this.get("url"),params,function(res) {
+      if (res === 0){
+        count = 0;
+      }else{
+        count = res.count;
+      }
+      var t = (new Date()).getTime();
+      self.set({count: count,last_update: t});
     });
   }
 });
