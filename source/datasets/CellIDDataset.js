@@ -6,7 +6,7 @@
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellID: 
+	{ CellID:
 			{
 			// only return 4 items at a time in the autocomplete dropdown
 			limit: 4,
