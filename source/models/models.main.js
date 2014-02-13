@@ -45,7 +45,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // 2.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    pert_count: 0,
+    count: 0,
     pert_types: [{}],
     g: "cell_type",
     last_update: (new Date()).getTime()
@@ -84,14 +84,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
         if (sig_res === 0){
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = sig_res.length;
           var cell_lines = '["' + sig_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":"' + search_string + '"}', g:"cell_type"};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });
@@ -101,14 +101,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         if (pert_res === 0){
           // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = pert_res.length;
           var cell_lines = '["' + pert_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:self.get("g")};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });
@@ -379,7 +379,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
 
 // 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
-// `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
+// `count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
 Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
@@ -392,7 +392,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
     "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
-    "pert_count": 0,
+    "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
@@ -432,7 +432,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
       params = _.omit(params,'c');
       params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(pert_info, params, function(pert_types){
-        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+        self.set({count: num_perts, pert_types: pert_types, last_update: t});
       });
     });
   }
@@ -561,7 +561,7 @@ Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 
 // 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
-// `pert_count_model = new SigCountModel({type_string: '["trt_sh","trt_oe"]'})`
+// `count_model = new SigCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
 Barista.Models.SigCountModel = Backbone.Model.extend({
   // ### defaults
@@ -574,7 +574,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
     "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
-    "pert_count": 0,
+    "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
@@ -614,7 +614,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
       params = _.omit(params,'c');
       params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(sig_info, params, function(pert_types){
-        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+        self.set({count: num_perts, pert_types: pert_types, last_update: t});
       });
     });
   }

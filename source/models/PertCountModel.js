@@ -8,7 +8,7 @@
 
 // 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
-// `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
+// `count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
 Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
@@ -21,7 +21,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
     "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
-    "pert_count": 0,
+    "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
@@ -61,7 +61,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
       params = _.omit(params,'c');
       params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(pert_info, params, function(pert_types){
-        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+        self.set({count: num_perts, pert_types: pert_types, last_update: t});
       });
     });
   }
