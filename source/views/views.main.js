@@ -3202,7 +3202,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 
 // basic use:
 
-//		pert_count_view = new PertCountView();
+//		count_view = new PertCountView();
 
 // optional arguments:
 
@@ -3213,7 +3213,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
-//		pert_count_view = new PertCountView({bg_color:"#ffffff", 
+//		count_view = new PertCountView({bg_color:"#ffffff", 
 //									well_color: "#bdbdbd",
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -3337,20 +3337,20 @@ Barista.Views.PertCountView = Backbone.View.extend({
 							.attr("fill",this.fg_color)
 							.text(this.static_text.toUpperCase());
 		// draw the pert count info
-		var pert_count = this.model.get('pert_count');
-		if (pert_count === undefined){
-			pert_count = 0;
+		var count = this.model.get('count');
+		if (count === undefined){
+			count = 0;
 		}
-		var pert_count_text = this.fg_layer.selectAll('.pert_count').data([]).exit().remove();
-		pert_count_text = this.fg_layer.selectAll('.pert_count').data([1])
+		var count_text = this.fg_layer.selectAll('.count').data([]).exit().remove();
+		count_text = this.fg_layer.selectAll('.count').data([1])
 							.enter().append("text")
-							.attr("class","pert_count")
+							.attr("class","count")
 							.attr("x",10)
 							.attr("y",55)
 							.attr("font-family","'Helvetica Neue',Helvetica,Arial,sans-serif")
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
-							.text(pert_count);
+							.text(count);
 
 		// for each sub-category, draw a bar graph well
 		this.category_rect_selection = this.fg_layer.selectAll('.category_rect_well');
@@ -3421,26 +3421,26 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// draw the pert count info
-		var pert_count = this.model.get('pert_count');
-		if (pert_count === undefined){
-			pert_count = 0;
+		var count = this.model.get('count');
+		if (count === undefined){
+			count = 0;
 		}
-		this.vis.selectAll('.pert_count').data([1])
+		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, pert_count);
+			    var i = d3.interpolate(this.textContent, count);
 			    return function(t) {
 			      this.textContent = Math.round(i(t));
 			    };
 			});
 
 		// transition the updated bars
-		pert_count = this.model.get('pert_count');
+		count = this.model.get('count');
 		this.pert_types = this.model.get("pert_types");
 		this.pert_types = _.filter(this.pert_types,function(o){return self.category_ids.indexOf(o._id) != -1;});
 		var category_counts = _.pluck(this.pert_types,'count');
 		var category_sum = _.reduce(category_counts, function(memo, num){ return memo + num; }, 0);
-		this.pert_types.push({_id:'other', count:pert_count - category_sum});
+		this.pert_types.push({_id:'other', count:count - category_sum});
 		this.categories.forEach(function(e,i,l){
 			var ids = _.pluck(self.pert_types,'_id');
 			var index = ids.indexOf(e._id);

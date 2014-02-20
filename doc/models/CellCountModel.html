@@ -13,10 +13,6 @@ of each annotation category for the set of cell lines.</p></div></div></div><div
     <span class="nx">pert_types</span><span class="o">:</span> <span class="p">[{}],</span>
     <span class="nx">g</span><span class="o">:</span> <span class="s2">&quot;cell_type&quot;</span><span class="p">,</span>
     <span class="nx">last_update</span><span class="o">:</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span>
-  <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="initialize">initialize</h3>
-
-<p>Overides the base Model initialize method to fetch data matching an empty string</p></div></div><div class="code"><div class="wrapper">  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
   <span class="p">},</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="fetch">fetch</h3>
 
 <p>fetches new data from the cell<em>info api.  the count and pert</em>types data

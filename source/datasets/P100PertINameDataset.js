@@ -1,28 +1,28 @@
-// # **PRISMPertINameDataset**
+// # **P100PertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
-// PRISM Perturbation IDs available in the Connectivity Map
+// P100 Perturbation IDs available in the Connectivity Map
 
-// PRISMPertINameDataset is typically not used directly, rather it's content
+// P100PertINameDataset is typically not used directly, rather it's content
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ PRISMPertIName:
+	{ P100PertIName:
 			{
 			// only return 2 items at a time in the autocomplete dropdown
 			limit: 2,
 
 			// provide a name for the default typeahead data source
-			name: 'PRISMPertIName',
+			name: 'P100PertIName',
 
 			// the template to render for all results
-			template: '<span class="label" style="background-color: #8387e6">PRISM</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+			template: '<span class="label" style="background-color: #7bd9e4">P100</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
 			engine: Hogan,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
+				url: ['http://prefix:8080/p100/v1/profileinfo?',
 					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&f={"pert_iname":1}',
 					  '&l=100',

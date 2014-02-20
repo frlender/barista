@@ -17,7 +17,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // 2.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    pert_count: 0,
+    count: 0,
     pert_types: [{}],
     g: "cell_type",
     last_update: (new Date()).getTime()
@@ -56,14 +56,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
         if (sig_res === 0){
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = sig_res.length;
           var cell_lines = '["' + sig_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":"' + search_string + '"}', g:"cell_type"};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });
@@ -73,14 +73,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         if (pert_res === 0){
           // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = pert_res.length;
           var cell_lines = '["' + pert_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:self.get("g")};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });

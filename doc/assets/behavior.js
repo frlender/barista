@@ -90,14 +90,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "type": "heading",
           "data": {
             "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
             "title": "fetch",
             "slug": "fetch"
           },
@@ -137,172 +129,175 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         }, {
           "type": "heading",
           "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
+            "level": 2,
             "title": "initialize",
             "slug": "initialize"
           },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "fetch",
-            "slug": "fetch"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "fetch",
-            "slug": "fetch"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "fetch",
-            "slug": "fetch"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "fetch",
-            "slug": "fetch"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "initialize",
-            "slug": "initialize"
-          },
-          "depth": 3
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 3,
-            "title": "defaults",
-            "slug": "defaults"
-          },
-          "depth": 3,
+          "depth": 2,
           "children": [
             {
               "type": "heading",
               "data": {
-                "level": 4,
-                "title": "model",
-                "slug": "model"
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
               },
-              "depth": 4
+              "depth": 3
             }, {
               "type": "heading",
               "data": {
-                "level": 4,
-                "title": "url",
-                "slug": "url"
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
               },
-              "depth": 4
+              "depth": 3
             }, {
               "type": "heading",
               "data": {
-                "level": 4,
-                "title": "skip",
-                "slug": "skip"
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
               },
-              "depth": 4
+              "depth": 3
             }, {
               "type": "heading",
               "data": {
-                "level": 4,
-                "title": "isLoading",
-                "slug": "isloading"
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
               },
-              "depth": 4
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "fetch",
+                "slug": "fetch"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "model",
+                    "slug": "model"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "url",
+                    "slug": "url"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "skip",
+                    "slug": "skip"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 4,
+                    "title": "isLoading",
+                    "slug": "isloading"
+                  },
+                  "depth": 4
+                }
+              ]
             }
           ]
         }, {
@@ -1419,6 +1414,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
+                "title": "draw tags",
+                "slug": "draw-tags"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
                 "title": "name",
                 "slug": "name"
               },
@@ -1949,6 +1952,38 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           },
           "depth": 2,
           "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/datasets/CellMutationDataset.js",
+            "projectPath": "source/datasets/CellMutationDataset.js",
+            "targetPath": "datasets/CellMutationDataset",
+            "title": "CellMutationDataset"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/datasets/PertINameDataset.js",
+            "projectPath": "source/datasets/PertINameDataset.js",
+            "targetPath": "datasets/PertINameDataset",
+            "title": "PertINameDataset"
+          },
+          "depth": 2,
+          "outline": []
         }
       ]
     }, {
@@ -2007,14 +2042,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "defaults",
                 "slug": "defaults"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
               },
               "depth": 3
             }, {
@@ -2096,6 +2123,51 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
+            "sourcePath": "/Users/cflynn/Code/barista/source/models/GenericCountModel.js",
+            "projectPath": "source/models/GenericCountModel.js",
+            "targetPath": "models/GenericCountModel",
+            "title": "GenericCountModel"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "defaults",
+                "slug": "defaults"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "initialize",
+                "slug": "initialize"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "fetch",
+                    "slug": "fetch"
+                  },
+                  "depth": 3
+                }
+              ]
+            }
+          ]
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
             "sourcePath": "/Users/cflynn/Code/barista/source/models/HeatmapModel.js",
             "projectPath": "source/models/HeatmapModel.js",
             "targetPath": "models/HeatmapModel",
@@ -2141,14 +2213,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "fetch",
                 "slug": "fetch"
               },
@@ -2183,14 +2247,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
                 "title": "fetch",
                 "slug": "fetch"
               },
@@ -2219,14 +2275,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "defaults",
                 "slug": "defaults"
-              },
-              "depth": 3
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "initialize",
-                "slug": "initialize"
               },
               "depth": 3
             }, {
@@ -2466,6 +2514,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "source/utils/getEmSizeInPixels.js",
             "targetPath": "utils/getEmSizeInPixels",
             "title": "getEmSizeInPixels"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "singleLineComment": ["//"],
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/cflynn/Code/barista/source/utils/setUserKey.js",
+            "projectPath": "source/utils/setUserKey.js",
+            "targetPath": "utils/setUserKey",
+            "title": "setUserKey"
           },
           "depth": 2,
           "outline": []
@@ -3700,6 +3764,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 3,
                 "title": "fit_height",
                 "slug": "fit-height"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "draw tags",
+                "slug": "draw-tags"
               },
               "depth": 3
             }

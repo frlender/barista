@@ -286,9 +286,84 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+// # **P100PertINameDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// P100 Perturbation IDs available in the Connectivity Map
+
+// P100PertINameDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+	{ P100PertIName:
+			{
+			// only return 2 items at a time in the autocomplete dropdown
+			limit: 2,
+
+			// provide a name for the default typeahead data source
+			name: 'P100PertIName',
+
+			// the template to render for all results
+			template: '<span class="label" style="background-color: #7bd9e4">P100</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+			// use twitter's hogan.js to compile the template for the typeahead results
+			engine: Hogan,
+
+			remote: {
+				// set the remote data source to use cellinfo with custom query params
+				url: ['http://prefix:8080/p100/v1/profileinfo?',
+					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  '&f={"pert_iname":1}',
+					  '&l=100',
+					  '&s={"pert_iname":1}'].join(''),
+				
+				dataType: 'jsonp',
+
+				filter: function(response){
+					var datum_list = [];
+					var auto_data = [];
+					var object_map = {};
+
+					// for each item, pull out its pert_iname and use that for the
+					// autocomplete value. Build a datum of other relevant data
+					// for use in suggestion displays
+					response.forEach(function(element){
+						auto_data.push(element.pert_iname);
+						object_map[element.pert_iname] = element;
+					});
+
+					// make sure we only show unique items
+					auto_data = _.uniq(auto_data);
+
+					// add cell lines if required
+					// if (self.match_cell_lines){
+					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// }
+
+					// build a list of datum objects
+					auto_data.forEach(function(item){
+						var datum = {
+							value: item,
+							tokens: [item],
+							data: object_map[item]
+						}
+						_.extend(datum,{
+							type: 'Chemical Reagent',
+							color: '#E69F00',
+						});
+						datum_list.push(datum);
+						return datum_list;
+					});
+
+					// return the processed list of daums for the autocomplete
+					return datum_list;
+				}
+			}
+		}
+	}
+);
 // # **PRISMPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
-// Perturbation IDs available in the Connectivity Map
+// PRISM Perturbation IDs available in the Connectivity Map
 
 // PRISMPertINameDataset is typically not used directly, rather it's content
 // is extracted from Barista.Datasets in views such as CMapSearchView
@@ -584,7 +659,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // 2.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    pert_count: 0,
+    count: 0,
     pert_types: [{}],
     g: "cell_type",
     last_update: (new Date()).getTime()
@@ -623,14 +698,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
         if (sig_res === 0){
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = sig_res.length;
           var cell_lines = '["' + sig_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":"' + search_string + '"}', g:"cell_type"};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });
@@ -640,14 +715,14 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
         if (pert_res === 0){
           // if there is no reponse, set **pert\_count: num_perts** and **pert\_types: [{}]**
           num_perts = 0;
-          self.set({pert_count: num_perts, pert_types: [{}], last_update: t});
+          self.set({count: num_perts, pert_types: [{}], last_update: t});
         }else{
           // if there is a reponse, update *pert\_count* and *pert\_types*
           num_perts = pert_res.length;
           var cell_lines = '["' + pert_res.join('","') + '"]';
           var cell_params = {q:'{"cell_id":{"$in":' + cell_lines + '}}', g:self.get("g")};
           $.getJSON(cell_info,cell_params,function(cell_res){
-            self.set({pert_count: num_perts, pert_types: cell_res, last_update: t});
+            self.set({count: num_perts, pert_types: cell_res, last_update: t});
           });
         }
       });
@@ -753,6 +828,62 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+    });
+  }
+});
+// # **GenericCountModel**
+
+// A Backbone.Model that represents the count of a set CMap databbase items.  The data model
+// captures the total count of perturbagens that meet a search criteria.
+
+// optional arguments:
+
+// 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
+// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+
+// `generic_count_model = new GenericCountModel()`
+
+Barista.Models.GenericCountModel = Backbone.Model.extend({
+  // ### defaults
+  // describes the model's default parameters
+
+  // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
+  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+  defaults: {
+    "search_field": "pert_iname",
+    "url": "http://api.lincscloud.org/a2/pertinfo",
+    "count": 0,
+    "last_update": (new Date()).getTime()
+  },
+
+  // ## initialize
+  // custom initialization to make sure we have the correct url for jsonp
+  initialize: function(){
+    var re = new RegExp("/?callback=/?");
+    if (!re.test(this.get("url"))){
+      this.set({"url": this.get("url") + "?callback=?"});
+    }
+  },
+
+  // ### fetch
+  // fetches new data from the API.  the count is updated with a new 
+  // count based on the results of the api call
+  fetch: function(search_string){
+    // set up API call parameters
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+              c:true};
+
+    // run the api request
+    var self = this;
+    var count;
+    $.getJSON(this.get("url"),params,function(res) {
+      if (res === 0){
+        count = 0;
+      }else{
+        count = res.count;
+      }
+      var t = (new Date()).getTime();
+      self.set({count: count,last_update: t});
     });
   }
 });
@@ -862,7 +993,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
 
 // 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
-// `pert_count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
+// `count_model = new PertCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
 Barista.Models.PertCountModel = Backbone.Model.extend({
   // ### defaults
@@ -875,7 +1006,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
     "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
-    "pert_count": 0,
+    "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
@@ -915,7 +1046,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
       params = _.omit(params,'c');
       params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(pert_info, params, function(pert_types){
-        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+        self.set({count: num_perts, pert_types: pert_types, last_update: t});
       });
     });
   }
@@ -1044,7 +1175,7 @@ Barista.Models.ScatterPlotModel = Backbone.Model.extend({
 
 // 1.  {string}  **type_string**  the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
 
-// `pert_count_model = new SigCountModel({type_string: '["trt_sh","trt_oe"]'})`
+// `count_model = new SigCountModel({type_string: '["trt_sh","trt_oe"]'})`
 
 Barista.Models.SigCountModel = Backbone.Model.extend({
   // ### defaults
@@ -1057,7 +1188,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
     "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
-    "pert_count": 0,
+    "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
     "last_update": (new Date()).getTime()
@@ -1097,7 +1228,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
       params = _.omit(params,'c');
       params = _.extend(params,{g:self.get('pert_type_field')});
       $.getJSON(sig_info, params, function(pert_types){
-        self.set({pert_count: num_perts, pert_types: pert_types, last_update: t});
+        self.set({count: num_perts, pert_types: pert_types, last_update: t});
       });
     });
   }
@@ -4892,7 +5023,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 
 // basic use:
 
-//		pert_count_view = new PertCountView();
+//		count_view = new PertCountView();
 
 // optional arguments:
 
@@ -4903,7 +5034,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
-//		pert_count_view = new PertCountView({bg_color:"#ffffff", 
+//		count_view = new PertCountView({bg_color:"#ffffff", 
 //									well_color: "#bdbdbd",
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -5027,20 +5158,20 @@ Barista.Views.PertCountView = Backbone.View.extend({
 							.attr("fill",this.fg_color)
 							.text(this.static_text.toUpperCase());
 		// draw the pert count info
-		var pert_count = this.model.get('pert_count');
-		if (pert_count === undefined){
-			pert_count = 0;
+		var count = this.model.get('count');
+		if (count === undefined){
+			count = 0;
 		}
-		var pert_count_text = this.fg_layer.selectAll('.pert_count').data([]).exit().remove();
-		pert_count_text = this.fg_layer.selectAll('.pert_count').data([1])
+		var count_text = this.fg_layer.selectAll('.count').data([]).exit().remove();
+		count_text = this.fg_layer.selectAll('.count').data([1])
 							.enter().append("text")
-							.attr("class","pert_count")
+							.attr("class","count")
 							.attr("x",10)
 							.attr("y",55)
 							.attr("font-family","'Helvetica Neue',Helvetica,Arial,sans-serif")
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
-							.text(pert_count);
+							.text(count);
 
 		// for each sub-category, draw a bar graph well
 		this.category_rect_selection = this.fg_layer.selectAll('.category_rect_well');
@@ -5111,26 +5242,26 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.height = $("#" + this.div_string).outerHeight();
 
 		// draw the pert count info
-		var pert_count = this.model.get('pert_count');
-		if (pert_count === undefined){
-			pert_count = 0;
+		var count = this.model.get('count');
+		if (count === undefined){
+			count = 0;
 		}
-		this.vis.selectAll('.pert_count').data([1])
+		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, pert_count);
+			    var i = d3.interpolate(this.textContent, count);
 			    return function(t) {
 			      this.textContent = Math.round(i(t));
 			    };
 			});
 
 		// transition the updated bars
-		pert_count = this.model.get('pert_count');
+		count = this.model.get('count');
 		this.pert_types = this.model.get("pert_types");
 		this.pert_types = _.filter(this.pert_types,function(o){return self.category_ids.indexOf(o._id) != -1;});
 		var category_counts = _.pluck(this.pert_types,'count');
 		var category_sum = _.reduce(category_counts, function(memo, num){ return memo + num; }, 0);
-		this.pert_types.push({_id:'other', count:pert_count - category_sum});
+		this.pert_types.push({_id:'other', count:count - category_sum});
 		this.categories.forEach(function(e,i,l){
 			var ids = _.pluck(self.pert_types,'_id');
 			var index = ids.indexOf(e._id);
