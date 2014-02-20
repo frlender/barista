@@ -6111,7 +6111,8 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     "search_field": "pert_iname",
     "url": "http://api.lincscloud.org/a2/pertinfo",
     "count": 0,
-    "last_update": (new Date()).getTime()
+    "last_update": (new Date()).getTime(),
+    "search_string": ""
   },
 
   // ## initialize
@@ -6127,6 +6128,9 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // fetches new data from the API.  the count is updated with a new 
   // count based on the results of the api call
   fetch: function(search_string){
+    // update the model's search string attribute
+    this.set("search_string",search_string);
+
     // set up API call parameters
     var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
               c:true};
