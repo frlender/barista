@@ -46,6 +46,12 @@ Barista.getEmSizeInPixels = function(id) {
     var el = document.body;
     return Number(getComputedStyle(el, "").fontSize.match(/(\d+)px/)[1]);
 }
+// # **numberWithCommas**
+
+// a utility function to return a number with commas every three digits
+Barista.numberWithCommas = function(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 // # **setUserKey**
 
 // a utility function to set a user_key attribute on the Barista object and set up
