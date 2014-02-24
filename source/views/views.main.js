@@ -1876,7 +1876,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 				if (d.dy < 40 || d.dx < 80){
 					return null;
 				}else{
-					return d.children ? null : d.count;
+					return d.children ? null : Barista.numberWithCommas(d.count);
 				}
 			})
 			.attr("text-anchor", "middle")
