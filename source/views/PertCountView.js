@@ -232,9 +232,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)))	;
 			    };
 			});
 

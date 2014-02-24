@@ -5846,6 +5846,7 @@ Barista.getEmSizeInPixels = function(id) {
 // # **numberWithCommas**
 
 // a utility function to return a number with commas every three digits
+// credit to Elias Zamaria http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
 Barista.numberWithCommas = function(x){
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -10517,9 +10518,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)))	;
 			    };
 			});
 
