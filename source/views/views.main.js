@@ -1876,7 +1876,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 				if (d.dy < 40 || d.dx < 80){
 					return null;
 				}else{
-					return d.children ? null : d.count;
+					return d.children ? null : Barista.numberWithCommas(d.count);
 				}
 			})
 			.attr("text-anchor", "middle")
@@ -3428,9 +3428,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)))	;
 			    };
 			});
 
@@ -3461,9 +3461,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.transition().duration(500)
 			.tween("text", function(d,i) {
 				var count = d.count.toFixed(0);
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)));
 			    };
 			});
 	},

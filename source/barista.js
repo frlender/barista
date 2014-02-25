@@ -585,6 +585,13 @@ Barista.getEmSizeInPixels = function(id) {
     var el = document.body;
     return Number(getComputedStyle(el, "").fontSize.match(/(\d+)px/)[1]);
 }
+// # **numberWithCommas**
+
+// a utility function to return a number with commas every three digits
+// credit to Elias Zamaria http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+Barista.numberWithCommas = function(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 // # **setUserKey**
 
 // a utility function to set a user_key attribute on the Barista object and set up
@@ -853,7 +860,8 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     "search_field": "pert_iname",
     "url": "http://api.lincscloud.org/a2/pertinfo",
     "count": 0,
-    "last_update": (new Date()).getTime()
+    "last_update": (new Date()).getTime(),
+    "search_string": ""
   },
 
   // ## initialize
@@ -869,6 +877,9 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // fetches new data from the API.  the count is updated with a new 
   // count based on the results of the api call
   fetch: function(search_string){
+    // update the model's search string attribute
+    this.set("search_string",search_string);
+
     // set up API call parameters
     var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
               c:true};
@@ -3697,7 +3708,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 				if (d.dy < 40 || d.dx < 80){
 					return null;
 				}else{
-					return d.children ? null : d.count;
+					return d.children ? null : Barista.numberWithCommas(d.count);
 				}
 			})
 			.attr("text-anchor", "middle")
@@ -5249,9 +5260,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		this.vis.selectAll('.count').data([1])
 			.transition().duration(500)
 			.tween("text", function() {
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)))	;
 			    };
 			});
 
@@ -5282,9 +5293,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.transition().duration(500)
 			.tween("text", function(d,i) {
 				var count = d.count.toFixed(0);
-			    var i = d3.interpolate(this.textContent, count);
+			    var i = d3.interpolate(this.textContent.replace(",",""), count);
 			    return function(t) {
-			      this.textContent = Math.round(i(t));
+			      this.textContent = Barista.numberWithCommas(Math.round(i(t)));
 			    };
 			});
 	},
