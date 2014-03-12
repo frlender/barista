@@ -54,7 +54,8 @@ module.exports = function(grunt) {
               'source/models/models.main.js',
               'source/collections/collections.main.js',
               'source/views/views.main.js',
-              'source/tile.js'
+              'source/tile.js',
+              'source/afterword.js'
               ],
         dest: 'source/barista.js'
       },
