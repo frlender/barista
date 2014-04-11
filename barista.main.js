@@ -6274,7 +6274,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 4.  {String}  **pert\_type\_field**  a field name over which to look for pert_types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert_icollection'*
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   defaults: {
-    "type_string": '["trt_sh","trt_oe","trt_oe.mut"]',
+    "type_string": '["trt_cp"]',
     "count": 0,
     "pert_types": [{}],
     "pert_type_field": "pert_icollection",
