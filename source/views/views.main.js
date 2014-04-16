@@ -763,19 +763,6 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 												subtitle: this.subtitle,
 												image: this.image,
 												fg_color: this.fg_color}));
-	},
-
-	// ### render
-	// overide this function if the view needs to do more complex rendering than
-	// simple template compilation
-	render: function(){
-
-	},
-
-	// ### update
-	// overide this function if the view needs to update
-	render: function(){
-
 	}
 });
 // # **BubbleView**
