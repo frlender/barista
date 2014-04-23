@@ -226,12 +226,7 @@ MySweetView = Barista.Views.BaristaBaseView.extend({
     <script src="barista.main.min.js"></script>
     <script src="bower_components/highlightjs/highlight.pack.js"></script>
     <script>
-        $.ajaxPrefilter(function( options, originalOptions, jqXHR ){
-            var re = new RegExp('api.lincscloud.org');
-            if (re.test(options.url)){
-                options.data = $.param($.extend(originalOptions.data,{user_key:'lincsdemo0'}));
-            }
-        });
+        Barista.setUserKey('lincsdemo');
         
         hljs.configure({languages:['javascript','html']});
         hljs.initHighlightingOnLoad();
