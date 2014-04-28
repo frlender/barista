@@ -1603,16 +1603,16 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // set up the query parameter for user_id
         switch (search_type){
         case "job_id":
-            this.q_param = '{"job_id":"' + search_string + '"}';
+            this.q_param = '{"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "status":
-            this.q_param = '{"status":"' + search_string + '"}';
+            this.q_param = '{"status":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "tool_id":
-            this.q_param = '{"tool_id":"' + search_string + '"}';
+            this.q_param = '{"tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         default:
-            this.q_param = '{"user_id":"' + search_string + '"}';
+            this.q_param = '{"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
         }
 
 
