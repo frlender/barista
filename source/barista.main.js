@@ -1860,16 +1860,16 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // set up the query parameter for user_id
         switch (search_type){
         case "job_id":
-            this.q_param = '{"user":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{"user_id":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "status":
-            this.q_param = '{"user":"' + self.user + '","status":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{"user_id":"' + self.user + '","status":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "tool_id":
-            this.q_param = '{"user":"' + self.user + '","tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{"user_id":"' + self.user + '","tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         default:
-            this.q_param = '{"user":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{"user_id":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
         }
 
 
