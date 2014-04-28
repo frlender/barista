@@ -1655,7 +1655,11 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // of the model list from a remote api.  On success, set **isLoading** back to false
         $.getJSON(this.url, params, function(res){
             self.set(res,{remove: false});
-            self.isLoading = false;
+            params.q = '{"job_id":"' + search_string + '"}';
+            $.getJSON(this.url, params, function(res){
+                self.set(res,{remove: false});
+                self.isLoading = false;
+            });
         });
 
         // make a second api call to find the maximum number of items in the collection
