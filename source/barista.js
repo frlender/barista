@@ -342,7 +342,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
                             data: object_map[item]
                         }
                         _.extend(datum,{
-                            type: 'Status',
+                            type: 'Job',
                             search_column: 'job_id',
                             color: '#BDBDBD',
                         });
