@@ -6,9 +6,9 @@
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellHistology: 
+	{ CellHistology:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
+			// only return 2 items at a time in the autocomplete dropdown
 			limit: 2,
 
 			// provide a name for the default typeahead data source
@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
-				
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -67,6 +67,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CellIDDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -267,6 +268,146 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+// # **JobIDDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// job IDs available in the Connectivity Map
+
+// JobIDDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+    { JobID:
+            {
+            // only return 2 items at a time in the autocomplete dropdown
+            limit: 2,
+
+            // provide a name for the default typeahead data source
+            name: 'JobID',
+
+            // the template to render for all results
+            template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+            // use twitter's hogan.js to compile the template for the typeahead results
+            engine: Hogan,
+
+            remote: {
+                // set the remote data source to use cellinfo with custom query params
+                url: ['http://api.lincscloud.org/compute_status?',
+                      'q={"job_id":{"$regex":"%QUERY", "$options":"i"}}',
+                      '&l=10',
+                      '&s={"job_id":1}'].join(''),
+
+                dataType: 'jsonp',
+
+                filter: function(response){
+                    var datum_list = [];
+                    var auto_data = [];
+                    var object_map = {};
+
+                    // for each item, pull out its job_id and use that for the
+                    // autocomplete value. Build a datum of other relevant data
+                    // for use in suggestion displays
+                    response.forEach(function(element){
+                        auto_data.push(element.job_id);
+                        object_map[element.job_id] = element;
+                    });
+
+                    // make sure we only show unique items
+                    auto_data = _.uniq(auto_data);
+
+                    // build a list of datum objects
+                    auto_data.forEach(function(item){
+                        var datum = {
+                            value: item,
+                            tokens: [item],
+                            data: object_map[item]
+                        }
+                        _.extend(datum,{
+                            type: 'Status',
+                            search_column: 'job_id',
+                            color: '#BDBDBD',
+                        });
+                        datum_list.push(datum);
+                    });
+
+                    // return the processed list of datums for the autocomplete
+                    return datum_list;
+                }
+            }
+        }
+    }
+);
+
+// # **JobStatusDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// job Statuses available in the Connectivity Map
+
+// JobStatusDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+    { JobStatus:
+            {
+            // only return 2 items at a time in the autocomplete dropdown
+            limit: 2,
+
+            // provide a name for the default typeahead data source
+            name: 'JobStatus',
+
+            // the template to render for all results
+            template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+            // use twitter's hogan.js to compile the template for the typeahead results
+            engine: Hogan,
+
+            remote: {
+                // set the remote data source to use cellinfo with custom query params
+                url: ['http://api.lincscloud.org/compute_status?',
+                      'q={"status":{"$regex":"%QUERY", "$options":"i"}}',
+                      '&l=10',
+                      '&s={"status":1}'].join(''),
+
+                dataType: 'jsonp',
+
+                filter: function(response){
+                    var datum_list = [];
+                    var auto_data = [];
+                    var object_map = {};
+
+                    // for each item, pull out its status and use that for the
+                    // autocomplete value. Build a datum of other relevant data
+                    // for use in suggestion displays
+                    response.forEach(function(element){
+                        auto_data.push(element.status);
+                        object_map[element.status] = element;
+                    });
+
+                    // make sure we only show unique items
+                    auto_data = _.uniq(auto_data);
+
+                    // build a list of datum objects
+                    auto_data.forEach(function(item){
+                        var datum = {
+                            value: item,
+                            tokens: [item],
+                            data: object_map[item]
+                        }
+                        _.extend(datum,{
+                            type: 'Status',
+                            search_column: 'status',
+                            color: '#B14A4E',
+                        });
+                        datum_list.push(datum);
+                    });
+
+                    // return the processed list of datums for the autocomplete
+                    return datum_list;
+                }
+            }
+        }
+    }
+);
+
 // # **P100PertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // P100 Perturbation IDs available in the Connectivity Map
@@ -517,4 +658,73 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			}
 		}
 	}
+);
+// # **ToolIDDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// Tool IDs available in the Connectivity Map
+
+// ToolIDDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+    { ToolID:
+            {
+            // only return 2 items at a time in the autocomplete dropdown
+            limit: 2,
+
+            // provide a name for the default typeahead data source
+            name: 'ToolID',
+
+            // the template to render for all results
+            template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+            // use twitter's hogan.js to compile the template for the typeahead results
+            engine: Hogan,
+
+            remote: {
+                // set the remote data source to use cellinfo with custom query params
+                url: ['http://api.lincscloud.org/compute_status?',
+                      'q={"tool_id":{"$regex":"%QUERY", "$options":"i"}}',
+                      '&l=10',
+                      '&s={"tool_id":1}'].join(''),
+
+                dataType: 'jsonp',
+
+                filter: function(response){
+                    var datum_list = [];
+                    var auto_data = [];
+                    var object_map = {};
+
+                    // for each item, pull out its tool_id and use that for the
+                    // autocomplete value. Build a datum of other relevant data
+                    // for use in suggestion displays
+                    response.forEach(function(element){
+                        auto_data.push(element.tool_id);
+                        object_map[element.tool_id] = element;
+                    });
+
+                    // make sure we only show unique items
+                    auto_data = _.uniq(auto_data);
+
+                    // build a list of datum objects
+                    auto_data.forEach(function(item){
+                        var datum = {
+                            value: item,
+                            tokens: [item],
+                            data: object_map[item]
+                        }
+                        _.extend(datum,{
+                            type: 'Tool',
+                            search_column: 'tool_id',
+                            color: '#005CF2',
+                        });
+                        datum_list.push(datum);
+                    });
+
+                    // return the processed list of datums for the autocomplete
+                    return datum_list;
+                }
+            }
+        }
+    }
 );

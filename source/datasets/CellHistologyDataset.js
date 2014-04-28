@@ -6,9 +6,9 @@
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellHistology: 
+	{ CellHistology:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
+			// only return 2 items at a time in the autocomplete dropdown
 			limit: 2,
 
 			// provide a name for the default typeahead data source
@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
-				
+
 				dataType: 'jsonp',
 
 				filter: function(response){
