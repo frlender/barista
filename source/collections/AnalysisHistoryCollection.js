@@ -66,10 +66,10 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
-        $.getJSON(this.url, user_params, function(res){
-            self.set(res,{remove: false});
-            self.isLoading = false;
-        });
+        // $.getJSON(this.url, user_params, function(res){
+        //     self.set(res,{remove: false});
+        //     self.isLoading = false;
+        // });
         $.getJSON(this.url, job_params, function(res){
             self.set(res,{remove: false});
             self.isLoading = false;
