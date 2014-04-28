@@ -1608,6 +1608,9 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         case "status":
             this.q_param = '{"status":"' + search_string + '"}';
             break;
+        case "tool_id":
+            this.q_param = '{"tool_id":"' + search_string + '"}';
+            break;
         default:
             this.q_param = '{"user_id":"' + search_string + '"}';
         }
