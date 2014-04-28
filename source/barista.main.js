@@ -1643,7 +1643,17 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         this.limit = (limit !== undefined) ? limit : 30;
 
         // set up the query parameter for user_id
-        this.q_param = '{"user_id":"' + search_string + '"}';
+        switch (search_type){
+        case job_id:
+            this.q_param = '{"job_id":"' + search_string + '"}';
+            break;
+        case status:
+            this.q_param = '{"status":"' + search_string + '"}';
+            break;
+        default:
+            this.q_param = '{"user_id":"' + search_string + '"}';
+        }
+
 
         // build a parameter object for the api call
         var params = {q: this.q_param,
@@ -1654,11 +1664,8 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
         $.getJSON(this.url, params, function(res){
-            params.q = '{"job_id":"' + search_string + '"}';
-            $.getJSON(this.url, params, function(res){
-                self.set(res,{remove: false});
-                self.isLoading = false;
-            });
+            self.set(res,{remove: false});
+            self.isLoading = false;
         });
 
         // make a second api call to find the maximum number of items in the collection
