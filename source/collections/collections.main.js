@@ -75,7 +75,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         var params = {q: this.q_param,
             l: this.limit,
             sk: this.skip,
-            s: '{"_id":1}'};
+            s: '{"_id":-1}'};
 
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
