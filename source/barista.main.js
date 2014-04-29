@@ -1370,10 +1370,10 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
 Barista.Models.GenericMongoModel = Backbone.Model.extend({
     // ### initialize
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
-    initialize: function(attributes, options) {
-        this.cid = this.get('_id')
-        // this.date = new Date(parseInt(this.cid.substring(0,8), 16)*1000);
-  }
+  //   initialize: function(attributes, options) {
+  //       this.cid = this.get('_id')
+  //       this.date = new Date(parseInt(this.cid.substring(0,8), 16)*1000);
+  // }
 });
 
 // # **HeatmapModel**
@@ -1828,7 +1828,7 @@ Barista.Models.TickModel = Backbone.Model.extend({
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects.
-    model: Backbone.Model,
+    model: Barista.Models.GenericMongoModel,
 
     // #### url
     // the url from which model data is fetched
