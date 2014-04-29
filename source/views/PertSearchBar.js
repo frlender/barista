@@ -15,6 +15,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 
+
 		/**
 		determines wether or not the search view will match cell lines for autocomplete
 
@@ -22,12 +23,15 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		@default true
 		@type Boolean
 		**/
-		
+
 		// set up custom Datasets if they are passed in the constructor
 		this.datasets = (this.options.datasets !== undefined) ? this.options.datasets : [Barista.Datasets.CellID,Barista.Datasets.PertIName];
 
 		// determine wether or not we will match cell line strings in the autocomplete
 		this.match_cell_lines = (this.options.match_cell_lines !== undefined) ? this.options.match_cell_lines : true;
+
+		// custom placeholder
+		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : 'search gene, compound or cell type name';
 
 		// grab cell_ids and store them as an atribute of the view
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
@@ -69,7 +73,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 	/**
     Gets the current text entered in the view's search bar
-    
+
     @method get_val
     **/
 	get_val: function(){
@@ -78,7 +82,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 	/**
     fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
-    
+
     @method random_val
     **/
 	random_val: function(){
@@ -103,13 +107,13 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 	/**
     renders the view
-    
+
     @method render
     **/
 	render: function(){
 		var self = this;
 		// load the template into the view's el tag
-		this.$el.append(BaristaTemplates.CMapPertSearchBar());
+		this.$el.append(BaristaTemplates.CMapPertSearchBar({placeholder: self.placeholder}));
 
 		$('#search',this.$el).typeahead(self.datasets);
 	}
