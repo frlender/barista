@@ -6,24 +6,7 @@
                  			<p class="cmap-brand-text cmap-center-text">lincscloud</font>
                  		</div>
                  		<div class="col-sm-3">
-                             <p class="pull-right cmap-center-text">
-                                 {{#if user}}
-                                     <p class="cmap-header-username">{{ user }} </p>
-                                 {{/if}}
-                                 <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-3x cmap-header-link"></i>
-                                 {{#if user}}
-                                     <i title="logout" class="fa fa-sign-out fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
-                                 {{else}}
-                                     <i title="login" class="fa fa-sign-in fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/login';"></i>
-                                 {{/if}}
-                             </p>
-                 		</div>
-</div>
-
-<div class="row visible-xs">
-                         <div class="cmap-center-text col-xs-offset-1 col-xs-10">
                              <p class="pull-right">
-                                 <i title="home" class="fa fa-home fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i>
                                  <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-3x cmap-header-link"></i>
                                  {{#if user}}
                                      <i title="logout" class="fa fa-sign-out fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
@@ -34,6 +17,23 @@
                              {{#if user}}
                                  <p class="cmap-header-username pull-right">{{ user }} </p>
                              {{/if}}
+                 		</div>
+</div>
+
+<div class="row visible-xs">
+                         <div class="col-xs-offset-1 col-xs-10">
+                             <p class="cmap-center-text pull-right">
+                                 {{#if user}}
+                                     <p class="cmap-header-username pull-right">{{ user }} </p>
+                                 {{/if}}
+                                 <i title="home" class="fa fa-home fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i>
+                                 <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-3x cmap-header-link"></i>
+                                 {{#if user}}
+                                     <i title="logout" class="fa fa-sign-out fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
+                                 {{else}}
+                                     <i title="login" class="fa fa-sign-in fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/login';"></i>
+                                 {{/if}}
+                             </p>
                          </div>
                          <div class="col-xs-offset-1 col-xs-10">
                              <p class="cmap-brand-text cmap-center-text">lincscloud</font>
