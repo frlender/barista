@@ -1372,7 +1372,7 @@ Barista.Models.GenericMongoModel = Backbone.Model.extend({
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
     initialize: function(attributes, options) {
         this.cid = this.get('_id')
-        this.date = new Date(parseInt(this.cid.substring(0,8), 16)*1000);
+        // this.date = new Date(parseInt(this.cid.substring(0,8), 16)*1000);
   }
 });
 
