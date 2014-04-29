@@ -5198,7 +5198,7 @@ function program5(depth0,data) {
   buffer += "\n                             </p>\n                             ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                 		</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"pull-right\">\n                                 <i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                                 ";
+  buffer += "\n                 		</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"cmap-center-text col-xs-offset-1 col-xs-10\">\n                             <p class=\"pull-right\">\n                                 <i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                             ";
