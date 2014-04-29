@@ -7,6 +7,9 @@
                  		</div>
                  		<div class="col-sm-3">
                              <p class="pull-right">
+                                 {{#if user}}
+                                     <p class="cmap-header-username">{{ user }} </p>
+                                 {{/if}}
                                  <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-3x cmap-header-link"></i>
                                  {{#if user}}
                                      <i title="logout" class="fa fa-sign-out fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
@@ -14,9 +17,6 @@
                                      <i title="login" class="fa fa-sign-in fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/login';"></i>
                                  {{/if}}
                              </p>
-                             {{#if user}}
-                                 <p class="cmap-header-username pull-right">{{ user }} </p>
-                             {{/if}}
                  		</div>
 </div>
 
