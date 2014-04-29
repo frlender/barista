@@ -1,6 +1,6 @@
 // # **CellModel**
 
-// A Backbone.Model that represents a single perturbagen
+// A Backbone.Model that represents a cell line
 // `pert_model = new CellModel()`
 Barista.Models.CellModel = Backbone.Model.extend({
 	// ### initialize

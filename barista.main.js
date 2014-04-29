@@ -6207,7 +6207,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
 });
 // # **CellModel**
 
-// A Backbone.Model that represents a single perturbagen
+// A Backbone.Model that represents a cell line
 // `pert_model = new CellModel()`
 Barista.Models.CellModel = Backbone.Model.extend({
 	// ### initialize
@@ -6367,6 +6367,20 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     });
   }
 });
+// # **GenericMongoModel**
+
+// A Backbone.Model that represents a generic MongoDB object.  All fields in the document
+// are passed to the model as normal and a date attribute is set from the _id field of the mongo document
+// `pert_model = new GenericMongoModel()`
+Barista.Models.GenericMongoModel = Backbone.Model.extend({
+    // ### initialize
+    // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+    initialize: function(attributes, options) {
+        this.cid = this.get('_id')
+        this.date = new Date(parseInt(this.cid.substring(0,8), 16)*1000);
+  }
+});
+
 // # **HeatmapModel**
 
 // A Backbone.Model that represents the data in a heatmap.  The model contains
@@ -6819,7 +6833,7 @@ Barista.Models.TickModel = Backbone.Model.extend({
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects.
-    model: Backbone.Model,
+    model: Barista.Models.GenericMongoModel,
 
     // #### url
     // the url from which model data is fetched
