@@ -1,16 +1,22 @@
 <div id="spacer" style="min-height:10px"></div>
 
 <div class="row">
-                 		<p class="col-sm-offset-1 col-sm-3"><i class="fa fa-home fa-2x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i></p>
+                 		<p class="col-sm-offset-1 col-sm-3"><i title="home" class="fa fa-home fa-2x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i></p>
                  		<div class="col-sm-4">
                  			<p class="cmap-brand-text cmap-center-text">lincscloud</font>
                  		</div>
                  		<div class="col-sm-3">
                              <p class="pull-right">
-                                 <i data-toggle="modal" href="#aboutModal" class="fa fa-info-circle fa-2x cmap-header-link"></i>
-                                 <i class="fa fa-sign-out fa-2x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
+                                 <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-2x cmap-header-link"></i>
+                                 {{#if user}}
+                                     <i title="logout" class="fa fa-sign-out fa-2x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
+                                 {{else}}
+                                     <i title="logout" class="fa fa-sign-in fa-2x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/login';"></i>
+                                 {{/if}}
                              </p>
-                             <p class="cmap-header-link pull-right">username</p>
+                             {{#if user}}
+                                 <p class="cmap-header-link pull-right">{{ user }} </p>
+                             {{/if}}
                  		</div>
 </div>
 
@@ -20,7 +26,7 @@
     </div>
 </div>
 <div class="row">
-	<p class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text">{{ subtitle }}</p>
+	<p class="col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text">{{ subtitle }}</p>
 </div>
 
 <!-- Modal -->

@@ -19,33 +19,43 @@
 }
 
 .cmap-brand-text{
-	font-family:Memphis LT Std; 
-	font-weight: bold; 
-	font-size: 13pt; 
-	letter-spacing: 2pt;  
-	color: #FF6633; 
+	font-family:Memphis LT Std;
+	font-weight: bold;
+	font-size: 13pt;
+	letter-spacing: 2pt;
+	color: #FF6633;
 	text-transform: uppercase;
 }
 
 .cmap-header-link{
-	font-size: 13pt; 
+	font-size: 13pt;
 	letter-spacing: 2pt;
 	color: #FF6633;
 	cursor: pointer;
 	cursor: hand;
 }
 
+.cmap-header-username{
+	font-size: 13pt;
+	letter-spacing: 2pt;
+	color: #FF6633;
+	cursor: pointer;
+	cursor: hand;
+	position: relative;
+	bottom: 4px;
+}
+
 .cmap-title-text{
-	font-family:Helvetica Neue; 
-	font-weight: medium; 
-	font-size: 36pt; 
+	font-family:Helvetica Neue;
+	font-weight: medium;
+	font-size: 36pt;
 	text-transform: uppercase;
 }
 
 .cmap-subhead-text{
-	font-family:Helvetica Neue; 
-	font-weight: regular; 
-	font-size: 14pt; 
+	font-family:Helvetica Neue;
+	font-weight: regular;
+	font-size: 14pt;
 	text-transform: capitalize;
 }
 
@@ -87,16 +97,16 @@
 }
 
 .cmap-card-title-text{
-	font-family:Helvetica Neue; 
-	font-weight: bold; 
+	font-family:Helvetica Neue;
+	font-weight: bold;
 	font-size: 30pt;
 	color: black;
 }
 
 .cmap-card-subtitle-text{
-	font-family:Helvetica Neue; 
-	font-weight: regular; 
-	font-size: 25pt; 
+	font-family:Helvetica Neue;
+	font-weight: regular;
+	font-size: 25pt;
 	text-transform: capitalize;
 }
 

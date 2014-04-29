@@ -5167,14 +5167,42 @@ function program1(depth0,data) {
 this["BaristaTemplates"]["CMapHeader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+function program1(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-out fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                                 ";
+  }
 
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\"><i class=\"fa fa-home fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i></p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" class=\"fa fa-info-circle fa-2x cmap-header-link\"></i>\n                                 <i class=\"fa fa-sign-out fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                             </p>\n                             <p class=\"cmap-header-link pull-right\">username</p>\n                 		</div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
+function program3(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                                 <p class=\"cmap-header-link pull-right\">";
+  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " </p>\n                             ";
+  return buffer;
+  }
+
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\"><i title=\"home\" class=\"fa fa-home fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i></p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-2x cmap-header-link\"></i>\n                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                             </p>\n                             ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                 		</div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n    </div>\n</div>\n<div class=\"row\">\n	<p class=\"col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n    </div>\n</div>\n<div class=\"row\">\n	<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
