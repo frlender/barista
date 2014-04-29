@@ -173,7 +173,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
+  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
   }
 
 function program5(depth0,data) {
@@ -3509,7 +3509,7 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 // # **CMapHeaderView**
 
 // A view the provides the standard Connectivity map page header for apps built on apps.lincscloud.org
-// the header provides links in the view to navigate back to apps.lincscloud.org as well as links for 
+// the header provides links in the view to navigate back to apps.lincscloud.org as well as links for
 // sharing, settings, and information.  The view accepts as parameters a page title, subtitle, and handlebars template
 // basic use:
 
@@ -3521,7 +3521,7 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 // 2.  {string}  **subtitle**  The title of the page. Defaults to *Sub Title*
 // 3.  {string}  **template**  The path to a handlebars template to use. Defaults to *templates/CMapHeader.handlebars*
 
-//		header = new CMapHeaderView({el:"header_target", 
+//		header = new CMapHeaderView({el:"header_target",
 //									title: "",
 //									subtitle: "",
 //									template: "templates/CMapHeader.handlebars"});
@@ -3536,7 +3536,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
-		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapHeader.handlebars";
+		this.user = (this.options.user !== undefined) ? this.options.user : undefined;
 
 		// compile the default template for the view
 		this.compile_template();
@@ -3552,10 +3552,10 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// grab the template
 		this.compiled_template = BaristaTemplates.CMapHeader;
 		this.$el.append(this.compiled_template({title: this.title,
-										subtitle: this.subtitle}));
+										subtitle: this.subtitle,
+										user: this.user}));
 	}
 });
-
 
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete

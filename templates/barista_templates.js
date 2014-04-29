@@ -173,7 +173,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
+  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
   }
 
 function program5(depth0,data) {
