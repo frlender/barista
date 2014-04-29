@@ -5172,19 +5172,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-out fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                                 ";
+  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-out fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                                 ";
   }
 
 function program3(depth0,data) {
   
   
-  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
+  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
   }
 
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                                 <p class=\"cmap-header-link pull-right\">";
+  buffer += "\n                                 <p class=\"cmap-header-username pull-right\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -5192,7 +5192,7 @@ function program5(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\"><i title=\"home\" class=\"fa fa-home fa-2x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i></p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-2x cmap-header-link\"></i>\n                                 ";
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\"><i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i></p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                             ";
