@@ -1,6 +1,6 @@
 <div id="spacer" style="min-height:10px"></div>
 
-<div class="row">
+<div class="row hidden-xs">
                  		<p class="col-sm-offset-1 col-sm-3"><i title="home" class="fa fa-home fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i></p>
                  		<div class="col-sm-4">
                  			<p class="cmap-brand-text cmap-center-text">lincscloud</font>
@@ -18,6 +18,26 @@
                                  <p class="cmap-header-username pull-right">{{ user }} </p>
                              {{/if}}
                  		</div>
+</div>
+
+<div class="row visible-xs">
+                         <div class="col-xs-offset-1 col-xs-10">
+                             <p class="pull-right">
+                                 <i title="home" class="fa fa-home fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org';"></i>
+                                 <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle fa-3x cmap-header-link"></i>
+                                 {{#if user}}
+                                     <i title="logout" class="fa fa-sign-out fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/logout';"></i>
+                                 {{else}}
+                                     <i title="login" class="fa fa-sign-in fa-3x cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/login';"></i>
+                                 {{/if}}
+                             </p>
+                             {{#if user}}
+                                 <p class="cmap-header-username pull-right">{{ user }} </p>
+                             {{/if}}
+                         </div>
+                         <div class="col-xs-offset-1 col-xs-10">
+                             <p class="cmap-brand-text cmap-center-text">lincscloud</font>
+                         </div>
 </div>
 
 <div class="row">
