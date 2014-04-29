@@ -1923,7 +1923,8 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // build a parameter object for the api call
         var params = {q: this.q_param,
             l: this.limit,
-            sk: this.skip};
+            sk: this.skip,
+            s: '{"_id":1}'};
 
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
@@ -1936,7 +1937,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // make a second api call to find the maximum number of items in the collection
         // and set that as an attribute on it
         if (this.maxCount == Infinity){
-            params = _.omit(params,['l','sk']);
+            params = _.omit(params,['l','sk','s']);
             params = _.extend(params,{c: true});
             $.getJSON(this.url,params,function(res){
                 self.maxCount = res.count;
