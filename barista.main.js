@@ -6833,7 +6833,7 @@ Barista.Models.TickModel = Backbone.Model.extend({
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects.
-    model: Barista.Models.GenericMongoModel,
+    model: Backbone.Model,
 
     // #### url
     // the url from which model data is fetched
