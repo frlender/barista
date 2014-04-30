@@ -103,6 +103,13 @@
 	color: black;
 }
 
+.cmap-card-title-text-small{
+	font-family:Helvetica Neue;
+	font-weight: bold;
+	font-size: 18pt;
+	color: black;
+}
+
 .cmap-card-subtitle-text{
 	font-family:Helvetica Neue;
 	font-weight: regular;
