@@ -155,7 +155,7 @@ in the treemap (i.e. it is a non-empty dataset)</p></div></div><div class="code"
         <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">dy</span> <span class="o">&lt;</span> <span class="mi">40</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">){</span>
           <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
         <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">children</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="nx">d</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">children</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="nx">Barista</span><span class="p">.</span><span class="nx">numberWithCommas</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">})</span>
       <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;text-anchor&quot;</span><span class="p">,</span> <span class="s2">&quot;middle&quot;</span><span class="p">)</span>
