@@ -21,14 +21,14 @@
 .cmap-brand-text{
 	font-family:Memphis LT Std;
 	font-weight: bold;
-	font-size: 13pt;
+	font-size: 18pt;
 	letter-spacing: 2pt;
 	color: #FF6633;
 	text-transform: uppercase;
 }
 
 .cmap-header-link{
-	font-size: 13pt;
+	font-size: 18pt;
 	letter-spacing: 2pt;
 	color: #FF6633;
 	cursor: pointer;
@@ -36,12 +36,12 @@
 }
 
 .cmap-header-username{
-	font-size: 13pt;
+	font-size: 18pt;
 	color: #FF6633;
 	cursor: pointer;
 	cursor: hand;
 	position: relative;
-	bottom: 4px;
+	bottom: 7px;
 	padding-right: 5px;
 }
 
