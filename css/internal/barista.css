@@ -110,6 +110,13 @@
 	text-transform: capitalize;
 }
 
+.cmap-card-subtitle-text-small{
+	font-family:Helvetica Neue;
+	font-weight: regular;
+	font-size: 14pt;
+	text-transform: capitalize;
+}
+
 .cmap-img-responsive {
 display: block;
 height: auto;
