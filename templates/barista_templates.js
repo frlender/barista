@@ -201,13 +201,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-out fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                                 ";
+  return "\n                                     <i title=\"logout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/logout';\"></i>\n                                 ";
   }
 
 function program3(depth0,data) {
   
   
-  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
+  return "\n                                     <i title=\"login\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/login';\"></i>\n                                 ";
   }
 
 function program5(depth0,data) {
@@ -232,7 +232,7 @@ function program7(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\">\n                             <i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                             <i title=\"app list\" class=\"fa fa-th-large fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                             <i title=\"support\" class=\"fa fa-question-circle fa-3x cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                             <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                         </p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 ";
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\">\n                             <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                             <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                             <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                             <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                         </p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                             ";
@@ -241,7 +241,7 @@ function program7(depth0,data) {
   buffer += "\n                 		</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                                 <i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i title=\"app list\" class=\"fa fa-th-large fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"support\" class=\"fa fa-question-circle fa-3x cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                                 ";
+  buffer += "\n                                 <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
