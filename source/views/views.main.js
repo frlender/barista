@@ -2251,6 +2251,7 @@ Barista.Views.GridView = Backbone.View.extend({
         // make a JSON API call to grab data for the table
 		$.getJSON(url,params,function(res){
 			var lines = [headers];
+			var model = new self.collection.model(res);
 			res.forEach(function(r){
 				var line_data = [];
 				// for each data name in the table, grab the data. translate html
@@ -2258,13 +2259,13 @@ Barista.Views.GridView = Backbone.View.extend({
 				names.forEach(function(n){
 					switch (n){
 					case "pert_type_label":
-						line_data.push(Barista.CMapPertTypeAlias(r["pert_type"]).acronym);
+						line_data.push(Barista.CMapPertTypeAlias(model.get("pert_type")).acronym);
 						break;
 					case "view_result_link":
-						line_data.push(r.params.rpt);
+						line_data.push(model.get("standard_result"));
 						break;
 					default:
-						line_data.push(String(r[n]));
+						line_data.push(String(model.get(n)));
 					}
 				});
 				line_string = line_data.join('\t');
