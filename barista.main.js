@@ -6172,6 +6172,21 @@ Barista.setUserKey = function(key) {
 		Barista.user_key = key;
 	});
 };
+// # **AnalysisHistoryModel**
+
+// A Backbone.Model that represents an analysis history object.
+// `pert_model = new AnalysisHistoryModel()`
+Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
+    // ### initialize
+    // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+    initialize: function(attributes, options) {
+        this.cid = this.get('_id')
+        this.set("date", new Date(parseInt(this.cid.substring(0,8), 16)*1000));
+        this.set("rpt",this.get("params").rpt);
+        this.set({view_result_link: '<a href="' + this.get.standard_result + '"><i class="fa fa-eye"></i></a>'});
+  }
+});
+
 // # **BarPlotModel**
 // A Backbone.Model to hold the information needed to make a simple bar plot.  The model includes a title,
 // axis title, data, data_labels, and an optional object for metadata on the points in the data.  The meta
