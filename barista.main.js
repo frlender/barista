@@ -5249,7 +5249,7 @@ function program7(depth0,data) {
   buffer += "\n                                 <i title=\"home\" class=\"fa fa-home fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i title=\"app list\" class=\"fa fa-th-large fa-3x cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle fa-3x cmap-header-link\"></i>\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                             </p>\n                         </div>\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
+  buffer += "\n                             </p>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -5687,6 +5687,76 @@ Barista.Datasets = _.extend(Barista.Datasets,
                             type: 'Job',
                             search_column: 'job_id',
                             color: '#BDBDBD',
+                        });
+                        datum_list.push(datum);
+                    });
+
+                    // return the processed list of datums for the autocomplete
+                    return datum_list;
+                }
+            }
+        }
+    }
+);
+
+// # **JobNameDataset**
+// An object that extends Barista.Datasets to specify a backing dataset for
+// job IDs available in the Connectivity Map
+
+// JobNameDataset is typically not used directly, rather it's content
+// is extracted from Barista.Datasets in views such as CMapSearchView
+
+Barista.Datasets = _.extend(Barista.Datasets,
+    { JobName:
+            {
+            // only return 2 items at a time in the autocomplete dropdown
+            limit: 2,
+
+            // provide a name for the default typeahead data source
+            name: 'JobName',
+
+            // the template to render for all results
+            template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
+
+            // use twitter's hogan.js to compile the template for the typeahead results
+            engine: Hogan,
+
+            remote: {
+                // set the remote data source to use cellinfo with custom query params
+                url: ['http://api.lincscloud.org/compute_status?',
+                      'q={"params.rpt":{"$regex":"%QUERY", "$options":"i"}}',
+                      '&l=10',
+                      '&s={"job_id":1}'].join(''),
+
+                dataType: 'jsonp',
+
+                filter: function(response){
+                    var datum_list = [];
+                    var auto_data = [];
+                    var object_map = {};
+
+                    // for each item, pull out its job_id and use that for the
+                    // autocomplete value. Build a datum of other relevant data
+                    // for use in suggestion displays
+                    response.forEach(function(element){
+                        auto_data.push(element.params.rpt);
+                        object_map[element.params.rpt] = element;
+                    });
+
+                    // make sure we only show unique items
+                    auto_data = _.uniq(auto_data);
+
+                    // build a list of datum objects
+                    auto_data.forEach(function(item){
+                        var datum = {
+                            value: item,
+                            tokens: [item],
+                            data: object_map[item]
+                        }
+                        _.extend(datum,{
+                            type: 'Job Name',
+                            search_column: 'params.rpt',
+                            color: '#77A2A6',
                         });
                         datum_list.push(datum);
                     });
