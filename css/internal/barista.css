@@ -38,8 +38,7 @@
 .cmap-header-username{
 	font-size: 18pt;
 	color: #FF6633;
-	cursor: pointer;
-	cursor: hand;
+	cursor: default;
 	position: relative;
 	bottom: 7px;
 	padding-right: 5px;
@@ -56,7 +55,6 @@
 	font-family:Helvetica Neue;
 	font-weight: regular;
 	font-size: 14pt;
-	text-transform: capitalize;
 }
 
 .cmap-center-text{
