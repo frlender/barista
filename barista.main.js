@@ -5172,7 +5172,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-  buffer += "<hr>\n<div class=\"row hidden-xs\">\n	<p class=\"col-sm-offset-1 col-sm-3 pull-left\">&copy ";
+  buffer += "<hr>\n<div class=\"row hidden-xs\">\n	<p class=\"col-sm-offset-1 col-sm-5 pull-left\">&copy ";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -5180,7 +5180,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " all rights reserved</p>\n	<p class=\"col-sm-4 cmap-center-text\"></p>\n	<div class=\"col-sm-3\">\n	";
+    + " all rights reserved</p>\n	<div class=\"col-sm-5\">\n	";
   stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	</div>\n</div>\n\n<div class=\"row visible-xs\">\n	<p class=\"col-xs-12 cmap-center-text\">&copy ";
