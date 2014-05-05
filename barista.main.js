@@ -9764,6 +9764,7 @@ Barista.Views.GridView = Backbone.View.extend({
         // make a JSON API call to grab data for the table
 		$.getJSON(url,params,function(res){
 			var lines = [headers];
+			console.log(res);
 			var model = new self.collection.model(res);
 			res.forEach(function(r){
 				var line_data = [];
