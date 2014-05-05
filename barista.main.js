@@ -9436,14 +9436,14 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
 		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
-		
+
 
 		// set up a default collection and column definition for the grid to operate on
 		this.collection = (this.options.collection !== undefined) ? this.options.collection : new Barista.Collections.PertCollection();
 		this.columns = (this.options.columns !== undefined) ? this.options.columns : [{name: "pert_iname", label: "Reagent Name", cell: "string", editable: false},
 																						{name: "pert_type_label", label: "Pert Type", cell: Barista.HTMLCell, editable: false},
 																						{name: "num_inst", label: "Experiments", cell: "integer", editable: false}];
-		
+
 		// build the template
 		this.compile_template();
 
@@ -9612,7 +9612,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.collection.reset();
 			self.collection.maxCount = Infinity;
 			$("#" + this.div_string).hide();
-			
+
 			// reset the slice all data button and reject the slice
 			// deferred if it is present
 			self.change_slice_button_state("slice");
@@ -9655,16 +9655,16 @@ Barista.Views.GridView = Backbone.View.extend({
 		// operation.  This allows us to resolve the Deffered later in another
 		// method before the ajax call returns if we need to
 		this.slice_defer = $.Deferred();
-		
+
 		// If the Deferred resolves successfully, leave the button alone and let other the ajax call
 		// below manipulate it.  If it is rejected, set the button back up to its original state.
 		this.slice_defer.fail(function() {
 				self.change_slice_button_state("slice");
 			}
 		);
-		
+
 		// grab the API 'q' query parameter from the grid's collection and send it
-		// to sig_slice API.  if the slice job completes, check the return for a 
+		// to sig_slice API.  if the slice job completes, check the return for a
 		// file_url attribute and change the link in the slice button to expose the
 		// link.  If it does not exist, the slice failed and we display a failure
 		// message asking the user to try again
@@ -9684,10 +9684,10 @@ Barista.Views.GridView = Backbone.View.extend({
 				self.change_slice_button_state("fail");
 			}
 		});
-		
-		// if 60s pass, we assume that is too long and we 
-		// update the button with an error message and 
-		// resolve the deferred to indicate we finished the 
+
+		// if 60s pass, we assume that is too long and we
+		// update the button with an error message and
+		// resolve the deferred to indicate we finished the
 		// ajax call normally.  This is a hack to emulate a 404 error in jsonp
 		this.slice_timeout = setTimeout(function(){
 			self.change_slice_button_state("fail");
@@ -9704,7 +9704,7 @@ Barista.Views.GridView = Backbone.View.extend({
 			case "slice":
 				// update the slice button to show an available data slice
 				$("#" + self.div_string + "_slice",self.el).html('<font color="#0072B2"><i class="icon-cogs"></i> slice all data</font>');
-				
+
 				// rebind the click event and clear a timeout if present
 				$("#" + this.div_string + "_slice",this.el).click(function(){self.slice_all_table_data();});
 				clearTimeout(self.slice_timeout);
@@ -9724,8 +9724,8 @@ Barista.Views.GridView = Backbone.View.extend({
 								   link,
 								   '" class="cmap-link">',
 								   '<font color="#0072B2"><i class="icon-download"></i> download slice</font></a>'].join('');
-				
-				// update the button and resolve the deferred to 
+
+				// update the button and resolve the deferred to
 				// indicate we finished the ajax call normally
 				$("#" + self.div_string + "_slice",self.el).html(html_string);
 				self.slice_defer.resolve();
@@ -9769,9 +9769,14 @@ Barista.Views.GridView = Backbone.View.extend({
 				// for each data name in the table, grab the data. translate html
 				// content to plain text where required
 				names.forEach(function(n){
-					if (n == "pert_type_label"){
+					switch (n){
+					case "pert_type_label":
 						line_data.push(Barista.CMapPertTypeAlias(r["pert_type"]).acronym);
-					}else{
+						break;
+					case "view_result_link":
+						line_data.push(r.params.rpt);
+						break;
+					default:
 						line_data.push(String(r[n]));
 					}
 				});
@@ -9813,6 +9818,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.$el.animate({opacity:1},duration);
 	}
 });
+
 // # **HTMLCellView**
 
 // a Backgrid extension that supports display of html content in Backgrid tables.  HTMLCellView defines
