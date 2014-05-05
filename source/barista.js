@@ -3264,7 +3264,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 // 4.  {Array}  **logo_url**  The urls to organization links to use. Defaults to *['http://www.broadinstitute.org/','http://lincscloud.org/']*
 // 5.  {string}  **template**  The path to a handlebars template to use. Defaults to *templates/CMapFooter.handlebars*
 
-//		header = new CMapFooterView({el:"footer_target", 
+//		header = new CMapFooterView({el:"footer_target",
 //									organization: "Broad Institute",
 //									terms_url: "http://lincscloud.org/terms-and-conditions/",
 // 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
@@ -3281,8 +3281,8 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 		// store passed parameters as attributes of the view
 		this.organization = (this.options.organization !== undefined) ? this.options.organization : "Broad Institute";
 		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "http://lincscloud.org/terms-and-conditions/";
-		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['http://coreyflynn.github.io/Bellhop/img/broad_logo_small.png','http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png'];
-		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['http://www.broadinstitute.org/','http://lincscloud.org/'];
+		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['http://coreyflynn.github.io/Bellhop/img/broad_logo_small.png','http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png','http://coreyflynn.github.io/Bellhop/img/NIH_LINCS_logo.gif'];
+		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['http://www.broadinstitute.org/','http://lincscloud.org/','http://www.lincsproject.org/'];
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapFooter.handlebars";
 
 		// compile the default template for the view
@@ -3309,6 +3309,7 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 										year: new Date().getFullYear()}));
 	}
 });
+
 // # **CMapHeaderView**
 
 // A view the provides the standard Connectivity map page header for apps built on apps.lincscloud.org
