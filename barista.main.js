@@ -9776,6 +9776,12 @@ Barista.Views.GridView = Backbone.View.extend({
 					case "view_result_link":
 						line_data.push(r["standard_result"]);
 						break;
+					case "rpt":
+						line_data.push(r.params.rpt);
+						break;
+					case "tool_id":
+						line_data.push(r.params.tool_id);
+						break;
 					default:
 						line_data.push(String(r[n]));
 					}
