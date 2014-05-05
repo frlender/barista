@@ -12,7 +12,7 @@
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // #### model
     // the model used for the collection objects.
-    model: Barista.Models.AnalsysHistoryModel,
+    model: Barista.Models.AnalysisHistoryModel,
 
     // #### url
     // the url from which model data is fetched
