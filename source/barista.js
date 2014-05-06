@@ -911,7 +911,11 @@ Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
         this.cid = this.get('_id')
         this.set("date", new Date(parseInt(this.cid.substring(0,8), 16)*1000));
         this.set("rpt",this.get("params").rpt);
-        this.set({view_result_link: '<a href="' + this.get("standard_result") + '"><i class="fa fa-eye"></i></a>'});
+        if (this.get("status") === "complete"){
+            this.set({view_result_link: '<a href="' + this.get("standard_result") + '"><i class="fa fa-eye"></i></a>'});
+        }else{
+            this.set({view_result_link: ''});
+        }
   }
 });
 
