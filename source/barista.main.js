@@ -201,7 +201,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org/signout';\"></i>\n                                 ";
   }
 
 function program3(depth0,data) {
@@ -232,7 +232,13 @@ function program7(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\">\n                             <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                             <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                             <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                             <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                         </p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 ";
+function program9(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  }
+
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\">\n                             <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n                             <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                             <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'http://support.lincscloud.org';\"></i>\n                             <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                         </p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                             ";
@@ -241,14 +247,14 @@ function program7(depth0,data) {
   buffer += "\n                 		</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                                 <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'https://connectivitymap.zendesk.com/hc/en-us';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  buffer += "\n                                 <i title=\"home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org';\"></i>\n                                 <i title=\"app list\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'http://support.lincscloud.org';\"></i>\n                                 <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i>\n                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(9, program9, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                             </p>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-offset-1 col-sm-10\">\n        <h3 class=\"cmap-title-text cmap-center-text\">";
+  buffer += "\n                             </p>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n    </div>\n</div>\n<div class=\"row\">\n	<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n</div>\n<div class=\"row\">\n	<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
