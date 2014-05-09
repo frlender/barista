@@ -32,7 +32,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
     // ### user_id
     // the user_id to search jobs for. Forcing this to be set prevents us from searching other users jobs
-    user: "lincs@broadinstitute.org",
+    user: undefined,
 
     // ## getData
     // `AnalysisHistoryCollection.getData(search_string,search_type,limit)`
@@ -56,21 +56,28 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         this.limit = (limit !== undefined) ? limit : 30;
 
         // set up the query parameter for user_id
+        var user_q = "";
+        if (self.user){
+            user_q = '"user_id":"' + self.user + '",';
+        }
         switch (search_type){
         case "job_id":
-            this.q_param = '{"user_id":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "status":
-            this.q_param = '{"user_id":"' + self.user + '","status":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"status":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "tool_id":
-            this.q_param = '{"user_id":"' + self.user + '","tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "job_name":
-            this.q_param = '{"user_id":"' + self.user + '","params.rpt":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"params.rpt":{"$regex":"' + search_string + '", "$options":"i"}}';
+            break;
+        case "user_id":
+            this.q_param = '{' + user_q + '"user_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         default:
-            this.q_param = '{"user_id":"' + self.user + '","job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
         }
 
 
