@@ -1,18 +1,18 @@
-// # **PertINameDataset**
+// # **CompoundPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
 
-// PertINameDataset is typically not used directly, rather it's content
+// CompoundPertINameDataset is typically not used directly, rather it's content
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ PertIName:
+	{ CompoundPertIName:
 			{
 			// only return 2 items at a time in the autocomplete dropdown
 			limit: 2,
 
 			// provide a name for the default typeahead data source
-			name: 'PertIName',
+			name: 'CompoundPertIName',
 
 			// the template to render for all results
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
@@ -23,11 +23,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
-					  '&f={"pert_iname":1,"pert_type":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
+		            '&f={"pert_iname":1,"pert_type":1}',
+		            '&l=100',
+		            '&s={"pert_iname":1}'].join(''),
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -49,7 +49,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects
