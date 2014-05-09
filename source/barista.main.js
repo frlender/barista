@@ -1387,7 +1387,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 url: ['http://api.lincscloud.org/compute_status?',
                       'q={"user_id":{"$regex":"%QUERY", "$options":"i"}}',
                       '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                      '&s={"user_id":1}'].join(''),
 
                 dataType: 'jsonp',
 
@@ -1400,8 +1400,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
                     // autocomplete value. Build a datum of other relevant data
                     // for use in suggestion displays
                     response.forEach(function(element){
-                        auto_data.push(element.params.rpt);
-                        object_map[element.params.rpt] = element;
+                        auto_data.push(element.user_id);
+                        object_map[element.user_id] = element;
                     });
 
                     // make sure we only show unique items
@@ -1415,9 +1415,9 @@ Barista.Datasets = _.extend(Barista.Datasets,
                             data: object_map[item]
                         }
                         _.extend(datum,{
-                            type: 'Job Name',
-                            search_column: 'params.rpt',
-                            color: '#DAA848',
+                            type: 'Username',
+                            search_column: 'user_id',
+                            color: '#B348DA',
                         });
                         datum_list.push(datum);
                     });
