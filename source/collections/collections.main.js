@@ -71,7 +71,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
             this.q_param = '{' + user_q + '"tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
             break;
         case "job_name":
-            this.q_param = '{' + user_q + '"params.rpt":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"params.rpt":"' + search_string + '"}';
             break;
         case "user_id":
             this.q_param = '{' + user_q + '"user_id":{"$regex":"' + search_string + '", "$options":"i"}}';
