@@ -201,23 +201,23 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  return "\n             <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n         ";
   }
 
 function program3(depth0,data) {
   
   
-  return "\n                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n                                 ";
+  return "\n             <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n         ";
   }
 
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                                 <p class=\"cmap-header-username pull-right\">";
+  buffer += "\n         <p class=\"cmap-header-username pull-right\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " </p>\n                             ";
+    + " </p>\n     ";
   return buffer;
   }
 
@@ -232,17 +232,29 @@ function program7(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n                 		<p class=\"col-sm-offset-1 col-sm-3\">\n                             <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n                             <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                             <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n                             <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n                             <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n                             <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n                             <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'http://support.lincscloud.org';\"></i>\n                             <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n                         </p>\n                 		<div class=\"col-sm-4\">\n                 			<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n                 		</div>\n                 		<div class=\"col-sm-3\">\n                             <p class=\"pull-right\">\n                                 ";
+function program9(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n                                 ";
+  }
+
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<div class=\"row hidden-xs\">\n	<p class=\"col-sm-offset-1 col-sm-3\">\n         <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n         <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\">\n            <div class=\"cmap-header-dropdownContain\">\n                <div class=\"cmap-header-dropOut\">\n                    <i class=\"cmap-header-link  fa fa-search\" style=\"opacity:0;\"></i><br>\n                    <a href=\"//apps.lincscloud.org/query\"><i title=\"query\" class=\"cmap-header-link  fa fa-search\"></i></a><br>\n                    <a href=\"//apps.lincscloud.org/history\"><i title=\"history\" class=\"cmap-header-link  fa fa-clock-o\"></i></a><br>\n                    <a href=\"//apps.lincscloud.org/data_synopsis\"><i title=\"synopsis\" class=\"cmap-header-link fa fa-signal fa-rotate-90\"></i></a><br>\n                </div>\n            </div>\n        </i>\n\n         <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n         <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n         <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n         <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n         <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'http://support.lincscloud.org';\"></i>\n         <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n    </p>\n	<div class=\"col-sm-4\">\n		<p class=\"cmap-brand-text cmap-center-text\">lincscloud</font>\n	</div>\n	<div class=\"col-sm-3\">\n     <p class=\"pull-right\">\n         ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                             </p>\n                             ";
+  buffer += "\n     </p>\n     ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                 		</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
+  buffer += "\n	</div>\n</div>\n\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                                 <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n                                 <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n                                 <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n                                 <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n                                 <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n                                 <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = 'http://support.lincscloud.org';\"></i>\n                                 <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                             </p>\n                         </div>\n</div>\n\n<div class=\"row\">\n    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
