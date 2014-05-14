@@ -35,6 +35,10 @@
 	cursor: hand;
 }
 
+.cmap-header-link:hover{
+color: #FF470A;
+}
+
 .cmap-header-username{
 	font-size: 18pt;
 	color: #FF6633;
