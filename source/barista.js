@@ -3628,6 +3628,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : undefined;
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
+		this.tour = (this.options.tour !== undefined) ? this.options.tour : false;
 
 		// compile the default template for the view
 		this.compile_template();
@@ -3645,7 +3646,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.$el.append(this.compiled_template({title: this.title,
 										subtitle: this.subtitle,
 										user: this.user,
-										support_link: this.support_link}));
+										support_link: this.support_link,
+										tour: this.tour
+									}));
 	}
 });
 

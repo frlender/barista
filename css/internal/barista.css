@@ -75,6 +75,10 @@ color: #EA3A00;
 	height: 40px;
 }
 
+.cmap-header-image{
+	height: 60px;
+}
+
 .cmap-active-grid-row{
 	background-color: #BDBDBD;
 }
@@ -142,6 +146,10 @@ margin: 0 auto;
 
 .cmap-spacer-medium{
 	min-height: 20px;
+}
+
+.cmap-spacer-meso{
+	min-height: 40px;
 }
 
 .cmap-spacer-large{
@@ -216,7 +224,8 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut {
-	width: 1em;
+	width: 1.2em;
+	left: -.1em;
 	float: left;
 	position: relative;
 	margin-top: 0;
@@ -235,8 +244,21 @@ margin: 0 auto;
 
 .cmap-header-dropOut:hover{
     opacity: 1;
-    height: 4em;
-    width: 1em;
+    height: 4.1em;
+}
+
+.cmap-header-dropOut-apps-container {
+	width: 1em;
+	position: relative;
+	margin-top: 0;
+	top: -0;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 1;
+	height: 3em;
+	width: 1em;
+	box-shadow: 0 6px 4px rgba(0,0,0,.15);
+	background-color: white;
 }
 
 /*fix for introjs numbering*/
