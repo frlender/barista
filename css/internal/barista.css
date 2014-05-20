@@ -210,7 +210,7 @@ margin: 0 auto;
 
 /*menu dropdown styles*/
 .cmap-header-dropdownContain {
-	width: 2.5em;
+	width: 3em;
     position: absolute;
 	z-index: 2;
 /*	margin-left: -6.5em;  half of width */
@@ -224,7 +224,7 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut {
-	width: 2.5em;
+	width: 3em;
 	left: -.1em;
 	float: left;
 	position: relative;
@@ -243,7 +243,7 @@ margin: 0 auto;
 
 .cmap-header-developer:hover{
     opacity: 1;
-    height: 3.1em;
+    height: 4.1em;
 }
 
 .cmap-header-apps:hover{
@@ -252,7 +252,7 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut-apps-container {
-	width: 2.5em;
+	width: 3em;
 	position: relative;
 	margin-top: 0;
 	top: -0;
