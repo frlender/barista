@@ -231,7 +231,7 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut {
-	width: 3em;
+	width: 1em;
 	left: -.1em;
 	float: left;
 	position: relative;
@@ -250,11 +250,13 @@ margin: 0 auto;
 
 .cmap-header-developer:hover{
     opacity: 1;
+	width: 3em;
     height: 3.2em;
 }
 
 .cmap-header-apps:hover{
 	opacity: 1;
+	width: 3em;
 	height: 4.2em;
 }
 
