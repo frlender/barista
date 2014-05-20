@@ -27,16 +27,23 @@
 	text-transform: uppercase;
 }
 
-.cmap-header-link{
+.cmap-header-link, .cmap-header-sublink{
 	font-size: 18pt;
 	letter-spacing: 2pt;
-	color: #FF6633;
 	cursor: pointer;
 	cursor: hand;
 }
 
-.cmap-header-link:hover{
+.cmap-header-link:hover, .cmap-header-sublink:hover{
 color: #EA3A00;
+}
+
+.cmap-header-link{
+	color: #FF6633;
+}
+
+.cmap-header-sublink{
+	color: #FF9B7A;
 }
 
 .cmap-header-username{
@@ -260,7 +267,6 @@ margin: 0 auto;
 	margin-right: auto;
 	opacity: 1;
 	height: 3em;
-	box-shadow: 0 6px 4px rgba(0,0,0,.15);
 	background-color: white;
 }
 
