@@ -27,6 +27,10 @@ module.exports = function(grunt) {
       options: {
         separator: '\n'
       },
+	   js_barista_header_footer: {
+        src: ['source/preamble.js', 'templates/barista_templates.js', 'source/views/CMapHeaderView.js','source/views/CMapFooterView.js'],
+        dest: 'source/barista.header.footer.js'
+      },
       js_barista_datasets: {
         src: ['source/datasets/**/*.js','!source/datasets/datasets.main.js'],
         dest: 'source/datasets/datasets.main.js'

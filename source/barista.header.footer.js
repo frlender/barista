@@ -1,0 +1,509 @@
+//		Barista.js 0.2.0
+//		(c) 2013 Corey Flynn, Broad Institute.
+//		For all documentation:
+//		http://cmap.github.io/barista
+
+// ### Initial Setup
+// build the top level namespace.  All Barista components will be exposed through this object
+var Barista = {};
+
+// current version of the library
+Barista.VERSION = '0.2.0';
+
+// build objects to be extended for Models, Collections, and Views
+Barista.Models = {};
+Barista.Collections = {};
+Barista.Views = {};
+
+// build an array to contain backing datasets definitions
+Barista.Datasets = {};
+this["BaristaTemplates"] = this["BaristaTemplates"] || {};
+
+this["BaristaTemplates"]["CMapBaseGrid"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n	";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<p class=\"pull-left\" style=\"cursor: pointer\" id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "_download\">\n			<font color=\"#0072B2\"><i class=\"icon-download\"></i> download table</font>\n		</p>\n	";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<p class=\"pull-left\" style=\"padding-left: 8px; cursor: pointer\" id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "_slice\">\n			<font color=\"#0072B2\"><i class=\"icon-cogs\"></i> slice all data</font>\n		</p>\n	";
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "\n		<div class=\"col-lg-8\"></div>\n	";
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		";
+  stack1 = helpers['if'].call(depth0, depth0.legend, {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  return buffer;
+  }
+function program10(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n			";
+  if (stack1 = helpers.legend) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.legend; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n		";
+  return buffer;
+  }
+
+function program12(depth0,data) {
+  
+  
+  return "\n			<span class=\"col-lg-8\">\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #E69F00\">SMC</span> Small Molecule Compound </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #56B4E9\">KD</span> Knock Down </p>\n				<p class=\"pull-right\" style=\"padding-right: 8px\"><span class=\"label\" style=\"background-color: #D55E00\">OE</span> Over Expression </p>\n			</span>\n		";
+  }
+
+  buffer += "<div id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " backgrid-container\" height=\"300\">\n</div>\n<div class=\"row\">\n	<span class=\"col-lg-4\">\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_slice, {hash:{},inverse:self.program(5, program5, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	</span>\n	";
+  stack1 = helpers['if'].call(depth0, depth0.no_legend, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["CMapCard"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<a class=\"cmap-card-link\" href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <div id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    <div class=\"col-xs-12\" style=\"background-color: ";
+  if (stack1 = helpers.fg_color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.fg_color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        <div class=\"cmap-spacer-tiny\"></div>\n        <p class=\"hidden-xs cmap-center-text cmap-card-title-text\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        <p class=\"visible-xs cmap-center-text cmap-card-title-text-small\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        <div style=\"min-height:2px\"></div>\n      </div>\n\n    <div class=\"col-xs-12 cmap-card\">\n\n        <img src=\"";
+  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"col-xs-4 img-responsive\" alt=\"\">\n        <h4 class=\"hidden-xs col-xs-8 cmap-card-subtitle-text text-muted\">";
+  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h4>\n        <p class=\"visible-xs col-xs-8 cmap-card-subtitle-text-small text-muted\">";
+  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        <div class=\"col-xs-12 cmap-spacer-tiny\"></div>\n    </div>\n  </div>\n</a>\n";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["CMapFooter"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<a href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"><img class=\"pull-right cmap-footer-image\" src=\"";
+  if (stack1 = helpers.logo) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.logo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"></a>\n	";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		<a href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"><img class=\"cmap-footer-image\" src=\"";
+  if (stack1 = helpers.logo) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.logo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"></a>\n	";
+  return buffer;
+  }
+
+  buffer += "<hr>\n<div class=\"row hidden-xs\">\n	<div class=\"col-sm-offset-1 col-sm-5 pull-left\">\n		<p>&copy ";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " all rights reserved</p>\n		<p><a href=\"http://lincscloud.org/license/\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-sm-5\">\n	";
+  stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	</div>\n</div>\n\n<div class=\"row visible-xs\">\n	<div class=\"col-xs-12\">\n		<p class=\"cmap-center-text\">&copy ";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " all rights reserved</p>\n		<p class=\"cmap-center-text\"><a href=\"http://lincscloud.org/license/\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-xs-12 cmap-center-text\">\n	";
+  stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	</div>\n</div>\n<div class=\"cmap-spacer-medium\"></div>\n";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["CMapHeader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n		             <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n		         ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n		             <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n		         ";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n		         <p class=\"cmap-header-username pull-right\">";
+  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " </p>\n		     ";
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "\n					<a class=\"cmap-link pull-right\">Tour this app</a>\n				";
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                                     ";
+  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n                                 ";
+  return buffer;
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\n                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n                                 ";
+  }
+
+  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<!-- large screens -->\n<div class=\"row hidden-xs\">\n	<!-- logo and navigation buttons -->\n	<div class=\"col-sm-offset-1 col-sm-3\">\n\n		<!-- logo -->\n		<div class=\"row\">\n			<div class=\"col-xs-12\">\n				<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://coreyflynn.github.io/Bellhop/img/lincscloud_logo.png\"></a>\n			</div>\n		</div>\n\n		<div class=\"row\">\n			<div class=\"cmap-spacer-medium\"></div>\n		</div>\n\n		<!-- navigation buttons -->\n		<div class=\"row\">\n			<div class=\"col-sm-12\">\n		         <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n		         <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\">\n		            <div class=\"cmap-header-dropdownContain\">\n		                <div class=\"cmap-header-dropOut\">\n		                    <i class=\"cmap-header-link  fa fa-search\" style=\"opacity:0;\"></i><br>\n							<div class=\"cmap-header-dropOut-apps-container\">\n			                    <a href=\"//apps.lincscloud.org/query\"><i title=\"query\" class=\"cmap-header-link  fa fa-search\"></i></a><br>\n			                    <a href=\"//apps.lincscloud.org/history\"><i title=\"history\" class=\"cmap-header-link  fa fa-clock-o\"></i></a><br>\n			                    <a href=\"//apps.lincscloud.org/data_synopsis\"><i title=\"synopsis\" class=\"cmap-header-link fa fa-signal fa-rotate-90\"></i></a><br>\n							</div>\n		                </div>\n		            </div>\n		        </i>\n\n		         <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n		         <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n		         <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n		         <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n		         <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n		    </div>\n		</div>\n\n	</div>\n\n	<!-- app title and subtitle -->\n	<div class=\"col-sm-4\">\n		<h3 class=\"col-xs-12 cmap-title-text cmap-center-text\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n		<p class=\"col-xs-12 text-muted cmap-subhead-text cmap-center-text\">";
+  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n	</div>\n\n	<!-- signin/signout and support -->\n	<div class=\"col-sm-3\">\n\n		<!-- user and signin/out -->\n		<div class=\"row\">\n			<p class=\"pull-right\">\n		         ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n		     </p>\n		     ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n		</div>\n\n		<!-- spacers -->\n		<div class=\"row\">\n			<div class=\"cmap-spacer-meso\"></div>\n		</div>\n\n		<!-- support -->\n		<div class=\"row\">\n			<p>\n				<i title=\"Support\" class=\"fa fa-question-circle cmap-header-link pull-right\" onclick=\"window.location.href = '";
+  if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "';\"></i>\n				";
+  stack1 = helpers['if'].call(depth0, depth0.tour, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n			</p>\n		</div>\n	</div>\n</div>\n\n\n<!-- small screens -->\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                                 <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n                                 <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n                                 <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n                                 <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n                                 <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n                                 <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
+  if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "';\"></i>\n                                 <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                             </p>\n                         </div>\n\n	<div class=\"row\">\n	    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n	</div>\n	<div class=\"row\">\n		<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
+  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n	</div>\n</div>\n\n<!-- Modal -->\n<div class=\"modal fade\" id=\"aboutModal\">\n<div class=\"modal-dialog\">\n  <div class=\"modal-content\">\n    <div class=\"modal-header\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n      <h4 class=\"modal-title\">About The Connectivity Map</h4>\n    </div>\n    <div class=\"modal-body\">\n      <p>The Connectivity Map (or CMap) is a catalog of gene-expression data collected from human cells treated with chemical compounds and genetic reagents. Computational methods to reduce the number of necessary genomic measurements along with streamlined methodologies enable the current effort to significantly increase the size of the CMap database and along with it, our potential to connect human diseases with the genes that underlie them and the drugs that treat them.</p>\n\n      <p>CMap intends to accelerate the discovery process by systematically revealing connections between genes/compounds discovered in screens and molecular pathways that underlie disease states. The goal is to turn basic discoveries into drugs and diagnostics that have therapeutic impact.</p>\n    </div>\n  </div><!-- /.modal-content -->\n</div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["CMapPertSearchBar"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<input class=\"typeahead form-control col-lg-12\" autocomplete=\"off\" type=\"text\" placeholder=\"";
+  if (stack1 = helpers.placeholder) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.placeholder; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" data-provide=\"typeahead\" id=\"search\">";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["TypeaheadItem"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"tt-suggestion\"><span class=\"label\" style=\"background-color: ";
+  if (stack1 = helpers.color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.type) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.type; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</span> ";
+  if (stack1 = helpers.value) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</div>";
+  return buffer;
+  });
+
+this["BaristaTemplates"]["d3_target"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n<div id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" style=\"height:";
+  if (stack1 = helpers.height) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.height; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "px\"></div>\n";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n<div id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" style=\"height:120px\"></div>\n";
+  return buffer;
+  }
+
+  stack1 = helpers['if'].call(depth0, depth0.height, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { return stack1; }
+  else { return ''; }
+  });
+// # **CMapHeaderView**
+
+// A view the provides the standard Connectivity map page header for apps built on apps.lincscloud.org
+// the header provides links in the view to navigate back to apps.lincscloud.org as well as links for
+// sharing, settings, and information.  The view accepts as parameters a page title, subtitle, and handlebars template
+// basic use:
+
+//		header = new CMapHeaderView({el:"header_target"});
+
+// optional arguments:
+
+// 1.  {string}  **title**  The title of the page. Defaults to *Title*
+// 2.  {string}  **subtitle**  The title of the page. Defaults to *Sub Title*
+// 3.  {string}  **template**  The path to a handlebars template to use. Defaults to *templates/CMapHeader.handlebars*
+
+//		header = new CMapHeaderView({el:"header_target",
+//									title: "",
+//									subtitle: "",
+//									template: "templates/CMapHeader.handlebars"});
+Barista.Views.CMapHeaderView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapHeaderView",
+
+	// ### initialize
+	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	initialize: function(){
+		// store passed parameters as attributes of the view
+		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
+		this.title = this.options.title;
+		this.subtitle = this.options.subtitle;
+		this.tour = this.options.tour;
+		// compile the default template for the view
+		this.compile_template();
+
+		// render the template
+		this.render();
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the specified template for the view
+	compile_template: function(){
+		var self = this;
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapHeader;
+		this.$el.append(this.compiled_template({title: this.title,
+										subtitle: this.subtitle,
+										user: this.user,
+										support_link: this.support_link,
+										tour: this.tour
+									}));
+	}
+});
+
+// # **CMapFooterView**
+
+// A view that provides the standard Connectivity map page footer for apps built on apps.lincscloud.org
+// the view provides standard copyright text and customizable organization name,
+// terms and conditions link, and organization logo/link
+// basic use:
+
+//		header = new CMapHeaderView({el:"header_target"});
+
+// optional arguments:
+
+// 1.  {string}  **organization**  the name of the organization that claims copyright. Defaults to *Broad Institute*
+// 2.  {string}  **terms_url**  The url on which to find terms and conditions. Defaults to *http://lincscloud.org/terms-and-conditions/*
+// 3.  {Array}  **logo**  The urls to organization logos to use. Defaults to *['http://coreyflynn.github.io/Bellhop/img/broad_logo_small.png','http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png']*
+// 4.  {Array}  **logo_url**  The urls to organization links to use. Defaults to *['http://www.broadinstitute.org/','http://lincscloud.org/']*
+// 5.  {string}  **template**  The path to a handlebars template to use. Defaults to *templates/CMapFooter.handlebars*
+
+//		header = new CMapFooterView({el:"footer_target",
+//									organization: "Broad Institute",
+//									terms_url: "http://lincscloud.org/terms-and-conditions/",
+// 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
+// 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
+//									template: "../templates/CMapFooter.handlebars"});
+Barista.Views.CMapFooterView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapFooterView",
+
+	// ### initialize
+	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	initialize: function(){
+		// store passed parameters as attributes of the view
+		this.organization = (this.options.organization !== undefined) ? this.options.organization : "Broad Institute";
+		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "http://lincscloud.org/terms-and-conditions/";
+		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['http://coreyflynn.github.io/Bellhop/img/broad_logo_small_text.png','http://coreyflynn.github.io/Bellhop/img/CMap-logox.png','http://coreyflynn.github.io/Bellhop/img/skunkworks-logo.png','http://coreyflynn.github.io/Bellhop/img/NIH_LINCS_logo.gif'];
+		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['http://www.broadinstitute.org/','http://lincscloud.org/','http://www.broadinstitute.org/vis','http://www.lincsproject.org/'];
+		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapFooter.handlebars";
+
+		// compile the default template for the view
+		this.compile_template();
+
+		// render the template
+		this.render();
+	},
+
+	// ### compile_template
+	// use Handlebars to compile the specified template for the view
+	compile_template: function(){
+		// grab the template
+		this.compiled_template = BaristaTemplates.CMapFooter;
+
+		// package logos and log_urls into a set of object to iterate over
+		var logo_objects = []
+		for (var i=0; i < this.logo.length; i++){
+			logo_objects.push({logo: this.logo[i], url: this.logo_url[i]});
+		}
+		this.$el.append(this.compiled_template({organization: this.organization,
+										terms_url: this.terms_url,
+										logo_objects: logo_objects,
+										year: new Date().getFullYear()}));
+	}
+});
