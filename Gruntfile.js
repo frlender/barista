@@ -60,7 +60,7 @@ module.exports = function(grunt) {
         dest: 'source/barista.js'
       },
       js_external: {
-        src: ['external_source/jquery-1.9.1.min.js',
+        src: ['bower_components/jquery/jquery.min.js',
               'external_source/underscore-min.js',
               'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'external_source/d3.v3.min.js',
@@ -221,6 +221,6 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','cssmin','groc']);
 
-  
+
 
 };
