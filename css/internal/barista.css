@@ -248,7 +248,7 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut-apps-container {
-	width: 2.2em !important;
+	width: 2.2em;
 	position: relative;
 	margin-top: 0;
 	top: -0;
@@ -256,7 +256,6 @@ margin: 0 auto;
 	margin-right: auto;
 	opacity: 1;
 	height: 3em;
-	width: 1em;
 	box-shadow: 0 6px 4px rgba(0,0,0,.15);
 	background-color: white;
 }
