@@ -30,7 +30,6 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : undefined;
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
-		this.tour = (this.options.tour !== undefined) ? this.options.tour : false;
 
 		// compile the default template for the view
 		this.compile_template();

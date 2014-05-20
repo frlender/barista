@@ -37,6 +37,7 @@
 		         <i title="Data" class="fa fa-file cmap-header-link" onclick="window.location.href = 'http://data.lincscloud.org';"></i>
 		         <i title="Compute" class="fa fa-keyboard-o cmap-header-link" onclick="window.location.href = 'http://c3.lincscloud.org';"></i>
 		         <i title="Code" class="fa fa-code cmap-header-link" onclick="window.location.href = 'https://github.com/cmap/l1ktools';"></i>
+				 <i title="Support" class="fa fa-question-circle cmap-header-link pull-right" onclick="window.location.href = '{{ support_link }}';"></i>
 		         <!-- <i data-toggle="modal" href="#aboutModal" title="about" class="fa fa-info-circle cmap-header-link"></i> -->
 		    </div>
 		</div>
@@ -64,21 +65,6 @@
 		     {{#if user}}
 		         <p class="cmap-header-username pull-right">{{ user }} </p>
 		     {{/if}}
-		</div>
-
-		<!-- spacers -->
-		<div class="row">
-			<div class="cmap-spacer-meso"></div>
-		</div>
-
-		<!-- support -->
-		<div class="row">
-			<p>
-				<i title="Support" class="fa fa-question-circle cmap-header-link pull-right" onclick="window.location.href = '{{ support_link }}';"></i>
-				{{#if tour}}
-					<a class="cmap-link pull-right">Tour this app</a>
-				{{/if}}
-			</p>
 		</div>
 	</div>
 </div>
