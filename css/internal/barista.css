@@ -271,6 +271,23 @@ margin: 0 auto;
 	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
 	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 2px;
+}
+
+.cmap-header-dropOut-developer-container {
+	width: 2.5em;
+	position: relative;
+	margin-top: 0;
+	top: -0;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 1;
+	height: 2em;
+	background-color: white;
+	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 2px;
 }
 
 /*fix for introjs numbering*/
