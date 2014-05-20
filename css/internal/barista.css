@@ -217,7 +217,7 @@ margin: 0 auto;
 
 /*menu dropdown styles*/
 .cmap-header-dropdownContain {
-	width: 3em;
+	width: 1em;
     position: absolute;
 	z-index: 2;
 /*	margin-left: -6.5em;  half of width */
