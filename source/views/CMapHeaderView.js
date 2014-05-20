@@ -26,8 +26,10 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
 		// store passed parameters as attributes of the view
-		this.support_link = (this.support_link !== undefined) ? this.support_link : "http://support.lincscloud.org";
-	
+		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
+		this.title = this.options.title;
+		this.subtitle = this.options.subtitle;
+		this.tour = this.options.tour;
 		// compile the default template for the view
 		this.compile_template();
 
