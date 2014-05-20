@@ -231,7 +231,6 @@ margin: 0 auto;
 	margin-top: 0;
 	opacity: 0;
     top: -0;
-/*	box-shadow: 0 0 4px rgba(0,0,0,.15);*/
     height: 1em;
   overflow:hidden;
 
@@ -242,9 +241,14 @@ margin: 0 auto;
   transition: all 0.3s ease-out;
 }
 
-.cmap-header-dropOut:hover{
+.cmap-header-developer:hover{
     opacity: 1;
-    height: 4.1em;
+    height: 3.1em;
+}
+
+.cmap-header-apps:hover{
+	opacity: 1;
+	height: 4.1em;
 }
 
 .cmap-header-dropOut-apps-container {
