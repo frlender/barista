@@ -9335,16 +9335,18 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// render the base view components
 		this.base_render();
 
-		// draw the static index reagent icon
-		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
-		this.fg_layer.selectAll('.index_text_icon').data([1])
-							.enter().append("svg:image")
-							.attr("class","index_text_icon")
-			                .attr("xlink:href", this.model.get("structure_url"))
-							.attr("x",10)
-							.attr("y",0)
-							.attr("height",40)
-							.attr("width",40);
+		// draw compound structure if there is one
+		if (this.model.get("structure_url")){
+			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+			this.fg_layer.selectAll('.index_text_icon').data([1])
+								.enter().append("svg:image")
+								.attr("class","index_text_icon")
+								.attr("xlink:href", this.model.get("structure_url"))
+								.attr("x",this.width - 110)
+								.attr("y",0)
+								.attr("height",100)
+								.attr("width",100);
+		}
 
 		// draw the static index reagent text
 		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
