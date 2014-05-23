@@ -1354,7 +1354,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.attr("fill","#777777")
-							.text(self.get("molecular_wt"));
+							.text(this.get("molecular_wt"));
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
