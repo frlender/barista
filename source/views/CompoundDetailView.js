@@ -116,6 +116,30 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("fill","#777777")
 							.text(this.model.get("molecular_wt"));
 
+		// (re)draw the formula and label
+		this.fg_layer.selectAll('.formula_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.formula_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","formula_label_text")
+							.attr("x",300)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text("Formula:");
+
+		this.fg_layer.selectAll('.formula_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.formula_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","formula_text")
+							.attr("x",370)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.attr("fill","#777777")
+							.text(this.model.get("molecular_formula"));
+
 		// (re)draw the InChIKey label and InChIKey
 		this.fg_layer.selectAll('.inchi_label_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.inchi_label_text').data([1])
