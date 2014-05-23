@@ -3922,7 +3922,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.append("text")
 							.attr("class","inchi_label_text")
 							.attr("x",180)
-							.attr("y",115)
+							.attr("y",125)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text("InChIKey:");
@@ -3932,12 +3932,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.enter()
 							.append("text")
 							.attr("class","inchi_text")
-							.attr("x",250)
-							.attr("y",115)
+							.attr("x",270)
+							.attr("y",125)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.attr("fill","#777777")
-							.text(this.model.get("inchi_key"));
+							.text(this.model.get("inchi_key").split("InChIKey=")[1]);
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
