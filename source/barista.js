@@ -3851,6 +3851,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.attr("y",0)
 								.attr("height",100)
 								.attr("width",100)
+								.style("cursor","pointer")
 								.on("click", function(){window.location = self.model.get('structure_url')});
 		}
 
