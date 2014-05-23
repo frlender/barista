@@ -4255,17 +4255,30 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text(this.model.get('pert_id'));
-		// (re)draw the pert_iname
+
+		// (re)draw the weight label and weight
 		this.fg_layer.selectAll('.weight_label_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.weight_label_text').data([1])
 							.enter()
 							.append("text")
 							.attr("class","weight_label_text")
-							.attr("x",100)
+							.attr("x",180)
 							.attr("y",100)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text("Weight:");
+
+		this.fg_layer.selectAll('.weight_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.weight_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","weight_text")
+							.attr("x",240)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.attr("fill","#777777")
+							.text(self.get("molecular_wt"));
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
