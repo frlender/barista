@@ -3860,18 +3860,18 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.index_text').data([1])
 							.enter().append("text")
 							.attr("class","index_text")
-							.attr("x",60)
+							.attr("x",10)
 							.attr("y",30)
 							.attr("fill","#E69F00")
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","20pt")
 							.text('Small Molecule Compound');
 
-		// (re)draw the pert_iname text
-		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_id_text').data([1])
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_iname_text').data([1])
 							.enter().append("text")
-							.attr("class","pert_id_text")
+							.attr("class","pert_iname_text")
 							.attr("x",10)
 							.attr("y",75)
 							.attr("font-family","Helvetica Neue")
@@ -3880,16 +3880,27 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.text(this.model.get('pert_iname'));
 
 		// (re)draw the pert_iname
-		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_iname_text').data([1])
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
 							.enter()
 							.append("text")
-							.attr("class","pert_iname_text")
+							.attr("class","pert_id_text")
 							.attr("x",10)
 							.attr("y",100)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text(this.model.get('pert_id'));
+		// (re)draw the pert_iname
+		this.fg_layer.selectAll('.weight_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.weight_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","weight_label_text")
+							.attr("x",100)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text("Weight:");
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
