@@ -1291,7 +1291,8 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.attr("x",this.width - 110)
 								.attr("y",0)
 								.attr("height",100)
-								.attr("width",100);
+								.attr("width",100)
+								.on("click", function(){window.location = self.model.get('structure_url')});
 		}
 
 		// draw the static index reagent text
