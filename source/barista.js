@@ -17,6 +17,10 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// build an object of utilities that we need to make sure are not overwritten
+Barista.Utils = {cookie: $.cookie};
+
 // # **CellHistologyDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -3626,7 +3630,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
-		this.user = (this.options.user !== undefined) ? this.options.user : $.cookie("user_id");
+		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
 
 		// compile the default template for the view
