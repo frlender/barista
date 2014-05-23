@@ -76,7 +76,8 @@ module.exports = function(grunt) {
               'external_source/Blob.js',
               'external_source/canvas-toBlob.js',
               'external_source/typeahead.min.js',
-              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js'
+              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
+              'bower_components/jquery.cookie/jquery.cookie.js'
               ],
         dest: 'external_source/external.js'
       },
@@ -221,6 +222,6 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','cssmin','groc']);
 
-  
+
 
 };
