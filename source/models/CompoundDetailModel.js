@@ -103,7 +103,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   num_gold: perts[0].num_gold,
                   num_sig: perts[0].num_sig,
                   inchi_key: perts[0].inchi_key,
-                  structure_url: structure_url
+                  structure_url: structure_url,
                   last_update: (new Date()).getTime()});
 
         // trigger an event to tell us that the model is not null

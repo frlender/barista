@@ -1262,7 +1262,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### model
 	// set up the view's default model
 	model: new Barista.Models.CompoundDetailModel(),
-	
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -1315,7 +1315,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
 							.text(this.model.get('pert_iname'));
-		
+
 		// (re)draw the pert_iname
 		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.pert_iname_text').data([1])
@@ -1448,7 +1448,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
 	},
 
-	
+
 	// ### save_png_pre
 	// overide the base views save_png_pre method to clear out the image so we
 	// can render the png properly
@@ -1481,6 +1481,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr('x',60)
 	}
 });
+
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete
 functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the

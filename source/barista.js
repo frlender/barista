@@ -1344,15 +1344,19 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
   defaults: {
     pert_id: "",
     pert_iname: "",
     pert_summary: null,
     pubchem_cid: null,
     wiki_url: null,
+    molecular_formula: null,
+    molecular_wt: null,
+    pert_vendor: null,
+    num_gold: 0,
+    num_sig: 0,
+    inchi_key: "",
+    structure_url: ""
   },
 
   // ### fetch
@@ -1376,7 +1380,14 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_iname: "",
                   pert_summary: null,
                   pubchem_cid: null,
-                  wiki_url: null})
+                  wiki_url: null,
+                  molecular_formula: null,
+                  molecular_wt: null,
+                  pert_vendor: null,
+                  num_gold: 0,
+                  num_sig: 0,
+                  inchi_key: "",
+                  structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
       }else{
         // grab the wikipedia link if it is there
@@ -1403,12 +1414,25 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
           pert_summary = perts[0].pert_summary;
         }
 
+        // grab the sstructure_url if it is there.
+        var structure_url = null;
+        if (perts[0].structure_url){
+          pert_summary = perts[0].structure_url;
+        }
+
         // set the fields on the model
         self.set({pert_id: perts[0].pert_id,
                   pert_iname: perts[0].pert_iname,
                   pert_summary: pert_summary,
                   pubchem_cid: pubchem_cid,
                   wiki_url: wiki_url,
+                  molecular_formula: perts[0].molecular_formula,
+                  molecular_wt: perts[0].molecular_wt,
+                  pert_vendor: perts[0].pert_vendor,
+                  num_gold: perts[0].num_gold,
+                  num_sig: perts[0].num_sig,
+                  inchi_key: perts[0].inchi_key,
+                  structure_url: structure_url,
                   last_update: (new Date()).getTime()});
 
         // trigger an event to tell us that the model is not null
@@ -1417,6 +1441,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **GenericCountModel**
 
 // A Backbone.Model that represents the count of a set CMap databbase items.  The data model
@@ -3796,7 +3821,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### model
 	// set up the view's default model
 	model: new Barista.Models.CompoundDetailModel(),
-	
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
@@ -3849,7 +3874,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
 							.text(this.model.get('pert_iname'));
-		
+
 		// (re)draw the pert_iname
 		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.pert_iname_text').data([1])
@@ -3982,7 +4007,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
 	},
 
-	
+
 	// ### save_png_pre
 	// overide the base views save_png_pre method to clear out the image so we
 	// can render the png properly
@@ -4015,6 +4040,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr('x',60)
 	}
 });
+
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete
 functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the
