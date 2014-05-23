@@ -6909,9 +6909,9 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
           pert_summary = perts[0].pert_summary;
         }
 
-        // grab the sstructure_url if it is there.
+        // grab the sstructure_url if it is there and there is a pubchem_cid (i.e. it is public).
         var structure_url = null;
-        if (perts[0].structure_url){
+        if (perts[0].structure_url && pubchem_cid){
           structure_url = perts[0].structure_url;
         }
 
