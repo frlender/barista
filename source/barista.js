@@ -3845,7 +3845,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.index_text_icon').data([1])
 							.enter().append("svg:image")
 							.attr("class","index_text_icon")
-			                .attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
+			                .attr("xlink:href", this.model.get("structure_url"))
 							.attr("x",10)
 							.attr("y",0)
 							.attr("height",40)
