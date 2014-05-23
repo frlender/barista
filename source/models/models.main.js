@@ -174,6 +174,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
     pert_vendor: null,
     num_gold: 0,
     num_sig: 0,
+    cell_id: [],
     inchi_key: "",
     structure_url: ""
   },
@@ -205,6 +206,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_vendor: null,
                   num_gold: 0,
                   num_sig: 0,
+                  cell_id: [],
                   inchi_key: "",
                   structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
@@ -250,6 +252,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_vendor: perts[0].pert_vendor,
                   num_gold: perts[0].num_gold,
                   num_sig: perts[0].num_sig,
+                  cell_id: perts[0].cell_id,
                   inchi_key: perts[0].inchi_key,
                   structure_url: structure_url,
                   last_update: (new Date()).getTime()});
