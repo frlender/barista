@@ -1417,7 +1417,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
         // grab the sstructure_url if it is there.
         var structure_url = null;
         if (perts[0].structure_url){
-          pert_summary = perts[0].structure_url;
+          structure_url = perts[0].structure_url;
         }
 
         // set the fields on the model
