@@ -65,7 +65,7 @@
 
 	<!-- app title and subtitle -->
 	<div class="col-sm-4">
-		<h3 class="col-xs-12 cmap-title-text cmap-center-text">{{ title }}</h3>
+		<h3 class="col-xs-12 cmap-title-text cmap-center-text cmap-header-top-margin">{{ title }}</h3>
 		<p class="col-xs-12 text-muted cmap-subhead-text cmap-center-text">{{ subtitle }}</p>
 	</div>
 
@@ -73,7 +73,7 @@
 	<div class="col-sm-3">
 
 		<!-- user and signin/out -->
-		<div class="row">
+		<div class="row cmap-header-top-margin">
 			<p class="pull-right">
 		         {{#if user}}
 		             <i title="signout" class="fa fa-sign-out cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/signout';"></i>

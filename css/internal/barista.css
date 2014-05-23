@@ -61,7 +61,6 @@ color: #EA3A00;
 	font-weight: bold;
 	font-size: 30pt;
 	border: 1px solid black;
-	margin-top: 22px;
 	padding: 2px;
 }
 
@@ -69,6 +68,10 @@ color: #EA3A00;
 	font-family:Helvetica;
 	font-weight: regular;
 	font-size: 12pt;
+}
+
+.cmap-header-top-margin{
+	margin-top: 22px;
 }
 
 .cmap-center-text{

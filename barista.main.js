@@ -5260,7 +5260,7 @@ function program11(depth0,data) {
   if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "';\"></i>\n		         <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n		    </div>\n		</div>\n\n	</div>\n\n	<!-- app title and subtitle -->\n	<div class=\"col-sm-4\">\n		<h3 class=\"col-xs-12 cmap-title-text cmap-center-text\">";
+    + "';\"></i>\n		         <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n		    </div>\n		</div>\n\n	</div>\n\n	<!-- app title and subtitle -->\n	<div class=\"col-sm-4\">\n		<h3 class=\"col-xs-12 cmap-title-text cmap-center-text cmap-header-top-margin\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -5268,7 +5268,7 @@ function program11(depth0,data) {
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n	</div>\n\n	<!-- signin/signout and support -->\n	<div class=\"col-sm-3\">\n\n		<!-- user and signin/out -->\n		<div class=\"row\">\n			<p class=\"pull-right\">\n		         ";
+    + "</p>\n	</div>\n\n	<!-- signin/signout and support -->\n	<div class=\"col-sm-3\">\n\n		<!-- user and signin/out -->\n		<div class=\"row cmap-header-top-margin\">\n			<p class=\"pull-right\">\n		         ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n		     </p>\n		     ";
