@@ -57,10 +57,10 @@ color: #EA3A00;
 }
 
 .cmap-title-text{
-	font-family:Helvetica Neue;
-	font-weight: medium;
-	font-size: 36pt;
-	text-transform: uppercase;
+	font-family:Helvetica;
+	font-weight: bold;
+	font-size: 30pt;
+	border: 1px solid black;
 	margin-top: 0px;
 }
 
