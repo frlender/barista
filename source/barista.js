@@ -3908,12 +3908,36 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.enter()
 							.append("text")
 							.attr("class","weight_text")
-							.attr("x",240)
+							.attr("x",250)
 							.attr("y",100)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.attr("fill","#777777")
 							.text(this.model.get("molecular_wt"));
+
+		// (re)draw the InChIKey label and InChIKey
+		this.fg_layer.selectAll('.inchi_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.inchi_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","inchi_label_text")
+							.attr("x",180)
+							.attr("y",115)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text("InChIKey:");
+
+		this.fg_layer.selectAll('.inchi_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.inchi_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","inchi_text")
+							.attr("x",250)
+							.attr("y",115)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.attr("fill","#777777")
+							.text(this.model.get("inchi_key"));
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
