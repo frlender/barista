@@ -1337,13 +1337,13 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// render additional labels
 		this.label_y_position = 100;
 		// (re)draw the weight label and weight
-		render_label_and_value('weight', 'Weight', 'molecular_wt');
+		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
 
 		// (re)draw the formula and label
-		render_label_and_value('formula', 'Formula', 'molecular_fomula');
+		this.render_label_and_value('formula', 'Formula', 'molecular_fomula');
 
 		// (re)draw the InChIKey label and InChIKey
-		render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
