@@ -81,7 +81,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 						.attr("height",this.height);
 
 		// make sure that the top level div target is set to hide overflow content
-		$("#" + this.div_string).css("overflow",hidden);
+		$("#" + this.div_string).css("overflow","hidden");
 
 		// render the vis
 		this.render();
