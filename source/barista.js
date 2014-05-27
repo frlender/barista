@@ -4166,7 +4166,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
-		this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("transform", "rotate(180)").attr("y",h - 20);
+		this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("transform", "rotate(180," + this.width/2 + "," + (h-10) + ")").attr("y",h - 20);
 		this.vis.transition().duration(500).attr("height",h);
 	},
 
