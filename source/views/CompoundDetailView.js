@@ -347,13 +347,15 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		if (this.panel_open){
 			h = this.options.plot_height;
 			$("#" + this.div_string).animate({height:h},500);
-			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("transform", "rotate(0," + this.width/2 + "," + (h-10) + ")").attr("y",h - 20);
 			this.panel_open = false;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
 		}else{
 			h = this.open_height
 			$("#" + this.div_string).animate({height:h},500);
-			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("transform", "rotate(180," + this.width/2 + "," + (h-10) + ")").attr("y",h - 20);
 			this.panel_open = true;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
 		}
 		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
 		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
