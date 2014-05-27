@@ -4195,7 +4195,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// window resize events to view re-draws, compile the template, and render the view
 	initialize: function(){
 		// set up the plot height
-		this.options.plot_height = 130;
+		this.options.plot_height = 200;
 
 		// initialize the view using the base view's built in method
 		this.base_initialize();
@@ -4204,7 +4204,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### render
 	// completely render the view. Updates both static and dynamic content in the view.
 	render: function(){
+		// keep track of our scope at this level
 		var self = this;
+
 		// render the base view components
 		this.base_render();
 
@@ -4235,7 +4237,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-size","20pt")
 							.text('Small Molecule Compound');
 
-		// (re)draw the pert_id text
+		// (re)draw the pert_iname text
 		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.pert_iname_text').data([1])
 							.enter().append("text")
@@ -4247,7 +4249,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-size","36pt")
 							.text(this.model.get('pert_iname'));
 
-		// (re)draw the pert_iname
+		// (re)draw the pert_id text
 		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.pert_id_text').data([1])
 							.enter()
@@ -4259,77 +4261,16 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("font-size","14pt")
 							.text(this.model.get('pert_id'));
 
+		// render additional labels
+		this.label_y_position = 100;
 		// (re)draw the weight label and weight
-		this.fg_layer.selectAll('.weight_label_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.weight_label_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","weight_label_text")
-							.attr("x",180)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text("Weight:");
-
-		this.fg_layer.selectAll('.weight_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.weight_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","weight_text")
-							.attr("x",250)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.attr("fill","#777777")
-							.text(this.model.get("molecular_wt"));
+		render_label_and_value('weight', 'Weight', 'molecular_wt');
 
 		// (re)draw the formula and label
-		this.fg_layer.selectAll('.formula_label_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.formula_label_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","formula_label_text")
-							.attr("x",340)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text("Formula:");
-
-		this.fg_layer.selectAll('.formula_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.formula_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","formula_text")
-							.attr("x",420)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.attr("fill","#777777")
-							.text(this.model.get("molecular_formula"));
+		render_label_and_value('formula', 'Formula', 'molecular_fomula');
 
 		// (re)draw the InChIKey label and InChIKey
-		this.fg_layer.selectAll('.inchi_label_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.inchi_label_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","inchi_label_text")
-							.attr("x",180)
-							.attr("y",125)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text("InChIKey:");
-
-		this.fg_layer.selectAll('.inchi_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.inchi_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","inchi_text")
-							.attr("x",270)
-							.attr("y",125)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.attr("fill","#777777")
-							.text(this.model.get("inchi_key").split("InChIKey=")[1]);
+		render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
@@ -4383,6 +4324,50 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	update: function(){
 		this.render();
 		return this;
+	},
+
+	// ### render_label_and_value
+	// utility function to draw a standard label and value for that label under
+	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
+	// pass the value in model_field as text instead of serching for it in the model
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text){
+		// set up a local variable to keep our scope straight
+		var self = this;
+
+		// make sure that we have a label_y_position set
+		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
+		this.label_y_position += 25;
+
+		// (re)draw the label
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class",'.' + class_name_base + '_label_text')
+							.attr("x",10)
+							.attr("y",this.label_y_position)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(label_text = ':');
+
+		// (re)draw the text
+		this.fg_layer.selectAll('.' + class_name_base + '_text').data([]).exit().remove();
+		var model_text = '';
+		if (pass_model_field_as_text){
+			model_text = model_field;
+		}else{
+			model_text = this.model.get(model_field);
+		}
+		this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class",'.' + class_name_base + '_text')
+							.attr("x",$('.' + class_name_base + '_label_text').width() + 15)
+							.attr("y",this.label_y_position)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.attr("fill","#777777")
+							.text(model_text);
 	},
 
 	// ### render_summary
