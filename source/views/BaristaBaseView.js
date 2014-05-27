@@ -78,8 +78,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height)
-						.style("overflow","hidden");
+						.attr("height",this.height);
+
+		// make sure that the top level div target is set to hide overflow content
+		$("#" + this.div_string).css("overflow",hidden);
 
 		// render the vis
 		this.render();
