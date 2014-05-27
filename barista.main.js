@@ -9332,7 +9332,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// window resize events to view re-draws, compile the template, and render the view
 	initialize: function(){
 		// set up the plot height
-		this.options.plot_height = 300;
+		this.options.plot_height = 250;
 
 		// initialize the view using the base view's built in method
 		this.base_initialize();
@@ -9356,8 +9356,8 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.attr("xlink:href", this.model.get("structure_url"))
 								.attr("x",this.width - 410)
 								.attr("y",100)
-								.attr("height",200)
-								.attr("width",400)
+								.attr("height",150)
+								.attr("width",300)
 								.style("cursor","pointer")
 								.on("click", function(){window.location = self.model.get('structure_url')});
 		}
@@ -9410,7 +9410,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the InChIKey label and InChIKey
-		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true, 410);
+		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
