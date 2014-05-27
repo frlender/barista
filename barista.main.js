@@ -9397,7 +9397,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
 
 		// (re)draw the formula and label
-		this.render_label_and_value('formula', 'Formula', 'molecular_fomula');
+		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
@@ -9478,7 +9478,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
-							.text(label_text = ':');
+							.text(label_text + ':');
 
 		// (re)draw the text
 		this.fg_layer.selectAll('.' + class_name_base + '_text').data([]).exit().remove();
@@ -9492,7 +9492,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.enter()
 							.append("text")
 							.attr("class",'.' + class_name_base + '_text')
-							.attr("x",$('.' + class_name_base + '_label_text').width() + 15)
+							.attr("x",$('.' + class_name_base + '_label_text').width() + 20)
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
