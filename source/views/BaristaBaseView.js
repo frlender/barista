@@ -16,7 +16,7 @@
 // 4.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
 //		base_view = new BaristaBaseView({el: $("target_selector",
-//									bg_color:"#ffffff", 
+//									bg_color:"#ffffff",
 //									fg_color: "#1b9e77",
 //									span_class: "col-lg-12",
 //									plot_height: 120});
@@ -54,7 +54,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 
 	// ### base_initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
-	// template, bind model changes to view updates, and render the view.  This method is provided so it 
+	// template, bind model changes to view updates, and render the view.  This method is provided so it
 	// can be used in view that extend BaristaBaseView
 	base_initialize: function(){
 		// set up color options.  default if not specified
@@ -78,7 +78,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.height = $("#" + this.div_string).outerHeight();
 		this.vis = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height);
+						.attr("height",this.height)
+						.style("overflow","hidden");
 
 		// render the vis
 		this.render();
