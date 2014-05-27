@@ -4008,7 +4008,13 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("class","cevron_icon")
 			.attr("xlink:href", this.cevron_image_link)
 			.attr("x",this.width/2 - 9)
-			.attr("y",this.height - 20)
+			.attr("y",function(){
+				if (self.panel_open){
+					return self.height - 15;
+				}else{
+					return self.height - 20;
+				}
+			})
 			.attr("height",20)
 			.attr("width", 18)
 			.attr("transform", "rotate(0)");
