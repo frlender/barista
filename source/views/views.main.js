@@ -1294,10 +1294,10 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.enter().append("svg:image")
 								.attr("class","index_text_icon")
 								.attr("xlink:href", this.model.get("structure_url"))
-								.attr("x",this.width - 110)
-								.attr("y",0)
-								.attr("height",100)
-								.attr("width",100)
+								.attr("x",10)
+								.attr("y",100)
+								.attr("height",200)
+								.attr("width",400)
 								.style("cursor","pointer")
 								.on("click", function(){window.location = self.model.get('structure_url')});
 		}
@@ -1341,16 +1341,16 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// render additional labels
 		this.label_y_position = 100;
 		// (re)draw the weight label and weight
-		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
+		this.render_label_and_value('weight', 'Weight', 'molecular_wt',false, 410);
 
 		// (re)draw the formula and label
-		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
+		this.render_label_and_value('formula', 'Formula', 'molecular_formula',false, 410);
 
 		// (re)draw the formula and label
-		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
+		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor',false, 410);
 
 		// (re)draw the InChIKey label and InChIKey
-		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true,false, 410);
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
@@ -1410,7 +1410,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// utility function to draw a standard label and value for that label under
 	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
 	// pass the value in model_field as text instead of serching for it in the model
-	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text){
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base){
 		// set up a local variable to keep our scope straight
 		var self = this;
 
@@ -1418,13 +1418,15 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
 		this.label_y_position += 25;
 
+		var x_pos_base = (x_posx_pos_base !== undefined) ? x_pos_base: 10;
+
 		// (re)draw the label
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
 							.enter()
 							.append("text")
 							.attr("class",class_name_base + '_label_text')
-							.attr("x",10)
+							.attr("x",x_pos_base)
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
@@ -1438,7 +1440,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		}else{
 			model_text = this.model.get(model_field);
 		}
-		var x_pos = this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 20;
+		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
 		this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 							.enter()
 							.append("text")
