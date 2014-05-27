@@ -1274,6 +1274,10 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// set up the plot height
 		this.options.plot_height = 250;
 
+		// set up the open and closed state heights
+		this.open_height = this.options.plot_height;
+		this.closed_height = this.options.plot_height;
+
 		// initialize the view using the base view's built in method
 		this.base_initialize();
 	},
@@ -1425,7 +1429,11 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("class",this.div_string + "more_button")
 			.attr("height",10)
 			.attr("width",this.width)
-			.attr("fill","#BDBDBD");
+			.attr("opacity",0.25)
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("click", function(){self.toggle_panel_state});
 
 		return this;
 	},
@@ -1449,7 +1457,11 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
 		this.label_y_position += 25;
 
+		// make sure that there is a base position for the x_label set
 		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
+
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height < this.label_y_position) ? this.options.plot_height : this.label_y_position;
 
 		// (re)draw the label
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
@@ -1542,6 +1554,16 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.attr("fill","#777777")
 				// .attr("text-anchor", "middle")
 				.text(function(d){return d;});
+	},
+
+	// ### toggle_panel_state
+	// utility to open or close the view
+	toggle_panel_state: function(){
+		if (this.panel_open){
+			this.$el.animate({height:this.options.plot_height},500);
+		}else{
+			this.$el.animate({height:this.open_height},500);
+		}
 	},
 
 	// ### clear_summary
