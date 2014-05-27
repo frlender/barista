@@ -1294,8 +1294,8 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.enter().append("svg:image")
 								.attr("class","index_text_icon")
 								.attr("xlink:href", this.model.get("structure_url"))
-								.attr("x",this.width - 410)
-								.attr("y",100)
+								.attr("x",this.width - 310)
+								.attr("y",0)
 								.attr("height",150)
 								.attr("width",300)
 								.style("cursor","pointer")
@@ -1355,8 +1355,8 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
-								 top: 36,
-								 bottom: 136,
+								 top: 186,
+								 bottom: 230,
 								 left: this.model.get('pert_iname').length*36*.85});
 		}else{
 			this.clear_summary();
