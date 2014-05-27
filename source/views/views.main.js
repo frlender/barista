@@ -1277,6 +1277,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// set up the open and closed state heights
 		this.open_height = this.options.plot_height;
 		this.closed_height = this.options.plot_height;
+		this.panel_open = false;
 
 		// initialize the view using the base view's built in method
 		this.base_initialize();
@@ -1433,7 +1434,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("fill","#BDBDBD")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1);})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
-			.on("click", function(){self.toggle_panel_state});
+			.on("click", function(){self.toggle_panel_state()});
 
 		return this;
 	},
@@ -1559,11 +1560,17 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### toggle_panel_state
 	// utility to open or close the view
 	toggle_panel_state: function(){
+		var h;
 		if (this.panel_open){
-			$("#" + this.div_string).animate({height:this.options.plot_height},500);
+			h = this.options.plot_height;
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = false;
 		}else{
-			$("#" + this.div_string).animate({height:this.open_height},500);
+			h = this.open_height
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = true;
 		}
+		this.vis.transition().duration(500).attr("height",h);
 	},
 
 	// ### clear_summary
