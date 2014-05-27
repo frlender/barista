@@ -1452,6 +1452,17 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.append("text")
 			.text("more");
 
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			.attr("x",this.width/2 - 9)
+			.attr("y",this.height - 20)
+			.style("cursor","pointer")
+			.on("click", function(){self.toggle_panel_state()});
+
 		return this;
 	},
 
