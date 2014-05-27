@@ -4136,12 +4136,11 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
 		}
-		this.controls_layer.transition().attr("opacity",0);
+		this.controls_layer.selectAll("." + this.div_string + "more_button").duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").duration(500).attr("y",h - 10);
 		this.vis.transition().duration(500).attr("height",h);
-		setTimeout(function(){
-			self.render();
-			this.controls_layer.transition(500).attr("opacity",1);
-		},500);
 	},
 
 	// ### clear_summary
