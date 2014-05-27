@@ -133,7 +133,10 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
-		// (re)draw the InChIKey label and InChIKey
+		// (re)draw the InChI string
+		this.render_label_and_value('inchi_string', 'InChI String', this.model.get("inchi_string").split("InChI=")[1], true);
+
+		// (re)draw the SMILES
 		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
