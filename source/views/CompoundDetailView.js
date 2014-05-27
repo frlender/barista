@@ -190,6 +190,17 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
 
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			.attr("x",this.width/2 - 9)
+			.attr("y",this.height - 20)
+			.attr("height",20)
+			.attr("width", 18)
+
 		// render a button to allow the user to expand the view to show its full content
 		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
 		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
@@ -205,19 +216,6 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1);})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
 			.on("click", function(){self.toggle_panel_state()})
-			.append("text")
-			.text("more");
-
-		// render an image that will to indicate that the user can click the content to unfold the panel
-		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
-		this.controls_layer.selectAll('.cevron_icon').data([1])
-			.enter().append("svg:image")
-			.attr("class","cevron_icon")
-			.attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
-			.attr("x",this.width/2 - 9)
-			.attr("y",this.height - 20)
-			.style("cursor","pointer")
-			.on("click", function(){self.toggle_panel_state()});
 
 		return this;
 	},
@@ -358,6 +356,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
 		this.vis.transition().duration(500).attr("height",h);
 	},
 
