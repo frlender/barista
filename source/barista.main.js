@@ -4270,6 +4270,19 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 		// render additional labels
 		this.label_y_position = 100;
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('summly', 'Summly', 'in_summly');
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_sig', '# Signatures', 'num_sig');
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('gold_sig', '# Gold Signatures', 'num_gold');
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_inst', '# Experiments', 'num_inst');
+
 		// (re)draw the weight label and weight
 		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
 
@@ -4398,7 +4411,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		var self = this;
 
 		// default arguments if they are not present
-		summary_string = (options.summary_string !== undefined) ? options.summary_string : "";
+		summary_string = this.model.get("pert_summary");
 		top_edge = (options.top !== undefined) ? options.top : 0;
 		bottom_edge = (options.bottom !== undefined) ? options.bottom : 100;
 		right_edge = (options.right !== undefined) ? options.right : this.width;
