@@ -9489,7 +9489,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
 				.text("Wiki")
-				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.5).attr("fill","#56B4E9");})
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
