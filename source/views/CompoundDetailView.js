@@ -101,20 +101,20 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('collection', 'Collection', 'pert_icollection');
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_sig', '# Signatures', 'num_sig');
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig');
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('gold_sig', '# Gold Signatures', 'num_gold');
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold');
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_inst', '# Experiments', 'num_inst');
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst');
 
 		// (re)draw the in_summly annotation
 		this.render_label_and_value('summly', 'In Summly', 'in_summly');
 
 
 		// set the y position to be below the fold
-		this.label_y_position = 225;
+		this.label_y_position = 250;
 
 		// (re)draw the weight label and weight
 		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
@@ -171,6 +171,17 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
+
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 10)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",10)
+			.attr("width",this.width)
+			.attr("fill","#BDBDBD");
 
 		return this;
 	},
