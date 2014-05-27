@@ -218,7 +218,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
 
 		// update the open_height to the total height of all that we have drawn
-		this.open_height = (this.options.plot_height > this.label_y_position) ? this.options.plot_height : this.label_y_position;
+		this.open_height = (this.options.plot_height > this.label_y_position + 10) ? this.options.plot_height : this.label_y_position + 10;
 
 		// (re)draw the label
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
@@ -316,6 +316,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### toggle_panel_state
 	// utility to open or close the view
 	toggle_panel_state: function(){
+		var self = this;
 		var h;
 		if (this.panel_open){
 			h = this.options.plot_height;
@@ -326,7 +327,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
 		}
+		this.controls_layer.transition().attr("opacity",0);
 		this.vis.transition().duration(500).attr("height",h);
+		setTimeout(function(){
+			self.render();
+			this.controls_layer.transition(500).attr("opacity",1);
+		},500);
 	},
 
 	// ### clear_summary
