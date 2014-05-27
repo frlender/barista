@@ -327,10 +327,10 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
 		}
-		this.controls_layer.selectAll("." + this.div_string + "more_button").duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "wiki_link").duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "png_export").duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "more_button").transition.duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition.duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition.duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").transition.duration(500).attr("y",h - 10);
 		this.vis.transition().duration(500).attr("height",h);
 	},
 
