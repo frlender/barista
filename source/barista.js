@@ -3837,7 +3837,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// window resize events to view re-draws, compile the template, and render the view
 	initialize: function(){
 		// set up the plot height
-		this.options.plot_height = 250;
+		this.options.plot_height = 260;
 
 		// set up the open and closed state heights
 		this.open_height = this.options.plot_height;
@@ -3928,7 +3928,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 
 		// set the y position to be below the fold
-		this.label_y_position = 250;
+		this.label_y_position = 260;
 
 		// (re)draw the weight label and weight
 		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
@@ -3996,10 +3996,13 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("height",10)
 			.attr("width",this.width)
 			.attr("opacity",0.25)
+			.style("cursor","pointer")
 			.attr("fill","#BDBDBD")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1);})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
-			.on("click", function(){self.toggle_panel_state()});
+			.on("click", function(){self.toggle_panel_state()})
+			.append("text")
+			.text("more");
 
 		return this;
 	},
