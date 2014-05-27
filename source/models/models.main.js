@@ -211,6 +211,9 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
       }else{
+        //   set all fields on the model
+        self.set(perts);
+
         // grab the wikipedia link if it is there
         var wiki_url = null;
         if (perts[0].pert_url){

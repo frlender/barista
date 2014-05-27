@@ -1342,6 +1342,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the formula and label
 		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
 
+		// (re)draw the formula and label
+		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
+
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
@@ -1431,7 +1434,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		}else{
 			model_text = this.model.get(model_field);
 		}
-		var x_pos = this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
+		var x_pos = this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 20;
 		this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 							.enter()
 							.append("text")
