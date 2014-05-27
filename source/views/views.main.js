@@ -71,6 +71,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.listenTo(this.model,'change', this.update);
 
 		// compile the default template for the view
+		this.div_string = (this.options.div_string !== undefined) ? this.options.div_string : "col-lg-12";
 		this.compile_template();
 
 		// define the location where d3 will build its plot
@@ -97,7 +98,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + new Date().getTime();;
+		this.div_string = (this.div_string !== undefined) ? this.div_string : 'barista_view' + new Date().getTime();
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
@@ -1376,6 +1377,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+
+		// add a tag list view for the cell lines
+		this.cell_tag_view = new Barista.Views.TagListView({
+			el: this.$el,
+			div_string: this.div_string,
+		});
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){

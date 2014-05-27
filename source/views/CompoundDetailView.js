@@ -133,6 +133,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 
+		// add a tag list view for the cell lines
+		this.cell_tag_view = new Barista.Views.TagListView({
+			el: this.$el,
+			div_string: this.div_string,
+		});
+
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
