@@ -143,6 +143,19 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.clear_summary();
 		}
 
+		// add a png export overlay
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 20)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
+
 		// check to see if there is a pubchem id and draw a link for it if there
 		// is one
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([]).exit().remove();
@@ -150,7 +163,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([1]).enter().append("text")
 				.attr("class", this.div_string + "pubchem_link no_png_export")
 				.attr("x",this.width - 10)
-				.attr("y",this.height - 10)
+				.attr("y",this.height - 20)
 				.attr("opacity",0.25)
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
@@ -167,7 +180,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([1]).enter().append("text")
 				.attr("class", this.div_string + "wiki_link no_png_export")
 				.attr("x",this.width - 80)
-				.attr("y",this.height - 10)
+				.attr("y",this.height - 20)
 				.attr("opacity",0.25)
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
@@ -182,9 +195,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
 			.append("rect")
 			.attr("x",0)
-			.attr("y",this.height - 10)
+			.attr("y",this.height - 15)
 			.attr("class",this.div_string + "more_button")
-			.attr("height",10)
+			.attr("height",15)
 			.attr("width",this.width)
 			.attr("opacity",0.25)
 			.style("cursor","pointer")
@@ -330,10 +343,10 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
 		}
-		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 10);
-		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 10);
+		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
 		this.vis.transition().duration(500).attr("height",h);
 	},
 
