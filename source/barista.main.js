@@ -4348,7 +4348,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
 		this.label_y_position += 25;
 
-		var x_pos_base = (x_posx_pos_base !== undefined) ? x_pos_base: 10;
+		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
 
 		// (re)draw the label
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
