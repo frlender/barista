@@ -316,9 +316,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// utility to open or close the view
 	toggle_panel_state: function(){
 		if (this.panel_open){
-			this.$el.animate({height:this.options.plot_height},500);
+			$("#" + this.div_string).animate({height:this.options.plot_height},500);
 		}else{
-			this.$el.animate({height:this.open_height},500);
+			$("#" + this.div_string).animate({height:this.open_height},500);
 		}
 	},
 
