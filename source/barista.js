@@ -4027,7 +4027,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
 
 		// update the open_height to the total height of all that we have drawn
-		this.open_height = (this.options.plot_height < this.label_y_position) ? this.options.plot_height : this.label_y_position;
+		this.open_height = (this.options.plot_height > this.label_y_position) ? this.options.plot_height : this.label_y_position;
 
 		// (re)draw the label
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
