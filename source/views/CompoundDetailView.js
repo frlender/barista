@@ -185,7 +185,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
 				.text("Wiki")
-				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.5).attr("fill","#56B4E9");})
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
@@ -200,6 +200,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("y",this.height - 20)
 			.attr("height",20)
 			.attr("width", 18)
+			.attr("transform", "rotate(0)");
 
 		// render a button to allow the user to expand the view to show its full content
 		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
@@ -213,7 +214,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("opacity",0.25)
 			.style("cursor","pointer")
 			.attr("fill","#BDBDBD")
-			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1);})
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.5);})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
 			.on("click", function(){self.toggle_panel_state()})
 
@@ -356,7 +357,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
-		this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("transform", "rotate(180)");attr("y",h - 20);
 		this.vis.transition().duration(500).attr("height",h);
 	},
 
