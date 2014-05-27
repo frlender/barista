@@ -9340,12 +9340,6 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.closed_height = this.options.plot_height;
 		this.panel_open = false;
 
-		// add a tag list view for the cell lines
-		this.cell_tag_view = new Barista.Views.TagListView({
-			el: this.$el,
-			div_string: this.div_string,
-		});
-
 		// initialize the view using the base view's built in method
 		this.base_initialize();
 	},
