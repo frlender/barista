@@ -176,7 +176,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
 							.enter()
 							.append("text")
-							.attr("class",'.' + class_name_base + '_label_text')
+							.attr("class",class_name_base + '_label_text')
 							.attr("x",10)
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
@@ -191,11 +191,12 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		}else{
 			model_text = this.model.get(model_field);
 		}
+
 		this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 							.enter()
 							.append("text")
-							.attr("class",'.' + class_name_base + '_text')
-							.attr("x",$('.' + class_name_base + '_label_text').width() + 20)
+							.attr("class",class_name_base + '_text')
+							.attr("x",(label_text.length*.7 + 1) + 'em')
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
