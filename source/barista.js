@@ -3908,7 +3908,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
 
 		// (re)draw the formula and label
-		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
+		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
