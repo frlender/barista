@@ -253,18 +253,18 @@ margin: 0 auto;
 
 .cmap-header-developer:hover{
     opacity: 1;
-	width: 210;
+	width: 20;
     height: 350;
 }
 
 .cmap-header-apps:hover{
 	opacity: 1;
-	width: 135;
+	width: 145;
 	height:250;
 }
 
 .cmap-header-dropOut-apps-container {
-	width: 130;
+	width: 140;
 	position: relative;
 	margin-top: 0;
 	top: -0;
