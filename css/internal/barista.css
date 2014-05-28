@@ -259,19 +259,19 @@ margin: 0 auto;
 
 .cmap-header-apps:hover{
 	opacity: 1;
-	width: 130;
-	height:225;
+	width: 135;
+	height:245;
 }
 
 .cmap-header-dropOut-apps-container {
-	width: 210;
+	width: 130;
 	position: relative;
 	margin-top: 0;
 	top: -0;
 	margin-left: auto;
 	margin-right: auto;
 	opacity: 1;
-	height: 220;
+	height: 240;
 	background-color: white;
 	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
