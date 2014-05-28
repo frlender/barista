@@ -18,6 +18,11 @@
 	text-decoration: none;
 }
 
+.cmap-header{
+	position: relative;
+	z-index: 999;
+}
+
 .cmap-brand-text{
 	font-family:Memphis LT Std;
 	font-weight: bold;
