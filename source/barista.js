@@ -4061,21 +4061,21 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("transform", "rotate(0)")
 			.on("click", function(){self.toggle_panel_state()});
 
-		// // render a button to allow the user to expand the view to show its full content
-		// this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
-		// this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
-		// 	.append("rect")
-		// 	.attr("x",0)
-		// 	.attr("y",this.height - 15)
-		// 	.attr("class",this.div_string + "more_button")
-		// 	.attr("height",15)
-		// 	.attr("width",this.width)
-		// 	.attr("opacity",0.25)
-		// 	.style("cursor","pointer")
-		// 	.attr("fill","#BDBDBD")
-		// 	.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.5);})
-		// 	.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
-		// 	.on("click", function(){self.toggle_panel_state()})
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 15)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",15)
+			.attr("width",this.width)
+			.attr("opacity",0)
+			.style("cursor","pointer")
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
+			.on("click", function(){self.toggle_panel_state()})
 
 		return this;
 	},
