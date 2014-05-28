@@ -9651,11 +9651,11 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
 								.attr("fill","#BDBDBD")
-								.text(model_text)
 								.style("cursor","pointer")
 								.on("mouseover",function(){d3.select(this).transition().duration(500).attr("fill","#56B4E9");})
 								.on("mouseout",function(){d3.select(this).transition().duration(500).attr("fill","#BDBDBD");})
-								.on("click", function(){window.location = value_link});
+								.on("click", function(){window.location = value_link})
+								.text(model_text);
 		}else{
 			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
