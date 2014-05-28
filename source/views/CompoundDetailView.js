@@ -250,6 +250,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("height",20)
 			.attr("width", 18)
 			.attr("transform", "rotate(0)")
+			.style("cursor","pointer")
 			.on("click", function(){self.toggle_panel_state()});
 
 		// render a button to allow the user to expand the view to show its full content
