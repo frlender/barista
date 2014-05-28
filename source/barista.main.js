@@ -4319,6 +4319,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the SMILES
 		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
 
+		// draw the cell lines that the compound has been profiled in
+		this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'));
+
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
@@ -4558,6 +4561,59 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
 		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
 		this.vis.transition().duration(500).attr("height",h);
+	},
+
+	// ### draw tags
+	// utility function to draw tags given an array.
+	draw_tags: function(class_name_base, label_text, data){
+		var x_offsets = [5];
+		var row_number = 0;
+		var y_offsets = [];
+		var lengths = [];
+		var tags = [];
+		var self = this;
+		var fg_color = "white";
+		var tag_color = "blue";
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
+
+		// draw the foreground text of all the tags
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data(data).enter().append('text')
+			.attr("class", class_name_base + "tag_list_text")
+			.text(function(d){return d;})
+			.attr("x",function(d,i){
+				self.lengths.push(this.getComputedTextLength() + 15);
+				var current_x_offset = x_offsets[i];
+				if (current_x_offset + lengths[i] > self.width){
+					x_offsets[i] = 5;
+					x_offsets.push(lengths[i] + x_offsets[i]);
+					row_number += 1;
+				}else{
+					x_offsets.push(lengths[i] + x_offsets[i]);
+				}
+				y_offsets.push((row_number * 1.5 + 1));
+				return x_offsets[i];
+			})
+			.attr("y",function(d,i){return y_offsets[i] * EmSize;})
+			.attr("opacity",1)
+			.attr("fill",fg_color)
+
+		// draw the background of all the tags
+		this.bg_layer.selectAll('.tag_list_rect').data([]).exit().remove();
+		this.bg_layer.selectAll('.tag_list_rect').data(data).enter().append('rect')
+			.attr("class","tag_list_rect")
+			.attr("x",function(d,i){return x_offsets[i] - 5;})
+			.attr("y",function(d,i){return (y_offsets[i] - 1) * EmSize;})
+			.attr("rx",4)
+			.attr("ry",4)
+			.attr('width',function(d,i){return lengths[i] - 4;})
+			.attr('height','1.2em')
+			.attr("opacity",1)
+			.attr("fill",tag_color);
+
+		this.label_y_position += y_offsets.slice(-1)[0] * EmSize;
+
+		return this
 	},
 
 	// ### clear_summary
