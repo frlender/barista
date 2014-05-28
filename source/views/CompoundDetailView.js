@@ -438,7 +438,11 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("opacity",1)
 			.attr("fill",tag_color);
 
+		// update the label_y_position
 		this.label_y_position += 10 + y_offsets.slice(-1)[0] * EmSize;
+
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
 
 		return this
 	},
