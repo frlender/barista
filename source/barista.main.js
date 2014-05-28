@@ -1495,6 +1495,9 @@ Barista.CMapPertTypeAlias = function(input_type){
 // # **NumbersToSubscript**
 // a utility to map numbers in an input string to subscript
 Barista.NumbersToSubscript = function(s) {
+    if (!s){
+        return s;
+    }
     var subscript = "₀₁₂₃₄₅₆₇₈₉";
     var re = new RegExp('^[0-9]$');
     var new_s = "";
