@@ -4327,7 +4327,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the pubchem_cid and label
-		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid');
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, this.model.get("pubchem_link"));
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
@@ -4476,7 +4476,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// utility function to draw a standard label and value for that label under
 	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
 	// pass the value in model_field as text instead of serching for it in the model
-	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base){
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link){
 		// set up a local variable to keep our scope straight
 		var self = this;
 
@@ -4511,16 +4511,33 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			model_text = this.model.get(model_field);
 		}
 		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
-		this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class",class_name_base + '_text')
-							.attr("x",x_pos)
-							.attr("y",this.label_y_position)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.attr("fill","#BDBDBD")
-							.text(model_text);
+		if (value_link){
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.text(model_text)
+								.style("cursor","pointer")
+								.on("mouseover",function(){d3.select(this).transition().duration(500).attr("fill","#56B4E9");})
+								.on("mouseout",function(){d3.select(this).transition().duration(500).attr("fill","#BDBDBD");})
+								.on("click", function(){window.location = value_link});
+		}else{
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.text(model_text);
+		}
 	},
 
 	// ### render_summary
