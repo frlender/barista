@@ -9635,6 +9635,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// many lines the summary would need if we rendered all of it
 		this.line_width = right_edge - left_edge;
 		this.num_char = Math.floor(this.line_width / 13 / .75);
+		this.num_char = (this.num_char > 80) ? 80 : this.num_char;
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
 		// compute the line splits to display in the wiki summary
