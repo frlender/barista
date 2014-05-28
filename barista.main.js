@@ -9454,7 +9454,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		if (this.model.get('alt_name')){
 			this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'white', '#777777');
+			this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'white', '#BDBDBD');
 		}
 
 		// draw the cell lines that the compound has been profiled in
@@ -9468,14 +9468,14 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		if (this.model.get('sig_id')){
 			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#777777');
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
 		}
 
 		// draw the gold signatures for the compound
 		if (this.model.get('sig_id_gold')){
 			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), '#777777', '#F0E442');
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), '#BDBDBD', '#F0E442');
 		}
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
@@ -9566,7 +9566,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("width",this.width)
 			.attr("opacity",0.25)
 			.style("cursor","pointer")
-			.attr("fill","#777777")
+			.attr("fill","#BDBDBD")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.5);})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
 			.on("click", function(){self.toggle_panel_state()})
@@ -9628,7 +9628,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
-							.attr("fill","#777777")
+							.attr("fill","#BDBDBD")
 							.text(model_text);
 	},
 
@@ -9689,7 +9689,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.attr("y",function(d,i){return top_edge + 13 + i*15;})
 				.attr("font-family","Helvetica Neue")
 				.attr("font-size","13pt")
-				.attr("fill","#777777")
+				.attr("fill","#BDBDBD")
 				// .attr("text-anchor", "middle")
 				.text(function(d){return d;});
 	},
