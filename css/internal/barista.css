@@ -233,7 +233,7 @@ margin: 0 auto;
 
 }
 
-.cmap-header-dropOut {
+.cmap-header-developer, .cmap-header-apps {
 	width: 1em;
 	left: -.1em;
 	float: left;
