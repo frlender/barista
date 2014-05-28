@@ -4229,7 +4229,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				y_offsets.push((row_number * 1.5 + 1));
 				return x_offsets[i];
 			})
-			.attr("y",function(d,i){return y_offsets[i] * EmSize;})
+			.attr("y",function(d,i){return self.label_y_position + y_offsets[i] * EmSize;})
 			.attr("opacity",1)
 			.attr("fill",fg_color)
 
@@ -4238,7 +4238,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.bg_layer.selectAll('.tag_list_rect').data(data).enter().append('rect')
 			.attr("class","tag_list_rect")
 			.attr("x",function(d,i){return x_offsets[i] - 5;})
-			.attr("y",function(d,i){return (y_offsets[i] - 1) * EmSize;})
+			.attr("y",function(d,i){return self.label_y_position + (y_offsets[i] - 1) * EmSize;})
 			.attr("rx",4)
 			.attr("ry",4)
 			.attr('width',function(d,i){return lengths[i] - 4;})
