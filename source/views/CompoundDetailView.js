@@ -154,19 +154,25 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		}
 
 		// draw the cell lines that the compound has been profiled in
-		this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
-		this.label_y_position += 5;
-		this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		if (this.model.get('cell_id')){
+			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		}
 
 		// draw the signatures for the compound
-		this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
-		this.label_y_position += 5;
-		this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		if (this.model.get('sig_id')){
+			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		}
 
 		// draw the gold signatures for the compound
-		this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
-		this.label_y_position += 5;
-		this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#F0E442');
+		if (this.model.get('sig_id_gold')){
+			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#F0E442');
+		}
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
