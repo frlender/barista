@@ -1504,7 +1504,8 @@ Barista.NumbersToSubscript = function(s) {
         }else{
             new_s += char;
         }
-    })
+    });
+    return new_s;
 }
 
 // # **arrayAverage**
