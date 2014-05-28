@@ -6622,6 +6622,21 @@ Barista.CMapPertTypeAlias = function(input_type){
 			return {name: input_type, acronym: input_type};
 	}
 };
+// # **NumbersToSubscript**
+// a utility to map numbers in an input string to subscript
+Barista.NumbersToSubscript = function(s) {
+    var subscript = "₀₁₂₃₄₅₆₇₈₉";
+    var re = new RegExp('^[0-9]$');
+    var new_s = "";
+    s.split("").forEach(function(char){
+        if (re.test(char)){
+            new_s += subscript[char];
+        }else{
+            new_s += char;
+        }
+    })
+}
+
 // # **arrayAverage**
 
 // a utility function to take the average of an array of numeric values
