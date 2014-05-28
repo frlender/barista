@@ -4321,9 +4321,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 		// draw alternate names
 		this.label_y_position += 20;
-		this.render_label_and_value('cell_id_label', 'Alternate Names', '', true);
+		this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
 		this.label_y_position += 5;
-		this.draw_tags('cell_id', 'Cell Lines', this.model.get('alt_name'), 'black', 'white');
+		this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'black', 'white');
 
 		// draw the cell lines that the compound has been profiled in
 		this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
