@@ -9407,19 +9407,19 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = 100;
 
 		// (re)draw the in_summly annotation
-		this.render_label_and_value('collection', 'Collection', 'pert_icollection');
+		this.render_label_and_value('collection', 'Collection', 'pert_icollection', false, 320);
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_sig', 'Signatures', 'num_sig');
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold');
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_inst', 'Experiments', 'num_inst');
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
 
 		// (re)draw the in_summly annotation
-		this.render_label_and_value('summly', 'In Summly', 'in_summly');
+		this.render_label_and_value('summly', 'In Summly', 'in_summly', false, 320);
 
 
 		// set the y position to be below the fold
