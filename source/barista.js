@@ -3950,7 +3950,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
 
 		// (re)draw the formula and label
-		this.render_label_and_value('formula', 'Formula', 'molecular_formula');
+		this.render_label_and_value('formula', 'Formula', Barista.NumbersToSubscript(this.model.get('molecular_formula')),true);
 
 		// (re)draw the logp and label
 		this.render_label_and_value('logp', 'LogP', 'logp');
