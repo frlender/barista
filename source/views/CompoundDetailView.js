@@ -134,7 +134,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the pubchem_cid and label
-		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, this.model.get("pubchem_link"));
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
@@ -318,8 +318,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			model_text = this.model.get(model_field);
 		}
 		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
+
+		// if there is a value link supplied, use it as a link on the text, otherwise, render plain text
 		if (value_link){
-			console.log(value_link);
 			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
 								.append("text")
