@@ -4151,6 +4151,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			}else{
 				var l = summary_string.slice(i*this.num_char,(i+1)*this.num_char - 3) + '...';
 				this.lines.push(l);
+				break;
 			}
 		}
 
