@@ -171,7 +171,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		if (this.model.get('sig_id_gold')){
 			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), '#F0E442', '#BDBDBD');
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
 		}
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
