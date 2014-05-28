@@ -4147,6 +4147,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		}
 		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
 		if (value_link){
+			console.log(value_link);
 			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
 								.append("text")
