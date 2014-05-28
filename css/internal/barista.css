@@ -259,8 +259,8 @@ margin: 0 auto;
 
 .cmap-header-apps:hover{
 	opacity: 1;
-	width: 210;
-	height: 350;
+	width: 130;
+	height:225;
 }
 
 .cmap-header-dropOut-apps-container {
@@ -271,7 +271,7 @@ margin: 0 auto;
 	margin-left: auto;
 	margin-right: auto;
 	opacity: 1;
-	height: 3em;
+	height: 220;
 	background-color: white;
 	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
