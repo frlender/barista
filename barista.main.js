@@ -9452,9 +9452,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
-								 top: 186,
-								 bottom: 230,
-								 left: this.model.get('pert_iname').length*36*.85});
+								 top: 55,
+								 bottom: 100,
+								 left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 10});
 		}else{
 			this.clear_summary();
 		}
