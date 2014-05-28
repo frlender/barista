@@ -4582,7 +4582,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("class", class_name_base + "tag_list_text")
 			.text(function(d){return d;})
 			.attr("x",function(d,i){
-				self.lengths.push(this.getComputedTextLength() + 15);
+				lengths.push(this.getComputedTextLength() + 15);
 				var current_x_offset = x_offsets[i];
 				if (current_x_offset + lengths[i] > self.width){
 					x_offsets[i] = 5;
