@@ -3955,8 +3955,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
 
 		// draw the cell lines that the compound has been profiled in
+		this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
 		this.label_y_position += 20;
-		this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'));
+		this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
@@ -4201,15 +4202,13 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 	// ### draw tags
 	// utility function to draw tags given an array.
-	draw_tags: function(class_name_base, label_text, data){
+	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
 		var x_offsets = [10];
 		var row_number = 0;
 		var y_offsets = [];
 		var lengths = [];
 		var tags = [];
 		var self = this;
-		var fg_color = "white";
-		var tag_color = "blue";
 		var EmSize = Barista.getEmSizeInPixels(this.div_string);
 
 		// draw the foreground text of all the tags
