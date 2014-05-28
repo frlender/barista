@@ -1391,9 +1391,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 
 		// draw alternate names
 		this.label_y_position += 20;
-		// this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
-		// this.label_y_position += 5;
-		// this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'black', 'white');
+		this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
+		this.label_y_position += 5;
+		this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'black', 'white');
 
 		// draw the cell lines that the compound has been profiled in
 		this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
@@ -1675,9 +1675,9 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr("fill",fg_color)
 
 		// draw the background of all the tags
-		this.bg_layer.selectAll('.tag_list_rect').data([]).exit().remove();
-		this.bg_layer.selectAll('.tag_list_rect').data(data).enter().append('rect')
-			.attr("class","tag_list_rect")
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data([]).exit().remove();
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data(data).enter().append('rect')
+			.attr("class", class_name_base + "tag_list_rect")
 			.attr("x",function(d,i){return x_offsets[i] - 5;})
 			.attr("y",function(d,i){return self.label_y_position + (y_offsets[i] - 1) * EmSize;})
 			.attr("rx",4)
