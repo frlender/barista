@@ -9449,9 +9449,15 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// (re)draw the SMILES
 		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
 
+		// draw alternate names
+		this.label_y_position += 20;
+		this.render_label_and_value('cell_id_label', 'Alternate Names', '', true);
+		this.label_y_position += 5;
+		this.draw_tags('cell_id', 'Cell Lines', this.model.get('alt_name'), 'black', 'white');
+
 		// draw the cell lines that the compound has been profiled in
 		this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
-		this.label_y_position += 20;
+		this.label_y_position += 5;
 		this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
 
 		// (re)draw the pert_summary or clear it if there pert_summary is null
