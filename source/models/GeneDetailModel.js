@@ -67,12 +67,12 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
           }else{
             // otherwise, populate the model with a combination of KD and OE annotations
 
-            // set up the deffered objects for calls to the pertinfo API
+            // set up the deferred objects for calls to the pertinfo API
             var search_string = perts[0].pert_iname;
             KD_deferred = self.fetch_pert_type(search_string,"trt_sh");
             OE_deferred = self.fetch_pert_type(search_string,"trt_oe");
 
-            // act on the deffered objects once they are resolved
+            // act on the deferred objects once they are resolved
             $.when(KD_deferred,OE_deferred).done(function(kd_annots, oe_annots){
                 if ( kd_annots === null && oe_annots === null ){
                     self.set(self.defaults);
@@ -103,7 +103,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
     // ### fetch_pert_type
     // fetches new data from the pert_info API for the given pert_type.
     fetch_pert_type: function(search_string,pert_type){
-        // set up a deffered object that we can use in the fetch function above
+        // set up a deferred object that we can use in the fetch function above
         var deferred = $.Deferred();
 
         // set up the api parameters to make an exact matched query against
@@ -117,12 +117,12 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
         var self = this;
         $.getJSON(pert_info,params,function(perts) {
               if (perts == 0 || search_string == ""){
-                deffered.resolve(null);
+                deferred.resolve(null);
               }else{
-                deffered.resolve(perts[0]);
+                deferred.resolve(perts[0]);
               }
         });
 
-        return deffered;
+        return deferred;
     }
 });
