@@ -1,7 +1,7 @@
 // # **PertDetailModel**
 
 // A Backbone.Model that represents a single perturbagen's description.  The data
-// model captures both the short and long description of a single perturbagen that 
+// model captures both the short and long description of a single perturbagen that
 // meet a search criteria.
 
 // optional arguments:
