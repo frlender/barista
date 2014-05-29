@@ -42,7 +42,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
   // ### array_fields
   // fields that are arrays
-  array_fields = ['cell_id','sig_id','sig_id_gold'],
+  array_fields: ['cell_id','sig_id','sig_id_gold'],
 
   // ### fetch
   // fetches new data from the pert_info api. All fields are replaced by the first item
