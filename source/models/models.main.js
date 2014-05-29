@@ -322,7 +322,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = params = {
         q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
-        f:'{pert_iname:1}',
+        f:'{"pert_iname":1}',
         l:1
     };
 
