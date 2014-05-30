@@ -12354,7 +12354,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 								.enter()
 								.append("text")
 								.attr("class","oe_pert_id_text pert_id_text")
-								.attr("x",10)
+								.attr("x",350)
 								.attr("y",100)
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
@@ -12364,15 +12364,21 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// render additional labels
 		this.label_y_position = 100;
 
+		// (re)draw the pert_id annotation
+		this.render_label_and_value('trt_sh_pert_id', 'ID', 'trt_sh_pert_id');
+		this.render_label_and_value('trt_oe_pert_id', 'ID', 'trt_oe_pert_id', false, 350, null,false);
+
 		// (re)draw the signatures annotation
 		this.render_label_and_value('trt_sh_num_sig', 'Signatures', 'trt_sh_num_sig');
-		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 300, null,false);
+		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 350, null,false);
 
 		// (re)draw the gold signatures annotation
 		this.render_label_and_value('trt_sh_num_gold', 'Gold Signatures', 'trt_sh_num_gold');
+		this.render_label_and_value('trt_oe_num_gold', 'Gold Signatures', 'trt_oe_num_gold', false, 350, null,false);
 
 		// (re)draw the experiments annotation
 		this.render_label_and_value('trt_sh_num_inst', 'Experiments', 'trt_sh_num_inst');
+		this.render_label_and_value('trt_oe_num_inst', 'Experiments', 'trt_oe_num_inst', false, 350, null,false);
 
 
 		// set the y position to be below the fold
