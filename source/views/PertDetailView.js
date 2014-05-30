@@ -385,25 +385,48 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// (re)draw the oligo sequence annotation
 		this.render_label_and_value('trt_sh_oligo_seq', 'Oligo Sequence', 'trt_sh_oligo_seq');
 
-		// draw the cell lines that the compound has been profiled in
-		if (this.model.get('cell_id')){
-			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+		// draw the cell lines that the knockdown has been profiled in
+		this.label_y_position += 20;
+		if (this.model.get('trt_sh_cell_id')){
+			this.render_label_and_value('trt_sh_cell_id_label', 'Knockdown Cell Lines', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+			this.draw_tags('trt_sh_cell_id', 'Cell Lines', this.model.get('trt_sh_cell_id'), 'white', '#CC79A7');
 		}
 
-		// draw the signatures for the compound
-		if (this.model.get('sig_id')){
-			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+		// draw the signatures for the knockknockdown
+		if (this.model.get('trt_sh_sig_id')){
+			this.render_label_and_value('trt_sh_sig_id_label', 'Knockdown Signature IDs', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+			this.draw_tags('trt_sh_sig_id', 'Signature IDs', this.model.get('trt_sh_sig_id'), 'white', '#BDBDBD');
 		}
 
-		// draw the gold signatures for the compound
-		if (this.model.get('sig_id_gold')){
-			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+		// draw the gold signatures for the knockdown
+		if (this.model.get('trt_sh_sig_id_gold')){
+			this.render_label_and_value('trt_sh_sig_id_gold_label', 'Gold Signature IDs', '', true);
 			this.label_y_position += 5;
-			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
+			this.draw_tags('trt_sh_sig_id_gold', 'Knockdown Gold Signature IDs', this.model.get('trt_sh_sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+		// draw the cell lines that the over expression has been profiled in
+		this.label_y_position += 20;
+		if (this.model.get('trt_oe_cell_id')){
+			this.render_label_and_value('trt_oe_cell_id_label', 'Over Expression Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_cell_id', 'Cell Lines', this.model.get('trt_oe_cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the over expression
+		if (this.model.get('trt_oe_sig_id')){
+			this.render_label_and_value('trt_oe_sig_id_label', 'Over Expression Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_sig_id', 'Signature IDs', this.model.get('trt_oe_sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the over expression
+		if (this.model.get('trt_oe_sig_id_gold')){
+			this.render_label_and_value('trt_oe_sig_id_gold_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_sig_id_gold', 'Over Expression Gold Signature IDs', this.model.get('trt_oe_sig_id_gold'), 'white', '#BDBDBD');
 		}
 
 
