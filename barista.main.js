@@ -12386,6 +12386,24 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// set the y position to be below the fold
 		this.label_y_position = 260;
 
+		// (re)draw the vector_id annotation
+		this.render_label_and_value('trt_sh_vector_id', 'Vector', 'trt_sh_vector_id');
+
+		// (re)draw the target region annotation
+		this.render_label_and_value('trt_sh_target_region', 'Target Region', 'trt_sh_target_region');
+
+		// (re)draw the 6 base seed annotation
+		this.render_label_and_value('trt_sh_seed_seq6', '6 Base Seed Sequence', 'trt_sh_seed_seq6');
+
+		// (re)draw the 7 base seed annotation
+		this.render_label_and_value('trt_sh_seed_seq7', '7 Base Seed Sequence', 'trt_sh_seed_seq7');
+
+		// (re)draw the target sequence annotation
+		this.render_label_and_value('trt_sh_target_seq', 'target Sequence', 'trt_sh_target_seq');
+
+		// (re)draw the oligo sequence annotation
+		this.render_label_and_value('trt_sh_oligo_seq', 'Oligo Sequence', 'trt_sh_oligo_seq');
+
 		// draw the cell lines that the compound has been profiled in
 		if (this.model.get('cell_id')){
 			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
