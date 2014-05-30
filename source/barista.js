@@ -1547,19 +1547,19 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
                     self.set(self.defaults);
                     self.trigger("GeneDetailModel:ModelIsNull");
                 }else{
+                    var annots = {pert_type:"gene"};
                     if (kd_annots === null){
                         oe_annots.has_kd = false;
                         oe_annots.has_oe = true;
-                        self.set(oe_annots);
+                        self.set(_.extend(oe_annots,annots));
                     }else if (oe_annots === null){
                         kd_annots.has_kd = true;
                         kd_annots.has_oe = false;
-                        self.set(kd_annots);
+                        self.set(_.extend(kd_annots,annots));
                     }else{
                         kd_annots.has_kd = true;
                         kd_annots.has_oe = true;
-                        annots = _.extend(kd_annots,oe_annots);
-                        self.set(annots);
+                        self.set(_.extend(kd_annots,oe_annots,annots));
                     }
                     // trigger an event to tell us that the model is not null
                     self.trigger("GeneDetailModel:ModelIsNotNull");
