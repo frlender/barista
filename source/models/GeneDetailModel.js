@@ -127,6 +127,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
             }else{
                 var annots = {};
                 for (field in perts[0]){
+                    console.log(pert_type + field);
                     annots[pert_type + field] = perts[0][field];
                 }
                 deferred.resolve(annots);
