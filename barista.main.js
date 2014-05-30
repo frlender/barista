@@ -6880,7 +6880,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   fetch: function(search_string){
     // set up a deferred object that can be used by outside functions.  This deferred will be
     // resolved with the contents of the model attributes
-    var deffered = $.Deferred();
+    var deferred = $.Deferred();
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
@@ -7019,7 +7019,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
   fetch: function(search_string){
     // set up a deferred object that can be used by outside functions.  This deferred will be
     // resolved with the contents of the model attributes
-    var deffered = $.Deferred();
+    var deferred = $.Deferred();
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
