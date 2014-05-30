@@ -103,6 +103,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
             });
           }
         });
+        return deferred;
     },
 
     // ### fetch_pert_type

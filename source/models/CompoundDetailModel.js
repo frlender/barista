@@ -121,5 +121,6 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
       }
       deferred.resolve(self.attributes);
     });
+    return deferred;
   }
 });

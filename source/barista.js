@@ -1469,6 +1469,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
       }
       deferred.resolve(self.attributes);
     });
+    return deferred;
   }
 });
 
@@ -1577,6 +1578,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
             });
           }
         });
+        return deferred;
     },
 
     // ### fetch_pert_type
