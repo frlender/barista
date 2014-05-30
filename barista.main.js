@@ -7380,7 +7380,6 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
           break;
       case "gene":
           this.gene_sub_model.fetch(search_string);
-          this.set(this.gene_sub_model.attributes);
           break;
       }
   },
@@ -7388,13 +7387,13 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### update_from_compound_sub_model
   // utility to update the model's attributes from the compound_sub_model
   update_from_compound_sub_model: function(){
-      this.set(this.compound_sub_model.attributes);
+      this.clear().set(this.compound_sub_model.attributes);
   },
 
   // ### update_from_gene_sub_model
   // utility to update the model's attributes from the compound_sub_model
   update_from_gene_sub_model: function(){
-      this.set(this.gene_sub_model.attributes);
+      this.clear().set(this.gene_sub_model.attributes);
   }
 });
 
