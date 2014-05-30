@@ -1597,11 +1597,15 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
         // with a null value, otherwise resolve it with the returned pert annotations
         var self = this;
         $.getJSON(pert_info,params,function(perts) {
-              if (perts == 0 || search_string == ""){
+            if (perts == 0 || search_string == ""){
                 deferred.resolve(null);
-              }else{
-                deferred.resolve(perts[0]);
-              }
+            }else{
+                var annots = {};
+                for (field in perts[0]){
+                    annots[pert_type + field] = perts[0][field];
+                }
+                deferred.resolve(annots);
+            }
         });
 
         return deferred;
