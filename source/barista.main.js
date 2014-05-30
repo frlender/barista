@@ -6914,6 +6914,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
 	initialize: function(){
+		var self = this;
 		// set up the plot height
 		this.options.plot_height = 260;
 
@@ -6924,7 +6925,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 		//populate the model with an initial compound and then render the view
 		this.model.fetch("","compound").then(function(){
-			this.base_initialize();
+			self.base_initialize();
 		});
 
 	},
