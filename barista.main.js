@@ -12084,17 +12084,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 							.attr("font-size","36pt")
 							.text(this.model.get('pert_iname'));
 
-		// (re)draw the pert_id text
-		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_id_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","pert_id_text")
-							.attr("x",10)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text(this.model.get('pert_id'));
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
@@ -12174,6 +12163,18 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	render_compound: function(){
 		this.clear_label_and_text();
 		var self = this;
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","pert_id_text")
+							.attr("x",10)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(this.model.get('pert_id'));
+
 		// draw compound structure if there is one
 		if (this.model.get("structure_url")){
 			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
@@ -12330,12 +12331,36 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 							.attr("font-size","20pt")
 							.text('Gene');
 
+		// (re)draw the static knockdown text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		var static_text_enter = this.fg_layer.selectAll('.pert_id_text').data([1]).enter();
+		if (this.model.get("has_kd")){
+			static_text_enter.append("text")
+								.attr("class","pert_id_text")
+								.attr("x",10)
+								.attr("y",100)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.text("Knockdown");
+		}
+
+		// (re)draw the static overexpression text
+		if (this.model.get("has_kd")){
+			static_text_enter.append("text")
+								.attr("class","pert_id_text")
+								.attr("x",350)
+								.attr("y",100)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.text("Over Expression");
+		}
+
 		// render additional labels
 		this.label_y_position = 100;
 
 		// (re)draw the signatures annotation
 		this.render_label_and_value('trt_sh_num_sig', 'Signatures', 'trt_sh_num_sig');
-		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 300, null,false);
+		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 350, null,false);
 
 		// (re)draw the gold signatures annotation
 		this.render_label_and_value('trt_sh_num_gold', 'Gold Signatures', 'trt_sh_num_gold');
