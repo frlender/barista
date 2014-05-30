@@ -315,13 +315,13 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = 100;
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig');
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold');
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst');
 
 
 		// set the y position to be below the fold
