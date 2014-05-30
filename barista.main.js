@@ -12156,8 +12156,10 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		switch (this.model.get("pert_type")){
 		case "trt_cp":
 			this.render_compound();
+			break;
 		case "gene":
 			this.render_gene();
+			break;
 		};
 
 		return this;
