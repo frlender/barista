@@ -12146,7 +12146,10 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			.on("click", function(){self.toggle_panel_state()})
 
 		// render the compound or gene specfic portion of the view
-		this.render_compound();
+		switch (this.model.get("pert_type")){
+		case "trt_cp":
+			this.render_compound();	
+		};
 
 		return this;
 	},
