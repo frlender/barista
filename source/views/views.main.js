@@ -3840,7 +3840,8 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.panel_open = false;
 
 		//populate the model with an initial compound and then render the view
-		this.model.fetch("AKT-inhibitor-1-2","compound").then(function(){
+		this.model.fetch("war","compound").then(function(){
+			console.log(self.model.attibutes);
 			self.base_initialize();
 		});
 
