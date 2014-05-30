@@ -6883,7 +6883,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 });
 // # **PertDetailView**
 
-// A Backbone.View that shows information about a small molecule compound.  This view is
+// A Backbone.View that shows information about a small molecule compound or gene.  This view is
 // frequently paired with a PertDetailModel.
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector")});
@@ -6931,6 +6931,91 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// render the base view components
 		this.base_render();
 
+		// render the compound or gene specfic portion of the view
+		this.render_compound();
+
+		// (re)draw the pert_iname text
+		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_iname_text').data([1])
+							.enter().append("text")
+							.attr("class","pert_iname_text")
+							.attr("x",10)
+							.attr("y",75)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-weight","bold")
+							.attr("font-size","36pt")
+							.text(this.model.get('pert_iname'));
+
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","pert_id_text")
+							.attr("x",10)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(this.model.get('pert_id'));
+
+		// add a png export overlay
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 20)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
+
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", this.cevron_image_link)
+			.attr("x",this.width/2 - 9)
+			.attr("y",function(){
+				if (self.panel_open){
+					return self.height - 15;
+				}else{
+					return self.height - 20;
+				}
+			})
+			.attr("height",20)
+			.attr("width", 18)
+			.attr("transform", "rotate(0)")
+			.style("cursor","pointer")
+			.on("click", function(){self.toggle_panel_state()});
+
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 15)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",15)
+			.attr("width",this.width)
+			.attr("opacity",0)
+			.style("cursor","pointer")
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
+			.on("click", function(){self.toggle_panel_state()})
+
+		return this;
+	},
+
+	// ### render_compound
+	// utility to render the compound specific parts of the view
+	render_compound: function(){
+		var self = this;
 		// draw compound structure if there is one
 		if (this.model.get("structure_url")){
 			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
@@ -6957,30 +7042,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","20pt")
 							.text('Small Molecule Compound');
-
-		// (re)draw the pert_iname text
-		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_iname_text').data([1])
-							.enter().append("text")
-							.attr("class","pert_iname_text")
-							.attr("x",10)
-							.attr("y",75)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-weight","bold")
-							.attr("font-size","36pt")
-							.text(this.model.get('pert_iname'));
-
-		// (re)draw the pert_id text
-		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_id_text').data([1])
-							.enter()
-							.append("text")
-							.attr("class","pert_id_text")
-							.attr("x",10)
-							.attr("y",100)
-							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text(this.model.get('pert_id'));
 
 		// render additional labels
 		this.label_y_position = 100;
@@ -7067,19 +7128,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			this.clear_summary();
 		}
 
-		// add a png export overlay
-		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
-		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
-			.attr("class", this.div_string + "png_export no_png_export")
-			.attr("x",10)
-			.attr("y",this.height - 20)
-			.attr("opacity",0.25)
-			.style("cursor","pointer")
-			.text("png")
-			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
-			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-			.on("click",function(){self.save_png();});
-
 		// check to see if there is a pubchem id and draw a link for it if there
 		// is one
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([]).exit().remove();
@@ -7113,46 +7161,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
-
-		// render an image that will to indicate that the user can click the content to unfold the panel
-		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
-
-		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
-		this.controls_layer.selectAll('.cevron_icon').data([1])
-			.enter().append("svg:image")
-			.attr("class","cevron_icon")
-			.attr("xlink:href", this.cevron_image_link)
-			.attr("x",this.width/2 - 9)
-			.attr("y",function(){
-				if (self.panel_open){
-					return self.height - 15;
-				}else{
-					return self.height - 20;
-				}
-			})
-			.attr("height",20)
-			.attr("width", 18)
-			.attr("transform", "rotate(0)")
-			.style("cursor","pointer")
-			.on("click", function(){self.toggle_panel_state()});
-
-		// render a button to allow the user to expand the view to show its full content
-		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
-		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
-			.append("rect")
-			.attr("x",0)
-			.attr("y",this.height - 15)
-			.attr("class",this.div_string + "more_button")
-			.attr("height",15)
-			.attr("width",this.width)
-			.attr("opacity",0)
-			.style("cursor","pointer")
-			.attr("fill","#BDBDBD")
-			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
-			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
-			.on("click", function(){self.toggle_panel_state()})
-
-		return this;
 	},
 
 	// ### update
