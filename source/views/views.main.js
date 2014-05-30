@@ -3856,9 +3856,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// render the base view components
 		this.base_render();
 
-		// render the compound or gene specfic portion of the view
-		this.render_compound();
-
 		// (re)draw the pert_iname text
 		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.pert_iname_text').data([1])
@@ -3934,6 +3931,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
 			.on("click", function(){self.toggle_panel_state()})
 
+		// render the compound or gene specfic portion of the view
+		this.render_compound();
+
 		return this;
 	},
 
@@ -4007,7 +4007,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 		// (re)draw the InChIKey label and InChIKey
 		if(this.model.get("inchi_key")){
-			this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);	
+			this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
 		}
 
 		// (re)draw the InChI string
