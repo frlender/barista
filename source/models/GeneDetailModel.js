@@ -86,15 +86,15 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
                     if (kd_annots === null){
                         oe_annots.has_kd = false;
                         oe_annots.has_oe = true;
-                        self.set(_.extend(oe_annots,annots));
+                        self.set(_.extend(oe_annots.unprefixed,oe_annots.prefixed,annots));
                     }else if (oe_annots === null){
                         kd_annots.has_kd = true;
                         kd_annots.has_oe = false;
-                        self.set(_.extend(kd_annots,annots));
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,annots));
                     }else{
                         kd_annots.has_kd = true;
                         kd_annots.has_oe = true;
-                        self.set(_.extend(kd_annots,oe_annots,annots));
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,oe_annots.prefixed,annots));
                     }
                     // trigger an event to tell us that the model is not null
                     self.trigger("GeneDetailModel:ModelIsNotNull");
@@ -127,10 +127,9 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
             }else{
                 var annots = {};
                 for (field in perts[0]){
-                    console.log(pert_type + field);
-                    annots[pert_type + field] = perts[0][field];
+                    annots[pert_type + '_' + field] = perts[0][field];
                 }
-                deferred.resolve(annots);
+                deferred.resolve({prefixed: annots, unprefixed: perts[0]});
             }
         });
 
