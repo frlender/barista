@@ -151,6 +151,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### render_compound
 	// utility to render the compound specific parts of the view
 	render_compound: function(){
+		this.clear_label_and_text();
 		var self = this;
 		// draw compound structure if there is one
 		if (this.model.get("structure_url")){
@@ -294,6 +295,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### render_gene
 	// utility to render the gene specific parts of the view
 	render_gene: function(){
+		this.clear_label_and_text();
 		var self = this;
 		// draw the static index reagent text
 		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
@@ -378,7 +380,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
 							.enter()
 							.append("text")
-							.attr("class",class_name_base + '_label_text')
+							.attr("class",class_name_base + '_label_text label_and_text')
 							.attr("x",x_pos_base)
 							.attr("y",this.label_y_position)
 							.attr("font-family","Helvetica Neue")
@@ -400,7 +402,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
 								.append("text")
-								.attr("class",class_name_base + '_text')
+								.attr("class",class_name_base + '_text label_and_text')
 								.attr("x",x_pos)
 								.attr("y",this.label_y_position)
 								.attr("font-family","Helvetica Neue")
@@ -415,7 +417,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
 								.append("text")
-								.attr("class",class_name_base + '_text')
+								.attr("class",class_name_base + '_text label_and_text')
 								.attr("x",x_pos)
 								.attr("y",this.label_y_position)
 								.attr("font-family","Helvetica Neue")
@@ -571,6 +573,13 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// utility function to clear the pert summary
 	clear_summary: function(){
 		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
+	},
+
+	// ### clear_label_and_text
+	// utility function to clear all of the labels and text generated with the
+	// render_label_and_value function
+	clear_label_and_text: function(){
+		this.fg_layer.selectAll('.label_and_text').data([]).exit().remove();
 	},
 
 
