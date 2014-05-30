@@ -37,19 +37,23 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // the PertDetailModel's attributes with that of the sub model
   fetch: function(search_string, model_type){
       var self = this;
+      var deferred = $.Deferred();
       switch (model_type){
       case "compound":
           this.compound_sub_model.fetch(search_string).then(function(attributes){
               console.log("setting compound attributes: " + attributes);
               self.clear().set(attributes);
+              deferred.resolve();
           });
           break;
       case "gene":
           this.gene_sub_model.fetch(search_string).then(function(attributes){
               console.log("setting gene attributes: " + attributes);
               self.clear().set(attributes);
+              deferred.resolve();
           });
           break;
       }
+      return deferred;
   }
 });

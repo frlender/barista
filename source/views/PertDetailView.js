@@ -35,11 +35,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.closed_height = this.options.plot_height;
 		this.panel_open = false;
 
-		//populate the model so we are able to render the view without error
-		this.model.fetch("","compound");
+		//populate the model with an initial compound and then render the view
+		this.model.fetch("","compound").then(this.base_initialize());
 
-		// initialize the view using the base view's built in method
-		this.base_initialize();
 	},
 
 	// ### render
