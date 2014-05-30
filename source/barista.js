@@ -1874,11 +1874,11 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   fetch: function(search_string, model_type){
       switch (model_type){
       case "compound":
-          this.compound_sub_model.fetch();
+          this.compound_sub_model.fetch(search_string);
           this.set(this.compound_sub_model.attributes);
           break;
       case "gene":
-          this.gene_sub_model.fetch();
+          this.gene_sub_model.fetch(search_string);
           this.set(this.gene_sub_model.attributes);
           break;
       }
