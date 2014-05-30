@@ -7343,7 +7343,7 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // set up the model to listen to its sub-models
   initialize: function(){
     this.listenTo(this.compound_sub_model, "change", this.update_from_compound_sub_model);
-    this.listenTo(this.gene_sub_model, "change", this.update_attr_from_gene_sub_model);
+    this.listenTo(this.gene_sub_model, "change", this.update_from_gene_sub_model);
   },
 
   // ### defaults
