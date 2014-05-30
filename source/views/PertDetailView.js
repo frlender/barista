@@ -36,7 +36,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.panel_open = false;
 
 		//populate the model with an initial compound and then render the view
-		this.model.fetch("","compound").then(this.base_initialize());
+		this.model.fetch("","compound").then(function(){
+			this.base_initialize();
+		});
 
 	},
 
