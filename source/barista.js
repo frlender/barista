@@ -6598,6 +6598,15 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text(this.model.get('pert_id'));
+		// (re)draw the pert_summary or clear it if there pert_summary is null
+		if (this.model.get('pert_summary')){
+			this.render_summary({summary_string: this.model.get('pert_summary'),
+								top: 45,
+								bottom: 100,
+								left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 30});
+		}else{
+			this.clear_summary();
+		}
 
 		// add a png export overlay
 		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
@@ -6653,7 +6662,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// render the compound or gene specfic portion of the view
 		switch (this.model.get("pert_type")){
 		case "trt_cp":
-			this.render_compound();	
+			this.render_compound();
+		case "gene":
+			this.render_gene();
 		};
 
 		return this;
@@ -6767,16 +6778,6 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
 		}
 
-		// (re)draw the pert_summary or clear it if there pert_summary is null
-		if (this.model.get('pert_summary')){
-			this.render_summary({summary_string: this.model.get('pert_summary'),
-								top: 45,
-								bottom: 100,
-								left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 30});
-		}else{
-			this.clear_summary();
-		}
-
 		// check to see if there is a pubchem id and draw a link for it if there
 		// is one
 		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([]).exit().remove();
@@ -6810,6 +6811,63 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
+	},
+
+	// ### render_gene
+	// utility to render the gene specific parts of the view
+	render_gene: function(){
+		var self = this;
+		// draw the static index reagent text
+		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.index_text').data([1])
+							.enter().append("text")
+							.attr("class","index_text")
+							.attr("x",10)
+							.attr("y",30)
+							.attr("fill","#0072B2")
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","20pt")
+							.text('Gene');
+
+		// render additional labels
+		this.label_y_position = 100;
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
+
+
+		// set the y position to be below the fold
+		this.label_y_position = 260;
+
+		// draw the cell lines that the compound has been profiled in
+		if (this.model.get('cell_id')){
+			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the compound
+		if (this.model.get('sig_id')){
+			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the compound
+		if (this.model.get('sig_id_gold')){
+			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+
+		return this;
 	},
 
 	// ### update
