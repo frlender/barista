@@ -14,7 +14,7 @@
 // 												model: CompoundDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "col-lg-12"});
-Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
+Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "CompoundDetailView",

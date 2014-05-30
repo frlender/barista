@@ -1258,7 +1258,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 // 												model: CompoundDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "col-lg-12"});
-Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
+Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "CompoundDetailView",
@@ -3803,7 +3803,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 });
 // # **PertDetailView**
 
-// A Backbone.View that shows the name and short description of a single purturbagen.  This view is
+// A Backbone.View that shows information about a small molecule compound.  This view is
 // frequently paired with a PertDetailModel.
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector")});
@@ -3811,13 +3811,13 @@ Barista.Views.PertCountView = Backbone.View.extend({
 // optional arguments:
 
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
-// 2.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
+// 2.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-12"*
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector"),
-//												model: PertDetailModel,
-//												bg_color: "#ffffff",
-//												span_class: "span4"});
-Barista.Views.PertDetailView = Backbone.View.extend({
+// 												model: PertDetailModel,
+// 												bg_color: "#ffffff",
+// 												span_class: "col-lg-12"});
+Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "PertDetailView",
@@ -3825,120 +3825,174 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### model
 	// set up the view's default model
 	model: new Barista.Models.PertDetailModel(),
-	
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
-	
-	//		pert_detail_view.initialize();
 	initialize: function(){
-		// set up color options.  default if not specified
-		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
+		// set up the plot height
+		this.options.plot_height = 260;
 
-		// set up the span class
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "#col-lg-12";
+		// set up the open and closed state heights
+		this.open_height = this.options.plot_height;
+		this.closed_height = this.options.plot_height;
+		this.panel_open = false;
 
-		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
-
-		// compile the default template for the view
-		this.compile_template();
-
-		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
-						.attr("width",this.width)
-						.attr("height",this.height);
-
-		// render the vis
-		this.redraw();
-
-		// bind window resize events to redraw
-		var self = this;
-		$(window).resize(function() {self.redraw();} );
+		// initialize the view using the base view's built in method
+		this.base_initialize();
 	},
 
-	// ### compile_template
-	// use Handlebars to compile the template for the view
-
-	// arguments:
-
-	// 1.  {string}  **template\_string**  an html string specifying the template to compile and render. defaults to `'<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:180px"></div>'`
-
-	//		pert_detail_view.compile_template(template\_string);
-	compile_template: function(template_string){
-		this.div_string = 'd3_target' + new Date().getTime();;
-		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
-												span_class: this.span_class}));
-	},
-
-	// ### redraw
-	// perform a full redraw of the view, including wiping out all d3 drawn components in the view and 
-	// initializing them again from scratch.
-	
-	//		pert_detail_view.redraw();
-	redraw: function(){
-		this.init_view();
-		this.render();
-	},
-
-	// ### init_view
-	// set up the view from scratch.  Draw a background panel and place all dynamic content on that panel
-	// with defualt values
-
-	//		pert_detail_view.init_view();
-	init_view: function(){
-		// stuff "this" into a variable for use inside of scoped funcitons
+	// ### render
+	// completely render the view. Updates both static and dynamic content in the view.
+	render: function(){
+		// keep track of our scope at this level
 		var self = this;
 
-		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		// render the base view components
+		this.base_render();
 
-		// rescale the width of the vis
-		this.vis.attr("width",this.width);
-
-		// draw the background of the panel
-		this.vis.selectAll('.bg_panel').data([]).exit().remove();
-		this.vis.selectAll('.bg_panel').data([1]).enter().append('rect')
-			.attr("class","bg_panel")
-			.attr("height",this.height)
-			.attr("width",this.width)
-			.attr("fill",this.bg_color);
-
-		// draw the static index reagent icon
-		this.vis.selectAll('.index_text_icon').data([]).exit().remove();
-		this.vis.selectAll('.index_text_icon').data([1])
-							.enter().append("foreignObject")
-							.attr("class","index_text_icon")
-							.attr("x",10)
-							.attr("y",0)
-							.attr("height",40)
-							.attr("width",40)
-							.append("xhtml:div")
-							.attr("id",this.div_id + "_index_text")
-							.style("background-color",this.bg_color)
-							.html('<p class="cmap-subhead-text"><font color="#56B4E9"><i class="icon-map-marker"></i></font><p>');
+		// draw compound structure if there is one
+		if (this.model.get("structure_url")){
+			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+			this.fg_layer.selectAll('.index_text_icon').data([1])
+								.enter().append("svg:image")
+								.attr("class","index_text_icon")
+								.attr("xlink:href", this.model.get("structure_url"))
+								.attr("x",10)
+								.attr("y",100)
+								.attr("height",150)
+								.attr("width",300)
+								.style("cursor","pointer")
+								.on("click", function(){window.location = self.model.get('structure_url')});
+		}
 
 		// draw the static index reagent text
-		this.vis.selectAll('.index_text').data([]).exit().remove();
-		this.vis.selectAll('.index_text').data([1])
+		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.index_text').data([1])
 							.enter().append("text")
 							.attr("class","index_text")
-							.attr("x",25)
-							.attr("y",17)
-							.attr("fill","#56B4E9")
+							.attr("x",10)
+							.attr("y",30)
+							.attr("fill","#E69F00")
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","20pt")
+							.text('Small Molecule Compound');
+
+		// (re)draw the pert_iname text
+		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_iname_text').data([1])
+							.enter().append("text")
+							.attr("class","pert_iname_text")
+							.attr("x",10)
+							.attr("y",75)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-weight","bold")
+							.attr("font-size","36pt")
+							.text(this.model.get('pert_iname'));
+
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","pert_id_text")
+							.attr("x",10)
+							.attr("y",100)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
-							.text('INDEX REAGENT');
+							.text(this.model.get('pert_id'));
+
+		// render additional labels
+		this.label_y_position = 100;
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('collection', 'Collection', 'pert_icollection', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('summly', 'In Summly', 'in_summly', false, 320);
+
+
+		// set the y position to be below the fold
+		this.label_y_position = 260;
+
+		// (re)draw the weight label and weight
+		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('formula', 'Formula', Barista.NumbersToSubscript(this.model.get('molecular_formula')),true);
+
+		// (re)draw the logp and label
+		this.render_label_and_value('logp', 'LogP', 'logp');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
+
+		// (re)draw the pubchem_cid and label
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+
+		// (re)draw the InChIKey label and InChIKey
+		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+
+		// (re)draw the InChI string
+		// this.render_label_and_value('inchi_string', 'InChI String', this.model.get("inchi_string").split("InChI=")[1], true);
+
+		// (re)draw the SMILES
+		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
+
+		// draw alternate names
+		this.label_y_position += 20;
+		if (this.model.get('alt_name')){
+			this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'white', '#BDBDBD');
+		}
+
+		// draw the cell lines that the compound has been profiled in
+		if (this.model.get('cell_id')){
+			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the compound
+		if (this.model.get('sig_id')){
+			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the compound
+		if (this.model.get('sig_id_gold')){
+			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+		// (re)draw the pert_summary or clear it if there pert_summary is null
+		if (this.model.get('pert_summary')){
+			this.render_summary({summary_string: this.model.get('pert_summary'),
+								top: 45,
+								bottom: 100,
+								left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 30});
+		}else{
+			this.clear_summary();
+		}
 
 		// add a png export overlay
-		this.vis.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
-		this.vis.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
 			.attr("class", this.div_string + "png_export no_png_export")
 			.attr("x",10)
-			.attr("y",this.height - 10)
+			.attr("y",this.height - 20)
 			.attr("opacity",0.25)
 			.style("cursor","pointer")
 			.text("png")
@@ -3946,233 +4000,340 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
 
+		// check to see if there is a pubchem id and draw a link for it if there
+		// is one
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([]).exit().remove();
+		if (this.model.get('pubchem_cid')){
+			this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([1]).enter().append("text")
+				.attr("class", this.div_string + "pubchem_link no_png_export")
+				.attr("x",this.width - 10)
+				.attr("y",this.height - 20)
+				.attr("opacity",0.25)
+				.attr("text-anchor","end")
+				.style("cursor","pointer")
+				.text("PubChem")
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+				.on("click", function(){window.location = "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
+		}
+
+		// check to see if there is a wikipedia url and draw a link for it if there
+		// is one
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([]).exit().remove();
+		if (this.model.get('wiki_url')){
+			this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([1]).enter().append("text")
+				.attr("class", this.div_string + "wiki_link no_png_export")
+				.attr("x",this.width - 80)
+				.attr("y",this.height - 20)
+				.attr("opacity",0.25)
+				.attr("text-anchor","end")
+				.style("cursor","pointer")
+				.text("Wiki")
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+				.on("click", function(){window.location = self.model.get('wiki_url')});
+		}
+
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", this.cevron_image_link)
+			.attr("x",this.width/2 - 9)
+			.attr("y",function(){
+				if (self.panel_open){
+					return self.height - 15;
+				}else{
+					return self.height - 20;
+				}
+			})
+			.attr("height",20)
+			.attr("width", 18)
+			.attr("transform", "rotate(0)")
+			.style("cursor","pointer")
+			.on("click", function(){self.toggle_panel_state()});
+
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 15)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",15)
+			.attr("width",this.width)
+			.attr("opacity",0)
+			.style("cursor","pointer")
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
+			.on("click", function(){self.toggle_panel_state()})
+
+		return this;
 	},
 
-	// ### render
-	// render the dynamic content of the view based on the current state of the view's data model
+	// ### update
+	// update the dynamic potions of the view
+	update: function(){
+		this.render();
+		return this;
+	},
 
-	//		pert_detail_view.render();
-	render: function(){
+	// ### render_label_and_value
+	// utility function to draw a standard label and value for that label under
+	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
+	// pass the value in model_field as text instead of serching for it in the model
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link){
+		// set up a local variable to keep our scope straight
 		var self = this;
-		// (re)draw a link to the gene's wikipedia article if it is a gene.
-		this.vis.selectAll('.' + this.div_string + 'gene_wiki_link').data([]).exit().remove();
-		this.vis.selectAll('.gene_wiki_text').data([]).exit().remove();
-		
-		// check for a link definition for wikipedia.  If there is one, draw a card that
-		// displays a link out to the article and the extract of the article.  If there
-		// is no link provided, just display the short and long name version of the card
-		if (this.model.get('gene_wiki_link') !== ""){
 
-			// set up wikipedia API query parameters
-			var params = {action: "query",
-							titles: this.model.get("short_description") + "_(gene)",
-							prop: "extracts",
-							format: "json",
-							exchars: 200,
-							exlimit: 1,
-							exintro: true,
-							exsectionformat: "wiki",
-							redirects: true,
-							explaintext: true};
+		// make sure that we have a label_y_position set
+		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
+		this.label_y_position += 25;
 
-			// make a query into the wikipedia API to get the article extract.  Once the
-			// extract has come back, draw the short description, long description , 
-			// the wiki link, and article stub
-			$.getJSON('http://en.wikipedia.org/w/api.php?callback=?',params,function(res) {
-				
-				// (re)draw the short name of the perturbagen
-				self.vis.selectAll('.short_description_text').data([]).exit().remove();
-				self.vis.selectAll('.short_description_text').data([1])
-									.enter().append("text")
-									.attr("class","short_description_text")
-									.attr("x",10)
-									.attr("y",60)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-weight","bold")
-									.attr("font-size","36pt")
-									.text(self.model.get('short_description'));
+		// make sure that there is a base position for the x_label set
+		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
 
-				// (re)draw the long name of the perturbagen
-				self.vis.selectAll('.long_description_text').data([]).exit().remove();
-				self.vis.selectAll('.long_description_text').data([1])
-									.enter()
-									.append("text")
-									.attr("class","long_description_text")
-									.attr("x",10)
-									.attr("y",85)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","14pt")
-									.text(self.model.get('long_description'));
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
 
-				// draw the wiki link
-				self.vis.selectAll('.' + self.div_string + 'gene_wiki_link').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_link no_png_export')
-									.attr("x",40)
-									.attr("y",self.height - 10)
-									.attr("opacity",0.25)
-									.style("cursor","pointer")
-									.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
-									.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-									.on("click", function(){window.location.href = self.model.get("gene_wiki_link")})
-									.text('wiki');
-			
-				// drill into the wikipedia API response and grab the article extract.
-				// break it into 50 character lines to display and draw each of those lines.
-				// If line breaks fall in the middle of a word, place a dash at the end of
-				// the line.  If the extract does not fit on four lines (200 characters),
-				// add an ellipsis to the end of the line.
-				for (var p in res.query.pages){
-					if (res.query.pages.propertyIsEnumerable(p)){
-						var extract = res.query.pages[p].extract;
-						if (extract !== undefined){
-							// compute the line splits to display in the wiki summary
-							var lines = ["","","",""];
-							lines[0] = (extract.slice(0,50).slice(-1) != " ") ? extract.slice(0,50) + '-': extract.slice(0,50);
-							lines[1] = (extract.slice(50,100).slice(-1) != " " && extract.slice(50,100).slice(49,50) != "") ? extract.slice(50,100)  + '-': extract.slice(50,100);
-							lines[2] = (extract.slice(100,150).slice(-1) != " " && extract.slice(100,150).slice(49,50) != "") ? extract.slice(100,150)  + '-': extract.slice(100,150);
-							lines[3] = (extract.slice(100,150) != "") ? extract.slice(150,200) + ' ...' : "";
+		// (re)draw the label
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class",class_name_base + '_label_text')
+							.attr("x",x_pos_base)
+							.attr("y",this.label_y_position)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(label_text + ':');
 
-							// draw line 1
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text1').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text1 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",12)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[0]);
-
-							// draw line 2
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text2 ').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text2 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",29)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[1]);
-
-							// draw line 3
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text3').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text3 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",46)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[2]);
-
-							// draw line 4
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text4').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text4 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",64)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[3]);
-						}
-					}
-				}
-			});
-
+		// (re)draw the text
+		this.fg_layer.selectAll('.' + class_name_base + '_text').data([]).exit().remove();
+		var model_text = '';
+		if (pass_model_field_as_text){
+			model_text = model_field;
 		}else{
-			// (re)draw the short name of the perturbagen
-			this.vis.selectAll('.short_description_text').data([]).exit().remove();
-			this.vis.selectAll('.short_description_text').data([1])
-								.enter().append("text")
-								.attr("class","short_description_text")
-								.attr("x",10)
-								.attr("y",60)
-								.attr("font-family","Helvetica Neue")
-								.attr("font-weight","bold")
-								.attr("font-size","36pt")
-								.text(this.model.get('short_description'));
+			model_text = this.model.get(model_field);
+		}
+		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
 
-			// (re)draw the long name of the perturbagen
-			this.vis.selectAll('.long_description_text').data([]).exit().remove();
-			this.vis.selectAll('.long_description_text').data([1])
+		// if there is a value link supplied, use it as a link on the text, otherwise, render plain text
+		if (value_link){
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
 								.enter()
 								.append("text")
-								.attr("class","long_description_text")
-								.attr("x",10)
-								.attr("y",85)
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
-								.text(this.model.get('long_description'));
+								.attr("fill","#BDBDBD")
+								.style("cursor","pointer")
+								.on("mouseover",function(){d3.select(this).transition().duration(500).attr("fill","#56B4E9");})
+								.on("mouseout",function(){d3.select(this).transition().duration(500).attr("fill","#BDBDBD");})
+								.on("click", function(){window.location = value_link})
+								.text(model_text);
+		}else{
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.text(model_text);
 		}
 	},
 
-	// ### hide
-	// hides the view by dimming the opacity and hiding it in the DOM
+	// ### render_summary
+	// utility function to break a long summary string into a multiline
+	// and draw it at the desired location
 
-	// arguments
+	// options
 
-	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *1*
-
-	//		pert_detail_view.hide(duration);
-	hide: function(duration){
-		duration = (duration !== undefined) ? duration : 1;
+	// 1.  {string}  **summary_string**  the string to be displayed, defaults to *""*
+	// 2.  {right}  **right**  the x position to place the **right** edge of text, defaults to *this.width*
+	// 3.  {left}  **left**  the x position to place the **left** edge of text, defaults to *this.width - 500*
+	// 4.  {top}  **top**  the y position to place the **top** edge of text, defaults to *0*
+	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
+	render_summary: function(options){
 		var self = this;
-		this.$el.animate({opacity:0},duration);
-		setTimeout(function(){self.$el.hide();},duration);
+
+		// default arguments if they are not present
+		summary_string = this.model.get("pert_summary");
+		top_edge = (options.top !== undefined) ? options.top : 0;
+		bottom_edge = (options.bottom !== undefined) ? options.bottom : 100;
+		right_edge = (options.right !== undefined) ? options.right : this.width;
+		left_edge = (options.left !== undefined) ? options.left : this.width - 500;
+
+		// clear existing summary
+		this.clear_summary();
+
+		// compute the number of lines we have room for
+		this.line_height = 15;
+		this.num_lines_allowed = Math.floor((bottom_edge - top_edge) / this.line_height);
+
+		// compute the number of characters per line we will allow and how
+		// many lines the summary would need if we rendered all of it
+		this.line_width = right_edge - left_edge;
+		this.num_char = Math.floor(this.line_width / 13 / .75);
+		this.num_char = (this.num_char > 60) ? 60 : this.num_char;
+		this.num_lines = Math.ceil(summary_string.length / this.num_char);
+
+		// compute the line splits to display in the wiki summary
+		this.lines = [];
+		for (var i=0; i<this.num_lines; i++){
+			if (i < this.num_lines_allowed - 1){
+				var l = (summary_string.slice(i*this.num_char,(i+1)*this.num_char).slice(-1) != " " && summary_string.slice(i*this.num_char,(i+1)*this.num_char).slice(this.num_char-1,this.num_char) != "") ? summary_string.slice(i*this.num_char,(i+1)*this.num_char)  + '-': summary_string.slice(i*this.num_char,(i+1)*this.num_char);
+				this.lines.push(l);
+			}else{
+				var l = summary_string.slice(i*this.num_char,(i+1)*this.num_char - 3) + '...';
+				this.lines.push(l);
+				break;
+			}
+		}
+
+		// draw lines
+		self.fg_layer.selectAll('.' + self.div_string + 'summary_text' + i).data(this.lines)
+				.enter()
+				.append("text")
+				.attr("class",self.div_string + "summary_text")
+				.attr("x",left_edge)
+				.attr("y",function(d,i){return top_edge + 13 + i*15;})
+				.attr("font-family","Helvetica Neue")
+				.attr("font-size","13pt")
+				.attr("fill","#BDBDBD")
+				// .attr("text-anchor", "middle")
+				.text(function(d){return d;});
 	},
 
-	// ### show
-	// shows the view by brightening the opacity and showing it in the DOM
-
-	// arguments
-
-	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *1*
-
-	//		pert_detail_view.show(duration);
-	show: function(duration){
-		duration = (duration !== undefined) ? duration : 1;
-		this.$el.show();
-		this.$el.animate({opacity:1},duration);
+	// ### toggle_panel_state
+	// utility to open or close the view
+	toggle_panel_state: function(){
+		var self = this;
+		var h;
+		if (this.panel_open){
+			h = this.options.plot_height;
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = false;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
+		}else{
+			h = this.open_height
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = true;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
+		}
+		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
+		this.vis.transition().duration(500).attr("height",h);
 	},
 
-	// ### savePng
-	// save the current state of the view into a png image
+	// ### draw tags
+	// utility function to draw tags given an array.
+	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
+		var x_offsets = [10];
+		var row_number = 0;
+		var y_offsets = [];
+		var lengths = [];
+		var tags = [];
+		var self = this;
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
 
-	//		pert_detail_view.save_png();
-	save_png: function(){
-		// build a canvas element to store the image temporarily while we save it
-		var width = this.vis.attr("width");
-		var height = this.vis.attr("height");
-		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
-		$('body').append(html_snippet);
+		// draw the foreground text of all the tags
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data(data).enter().append('text')
+			.attr("class", class_name_base + "tag_list_text")
+			.text(function(d){return d;})
+			.attr("x",function(d,i){
+				lengths.push(this.getComputedTextLength() + 15);
+				var current_x_offset = x_offsets[i];
+				if (current_x_offset + lengths[i] > self.width){
+					x_offsets[i] = 5;
+					x_offsets.push(lengths[i] + x_offsets[i]);
+					row_number += 1;
+				}else{
+					x_offsets.push(lengths[i] + x_offsets[i]);
+				}
+				y_offsets.push((row_number * 1.5 + 1));
+				return x_offsets[i];
+			})
+			.attr("y",function(d,i){return self.label_y_position + y_offsets[i] * EmSize;})
+			.attr("opacity",1)
+			.attr("fill",fg_color)
 
-		// dim the png label on the image
-		var png_selection = this.vis.selectAll(".no_png_export");
-		var png_opacity = png_selection.attr("opacity");
-		png_selection.attr("opacity",0);
+		// draw the background of all the tags
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data([]).exit().remove();
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data(data).enter().append('rect')
+			.attr("class", class_name_base + "tag_list_rect")
+			.attr("x",function(d,i){return x_offsets[i] - 5;})
+			.attr("y",function(d,i){return self.label_y_position + (y_offsets[i] - 1) * EmSize;})
+			.attr("rx",4)
+			.attr("ry",4)
+			.attr('width',function(d,i){return lengths[i] - 4;})
+			.attr('height','1.2em')
+			.attr("opacity",1)
+			.attr("fill",tag_color);
 
-		// grab the content of the target svg and place it in the canvas element
-		var svg_snippet = this.vis.node().parentNode.innerHTML;
-		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+		// update the label_y_position
+		this.label_y_position += 10 + y_offsets.slice(-1)[0] * EmSize;
 
-		// save the contents of the canvas to file and remove the canvas element
-		var canvas = $("#tmpCanvas")[0];
-		var filename = "cmapPertDetailView" + new Date().getTime() + ".png";
-		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
-		$('#tmpCanvas').remove();
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
 
-		// make the png label on the image visible again
-		png_selection.attr("opacity",png_opacity);
+		return this
+	},
+
+	// ### clear_summary
+	// utility function to clear the pert summary
+	clear_summary: function(){
+		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
+	},
+
+
+	// ### save_png_pre
+	// overide the base views save_png_pre method to clear out the image so we
+	// can render the png properly
+	save_png_pre: function(){
+		// remove the static index reagent icon
+		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+
+		// scoot the inde text to the left
+		this.fg_layer.selectAll('.index_text')
+			.attr('x',10)
+	},
+
+	// ### save_png_post
+	// overide the base views save_png_post method to restore the image after
+	// saving
+	save_png_post: function(){
+		// draw the static index reagent icon
+		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+		this.fg_layer.selectAll('.index_text_icon').data([1])
+							.enter().append("svg:image")
+							.attr("class","index_text_icon")
+							.attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
+							.attr("x",10)
+							.attr("y",0)
+							.attr("height",40)
+							.attr("width",40);
+
+		// scoot the inde text to the right
+		this.fg_layer.selectAll('.index_text')
+			.attr('x',60)
 	}
-
 });
+
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete
 functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the
