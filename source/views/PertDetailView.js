@@ -314,14 +314,15 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		// render additional labels
 		this.label_y_position = 100;
 
-		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_sig', 'Signatures', 'num_sig');
+		// (re)draw the signatures annotation
+		this.render_label_and_value('trt_sh_num_sig', 'Signatures', 'trt_sh_num_sig');
+		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 300, null,false);
 
 		// (re)draw the gold signatures annotation
-		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold');
+		this.render_label_and_value('trt_sh_num_gold', 'Gold Signatures', 'trt_sh_num_gold');
 
-		// (re)draw the gold signatures annotation
-		this.render_label_and_value('num_inst', 'Experiments', 'num_inst');
+		// (re)draw the experiments annotation
+		this.render_label_and_value('trt_sh_num_inst', 'Experiments', 'trt_sh_num_inst');
 
 
 		// set the y position to be below the fold
@@ -363,13 +364,19 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// utility function to draw a standard label and value for that label under
 	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
 	// pass the value in model_field as text instead of serching for it in the model
-	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link){
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link,increment_y){
 		// set up a local variable to keep our scope straight
 		var self = this;
 
 		// make sure that we have a label_y_position set
 		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
-		this.label_y_position += 25;
+		if (increment_y === undefined){
+			increment_y = true;
+		}
+		if (increment_y){
+			this.label_y_position += 25;
+		}
+
 
 		// make sure that there is a base position for the x_label set
 		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
