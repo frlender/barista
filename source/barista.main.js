@@ -7257,22 +7257,22 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.label_y_position = 260;
 
 		// (re)draw the vector_id annotation
-		this.render_label_and_value('trt_sh_vector_id', 'Vector', 'trt_sh_vector_id');
+		this.render_label_and_value('trt_sh_vector_id', 'Knockdown Vector', 'trt_sh_vector_id');
 
 		// (re)draw the target region annotation
-		this.render_label_and_value('trt_sh_target_region', 'Target Region', 'trt_sh_target_region');
+		this.render_label_and_value('trt_sh_target_region', 'Knockdown Target Region', 'trt_sh_target_region');
 
 		// (re)draw the 6 base seed annotation
-		this.render_label_and_value('trt_sh_seed_seq6', '6 Base Seed Sequence', 'trt_sh_seed_seq6');
+		this.render_label_and_value('trt_sh_seed_seq6', 'Knockdown 6 Base Seed Sequence', 'trt_sh_seed_seq6');
 
 		// (re)draw the 7 base seed annotation
-		this.render_label_and_value('trt_sh_seed_seq7', '7 Base Seed Sequence', 'trt_sh_seed_seq7');
+		this.render_label_and_value('trt_sh_seed_seq7', 'Knockdown 7 Base Seed Sequence', 'trt_sh_seed_seq7');
 
 		// (re)draw the target sequence annotation
-		this.render_label_and_value('trt_sh_target_seq', 'target Sequence', 'trt_sh_target_seq');
+		this.render_label_and_value('trt_sh_target_seq', 'Knockdown Target Sequence', 'trt_sh_target_seq');
 
 		// (re)draw the oligo sequence annotation
-		this.render_label_and_value('trt_sh_oligo_seq', 'Oligo Sequence', 'trt_sh_oligo_seq');
+		this.render_label_and_value('trt_sh_oligo_seq', 'Knockdown Oligo Sequence', 'trt_sh_oligo_seq');
 
 		// draw the cell lines that the knockdown has been profiled in
 		this.label_y_position += 20;
