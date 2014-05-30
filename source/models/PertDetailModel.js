@@ -8,14 +8,6 @@
 // `pert_detail_model = new PertDetailModel()`
 
 Barista.Models.PertDetailModel = Backbone.Model.extend({
-  // ### initialize
-  // set up the model to listen to its sub-models
-  initialize: function(){
-    this.events = _.extend({}, Backbone.Events);
-    this.events.listenTo(this.compound_sub_model, "change", this.update_from_compound_sub_model);
-    this.events.listenTo(this.gene_sub_model, "change", this.update_from_gene_sub_model);
-  },
-
   // ### defaults
   // describes the model's default parameters.  This an incomplete list of defaults, only those
   // that are common to all perturbagens
@@ -46,23 +38,15 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   fetch: function(search_string, model_type){
       switch (model_type){
       case "compound":
-          this.compound_sub_model.fetch(search_string);
+          this.compound_sub_model.fetch(search_string).then(function(attributes){
+              this.clear().set(attributes);
+          });
           break;
       case "gene":
-          this.gene_sub_model.fetch(search_string);
+          this.gene_sub_model.fetch(search_string).then(function(attributes){
+              this.clear().set(attributes);
+          });
           break;
       }
-  },
-
-  // ### update_from_compound_sub_model
-  // utility to update the model's attributes from the compound_sub_model
-  update_from_compound_sub_model: function(){
-      this.clear().set(this.compound_sub_model.attributes);
-  },
-
-  // ### update_from_gene_sub_model
-  // utility to update the model's attributes from the compound_sub_model
-  update_from_gene_sub_model: function(){
-      this.clear().set(this.gene_sub_model.attributes);
   }
 });

@@ -1383,6 +1383,10 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deffered = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
@@ -1463,6 +1467,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+      deferred.resolve(self.attributes);
     });
   }
 });
@@ -1517,6 +1522,10 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deffered = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
@@ -1564,6 +1573,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
                     // trigger an event to tell us that the model is not null
                     self.trigger("GeneDetailModel:ModelIsNotNull");
                 }
+                deferred.resolve(self.attributes);
             });
           }
         });
@@ -1844,14 +1854,6 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
 // `pert_detail_model = new PertDetailModel()`
 
 Barista.Models.PertDetailModel = Backbone.Model.extend({
-  // ### initialize
-  // set up the model to listen to its sub-models
-  initialize: function(){
-    this.events = _.extend({}, Backbone.Events);
-    this.events.listenTo(this.compound_sub_model, "change", this.update_from_compound_sub_model);
-    this.events.listenTo(this.gene_sub_model, "change", this.update_from_gene_sub_model);
-  },
-
   // ### defaults
   // describes the model's default parameters.  This an incomplete list of defaults, only those
   // that are common to all perturbagens
@@ -1882,24 +1884,16 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   fetch: function(search_string, model_type){
       switch (model_type){
       case "compound":
-          this.compound_sub_model.fetch(search_string);
+          this.compound_sub_model.fetch(search_string).then(function(attributes){
+              this.clear().set(attributes);
+          });
           break;
       case "gene":
-          this.gene_sub_model.fetch(search_string);
+          this.gene_sub_model.fetch(search_string).then(function(attributes){
+              this.clear().set(attributes);
+          });
           break;
       }
-  },
-
-  // ### update_from_compound_sub_model
-  // utility to update the model's attributes from the compound_sub_model
-  update_from_compound_sub_model: function(){
-      this.clear().set(this.compound_sub_model.attributes);
-  },
-
-  // ### update_from_gene_sub_model
-  // utility to update the model's attributes from the compound_sub_model
-  update_from_gene_sub_model: function(){
-      this.clear().set(this.gene_sub_model.attributes);
   }
 });
 

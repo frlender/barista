@@ -48,6 +48,10 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deffered = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
@@ -95,6 +99,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
                     // trigger an event to tell us that the model is not null
                     self.trigger("GeneDetailModel:ModelIsNotNull");
                 }
+                deferred.resolve(self.attributes);
             });
           }
         });
