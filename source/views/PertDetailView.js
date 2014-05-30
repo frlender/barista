@@ -323,6 +323,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 								.attr("class","kd_pert_id_text pert_id_text")
 								.attr("x",10)
 								.attr("y",100)
+								.attr("fill","#56B4E8")
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
 								.text("Knockdown");
@@ -337,6 +338,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 								.attr("class","oe_pert_id_text pert_id_text")
 								.attr("x",350)
 								.attr("y",100)
+								.attr("fill","#D55E00")
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
 								.text("Over Expression");
@@ -626,38 +628,5 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// render_label_and_value function
 	clear_label_and_text: function(){
 		this.fg_layer.selectAll('.label_and_text').data([]).exit().remove();
-	},
-
-
-	// ### save_png_pre
-	// overide the base views save_png_pre method to clear out the image so we
-	// can render the png properly
-	save_png_pre: function(){
-		// remove the static index reagent icon
-		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
-
-		// scoot the inde text to the left
-		this.fg_layer.selectAll('.index_text')
-			.attr('x',10)
-	},
-
-	// ### save_png_post
-	// overide the base views save_png_post method to restore the image after
-	// saving
-	save_png_post: function(){
-		// draw the static index reagent icon
-		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
-		this.fg_layer.selectAll('.index_text_icon').data([1])
-							.enter().append("svg:image")
-							.attr("class","index_text_icon")
-							.attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
-							.attr("x",10)
-							.attr("y",0)
-							.attr("height",40)
-							.attr("width",40);
-
-		// scoot the inde text to the right
-		this.fg_layer.selectAll('.index_text')
-			.attr('x',60)
 	}
 });
