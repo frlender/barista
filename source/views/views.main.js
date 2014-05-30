@@ -4006,7 +4006,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
 
 		// (re)draw the InChIKey label and InChIKey
-		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+		if(this.model.get("inchi_key")){
+			this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);	
+		}
 
 		// (re)draw the InChI string
 		// this.render_label_and_value('inchi_string', 'InChI String', this.model.get("inchi_string").split("InChI=")[1], true);
