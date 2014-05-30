@@ -7054,16 +7054,16 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
                 }else{
                     var annots = {pert_type:"gene"};
                     if (kd_annots === null){
-                        oe_annots.has_kd = false;
-                        oe_annots.has_oe = true;
+                        annots.has_kd = false;
+                        annots.has_oe = true;
                         self.set(_.extend(oe_annots.unprefixed,oe_annots.prefixed,annots));
                     }else if (oe_annots === null){
-                        kd_annots.has_kd = true;
-                        kd_annots.has_oe = false;
+                        annots.has_kd = true;
+                        annots.has_oe = false;
                         self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,annots));
                     }else{
-                        kd_annots.has_kd = true;
-                        kd_annots.has_oe = true;
+                        annots.has_kd = true;
+                        annots.has_oe = true;
                         self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,oe_annots.prefixed,annots));
                     }
                     // trigger an event to tell us that the model is not null
@@ -12335,8 +12335,11 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
 		var static_text_enter = this.fg_layer.selectAll('.pert_id_text').data([1]).enter();
 		if (this.model.get("has_kd")){
-			static_text_enter.append("text")
-								.attr("class","pert_id_text")
+			this.fg_layer.selectAll('.kd_pert_id_text').data([]).exit().remove();
+			this.fg_layer.selectAll('.kd_pert_id_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class","kd_pert_id_text pert_id_text")
 								.attr("x",10)
 								.attr("y",100)
 								.attr("font-family","Helvetica Neue")
@@ -12345,10 +12348,13 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		}
 
 		// (re)draw the static overexpression text
-		if (this.model.get("has_kd")){
-			static_text_enter.append("text")
-								.attr("class","pert_id_text")
-								.attr("x",350)
+		if (this.model.get("has_oe")){
+			this.fg_layer.selectAll('.oe_pert_id_text').data([]).exit().remove();
+			this.fg_layer.selectAll('.oe_pert_id_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class","oe_pert_id_text pert_id_text")
+								.attr("x",10)
 								.attr("y",100)
 								.attr("font-family","Helvetica Neue")
 								.attr("font-size","14pt")
@@ -12360,7 +12366,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 		// (re)draw the signatures annotation
 		this.render_label_and_value('trt_sh_num_sig', 'Signatures', 'trt_sh_num_sig');
-		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 350, null,false);
+		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 300, null,false);
 
 		// (re)draw the gold signatures annotation
 		this.render_label_and_value('trt_sh_num_gold', 'Gold Signatures', 'trt_sh_num_gold');
