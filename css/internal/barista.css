@@ -18,6 +18,11 @@
 	text-decoration: none;
 }
 
+.cmap-link-disable {
+	cursor: default;
+	text-decoration: none;
+}
+
 .cmap-header{
 	position: relative;
 	z-index: 999;
