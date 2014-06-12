@@ -5040,6 +5040,9 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span4";
 
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update_vis);
 
@@ -5067,7 +5070,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.div_string = 'd3_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
-												height: 300}));
+												height: this.plot_height}));
 	},
 
 	render: function(){
@@ -5183,7 +5186,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// exit old elements
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
-		
+
 		// // add tooltips
 		// this.add_tooltips();
 
@@ -5195,7 +5198,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	add_tooltips: function(){
 		// make a selection of all cells in the treemap
 		var cell_selection = $('.' + this.div_string + '_cell');
-		
+
 		// remove existing tooltips so we don confuse the labels
 		cell_selection.each(function(){
 			$(this).tooltip('destroy');
@@ -5292,6 +5295,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
+
 Barista.Views.GridView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
@@ -7443,7 +7447,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.num_char = (this.num_char > 60) ? 60 : this.num_char;
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
-		// compute the line splits to display in the wiki summary
+		// compute the line splits to display in the summary
 		this.lines = [];
 		for (var i=0; i<this.num_lines; i++){
 			if (i < this.num_lines_allowed - 1){

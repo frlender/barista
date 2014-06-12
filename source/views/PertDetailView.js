@@ -551,7 +551,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.num_char = (this.num_char > 60) ? 60 : this.num_char;
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
-		// compute the line splits to display in the wiki summary
+		// compute the line splits to display in the summary
 		this.lines = [];
 		for (var i=0; i<this.num_lines; i++){
 			if (i < this.num_lines_allowed - 1){
