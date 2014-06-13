@@ -2212,9 +2212,12 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
+        // and resolve a deferred that we set up as a return value
+        var def = $.Deferred();
         $.getJSON(this.url, params, function(res){
             self.set(res,{remove: false});
             self.isLoading = false;
+            def.resolve();
         });
 
         // make a second api call to find the maximum number of items in the collection
@@ -2226,6 +2229,8 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
                 self.maxCount = res.count;
             });
         }
+
+        return def;
     }
 });
 
