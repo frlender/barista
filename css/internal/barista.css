@@ -288,7 +288,7 @@ margin: 0 auto;
 
 /*animation settings for barista-base-views*/
 .barista-base-view{
-	-webkit-animation-duration: 1s;
+	-webkit-animation-duration: .5s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: linear;
 }
