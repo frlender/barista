@@ -351,7 +351,7 @@ margin: 0 auto;
 		box-shadow: 0 1px 1px rgba(0,0,0,0.3);
 	}
 	50% {
-		-webkit-transform: translateY(-20px) scale(1.02, 1.02);
+		-webkit-transform: translateY(-10px) scale(1.02, 1.02);
 		box-shadow: 0 11px 18px rgba(0,0,0,0.2);
 	}
 	100%{
