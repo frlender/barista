@@ -435,7 +435,8 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     "url": "http://api.lincscloud.org/a2/pertinfo",
     "count": 0,
     "last_update": (new Date()).getTime(),
-    "search_string": ""
+    "search_string": "",
+    "distinct": false
   },
 
   // ## initialize
@@ -457,6 +458,9 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     // set up API call parameters
     var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
               c:true};
+    if (this.get("distinct")){
+        _.extend(params,{d:this.get("search_field")});
+    }
 
     // run the api request
     var self = this;
