@@ -348,14 +348,14 @@ margin: 0 auto;
 @-webkit-keyframes float {
 	0%{
 		-webkit-transform: translateY(0) scale(1, 1);
-		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+		box-shadow: 0 1px 1px rgba(0,0,0,0.3);
 	}
 	50% {
-		-webkit-transform: translateY(-20px) scale(1.05, 1.05);
-		-webkit-box-shadow: 0 11px 18px rgba(0,0,0,0.2);
+		-webkit-transform: translateY(-20px) scale(1.02, 1.02);
+		box-shadow: 0 11px 18px rgba(0,0,0,0.2);
 	}
 	100%{
 		-webkit-transform: translateY(0) scale(1, 1);
-		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+		box-shadow: 0 1px 1px rgba(0,0,0,0.3);
 	}
 }
