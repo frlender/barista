@@ -10196,7 +10196,6 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.top_svg = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
 						.attr("height",this.height)
-						.attr("class","barista-base-view");
 		this.vis = this.top_svg.append("g");
 		// this.vis_overlay = this.top_svg.append("g");
 
@@ -10413,9 +10412,9 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 	savePng: function(){
 		//set the css animation 'float' in motion and turn it off once it is done
-		var $svg = $(this.vis.node()).parent();
-		$svg.attr("class","barista-base-view exporting");
-		setTimeout(function(){$svg.attr("class","barista-base-view");},500);
+		var $div = $("#" + this.div_string);
+		$div.toggleClass("barista-base-view exporting");
+		setTimeout(function(){$div.toggleClass("barista-base-view exporting");},500);
 		// $svg.css('webkitAnimationName','float');
 		// $svg.bind('webkitAnimationEnd', function(){
 		//     this.style.webkitAnimationName = '';
