@@ -3284,6 +3284,13 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		// do any pre save work that the child class may require
 		this.save_png_pre();
 
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = $("#" + this.div_string);
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
@@ -5279,15 +5286,12 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	savePng: function(){
-		//set the css animation 'float' in motion and turn it off once it is done
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
 		var $div = $("#" + this.div_string);
 		$div.addClass("barista-base-view");
 		$div.toggleClass("exporting");
 		setTimeout(function(){$div.toggleClass("exporting");},500);
-		// $svg.css('webkitAnimationName','float');
-		// $svg.bind('webkitAnimationEnd', function(){
-		//     this.style.webkitAnimationName = '';
-		// });
 
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.top_svg.attr("width");
@@ -6610,7 +6614,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // # **PertCountView**
 
 // A Backbone.View that shows that number of perturbagens matching a given query.  Optionally, sub-category
-// counts are give for the type of perturbagen queried for.  This view is frequently paired with a 
+// counts are give for the type of perturbagen queried for.  This view is frequently paired with a
 // **PertCountModel** or **CellCountModel**
 
 // basic use:
@@ -6626,7 +6630,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
-//		count_view = new PertCountView({bg_color:"#ffffff", 
+//		count_view = new PertCountView({bg_color:"#ffffff",
 //									well_color: "#bdbdbd",
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -6668,7 +6672,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// get categories from model and determine the maximum category count
 		// this.categories = this.model.get('pert_types');
 		this.max_category_count = _.max(_.pluck(this.categories,'count'));
-		
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
@@ -6884,6 +6888,13 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### savePng
 	// save the current state of the view into a png image
 	save_png: function(){
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = $("#" + this.div_string);
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+		
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
@@ -6913,6 +6924,7 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
+
 // # **PertDetailView**
 
 // A Backbone.View that shows information about a small molecule compound or gene.  This view is

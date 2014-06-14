@@ -189,6 +189,13 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		// do any pre save work that the child class may require
 		this.save_png_pre();
 
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = $("#" + this.div_string);
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
