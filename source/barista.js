@@ -4917,8 +4917,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	savePng: function(){
 		//set the css animation 'float' in motion and turn it off once it is done
 		var $svg = $(this.vis.node()).parent();
-		$svg.toggleClass("exporting");
-		setTimeout(function(){$svg.toggleClass("exporting");},500);
+		$svg.addClass("exporting");
+		// setTimeout(function(){$svg.removeClass("exporting");},500);
 		// $svg.css('webkitAnimationName','float');
 		// $svg.bind('webkitAnimationEnd', function(){
 		//     this.style.webkitAnimationName = '';
