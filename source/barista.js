@@ -2392,7 +2392,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 	}
 });
 // # **PertCollection**
-// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
+// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -2409,7 +2409,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 
 Barista.Collections.PertCollection = Backbone.Collection.extend({
     // #### model
-    // the model used for the collection objects. 
+    // the model used for the collection objects.
     model: Barista.Models.PertModel,
 
     // #### url
@@ -2417,11 +2417,11 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -2434,7 +2434,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     // Gets additional data from the specified url and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
@@ -2454,7 +2454,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            this.q_param = '{"pert_iname":{"$regex":"^' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
@@ -2496,6 +2496,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         }
     }
 });
+
 // # **SignatureCollection**
 // A Backbone.Collection that represents a set of signatures.  This collection is suitable for 
 // internal use in GridView.
