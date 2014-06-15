@@ -9,7 +9,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
 			// only return 4 items at a time in the autocomplete dropdown
-			limit: 2,
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',

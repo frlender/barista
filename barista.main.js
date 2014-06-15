@@ -5528,8 +5528,8 @@ Barista.Utils = {cookie: $.cookie};
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellHistology',
@@ -5542,10 +5542,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^.%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
+				url: "",
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -5599,7 +5604,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
 			// only return 4 items at a time in the autocomplete dropdown
-			limit: 2,
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',
@@ -5668,8 +5673,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellLineage:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
@@ -5738,8 +5743,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellMutation: 
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellMutation',
@@ -5800,8 +5805,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CompoundPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CompoundPertIName',
@@ -5902,8 +5907,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ GeneticPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'GeneticPertIName',
@@ -6004,8 +6009,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 4 items at a time in the autocomplete dropdown
+            limit: 4,
 
             // provide a name for the default typeahead data source
             name: 'JobID',
@@ -6074,8 +6079,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 4 items at a time in the autocomplete dropdown
+            limit: 4,
 
             // provide a name for the default typeahead data source
             name: 'JobName',
@@ -6144,8 +6149,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobStatus:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 4 items at a time in the autocomplete dropdown
+            limit: 4,
 
             // provide a name for the default typeahead data source
             name: 'JobStatus',
@@ -6214,8 +6219,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ P100PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'P100PertIName',
@@ -6289,8 +6294,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'PRISMPertIName',
@@ -6364,8 +6369,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'PertIName',
@@ -6471,8 +6476,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { ToolID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 4 items at a time in the autocomplete dropdown
+            limit: 4,
 
             // provide a name for the default typeahead data source
             name: 'ToolID',
@@ -6541,8 +6546,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { UserID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 4 items at a time in the autocomplete dropdown
+            limit: 4,
 
             // provide a name for the default typeahead data source
             name: 'UserID',

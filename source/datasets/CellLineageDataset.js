@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellLineage:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 4 items at a time in the autocomplete dropdown
+			limit: 4,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
