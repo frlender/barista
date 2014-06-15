@@ -1,5 +1,5 @@
 // # **SummlyResultCollection**
-// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for 
+// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -24,11 +24,11 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -41,7 +41,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // Generates additional fake data objects and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
     getData: function(search_string,search_type,limit){
 		var self = this;
