@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellHistology',
@@ -83,8 +83,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',
@@ -153,8 +153,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellLineage:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
@@ -223,8 +223,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellMutation: 
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellMutation',
@@ -285,8 +285,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CompoundPertIName:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CompoundPertIName',
@@ -387,8 +387,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ GeneticPertIName:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'GeneticPertIName',
@@ -489,8 +489,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobID',
@@ -559,8 +559,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobName',
@@ -629,8 +629,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobStatus:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobStatus',
@@ -699,8 +699,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ P100PertIName:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'P100PertIName',
@@ -774,8 +774,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PRISMPertIName',
@@ -849,8 +849,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PertIName:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 4,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PertIName',
@@ -956,8 +956,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { ToolID:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'ToolID',
@@ -1026,8 +1026,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { UserID:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'UserID',

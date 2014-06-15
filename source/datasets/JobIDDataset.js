@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
-            // only return 4 items at a time in the autocomplete dropdown
-            limit: 4,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobID',
