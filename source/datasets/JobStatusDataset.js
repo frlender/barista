@@ -23,7 +23,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"status":{"$regex":"^.{0,0}%QUERY", "$options":"i"}}',
+                      'q={"status":{"$regex":"^.%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"status":1}'].join(''),
 

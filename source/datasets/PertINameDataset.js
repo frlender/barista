@@ -21,12 +21,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			engine: Hogan,
 
 			remote: {
-				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"^.{0,0}%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
-					  '&f={"pert_iname":1,"pert_type":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
+				// set the remote data source to use pertinfo with custom query params
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
