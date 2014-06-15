@@ -46,7 +46,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 
@@ -116,7 +116,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -185,7 +185,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
 				
@@ -316,7 +316,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
+		            'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
 		            '&f={"pert_iname":1,"pert_type":1}',
 		            '&l=100',
 		            '&s={"pert_iname":1}'].join(''),
@@ -418,7 +418,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
+		            'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
 		            '&f={"pert_iname":1,"pert_type":1}',
 		            '&l=100',
 		            '&s={"pert_iname":1}'].join(''),
@@ -520,7 +520,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"job_id":{"$regex":"%QUERY", "$options":"i"}}',
+                      'q={"job_id":{"$regex":"^%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"job_id":1}'].join(''),
 
@@ -590,7 +590,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"params.rpt":{"$regex":"%QUERY", "$options":"i"}}',
+                      'q={"params.rpt":{"$regex":"^%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"job_id":1}'].join(''),
 
@@ -660,7 +660,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"status":{"$regex":"%QUERY", "$options":"i"}}',
+                      'q={"status":{"$regex":"^%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"status":1}'].join(''),
 
@@ -730,7 +730,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://prefix:8080/p100/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}}',
 					  '&f={"pert_iname":1}',
 					  '&l=100',
 					  '&s={"pert_iname":1}'].join(''),
@@ -805,7 +805,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
+					  'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}}',
 					  '&f={"pert_iname":1}',
 					  '&l=100',
 					  '&s={"pert_iname":1}'].join(''),
@@ -880,7 +880,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
+					  'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',
 					  '&s={"pert_iname":1}'].join(''),
@@ -982,7 +982,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"tool_id":{"$regex":"%QUERY", "$options":"i"}}',
+                      'q={"tool_id":{"$regex":"^%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"tool_id":1}'].join(''),
 
@@ -1052,7 +1052,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"user_id":{"$regex":"%QUERY", "$options":"i"}}',
+                      'q={"user_id":{"$regex":"^%QUERY", "$options":"i"}}',
                       '&l=10',
                       '&s={"user_id":1}'].join(''),
 
