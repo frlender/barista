@@ -42,7 +42,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     this.set("search_string",search_string);
 
     // set up API call parameters
-    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"^' + search_string + '","$options":"i"}}',
               c:true};
     if (this.get("distinct")){
         _.extend(params,{d:this.get("search_field")});

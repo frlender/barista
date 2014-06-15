@@ -1287,7 +1287,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
       pert_params = {q:'{"pert_iname":{"$in":' + search_string + '},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      pert_params = {q:'{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
+      pert_params = {q:'{"pert_iname":{"$regex":"^' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "cell") {
       pert_params = {q:'{"cell_id":"' + search_string + '"}', f:'{"cell_id":1}', l:1};
@@ -1334,6 +1334,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
      }
   }
 });
+
 // # **CellModel**
 
 // A Backbone.Model that represents a cell line
@@ -1390,7 +1391,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
+    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
     // run the api request.  If the search string is "", set the short and long
@@ -1531,7 +1532,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
     // pert_inames in pertinfo
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = params = {
-        q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
+        q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
         f:'{"pert_iname":1}',
         l:1
     };
@@ -1656,7 +1657,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     this.set("search_string",search_string);
 
     // set up API call parameters
-    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"^' + search_string + '","$options":"i"}}',
               c:true};
     if (this.get("distinct")){
         _.extend(params,{d:this.get("search_field")});
@@ -1763,7 +1764,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}', g:"cell_id"};
+      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}', g:"cell_id"};
     }
     if (search_type === "cell") {
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":""}}', g:"cell_id"};
@@ -1830,7 +1831,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
@@ -2004,7 +2005,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};

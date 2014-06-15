@@ -30,7 +30,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}', g:"cell_id"};
+      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}', g:"cell_id"};
     }
     if (search_type === "cell") {
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":""}}', g:"cell_id"};

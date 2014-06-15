@@ -42,7 +42,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
