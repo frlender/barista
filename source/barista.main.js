@@ -7646,7 +7646,12 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 			// once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
 			var change_callback = function () {
+				// get the value from the search bar. If the first character is '*',
+				// replace it with '.*' so we use the wildcard as expected in API
+				// saerches
 				var val  = $("#search",self.el).val();
+				val = (val[0] === '*') ? val.replace('*','.*') : val;
+
 				var type = "";
 				if (self.cell_lines.indexOf(val) != -1 && self.match_cell_lines){
 					type = "cell";
@@ -7663,7 +7668,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 				self.trigger("search:DidType",{val: val,type: type});
 			};
 
-			$("#search",self.el).bind('input propertychange change', _.throttle(change_callback,500));
+			$("#search",self.el).bind('input propertychange change', _.throttle(change_callback,250));
 
 			// bind a search:DidType event to the typeahead events coming out of typeahead.js
 			$(".typeahead",self.el).bind('typeahead:selected typeahead:autocompleted', function (obj,datum) {
