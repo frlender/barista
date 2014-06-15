@@ -26,7 +26,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split("/[:,\ ]/").join('","') + '"]';
+      search_string = '["' + search_string.split("/[:, ]/").join('","') + '"]';
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){

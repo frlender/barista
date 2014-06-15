@@ -1660,7 +1660,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     var cell_info = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split("/[:,\ ]/").join('","') + '"]';
+      search_string = '["' + search_string.split("/[:, ]/").join('","') + '"]';
       pert_params = {q:'{"pert_iname":{"$in":' + search_string + '},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
@@ -2137,7 +2137,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split("/[:,\ ]/").join('","') + '"]';
+      search_string = '["' + search_string.split("/[:, ]/").join('","') + '"]';
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
@@ -2204,7 +2204,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split("/[:,\ ]/").join('","') + '"]';
+      search_string = '["' + search_string.split("/[:, ]/").join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
@@ -2378,7 +2378,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
     var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split("/[:,\ ]/").join('","') + '"]';
+      search_string = '["' + search_string.split("/[:, ]/").join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
