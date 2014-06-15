@@ -23,7 +23,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"^%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
+		            'q={"pert_iname":{"$regex":"^.%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
 		            '&f={"pert_iname":1,"pert_type":1}',
 		            '&l=100',
 		            '&s={"pert_iname":1}'].join(''),

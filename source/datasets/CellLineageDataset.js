@@ -6,7 +6,7 @@
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellLineage: 
+	{ CellLineage:
 			{
 			// only return 2 items at a time in the autocomplete dropdown
 			limit: 2,
@@ -23,10 +23,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^%QUERY", "$options":"i"}}',
+					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^.%QUERY", "$options":"i"}}',
 					  '&l=10',
 					  '&s={"cell_id":1}'].join(''),
-				
+
 				dataType: 'jsonp',
 
 				filter: function(response){
