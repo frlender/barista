@@ -4731,7 +4731,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// define the location where d3 will build its plot
 		this.width = this.$div.width();
 		this.height = this.$div.outerHeight();
-		this.top_svg = d3.select(this.$div[0]).append("svg")
+		this.top_svg = d3.select(this.$div.children("#" + this.div_string)[0]).append("svg")
 						.attr("width",this.width)
 						.attr("height",this.height)
 		this.vis = this.top_svg.append("g");
