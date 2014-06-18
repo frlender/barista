@@ -4720,6 +4720,15 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
+		// set up a $div selector that can find the target div even if it is in a
+		// shadow DOM
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
+		console.log(this.$div);
+
 		// define the location where d3 will build its plot
 		this.width = this.$div.width();
 		this.height = this.$div.outerHeight();
@@ -4739,12 +4748,6 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 	compile_template: function(){
 		this.div_string = 'd3_target' + new Date().getTime();
-		if (this.shadow_el && this.shadow_root){
-			this.$div = $(this.shadow_root).children(this.shadow_el);
-		}else{
-			this.$div = $("#" + this.div_string);
-		}
-		console.log(this.$div);
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
