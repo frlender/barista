@@ -4876,7 +4876,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 	add_tooltips: function(){
 		// make a selection of all cells in the treemap
-		var cell_selection = this.$div.children("svg").children("g").children("rect");
+		var cell_selection = d3.select(this.$div.children("svg").children("g")[0]).selectAll("rect");
 
 		// remove existing tooltips so we don confuse the labels
 		cell_selection.each(function(){
