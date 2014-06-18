@@ -214,7 +214,6 @@ margin: 0 auto;
 	width: 1em;
     position: absolute;
 	z-index: 2;
-/*	margin-left: -6.5em;  half of width */
 	top: 0px;
     -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
@@ -233,13 +232,13 @@ margin: 0 auto;
 	opacity: 0;
     top: -0;
     height: 1em;
-  overflow:hidden;
+	overflow:hidden;
 
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 
 .cmap-header-developer:hover{
