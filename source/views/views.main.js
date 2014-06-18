@@ -1964,6 +1964,10 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// set up the default height for the plot
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
 
+		// allow for construction inside of a shadow DOM
+		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
+		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update_vis);
 
@@ -1971,8 +1975,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.compile_template();
 
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 		this.top_svg = d3.select("#" + this.div_string).append("svg")
 						.attr("width",this.width)
 						.attr("height",this.height)
@@ -1988,7 +1992,12 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'd3_target' + new Date().getTime();;
+		this.div_string = 'd3_target' + new Date().getTime();
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
 												height: this.plot_height}));
@@ -1999,8 +2008,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// rescale the width of the vis
 		this.top_svg.transition().duration(1).attr("width",this.width);
@@ -2193,7 +2202,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	savePng: function(){
 		//set the animate the div containing the view by applying and then removing
 		// css classes that defined the transitions we want
-		var $div = $("#" + this.div_string);
+		var $div = this.$div;
 		$div.addClass("barista-base-view");
 		$div.toggleClass("exporting");
 		setTimeout(function(){$div.toggleClass("exporting");},500);
