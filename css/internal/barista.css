@@ -244,7 +244,7 @@ margin: 0 auto;
 .cmap-header-developer:hover{
     opacity: 1;
 	width: 145px;
-    height: 180px;
+    height: 250px;
 }
 
 .cmap-header-apps:hover{
@@ -256,7 +256,7 @@ margin: 0 auto;
 .cmap-header-projects:hover{
 	opacity: 1;
 	width: 145px;
-	height: 180px;
+	height: 110px;
 }
 
 .cmap-header-dropOut-apps-container {
