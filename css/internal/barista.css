@@ -224,7 +224,7 @@ margin: 0 auto;
 
 }
 
-.cmap-header-developer, .cmap-header-apps {
+.cmap-header-developer, .cmap-header-apps, .cmap-header-projects {
 	width: 1em;
 	left: -.1em;
 	float: left;
@@ -254,6 +254,12 @@ margin: 0 auto;
 	height:250px;
 }
 
+.cmap-header-developer:hover{
+	opacity: 1;
+	width: 145px;
+	height: 180px;
+}
+
 .cmap-header-dropOut-apps-container {
 	width: 140px;
 	position: relative;
@@ -271,6 +277,22 @@ margin: 0 auto;
 }
 
 .cmap-header-dropOut-developer-container {
+	width: 140px;
+	position: relative;
+	margin-top: 0;
+	top: -0;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 1;
+	height: 145;
+	background-color: white;
+	-moz-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 1 15px rgba(0,0,0,0.2);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 2px;
+}
+
+.cmap-header-dropOut-projects-container {
 	width: 140px;
 	position: relative;
 	margin-top: 0;
