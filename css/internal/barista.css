@@ -45,7 +45,7 @@
 }
 
 .cmap-header-link:hover, .cmap-header-sublink:hover{
-color: #EA3A00;
+	color: #EA3A00;
 }
 
 .cmap-header-link{
@@ -61,9 +61,18 @@ color: #EA3A00;
 	color: #BDBDBD;
 	cursor: default;
 	position: relative;
-	bottom: 7px;
 	padding-right: 5px;
 	margin-bottom: 0px;
+}
+
+.cmap-header-signin-signout{
+	background-color: #FF6633;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.cmap-header-signin-signout:hover{
+	color: #EA3A00;
 }
 
 .cmap-title-text{
