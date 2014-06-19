@@ -22,10 +22,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"tool_id":{"$regex":"^.%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"tool_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"tool_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"tool_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 

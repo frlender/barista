@@ -45,6 +45,7 @@ Barista.Models.BarPlotModel = Backbone.Model.extend({
 		meta_data: {}
 	}
 });
+
 // # **CellCountModel**
 
 // A Backbone.Model that represents the count of a set of cell_lines.  The data model
