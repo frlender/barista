@@ -5333,7 +5333,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n			             <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n			         ";
+  return "\n			             <p title=\"signout\" class=\"cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"> <span class=\"label label-default\">Sign In</span></p>\n			         ";
   }
 
 function program3(depth0,data) {
