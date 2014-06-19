@@ -84,13 +84,13 @@
 
 			<!-- user and signin/out -->
 			<div class="row cmap-header-top-margin">
-				<h6 class="pull-right">
+				<h4 class="pull-right">
 			         {{#if user}}
-			             <span title="signout" class="label label-default" onclick="window.location.href = 'http://apps.lincscloud.org/signout';">Sign Out</span>
+			             <span title="signout" class="label label-default cmap-header-signin-signout" onclick="window.location.href = 'http://apps.lincscloud.org/signout';">Sign Out</span>
 			         {{else}}
 			             <i title="signin" class="fa fa-sign-in cmap-header-link" onclick="window.location.href = 'http://apps.lincscloud.org/signin';"></i>
 			         {{/if}}
-			     </h6>
+			     </h4>
 			     {{#if user}}
 			         <p class="cmap-header-username pull-right">{{ user }} </p>
 			     {{/if}}
