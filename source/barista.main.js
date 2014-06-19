@@ -201,7 +201,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n			             <span title=\"signout\" class=\"cmap-header-link label label-default\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">Sign Out</span>\n			         ";
+  return "\n			             <h6><span title=\"signout\" class=\"cmap-header-link label label-default\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">Sign Out</span></h6>\n			         ";
   }
 
 function program3(depth0,data) {
