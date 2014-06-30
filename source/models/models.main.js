@@ -451,13 +451,14 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   },
 
   // ### fetch
-  // fetches new data from the API.  the count is updated with a new 
+  // fetches new data from the API.  the count is updated with a new
   // count based on the results of the api call
   fetch: function(search_string){
     // update the model's search string attribute
     this.set("search_string",search_string);
 
     // set up API call parameters
+    search_string = (search_string[0] === "*") ? search_string.replace("*",".*") : search_string;
     var params = {q:'{"' + this.get("search_field") + '":{"$regex":"^' + search_string + '","$options":"i"}}',
               c:true};
     if (this.get("distinct")){
@@ -478,6 +479,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **GenericMongoModel**
 
 // A Backbone.Model that represents a generic MongoDB object.  All fields in the document
