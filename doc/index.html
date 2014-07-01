@@ -22,9 +22,9 @@
 
 <h1 id="baristajs"><strong>Barista.js</strong></h1>
 
-<h3 id="lincs-javascript-components">LINCS javascript components</h3>
+<h3 id="lincs-javascript-components">Architecture and Design</h3>
 
-<p>Barista provides a library of components for working with data provided by the LINCS/Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in <a href="http://backbonejs.org/" title="Backbone">Backbone.js</a>.  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. </p>
+<p>Barista provides a library of components for working with data provided by the LINCS/Connectivity Map group at the Broad Institute.  The architecture of this library is centered around the core structures of Models, Collections, and Views of <a href="http://backbonejs.org/" title="Backbone">Backbone.js</a>.  The Models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group models together, to be used (for example) as search results or in a table.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. </p>
 
 <h2 id="installation"><strong>Usage / Installation</strong></h2>
 
@@ -48,7 +48,7 @@
 
 <h2 id="models"><strong>Models</strong></h2>
 
-<p>Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an <a href="http://cmap.github.io/barista/doc/models/CellCountModel.html" title="Example Model">example model</a> to get a feel for what models provide.  You can find models under <code>Barista.Models</code>.</p>
+<p>Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an <a href="http://cmap.github.io/barista/doc/models/CellCountModel.html" title="Example Model">example model</a> or browse the source at <code>barista/source/models</code> to get a feel for the functionality that models provide.  Models can be used via <code>Barista.Models</code></p>
 
 <h2 id="collections"><strong>Collections</strong></h2>
 
