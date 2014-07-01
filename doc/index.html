@@ -1,4 +1,24 @@
-<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><p><img src="http://coreyflynn.github.io/Bellhop/img/cmap_broad_logo_small.png" alt="barista.js" title="" /></p>
+<!DOCTYPE html><html lang="en">
+<head>
+<title>index</title>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="">
+<meta name="groc-document-path" content="index">
+<meta name="groc-project-path" content="README.md">
+<link rel="stylesheet" type="text/css" media="all" href="assets/style.css">
+<script type="text/javascript" src="assets/behavior.js"></script>
+
+<body>
+<div id="meta">
+<div class="file-path">README.md</div>
+</div>
+
+<div id="document">
+<div class="segment">
+<div class="comments">
+<div class="wrapper">
+<p><img src="http://coreyflynn.github.io/Bellhop/img/cmap_broad_logo_small.png" alt="barista.js" title="" /></p>
 
 <h1 id="baristajs"><strong>Barista.js</strong></h1>
 
@@ -6,16 +26,16 @@
 
 <p>Barista provides a library of components for working with data provided by the LINCS/Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in <a href="http://backbonejs.org/" title="Backbone">Backbone.js</a>.  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. </p>
 
-<h2 id="installation"><strong>Installation</strong></h2>
+<h2 id="installation"><strong>Usage / Installation</strong></h2>
 
 <p>All of barista's dependencies are included in the main barista css and javascript files which we provide via a CDN, so all you need is</p>
 
-<pre><code>        &lt;link href="http://cmap.github.io/barista/barista.main.min.css" rel="stylesheet"&gt;
+<pre><code>&lt;link href="http://cmap.github.io/barista/barista.main.min.css" rel="stylesheet"&gt;
 </code></pre>
 
 <p>and</p>
 
-<pre><code>        &lt;script src="http://cmap.github.io/barista/barista.main.min.js"&gt;&lt;/script&gt;
+<pre><code>&lt;script src="http://cmap.github.io/barista/barista.main.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
 <p>in your HTML and you're all set.</p>
@@ -82,12 +102,6 @@ many more complicated views in barista and handles common tasks such as standard
 <h2 id="utils"><strong>Utils</strong></h2>
 
 <p>There are a small set of utility functions that do not fit cleanly as a model, collection, or view.  Think of these as mechanisms through which we abstract away mundane processing of data.  For example, the function <a href="http://cmap.github.io/barista/doc/utils/CMapTypeAlias.html" title="CMapPertTypeAlias">CMapPertTypeAlias</a> returns an object of standard names and acronyms when given a Connectivity Map perturbagen type.  Utility functions are registered under the top-level <code>Barista</code> object.</p>
-
-<h1 id="developerdocumentation"><strong>Developer Documentation</strong></h1>
-
-<p>Want the nuts and bolts? dig in!</p>
-
-<p><a href="http://cmap.github.io/barista/doc">Developer Documentation ></a></p>
 
 <h1 id="attribution"><strong>Attribution</strong></h1>
 
