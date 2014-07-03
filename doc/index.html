@@ -70,9 +70,35 @@ setTimeout(function() {
 		+ countModel.get('count'));
 }, 1000);</code></pre>
 
+<br/>
+
 <h2 id="collections"><strong>Collections</strong></h2>
 
-<p>Collections build on top of models.  A Collection represents a group of models that will be operated on as a whole. As an example, rather than handling a set of <a href="http://cmap.github.io/barista/doc/models/PertModel.html" title="PertModel">PertModels</a> indivudually it is convient to use a <a href="http://cmap.github.io/barista/doc/collections/PertCollection.html" title="PertCollection">PertCollection</a>.  This allows you to interact with the models as a set instead of handling them one at a time. Certain views such as the <a href="http://cmap.github.io/barista/doc/views/GridView.html" title="GridView">GridView</a> are built on top of collections. You can find collections under <code>Barista.Collections</code>.</p>
+<p>Collections build on top of models.  A Collection represents a group of models that will be operated on as a whole. For example, rather than individually updating a set of <a href="http://cmap.github.io/barista/doc/models/PertModel.html" title="PertModel">PertModels</a> it is convenient to use a <a href="http://cmap.github.io/barista/doc/collections/PertCollection.html" title="PertCollection">PertCollection</a> to update all of them with a single command.  Certain views such as the <a href="http://cmap.github.io/barista/doc/views/GridView.html" title="GridView">GridView</a> are built on top of collections. You can find collections under <code>Barista.Collections</code>.</p>
+
+<p>For a concrete example, if you wanted to make a collection of models that represent all of the statins that you counted in the above code snippet, you could use for following:</p>
+
+<pre><code>// The PertCollection handles the logic of querying the
+// Connectivity Map data API and building a PertModel
+// for each match in the database to a query string
+
+// Instantiate a new PertCollection
+var pertCollection =new Barista.Collections.PertCollection();
+
+// Tell the collection to get data and build a model for all
+// documents matching the query string 'statin'
+pertCollection.getData('statin');
+
+// wait for the query to return then use the results
+setTimeout(function() {
+	// access a single model in the collection
+	pertCollection.models[0];
+
+	// get the length of the collection
+	pertCollection.models.length();
+}, 1000);</code></pre>
+
+<br/>
 
 <h2 id="views"><strong>Views</strong></h2>
 
