@@ -81,10 +81,11 @@ var countModel = new Barista.Models.GenericCountModel();
 // Map database matching the string 'statin'
 countModel.fetch('statin');
 
-// grab the number of counted items from the model
-countModel.get('count');
-                
-            </code></pre>
+// wait for the response to come back; then display the number found by the query
+setTimeout(function() {
+		console.log("number of statins:  " + countModel.get('count'));
+}, 1000);</code></pre>
+
             </div>    
         </div>
         
