@@ -48,7 +48,27 @@
 
 <h2 id="models"><strong>Models</strong></h2>
 
-<p>Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an <a href="http://cmap.github.io/barista/doc/models/CellCountModel.html" title="Example Model">example model</a> or browse the source at <code>barista/source/models</code> to get a feel for the functionality that models provide.  Models can be used via <code>Barista.Models</code></p>
+<p>Models provide objects that encapsulate information about commonly used data types in Connectivity Map data.  Many models also abstract the logic required to retrieve that information via the Connectivity Map's data APIs. Check out an <a href="http://cmap.github.io/barista/doc/models/CellCountModel.html" title="Example Model">example model</a> or browse the source at <code>barista/source/models</code> to get a feel for the functionality that models provide.  Models can be used via the <code>Barista.Models</code> object.</p>
+<p>As an example, the following code demonstates how you could use a model built into Barista to count the number of statin reagents available in the Connectivity Map database</p>
+
+<pre><code>// The GenericCountModel handles the logic of querying the
+// Connectivity Map data API and counting the number matches
+// in the database to a query string
+
+// Instantiate a new GenericCountModel.
+var countModel = new Barista.Models.GenericCountModel();
+
+// Find the number of statins in the connectivity Map database
+// by telling the model to count the number of documents in
+// the Connectivity Map database matching the string 'statin'
+countModel.fetch('statin');
+
+// wait for the response to come back; then display the number
+// found by the query
+setTimeout(function() {
+	console.log("number of statins:  "
+		+ countModel.get('count'));
+}, 1000);</code></pre>
 
 <h2 id="collections"><strong>Collections</strong></h2>
 
