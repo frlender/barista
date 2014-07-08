@@ -3596,12 +3596,20 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
+		// set up a $div selector that can find the target div even if it is in a
+		// shadow DOM
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el).children("#" + this.div_string);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
+
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
+		this.vis = d3.select(this.$div[0]).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height);
+						.attr("height",this.height)
 
 		// render the vis
 		this.redraw();
@@ -3634,8 +3642,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
@@ -3751,8 +3759,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// draw the pert count info
 		var count = this.model.get('count');
@@ -3807,11 +3815,11 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	save_png: function(){
 		//set the animate the div containing the view by applying and then removing
 		// css classes that defined the transitions we want
-		var $div = $("#" + this.div_string);
+		var $div = this.$div;
 		$div.addClass("barista-base-view");
 		$div.toggleClass("exporting");
 		setTimeout(function(){$div.toggleClass("exporting");},500);
-		
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
