@@ -6394,6 +6394,10 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// set up the default plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
+		// allow for construction inside of a shadow DOM
+		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
+		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
+
 		// set up default categories to display
 		this.categories = (this.options.categories !== undefined) ? this.options.categories : [];
 		this.category_ids = _.pluck(this.categories,'_id');
