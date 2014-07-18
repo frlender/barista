@@ -25,6 +25,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		// determine whether or not we will match cell line strings in the autocomplete
 		this.match_cell_lines = (this.options.match_cell_lines !== undefined) ? this.options.match_cell_lines : true;
 
+		// custom placeholder if specified
+		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : "search cell lines";
+
 		// grab cell_ids and store them as an atribute of the view
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
@@ -66,7 +69,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     Gets the current text entered in the view's search bar
-    
+
     @method get_val
     **/
 	get_val: function(){
@@ -75,13 +78,13 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
-    
+
     @method random_val
     **/
 	random_val: function(){
 		var self = this;
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
-		
+
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
 		$.getJSON(cellinfo,params,function(res){
@@ -98,14 +101,14 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     renders the view
-    
+
     @method render
     **/
 	render: function(){
 		var self = this;
 
 		// load the template into the view's el tag
-		this.$el.append(BaristaTemplates.CMapPertSearchBar());
+		this.$el.append(BaristaTemplates.CMapPertSearchBar({placeholder: this.placeholder}));
 
 		// hook up the typeahead with backing datasets
 		$('#search',this.$el).typeahead([Barista.Datasets.CellID,

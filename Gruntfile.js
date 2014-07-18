@@ -80,7 +80,9 @@ module.exports = function(grunt) {
               'external_source/Blob.js',
               'external_source/canvas-toBlob.js',
               'external_source/typeahead.min.js',
-              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js'
+              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
+              'bower_components/jquery.cookie/jquery.cookie.js',
+              'bower_components/offline/offline.min.js'
               ],
         dest: 'external_source/external.js'
       },
@@ -125,7 +127,10 @@ module.exports = function(grunt) {
                                   'css/external/d3.parcoords.css',
                                   'css/external/introjs.min.css',
                                   'bower_components/bootstrap/dist/css/bootstrap.min.css',
-                                  'css/external/typeahead.js-bootstrap.css']
+                                  'css/external/typeahead.js-bootstrap.css',
+                                  'bower_components/offline/themes/offline-theme-default.css',
+                                  'bower_components/offline/themes/offline-language-english.css',
+                              ]
         }
       },
       internal: {

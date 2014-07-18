@@ -1,7 +1,7 @@
 // # **PertCountView**
 
 // A Backbone.View that shows that number of perturbagens matching a given query.  Optionally, sub-category
-// counts are give for the type of perturbagen queried for.  This view is frequently paired with a 
+// counts are give for the type of perturbagen queried for.  This view is frequently paired with a
 // **PertCountModel** or **CellCountModel**
 
 // basic use:
@@ -17,7 +17,7 @@
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
-//		count_view = new PertCountView({bg_color:"#ffffff", 
+//		count_view = new PertCountView({bg_color:"#ffffff",
 //									well_color: "#bdbdbd",
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -52,6 +52,10 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// set up the default plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
+		// allow for construction inside of a shadow DOM
+		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
+		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
+
 		// set up default categories to display
 		this.categories = (this.options.categories !== undefined) ? this.options.categories : [];
 		this.category_ids = _.pluck(this.categories,'_id');
@@ -59,19 +63,27 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// get categories from model and determine the maximum category count
 		// this.categories = this.model.get('pert_types');
 		this.max_category_count = _.max(_.pluck(this.categories,'count'));
-		
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
 		this.compile_template();
 
+		// set up a $div selector that can find the target div even if it is in a
+		// shadow DOM
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el).children("#" + this.div_string);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
+
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
+		this.vis = d3.select(this.$div[0]).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height);
+						.attr("height",this.height)
 
 		// render the vis
 		this.redraw();
@@ -104,8 +116,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
@@ -221,8 +233,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// draw the pert count info
 		var count = this.model.get('count');
@@ -275,6 +287,13 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### savePng
 	// save the current state of the view into a png image
 	save_png: function(){
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = this.$div;
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;

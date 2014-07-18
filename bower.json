@@ -19,9 +19,15 @@
   "dependencies": {
     "bootstrap": "~3.1.1",
     "hogan": "~3.0.0",
+<<<<<<< HEAD
     "highlightjs": "~8.0.0"
   },
   "resolutions": {
     "bootstrap": "~3.1.1"
+=======
+    "highlightjs": "~8.0.0",
+    "jquery.cookie": "~1.4.1",
+    "offline": "~0.7.3"
+>>>>>>> gh-pages
   }
 }

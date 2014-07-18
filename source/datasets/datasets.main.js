@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellHistology',
@@ -22,10 +22,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
+				url: "",
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -78,8 +83,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',
@@ -92,11 +97,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url, query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('')
+				} ,
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -137,6 +147,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CellLineageDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -145,10 +156,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellLineage: 
+	{ CellLineage:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
@@ -161,11 +172,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('');
+				} ,
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -206,6 +222,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CellMutationDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular mutation annotations available in the Connectivity Map
@@ -214,10 +231,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellMutation: 
+	{ CellMutation:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellMutation',
@@ -230,10 +247,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
-					  '&d=mutations'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
+						'&d=mutations'].join('');
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -268,6 +290,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CompoundPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
@@ -278,8 +301,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CompoundPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CompoundPertIName',
@@ -292,11 +315,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
-		            '&f={"pert_iname":1,"pert_type":1}',
-		            '&l=100',
-		            '&s={"pert_iname":1}'].join(''),
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":"trt_cp"}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -380,8 +408,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ GeneticPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'GeneticPertIName',
@@ -394,11 +422,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
-		            '&f={"pert_iname":1,"pert_type":1}',
-		            '&l=100',
-		            '&s={"pert_iname":1}'].join(''),
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_oe.mut"]}}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -482,8 +515,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobID',
@@ -496,10 +529,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"job_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    ['http://api.lincscloud.org/compute_status?',
+                          'q={"job_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"job_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -552,8 +590,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobName',
@@ -566,10 +604,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"params.rpt":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                url: '',
+
+                reomote: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"params.rpt":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"job_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -622,8 +665,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobStatus:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobStatus',
@@ -636,10 +679,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"status":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"status":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"status":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"status":1}'].join('')
+                },
 
                 dataType: 'jsonp',
 
@@ -692,8 +740,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ P100PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'P100PertIName',
@@ -706,12 +754,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://prefix:8080/p100/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://prefix:8080/p100/v1/profileinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&f={"pert_iname":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -732,7 +785,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects
@@ -757,6 +810,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **PRISMPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // PRISM Perturbation IDs available in the Connectivity Map
@@ -767,8 +821,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PRISMPertIName',
@@ -781,12 +835,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/prism/v1/profileinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&f={"pert_iname":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('')
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -807,7 +866,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects
@@ -832,6 +891,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **PertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
@@ -842,8 +902,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PertIName',
@@ -855,12 +915,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			engine: Hogan,
 
 			remote: {
-				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
-					  '&f={"pert_iname":1,"pert_type":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
+				// set the remote data source to use pertinfo with custom query params
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -944,8 +1009,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { ToolID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'ToolID',
@@ -958,10 +1023,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"tool_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"tool_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"tool_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"tool_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -1014,8 +1084,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { UserID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'UserID',
@@ -1028,10 +1098,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"user_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"user_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"user_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"user_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 

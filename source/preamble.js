@@ -17,3 +17,6 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// build an object of utilities that we need to make sure are not overwritten
+Barista.Utils = {cookie: $.cookie};

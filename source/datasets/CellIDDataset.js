@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',
@@ -22,11 +22,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url, query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('')
+				} ,
+
 				dataType: 'jsonp',
 
 				filter: function(response){

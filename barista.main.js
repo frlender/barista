@@ -5010,6 +5010,126 @@ var Hogan = {};
 })(typeof exports !== 'undefined' ? exports : Hogan);
 
 
+/*!
+ * jQuery Cookie Plugin v1.4.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2013 Klaus Hartl
+ * Released under the MIT license
+ */
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['jquery'], factory);
+	} else if (typeof exports === 'object') {
+		// CommonJS
+		factory(require('jquery'));
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function ($) {
+
+	var pluses = /\+/g;
+
+	function encode(s) {
+		return config.raw ? s : encodeURIComponent(s);
+	}
+
+	function decode(s) {
+		return config.raw ? s : decodeURIComponent(s);
+	}
+
+	function stringifyCookieValue(value) {
+		return encode(config.json ? JSON.stringify(value) : String(value));
+	}
+
+	function parseCookieValue(s) {
+		if (s.indexOf('"') === 0) {
+			// This is a quoted cookie as according to RFC2068, unescape...
+			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+		}
+
+		try {
+			// Replace server-side written pluses with spaces.
+			// If we can't decode the cookie, ignore it, it's unusable.
+			// If we can't parse the cookie, ignore it, it's unusable.
+			s = decodeURIComponent(s.replace(pluses, ' '));
+			return config.json ? JSON.parse(s) : s;
+		} catch(e) {}
+	}
+
+	function read(s, converter) {
+		var value = config.raw ? s : parseCookieValue(s);
+		return $.isFunction(converter) ? converter(value) : value;
+	}
+
+	var config = $.cookie = function (key, value, options) {
+
+		// Write
+
+		if (value !== undefined && !$.isFunction(value)) {
+			options = $.extend({}, config.defaults, options);
+
+			if (typeof options.expires === 'number') {
+				var days = options.expires, t = options.expires = new Date();
+				t.setTime(+t + days * 864e+5);
+			}
+
+			return (document.cookie = [
+				encode(key), '=', stringifyCookieValue(value),
+				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+				options.path    ? '; path=' + options.path : '',
+				options.domain  ? '; domain=' + options.domain : '',
+				options.secure  ? '; secure' : ''
+			].join(''));
+		}
+
+		// Read
+
+		var result = key ? undefined : {};
+
+		// To prevent the for loop in the first place assign an empty array
+		// in case there are no cookies at all. Also prevents odd result when
+		// calling $.cookie().
+		var cookies = document.cookie ? document.cookie.split('; ') : [];
+
+		for (var i = 0, l = cookies.length; i < l; i++) {
+			var parts = cookies[i].split('=');
+			var name = decode(parts.shift());
+			var cookie = parts.join('=');
+
+			if (key && key === name) {
+				// If second argument (value) is a function it's a converter...
+				result = read(cookie, value);
+				break;
+			}
+
+			// Prevent storing a cookie that we couldn't decode.
+			if (!key && (cookie = read(cookie)) !== undefined) {
+				result[name] = cookie;
+			}
+		}
+
+		return result;
+	};
+
+	config.defaults = {};
+
+	$.removeCookie = function (key, options) {
+		if ($.cookie(key) === undefined) {
+			return false;
+		}
+
+		// Must not alter options, thus extending a fresh object...
+		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
+		return !$.cookie(key);
+	};
+
+}));
+
+/*! offline 0.7.3 */
+(function(){var a,b,c,d,e,f,g;d=function(a,b){var c,d,e,f;f=[];for(d in b.prototype)try{e=b.prototype[d],f.push(null==a[d]&&"function"!=typeof e?a[d]=e:void 0)}catch(g){c=g}return f},a={},null==a.options&&(a.options={}),c={checks:{xhr:{url:function(){return"/favicon.ico?_="+Math.floor(1e9*Math.random())},timeout:5e3},image:{url:function(){return"/favicon.ico?_="+Math.floor(1e9*Math.random())}},active:"xhr"},checkOnLoad:!1,interceptRequests:!0,reconnect:!0},e=function(a,b){var c,d,e,f,g,h;for(c=a,f=b.split("."),d=g=0,h=f.length;h>g&&(e=f[d],c=c[e],"object"==typeof c);d=++g);return d===f.length-1?c:void 0},a.getOption=function(b){var d,f;return d=null!=(f=e(a.options,b))?f:e(c,b),"function"==typeof d?d():d},"function"==typeof window.addEventListener&&window.addEventListener("online",function(){return setTimeout(a.confirmUp,100)},!1),"function"==typeof window.addEventListener&&window.addEventListener("offline",function(){return a.confirmDown()},!1),a.state="up",a.markUp=function(){return a.trigger("confirmed-up"),"up"!==a.state?(a.state="up",a.trigger("up")):void 0},a.markDown=function(){return a.trigger("confirmed-down"),"down"!==a.state?(a.state="down",a.trigger("down")):void 0},f={},a.on=function(b,c,d){var e,g,h,i,j;if(g=b.split(" "),g.length>1){for(j=[],h=0,i=g.length;i>h;h++)e=g[h],j.push(a.on(e,c,d));return j}return null==f[b]&&(f[b]=[]),f[b].push([d,c])},a.off=function(a,b){var c,d,e,g,h;if(null!=f[a]){if(b){for(d=0,h=[];d<f[a].length;)g=f[a][d],c=g[0],e=g[1],h.push(e===b?f[a].splice(d,1):d++);return h}return f[a]=[]}},a.trigger=function(a){var b,c,d,e,g,h,i;if(null!=f[a]){for(g=f[a],i=[],d=0,e=g.length;e>d;d++)h=g[d],b=h[0],c=h[1],i.push(c.call(b));return i}},b=function(a,b,c){var d,e;return d=function(){return a.status&&a.status<12e3?b():c()},null===a.onprogress?(a.addEventListener("error",c,!1),a.addEventListener("timeout",c,!1),a.addEventListener("load",d,!1)):(e=a.onreadystatechange,a.onreadystatechange=function(){return 4===a.readyState?d():0===a.readyState&&c(),"function"==typeof e?e.apply(null,arguments):void 0})},a.checks={},a.checks.xhr=function(){var c,d;d=new XMLHttpRequest,d.offline=!1,d.open("HEAD",a.getOption("checks.xhr.url"),!0),null!=d.timeout&&(d.timeout=a.getOption("checks.xhr.timeout")),b(d,a.markUp,a.markDown);try{d.send()}catch(e){c=e,a.markDown()}return d},a.checks.image=function(){var b;return b=document.createElement("img"),b.onerror=a.markDown,b.onload=a.markUp,void(b.src=a.getOption("checks.image.url"))},a.checks.down=a.markDown,a.checks.up=a.markUp,a.check=function(){return a.trigger("checking"),a.checks[a.getOption("checks.active")]()},a.confirmUp=a.confirmDown=a.check,a.onXHR=function(a){var b,c,e;return b=function(b,c){var d;return d=b.open,b.open=function(e,f,g,h,i){return a({type:e,url:f,async:g,flags:c,user:h,password:i,xhr:b}),d.apply(b,arguments)}},e=window.XMLHttpRequest,window.XMLHttpRequest=function(a){var c,d,f;return c=new e(a),b(c,a),f=c.setRequestHeader,c.headers={},c.setRequestHeader=function(a,b){return c.headers[a]=b,f.call(c,a,b)},d=c.overrideMimeType,c.overrideMimeType=function(a){return c.mimeType=a,d.call(c,a)},c},d(window.XMLHttpRequest,e),null!=window.XDomainRequest?(c=window.XDomainRequest,window.XDomainRequest=function(){var a;return a=new c,b(a),a},d(window.XDomainRequest,c)):void 0},g=function(){return a.getOption("interceptRequests")&&a.onXHR(function(c){var d;return d=c.xhr,d.offline!==!1?b(d,a.confirmUp,a.confirmDown):void 0}),a.getOption("checkOnLoad")?a.check():void 0},setTimeout(g,0),window.Offline=a}).call(this),function(){var a,b,c,d,e,f,g,h,i;if(!window.Offline)throw new Error("Offline Reconnect brought in without offline.js");d=Offline.reconnect={},f=null,e=function(){var a;return null!=d.state&&"inactive"!==d.state&&Offline.trigger("reconnect:stopped"),d.state="inactive",d.remaining=d.delay=null!=(a=Offline.getOption("reconnect.initialDelay"))?a:3},b=function(){var a,b;return a=null!=(b=Offline.getOption("reconnect.delay"))?b:Math.min(Math.ceil(1.5*d.delay),3600),d.remaining=d.delay=a},g=function(){return"connecting"!==d.state?(d.remaining-=1,Offline.trigger("reconnect:tick"),0===d.remaining?h():void 0):void 0},h=function(){return"waiting"===d.state?(Offline.trigger("reconnect:connecting"),d.state="connecting",Offline.check()):void 0},a=function(){return Offline.getOption("reconnect")?(e(),d.state="waiting",Offline.trigger("reconnect:started"),f=setInterval(g,1e3)):void 0},i=function(){return null!=f&&clearInterval(f),e()},c=function(){return Offline.getOption("reconnect")?"connecting"===d.state?(Offline.trigger("reconnect:failure"),d.state="waiting",b()):void 0:void 0},d.tryNow=h,e(),Offline.on("down",a),Offline.on("confirmed-down",c),Offline.on("up",i)}.call(this),function(){var a,b,c,d,e,f;if(!window.Offline)throw new Error("Requests module brought in without offline.js");c=[],f=!1,d=function(a){return Offline.trigger("requests:capture"),"down"!==Offline.state&&(f=!0),c.push(a)},e=function(a){var b,c,d,e,f,g,h,i,j;i=a.xhr,f=a.url,e=a.type,g=a.user,d=a.password,b=a.body,i.abort(),i.open(e,f,!0,g,d),j=i.headers;for(c in j)h=j[c],i.setRequestHeader(c,h);return i.mimeType&&i.overrideMimeType(i.mimeType),i.send(b)},a=function(){return c=[]},b=function(){var b,d,f,g,h,i;for(Offline.trigger("requests:flush"),f={},h=0,i=c.length;i>h;h++)d=c[h],g=d.url.replace(/(\?|&)_=[0-9]+/,function(a,b){return"?"===b?b:""}),f[""+d.type.toUpperCase()+" - "+g]=d;for(b in f)d=f[b],e(d);return a()},setTimeout(function(){return Offline.getOption("requests")!==!1?(Offline.on("confirmed-up",function(){return f?(f=!1,a()):void 0}),Offline.on("up",b),Offline.on("down",function(){return f=!1}),Offline.onXHR(function(a){var b,c,e,f,g;return e=a.xhr,b=a.async,e.offline!==!1&&(c=function(){return d(a)},g=e.send,e.send=function(b){return a.body=b,g.apply(e,arguments)},b)?null===e.onprogress?(e.addEventListener("error",c,!1),e.addEventListener("timeout",c,!1)):(f=e.onreadystatechange,e.onreadystatechange=function(){return 0===e.readyState?c():4===e.readyState&&(0===e.status||e.status>=12e3)&&c(),"function"==typeof f?f.apply(null,arguments):void 0}):void 0}),Offline.requests={flush:b,clear:a}):void 0},0)}.call(this),function(){var a,b,c,d,e;if(!Offline)throw new Error("Offline simulate brought in without offline.js");for(e=["up","down"],c=0,d=e.length;d>c;c++)a=e[c],(document.querySelector("script[data-simulate='"+a+"']")||localStorage.OFFLINE_SIMULATE===a)&&(null==Offline.options&&(Offline.options={}),null==(b=Offline.options).checks&&(b.checks={}),Offline.options.checks.active=a)}.call(this),function(){var a,b,c,d,e,f,g,h,i,j,k,l,m;if(!window.Offline)throw new Error("Offline UI brought in without offline.js");b='<div class="offline-ui"><div class="offline-ui-content"></div></div>',a='<a href class="offline-ui-retry"></a>',e=function(a){var b;return b=document.createElement("div"),b.innerHTML=a,b.children[0]},f=d=null,c=function(a){return j(a),f.className+=" "+a},j=function(a){return f.className=f.className.replace(new RegExp("(^| )"+a.split(" ").join("|")+"( |$)","gi")," ")},h={},g=function(a,b){return c(a),null!=h[a]&&clearTimeout(h[a]),h[a]=setTimeout(function(){return j(a),delete h[a]},1e3*b)},l=function(a){var b,c,d,e;d={day:86400,hour:3600,minute:60,second:1};for(c in d)if(b=d[c],a>=b)return e=Math.floor(a/b),[e,c];return["now",""]},k=function(){var g,h;return f=e(b),document.body.appendChild(f),null!=Offline.reconnect&&Offline.getOption("reconnect")&&(f.appendChild(e(a)),g=f.querySelector(".offline-ui-retry"),h=function(a){return a.preventDefault(),Offline.reconnect.tryNow()},null!=g.addEventListener?g.addEventListener("click",h,!1):g.attachEvent("click",h)),c("offline-ui-"+Offline.state),d=f.querySelector(".offline-ui-content")},i=function(){return k(),Offline.on("up",function(){return j("offline-ui-down"),c("offline-ui-up"),g("offline-ui-up-2s",2),g("offline-ui-up-5s",5)}),Offline.on("down",function(){return j("offline-ui-up"),c("offline-ui-down"),g("offline-ui-down-2s",2),g("offline-ui-down-5s",5)}),Offline.on("reconnect:connecting",function(){return c("offline-ui-connecting"),j("offline-ui-waiting")}),Offline.on("reconnect:tick",function(){var a,b,e;return c("offline-ui-waiting"),j("offline-ui-connecting"),e=l(Offline.reconnect.remaining),a=e[0],b=e[1],d.setAttribute("data-retry-in-value",a),d.setAttribute("data-retry-in-unit",b)}),Offline.on("reconnect:stopped",function(){return j("offline-ui-connecting offline-ui-waiting"),d.setAttribute("data-retry-in-value",null),d.setAttribute("data-retry-in-unit",null)}),Offline.on("reconnect:failure",function(){return g("offline-ui-reconnect-failed-2s",2),g("offline-ui-reconnect-failed-5s",5)}),Offline.on("reconnect:success",function(){return g("offline-ui-reconnect-succeeded-2s",2),g("offline-ui-reconnect-succeeded-5s",5)})},"complete"===document.readyState?i():null!=document.addEventListener?document.addEventListener("DOMContentLoaded",i,!1):(m=document.onreadystatechange,document.onreadystatechange=function(){return"complete"===document.readyState&&i(),"function"==typeof m?m.apply(null,arguments):void 0})}.call(this);
 this["BaristaTemplates"] = this["BaristaTemplates"] || {};
 
 this["BaristaTemplates"]["CMapBaseGrid"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -5198,7 +5318,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " all rights reserved</p>\n		<p class=\"cmap-center-text\"><a href=\"http://lincscloud.org/license/\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-xs-12 cmap-center-text\">\n	";
+    + " all rights reserved</p>\n		<p class=\"cmap-center-text\"><a href=\"http://www.lincscloud.org/license.html\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-xs-12 cmap-center-text\">\n	";
   stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	</div>\n</div>\n<div class=\"cmap-spacer-medium\"></div>\n";
@@ -5213,95 +5333,86 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n		             <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n		         ";
+  return "\n			             <span title=\"signout\" class=\"label cmap-header-signin-signout\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">Sign Out</span>\n			         ";
   }
 
 function program3(depth0,data) {
   
   
-  return "\n		             <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n		         ";
+  return "\n			             <span title=\"signin\" class=\"label cmap-header-signin-signout\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\">Sign In</span>\n			         ";
   }
 
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n		         <p class=\"cmap-header-username pull-right\">";
+  buffer += "\n			         <p class=\"cmap-header-username pull-right\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " </p>\n		     ";
+    + " </p>\n			     ";
   return buffer;
   }
 
 function program7(depth0,data) {
   
-  
-  return "\n					<a class=\"cmap-link pull-right\">Tour this app</a>\n				";
+  var buffer = "", stack1;
+  buffer += "\n	                                     ";
+  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n	                                 ";
+  return buffer;
   }
 
 function program9(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "\n                                     ";
-  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\n                                 ";
-  return buffer;
+  
+  return "\n	                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n	                                 ";
   }
 
 function program11(depth0,data) {
   
   
-  return "\n                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n                                 ";
+  return "\n	                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n	                                 ";
   }
 
-function program13(depth0,data) {
-  
-  
-  return "\n                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n                                 ";
-  }
-
-  buffer += "<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n<!-- large screens -->\n<div class=\"row hidden-xs\">\n	<!-- logo and navigation buttons -->\n	<div class=\"col-sm-offset-1 col-sm-3\">\n\n		<!-- logo -->\n		<div class=\"row\">\n			<div class=\"col-xs-12\">\n				<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://coreyflynn.github.io/Bellhop/img/lincscloud_logo.png\"></a>\n			</div>\n		</div>\n\n		<div class=\"row\">\n			<div class=\"cmap-spacer-medium\"></div>\n		</div>\n\n		<!-- navigation buttons -->\n		<div class=\"row\">\n			<div class=\"col-sm-12\">\n		         <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n		         <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\">\n		            <div class=\"cmap-header-dropdownContain\">\n		                <div class=\"cmap-header-dropOut\">\n		                    <i class=\"cmap-header-link  fa fa-search\" style=\"opacity:0;\"></i><br>\n							<div class=\"cmap-header-dropOut-apps-container\">\n			                    <a href=\"//apps.lincscloud.org/query\"><i title=\"query\" class=\"cmap-header-link  fa fa-search\"></i></a><br>\n			                    <a href=\"//apps.lincscloud.org/history\"><i title=\"history\" class=\"cmap-header-link  fa fa-clock-o\"></i></a><br>\n			                    <a href=\"//apps.lincscloud.org/data_synopsis\"><i title=\"synopsis\" class=\"cmap-header-link fa fa-signal fa-rotate-90\"></i></a><br>\n							</div>\n		                </div>\n		            </div>\n		        </i>\n\n		         <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n		         <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n		         <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n		         <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n		         <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n		    </div>\n		</div>\n\n	</div>\n\n	<!-- app title and subtitle -->\n	<div class=\"col-sm-4\">\n		<h3 class=\"col-xs-12 cmap-title-text cmap-center-text\">";
+  buffer += "<div class=\"cmap-header\">\n	<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<!-- logo and navigation buttons -->\n		<div class=\"col-sm-offset-1 col-sm-3\">\n\n			<!-- logo -->\n			<div class=\"row\">\n				<div class=\"col-xs-12\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://coreyflynn.github.io/Bellhop/img/lincscloud_logo.png\"></a>\n				</div>\n			</div>\n\n			<div class=\"row\">\n				<div class=\"cmap-spacer-medium\"></div>\n			</div>\n\n			<!-- navigation buttons -->\n			<div class=\"row\">\n				<div class=\"col-sm-12\">\n\n					<!-- apps sub-list -->\n					<i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\">\n			            <div class=\"cmap-header-dropdownContain\">\n			                <div class=\"cmap-header-dropOut cmap-header-apps\">\n			                    <i class=\"cmap-header-link  fa fa-search\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-apps-container\">\n				                    <a href=\"//apps.lincscloud.org/query\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Query.png\" alt=\"\" /></a>\n									<a href=\"//apps.lincscloud.org/data_synopsis\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Data_Synopsis.png\" alt=\"\" /></a><br>\n									<a href=\"//apps.lincscloud.org/compound_digest\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Compound_Digest.png\" alt=\"\" /></a>\n									<a href=\"//apps.lincscloud.org/gene_digest\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Gene_Digest.png\" alt=\"\" /></a><br>\n									<a href=\"//apps.lincscloud.org/history\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_History.png\" alt=\"\" /></a><br>\n\n								</div>\n			                </div>\n			            </div>\n			        </i>\n\n					<!-- developer tools sub-list -->\n					<i title=\"Developer\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://developer.lincscloud.org/';\">\n						<div class=\"cmap-header-dropdownContain\">\n							<div class=\"cmap-header-dropOut cmap-header-developer\">\n								<i class=\"cmap-header-link  fa fa-cogs\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-developer-container\">\n									<a href=\"//api.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_API.png\" alt=\"\" /></a>\n									<a href=\"//c3.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_C3.png\" alt=\"\" /></a><br>\n									<a href=\"//download.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Download.png\" alt=\"\" /></a>\n									<a href=\"//code.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Code.png\" alt=\"\" /></a><br>\n								</div>\n							</div>\n						</div>\n					</i>\n\n					<!-- projects sub-list -->\n					<i title=\"Projects\" class=\"fa fa-book cmap-header-link\" onclick=\"window.location.href = 'http://projects.lincscloud.org/';\">\n						<div class=\"cmap-header-dropdownContain\">\n							<div class=\"cmap-header-dropOut cmap-header-projects\">\n								<i class=\"cmap-header-link  fa fa-cogs\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-projects-container\">\n									<a href=\"//projects.lincscloud.org#LJP\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_LJP.png\" alt=\"\" /></a>\n									<a href=\"//projects.lincscloud.org#LTC\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_LTC.png\" alt=\"\" /></a><br>\n								</div>\n							</div>\n						</div>\n					</i>\n\n					<!-- support -->\n					<i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
+  if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "';\"></i>\n			    </div>\n			</div>\n\n		</div>\n\n		<!-- app title and subtitle -->\n		<div class=\"col-sm-4\">\n			<h3 class=\"col-xs-12 cmap-title-text cmap-center-text cmap-header-top-margin\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n		<p class=\"col-xs-12 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n			<p class=\"col-xs-12 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n	</div>\n\n	<!-- signin/signout and support -->\n	<div class=\"col-sm-3\">\n\n		<!-- user and signin/out -->\n		<div class=\"row\">\n			<p class=\"pull-right\">\n		         ";
+    + "</p>\n		</div>\n\n		<!-- signin/signout and support -->\n		<div class=\"col-sm-3\">\n\n			<!-- user and signin/out -->\n			<div class=\"row cmap-header-top-margin\">\n				<h4 class=\"pull-right\">\n			         ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n		     </p>\n		     ";
+  buffer += "\n			     </h4>\n			     ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n		</div>\n\n		<!-- spacers -->\n		<div class=\"row\">\n			<div class=\"cmap-spacer-meso\"></div>\n		</div>\n\n		<!-- support -->\n		<div class=\"row\">\n			<p>\n				<i title=\"Support\" class=\"fa fa-question-circle cmap-header-link pull-right\" onclick=\"window.location.href = '";
+  buffer += "\n			</div>\n		</div>\n	</div>\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n	                         <div class=\"col-xs-offset-1 col-xs-10\">\n	                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n	                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	                                 <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n	                                 <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n	                                 <i title=\"Developer\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://developer.lincscloud.org/';\"></i>\n									 <i title=\"Projects\" class=\"fa fa-book cmap-header-link\" onclick=\"window.location.href = 'http://projects.lincscloud.org/';\"></i>\n	                                 <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
   if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "';\"></i>\n				";
-  stack1 = helpers['if'].call(depth0, depth0.tour, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+    + "';\"></i>\n	                                 <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n	                                 ";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n			</p>\n		</div>\n	</div>\n</div>\n\n\n<!-- small screens -->\n<div class=\"row visible-xs\">\n                         <div class=\"col-xs-offset-1 col-xs-10\">\n                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                                 <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n                                 <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n                                 <i title=\"API\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://api.lincscloud.org';\"></i>\n                                 <i title=\"Data\" class=\"fa fa-file cmap-header-link\" onclick=\"window.location.href = 'http://data.lincscloud.org';\"></i>\n                                 <i title=\"Compute\" class=\"fa fa-keyboard-o cmap-header-link\" onclick=\"window.location.href = 'http://c3.lincscloud.org';\"></i>\n                                 <i title=\"Code\" class=\"fa fa-code cmap-header-link\" onclick=\"window.location.href = 'https://github.com/cmap/l1ktools';\"></i>\n                                 <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
-  if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "';\"></i>\n                                 <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                             </p>\n                         </div>\n\n	<div class=\"row\">\n	    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
+  buffer += "\n	                             </p>\n	                         </div>\n\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n	</div>\n	<div class=\"row\">\n		<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n		</div>\n		<div class=\"row\">\n			<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n	</div>\n</div>\n\n<!-- Modal -->\n<div class=\"modal fade\" id=\"aboutModal\">\n<div class=\"modal-dialog\">\n  <div class=\"modal-content\">\n    <div class=\"modal-header\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n      <h4 class=\"modal-title\">About The Connectivity Map</h4>\n    </div>\n    <div class=\"modal-body\">\n      <p>The Connectivity Map (or CMap) is a catalog of gene-expression data collected from human cells treated with chemical compounds and genetic reagents. Computational methods to reduce the number of necessary genomic measurements along with streamlined methodologies enable the current effort to significantly increase the size of the CMap database and along with it, our potential to connect human diseases with the genes that underlie them and the drugs that treat them.</p>\n\n      <p>CMap intends to accelerate the discovery process by systematically revealing connections between genes/compounds discovered in screens and molecular pathways that underlie disease states. The goal is to turn basic discoveries into drugs and diagnostics that have therapeutic impact.</p>\n    </div>\n  </div><!-- /.modal-content -->\n</div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n";
+    + "</p>\n		</div>\n	</div>\n</div>\n";
   return buffer;
   });
 
@@ -5403,6 +5514,10 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// build an object of utilities that we need to make sure are not overwritten
+Barista.Utils = {cookie: $.cookie};
+
 // # **CellHistologyDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -5413,8 +5528,8 @@ Barista.Datasets = {};
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellHistology',
@@ -5427,10 +5542,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
+				url: "",
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -5483,8 +5603,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
-			// only return 4 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellID',
@@ -5497,11 +5617,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url, query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('')
+				} ,
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -5542,6 +5667,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CellLineageDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular Contexts available in the Connectivity Map
@@ -5550,10 +5676,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellLineage: 
+	{ CellLineage:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellLineage',
@@ -5566,11 +5692,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&l=10',
-					  '&s={"cell_id":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&l=10',
+						'&s={"cell_id":1}'].join('');
+				} ,
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -5611,6 +5742,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CellMutationDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Cellular mutation annotations available in the Connectivity Map
@@ -5619,10 +5751,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 // is extracted from Barista.Datasets in views such as CMapSearchView
 
 Barista.Datasets = _.extend(Barista.Datasets,
-	{ CellMutation: 
+	{ CellMutation:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CellMutation',
@@ -5635,10 +5767,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/cellinfo?',
-					  'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
-					  '&d=mutations'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/cellinfo?',
+						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
+						'&d=mutations'].join('');
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -5673,6 +5810,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **CompoundPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
@@ -5683,8 +5821,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ CompoundPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'CompoundPertIName',
@@ -5697,11 +5835,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
-		            '&f={"pert_iname":1,"pert_type":1}',
-		            '&l=100',
-		            '&s={"pert_iname":1}'].join(''),
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":"trt_cp"}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -5785,8 +5928,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ GeneticPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'GeneticPertIName',
@@ -5799,11 +5942,16 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-		            'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_sh.cgs","trt_oe.mut"]}}',
-		            '&f={"pert_iname":1,"pert_type":1}',
-		            '&l=100',
-		            '&s={"pert_iname":1}'].join(''),
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_oe.mut"]}}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -5887,8 +6035,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobID',
@@ -5901,10 +6049,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"job_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    ['http://api.lincscloud.org/compute_status?',
+                          'q={"job_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"job_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -5957,8 +6110,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobName',
@@ -5971,10 +6124,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"params.rpt":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                url: '',
+
+                reomote: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"params.rpt":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"job_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -6027,8 +6185,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobStatus:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobStatus',
@@ -6041,10 +6199,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"status":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"status":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"status":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"status":1}'].join('')
+                },
 
                 dataType: 'jsonp',
 
@@ -6097,8 +6260,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ P100PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'P100PertIName',
@@ -6111,12 +6274,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://prefix:8080/p100/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://prefix:8080/p100/v1/profileinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&f={"pert_iname":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -6137,7 +6305,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects
@@ -6162,6 +6330,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **PRISMPertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // PRISM Perturbation IDs available in the Connectivity Map
@@ -6172,8 +6341,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PRISMPertIName',
@@ -6186,12 +6355,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/prism/v1/profileinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&f={"pert_iname":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('')
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -6212,7 +6386,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects
@@ -6237,6 +6411,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 		}
 	}
 );
+
 // # **PertINameDataset**
 // An object that extends Barista.Datasets to specify a backing dataset for
 // Perturbation IDs available in the Connectivity Map
@@ -6247,8 +6422,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PertIName',
@@ -6260,12 +6435,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			engine: Hogan,
 
 			remote: {
-				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
-					  '&f={"pert_iname":1,"pert_type":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
+				// set the remote data source to use pertinfo with custom query params
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/a2/pertinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
+						'&f={"pert_iname":1,"pert_type":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('');
+				},
 
 				dataType: 'jsonp',
 
@@ -6349,8 +6529,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { ToolID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'ToolID',
@@ -6363,10 +6543,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"tool_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"tool_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"tool_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"tool_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -6419,8 +6604,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 Barista.Datasets = _.extend(Barista.Datasets,
     { UserID:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'UserID',
@@ -6433,10 +6618,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"user_id":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"user_id":1}'].join(''),
+                url: '',
+
+                replace: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"user_id":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"user_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 
@@ -6509,6 +6699,25 @@ Barista.CMapPertTypeAlias = function(input_type){
 			return {name: input_type, acronym: input_type};
 	}
 };
+// # **NumbersToSubscript**
+// a utility to map numbers in an input string to subscript
+Barista.NumbersToSubscript = function(s) {
+    if (!s){
+        return s;
+    }
+    var subscript = "₀₁₂₃₄₅₆₇₈₉";
+    var re = new RegExp('^[0-9]$');
+    var new_s = "";
+    s.split("").forEach(function(char){
+        if (re.test(char)){
+            new_s += subscript[char];
+        }else{
+            new_s += char;
+        }
+    });
+    return new_s;
+}
+
 // # **arrayAverage**
 
 // a utility function to take the average of an array of numeric values
@@ -6608,6 +6817,7 @@ Barista.Models.BarPlotModel = Backbone.Model.extend({
 		meta_data: {}
 	}
 });
+
 // # **CellCountModel**
 
 // A Backbone.Model that represents the count of a set of cell_lines.  The data model
@@ -6646,11 +6856,11 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     var cell_info = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       pert_params = {q:'{"pert_iname":{"$in":' + search_string + '},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      pert_params = {q:'{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
+      pert_params = {q:'{"pert_iname":{"$regex":"^' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "cell") {
       pert_params = {q:'{"cell_id":"' + search_string + '"}', f:'{"cell_id":1}', l:1};
@@ -6697,6 +6907,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
      }
   }
 });
+
 // # **CellModel**
 
 // A Backbone.Model that represents a cell line
@@ -6726,25 +6937,34 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
   defaults: {
     pert_id: "",
     pert_iname: "",
     pert_summary: null,
     pubchem_cid: null,
     wiki_url: null,
+    molecular_formula: null,
+    molecular_wt: null,
+    pert_vendor: null,
+    num_gold: 0,
+    num_sig: 0,
+    cell_id: [],
+    inchi_key: "",
+    structure_url: ""
   },
 
   // ### fetch
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deferred = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
+    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
     // run the api request.  If the search string is "", set the short and long
@@ -6758,9 +6978,20 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_iname: "",
                   pert_summary: null,
                   pubchem_cid: null,
-                  wiki_url: null})
+                  wiki_url: null,
+                  molecular_formula: null,
+                  molecular_wt: null,
+                  pert_vendor: null,
+                  num_gold: 0,
+                  num_sig: 0,
+                  cell_id: [],
+                  inchi_key: "",
+                  structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
       }else{
+        //   set all fields on the model
+        self.set(perts[0]);
+
         // grab the wikipedia link if it is there
         var wiki_url = null;
         if (perts[0].pert_url){
@@ -6785,20 +7016,176 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
           pert_summary = perts[0].pert_summary;
         }
 
+        // grab the sstructure_url if it is there and there is a pubchem_cid (i.e. it is public).
+        var structure_url = null;
+        if (perts[0].structure_url && pubchem_cid){
+          structure_url = perts[0].structure_url;
+        }
+
         // set the fields on the model
         self.set({pert_id: perts[0].pert_id,
                   pert_iname: perts[0].pert_iname,
                   pert_summary: pert_summary,
                   pubchem_cid: pubchem_cid,
                   wiki_url: wiki_url,
+                  molecular_formula: perts[0].molecular_formula,
+                  molecular_wt: perts[0].molecular_wt,
+                  pert_vendor: perts[0].pert_vendor,
+                  num_gold: perts[0].num_gold,
+                  num_sig: perts[0].num_sig,
+                  cell_id: perts[0].cell_id,
+                  inchi_key: perts[0].inchi_key,
+                  structure_url: structure_url,
                   last_update: (new Date()).getTime()});
 
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+      deferred.resolve(self.attributes);
     });
+    return deferred;
   }
 });
+
+// # **GeneDetailModel**
+
+// A Backbone.Model that represents a single compound's description.  The data
+// model captures a number of fields including
+
+// 1. pert_id: the compound's perturbagen identifier
+// 2. pert_iname: the compound's standardized name
+// 3. pert_summary: a short description of the compound
+// 4. pubchem_cid: the PubChem identifier associated with the compound
+// 5. wiki_url: wikipedia url
+
+// `pert_detail_model = new GeneDetailModel()`
+
+Barista.Models.GeneDetailModel = Backbone.Model.extend({
+  // ### defaults
+  // describes the model's default parameters
+
+  defaults: {
+    cell_id: [],
+    clone_name: null,
+    has_kd: false,
+    has_oe: false,
+    num_gold: null,
+    num_inst: null,
+    num_sig: null,
+    oligo_seq: null,
+    pert_id: null,
+    pert_iname: null,
+    pert_summary: null,
+    seed_seq6: null,
+    seed_seq7: null,
+    sig_id: [],
+    sig_id_gold: [],
+    target_region: null,
+    target_seq: null,
+    vector_id: null
+  },
+
+  // ### kd_fields
+  // kd specific model fields
+  kd_fields: ['clone_name','oligo_seq','seed_seq6','seed_seq7','target_region','target_seq','vector_id'],
+
+  // ### array_fields
+  // fields that are arrays
+  array_fields: ['cell_id','sig_id','sig_id_gold'],
+
+  // ### fetch
+  // fetches new data from the pert_info api. All fields are replaced by the first item
+  // that matches the api search_string
+  fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deferred = $.Deferred();
+
+    // set up the api parameters to make a regular expression matched query against
+    // pert_inames in pertinfo
+    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var params = params = {
+        q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
+        f:'{"pert_iname":1}',
+        l:1
+    };
+
+    // get annotations for both KD and OE experiments of the matched gene name
+    var self = this;
+    $.getJSON(pert_info,params,function(perts) {
+          if (perts == 0 || search_string == ""){
+            // if there is no matched gene, go back to defaults
+            self.set(self.defaults);
+            self.trigger("GeneDetailModel:ModelIsNull");
+          }else{
+            // otherwise, populate the model with a combination of KD and OE annotations
+
+            // set up the deferred objects for calls to the pertinfo API
+            var search_string = perts[0].pert_iname;
+            KD_deferred = self.fetch_pert_type(search_string,"trt_sh");
+            OE_deferred = self.fetch_pert_type(search_string,"trt_oe");
+
+            // act on the deferred objects once they are resolved
+            $.when(KD_deferred,OE_deferred).done(function(kd_annots, oe_annots){
+                if ( kd_annots === null && oe_annots === null ){
+                    self.set(self.defaults);
+                    self.trigger("GeneDetailModel:ModelIsNull");
+                }else{
+                    var annots = {pert_type:"gene"};
+                    if (kd_annots === null){
+                        annots.has_kd = false;
+                        annots.has_oe = true;
+                        self.set(_.extend(oe_annots.unprefixed,oe_annots.prefixed,annots));
+                    }else if (oe_annots === null){
+                        annots.has_kd = true;
+                        annots.has_oe = false;
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,annots));
+                    }else{
+                        annots.has_kd = true;
+                        annots.has_oe = true;
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,oe_annots.prefixed,annots));
+                    }
+                    // trigger an event to tell us that the model is not null
+                    self.trigger("GeneDetailModel:ModelIsNotNull");
+                }
+                deferred.resolve(self.attributes);
+            });
+          }
+        });
+        return deferred;
+    },
+
+    // ### fetch_pert_type
+    // fetches new data from the pert_info API for the given pert_type.
+    fetch_pert_type: function(search_string,pert_type){
+        // set up a deferred object that we can use in the fetch function above
+        var deferred = $.Deferred();
+
+        // set up the api parameters to make an exact matched query against
+        // pert_inames in pertinfo and retrieve the first result
+        var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+        var params = params = {q:'{"pert_type":"'+ pert_type + '","pert_iname":"' + search_string + '"}',
+                              l:1};
+
+        // run the api request.  If the search string is ""resolve the generated promise
+        // with a null value, otherwise resolve it with the returned pert annotations
+        var self = this;
+        $.getJSON(pert_info,params,function(perts) {
+            if (perts == 0 || search_string == ""){
+                deferred.resolve(null);
+            }else{
+                var annots = {};
+                for (field in perts[0]){
+                    annots[pert_type + '_' + field] = perts[0][field];
+                }
+                deferred.resolve({prefixed: annots, unprefixed: perts[0]});
+            }
+        });
+
+        return deferred;
+    }
+});
+
 // # **GenericCountModel**
 
 // A Backbone.Model that represents the count of a set CMap databbase items.  The data model
@@ -6822,7 +7209,8 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     "url": "http://api.lincscloud.org/a2/pertinfo",
     "count": 0,
     "last_update": (new Date()).getTime(),
-    "search_string": ""
+    "search_string": "",
+    "distinct": false
   },
 
   // ## initialize
@@ -6835,15 +7223,19 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   },
 
   // ### fetch
-  // fetches new data from the API.  the count is updated with a new 
+  // fetches new data from the API.  the count is updated with a new
   // count based on the results of the api call
   fetch: function(search_string){
     // update the model's search string attribute
     this.set("search_string",search_string);
 
     // set up API call parameters
-    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+    search_string = (search_string[0] === "*") ? search_string.replace("*",".*") : search_string;
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"^' + search_string + '","$options":"i"}}',
               c:true};
+    if (this.get("distinct")){
+        _.extend(params,{d:this.get("search_field")});
+    }
 
     // run the api request
     var self = this;
@@ -6859,6 +7251,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **GenericMongoModel**
 
 // A Backbone.Model that represents a generic MongoDB object.  All fields in the document
@@ -6942,11 +7335,11 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}', g:"cell_id"};
+      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}', g:"cell_id"};
     }
     if (search_type === "cell") {
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":""}}', g:"cell_id"};
@@ -7009,11 +7402,11 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
@@ -7037,72 +7430,65 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **PertDetailModel**
 
 // A Backbone.Model that represents a single perturbagen's description.  The data
-// model captures both the short and long description of a single perturbagen that 
-// meet a search criteria.
-
-// optional arguments:
-
-// 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-// 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-// 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
+// model captures annotation data from compounds or genes.  To do this, the model
+// uses CompoundDetailModel and GeneDetailModel under the hood and pulls in their
+// attributes depending on how the model's fetch method is called
 
 // `pert_detail_model = new PertDetailModel()`
 
 Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
-  // describes the model's default parameters
-
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
+  // describes the model's default parameters.  This an incomplete list of defaults, only those
+  // that are common to all perturbagens
   defaults: {
-    short_description: "",
-    long_description: "",
-    gene_wiki_link: ""
+    cell_id: [],
+    num_gold: null,
+    num_inst: null,
+    num_sig: null,
+    pert_id: null,
+    pert_iname: null,
+    pert_type: null,
+    sig_id: [],
+    sig_id_gold: []
   },
 
-  // ### fetch
-  // fetches new data from the pert_info api.  the short_description and long_description
-  // are replaced with new data coming from the api call
-  fetch: function(search_string){
-    // set up the api parameters to make a regular expression matched query against
-    // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
-                          l:1};
+  // ### compound_sub_model
+  // a sub-model to be used when the PertDetailModel model needs to fetch Compound annotations
+  compound_sub_model: new Barista.Models.CompoundDetailModel(),
 
-    // run the api request.  If the search string is "", set the short and long
-    // description to undefined and trigger a "PertDetailModel:ModelIsNull" event.
-    // Otherwise, retrive the pert_iname and pert_desc of the response and set
-    // them to the model and trigger a "PertDetailModel:ModelIsNotNull" event
-    var self = this;
-    var short_description, long_description, num_perts;
-    $.getJSON(pert_info,params,function(perts) {
-      if (perts == 0 || search_string == ""){
-        short_description = undefined;
-        long_description = undefined;
-        self.trigger("PertDetailModel:ModelIsNull");
-      }else{
-        short_description = perts[0].pert_iname;
-        if (perts[0].gene_title !== undefined){
-          long_description = perts[0].gene_title;
-          self.set({gene_wiki_link: 'http://en.wikipedia.org/wiki/' + short_description + '_(gene)'});
-        }
-        if(perts[0].pubchem_cid !== undefined){
-          long_description = "PubChem ID: " + perts[0].pubchem_cid;
-          self.set({gene_wiki_link: ""});
-        }
-        self.trigger("PertDetailModel:ModelIsNotNull");
+  // ### gene_sub_model
+  // a sub-model to be used when the PertDetailModel model needs to fetch Gene annotations
+  gene_sub_model: new Barista.Models.GeneDetailModel(),
+
+  // ### fetch
+  // fetches new data from the pert_info API. depending on the model_type parameter,
+  // the method calls the appropriate fetch method for the given sub model type and fills
+  // the PertDetailModel's attributes with that of the sub model
+  fetch: function(search_string, model_type){
+      var self = this;
+      var deferred = $.Deferred();
+      switch (model_type){
+      case "compound":
+          this.compound_sub_model.fetch(search_string).then(function(attributes){
+              self.clear().set(attributes);
+              deferred.resolve();
+          });
+          break;
+      case "gene":
+          this.gene_sub_model.fetch(search_string).then(function(attributes){
+              self.clear().set(attributes);
+              deferred.resolve();
+          });
+          break;
       }
-      var t = (new Date()).getTime();
-      self.set({short_description: short_description, long_description: long_description, last_update: t});
-      self.set(perts[0])
-    });
+      return deferred;
   }
 });
+
 // # **PertModel**
 
 // A Backbone.Model that represents a single perturbagen
@@ -7191,11 +7577,11 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
     var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
@@ -7403,9 +7789,12 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         // make the api call and store the results as individual models in the collection.
         // we don't remove old models in this case as we want to support continuous building
         // of the model list from a remote api.  On success, set **isLoading** back to false
+        // and resolve a deferred that we set up as a return value
+        var def = $.Deferred();
         $.getJSON(this.url, params, function(res){
             self.set(res,{remove: false});
             self.isLoading = false;
+            def.resolve();
         });
 
         // make a second api call to find the maximum number of items in the collection
@@ -7417,11 +7806,13 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
                 self.maxCount = res.count;
             });
         }
+
+        return def;
     }
 });
 
 // # **CellCollection**
-// A Backbone.Collection that represents a set of cell types.  This collection is suitable for 
+// A Backbone.Collection that represents a set of cell types.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -7438,7 +7829,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
 Barista.Collections.CellCollection = Backbone.Collection.extend({
     // #### model
-    // the model used for the collection objects. 
+    // the model used for the collection objects.
     model: Barista.Models.CellModel,
 
     // #### url
@@ -7446,11 +7837,11 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
     url: 'http://api.lincscloud.org/a2/cellinfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ## getData
@@ -7459,7 +7850,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
     // Gets additional data from the specified url and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_column**  the column to query the search_string against, defaults to "cell_id"
     // 3.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
@@ -7482,7 +7873,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
         if (this.search_column == 'mutations'){
             this.q_param = '{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"mutations":"' + this.search_string + '"}';
         }else{
-            this.q_param = '{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"' + this.search_column + '":' + '{"$regex":"' + this.search_string + '","$options":"i"}}';
+            this.q_param = '{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"' + this.search_column + '":' + '{"$regex":"^' + this.search_string + '","$options":"i"}}';
         }
 
         // build a parameter object for the api call
@@ -7491,7 +7882,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
             l: this.limit,
             // s: this.s_param, // no sorting yet
             sk: this.skip};
-        
+
         $.getJSON(this.url, params, function(res){
             self.set(res,{remove: false});
             self.isLoading = false;
@@ -7577,7 +7968,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 	}
 });
 // # **PertCollection**
-// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for 
+// A Backbone.Collection that represents a set of perturbagens.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -7594,7 +7985,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 
 Barista.Collections.PertCollection = Backbone.Collection.extend({
     // #### model
-    // the model used for the collection objects. 
+    // the model used for the collection objects.
     model: Barista.Models.PertModel,
 
     // #### url
@@ -7602,11 +7993,11 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -7619,7 +8010,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     // Gets additional data from the specified url and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
@@ -7639,7 +8030,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         // doing a multi query, match exact names. If we are doing a cell line query, only match
         // cell\_ids
         if (search_type === "single" || search_type === undefined){
-            this.q_param = '{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
+            this.q_param = '{"pert_iname":{"$regex":"^' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}';
         }
         if (search_type === "multi"){
             search_string = '["' + search_string.split(":").join('","') + '"]';
@@ -7681,6 +8072,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
         }
     }
 });
+
 // # **SignatureCollection**
 // A Backbone.Collection that represents a set of signatures.  This collection is suitable for 
 // internal use in GridView.
@@ -7806,7 +8198,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     }
 });
 // # **SummlyResultCollection**
-// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for 
+// A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -7831,11 +8223,11 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -7848,7 +8240,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // Generates additional fake data objects and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
     getData: function(search_string,search_type,limit){
 		var self = this;
@@ -7914,6 +8306,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
         }
     }
 });
+
 // # **BaristaBaseView**
 // A Backbone.View the serves as the base view for other views in the barista library.  BaristaBaseView provides common
 // functionality for views including standard initialization, redraw, render, template compilation, and png export functions.
@@ -7932,7 +8325,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 // 4.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
 //		base_view = new BaristaBaseView({el: $("target_selector",
-//									bg_color:"#ffffff", 
+//									bg_color:"#ffffff",
 //									fg_color: "#1b9e77",
 //									span_class: "col-lg-12",
 //									plot_height: 120});
@@ -7970,7 +8363,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 
 	// ### base_initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
-	// template, bind model changes to view updates, and render the view.  This method is provided so it 
+	// template, bind model changes to view updates, and render the view.  This method is provided so it
 	// can be used in view that extend BaristaBaseView
 	base_initialize: function(){
 		// set up color options.  default if not specified
@@ -7996,6 +8389,9 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 						.attr("width",this.width)
 						.attr("height",this.height);
 
+		// make sure that the top level div target is set to hide overflow content
+		$("#" + this.div_string).css("overflow","hidden");
+
 		// render the vis
 		this.render();
 
@@ -8010,7 +8406,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + new Date().getTime();;
+		this.div_string = 'barista_view' + new Date().getTime();
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
@@ -8102,6 +8498,13 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		// do any pre save work that the child class may require
 		this.save_png_pre();
 
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = $("#" + this.div_string);
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
@@ -8178,6 +8581,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 		this.$el.animate({opacity:1},duration);
 	}
 });
+
 // # **BarPlotView**
 // A Backbone.View that displays a scatter plot.  the view's model is assumed to have the same defaults
 // as specified in **BarPlotModel**
@@ -9010,12 +9414,18 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
 		// store passed parameters as attributes of the view
+<<<<<<< HEAD
+		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
+		this.title = this.options.title;
+		this.subtitle = this.options.subtitle;
+		this.tour = this.options.tour;
+=======
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
-		this.user = (this.options.user !== undefined) ? this.options.user : undefined;
+		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
-		this.tour = (this.options.tour !== undefined) ? this.options.tour : false;
 
+>>>>>>> gh-pages
 		// compile the default template for the view
 		this.compile_template();
 
@@ -9065,6 +9475,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		// determine whether or not we will match cell line strings in the autocomplete
 		this.match_cell_lines = (this.options.match_cell_lines !== undefined) ? this.options.match_cell_lines : true;
 
+		// custom placeholder if specified
+		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : "search cell lines";
+
 		// grab cell_ids and store them as an atribute of the view
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
@@ -9106,7 +9519,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     Gets the current text entered in the view's search bar
-    
+
     @method get_val
     **/
 	get_val: function(){
@@ -9115,13 +9528,13 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
-    
+
     @method random_val
     **/
 	random_val: function(){
 		var self = this;
 		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
-		
+
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
 		$.getJSON(cellinfo,params,function(res){
@@ -9138,14 +9551,14 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 	/**
     renders the view
-    
+
     @method render
     **/
 	render: function(){
 		var self = this;
 
 		// load the template into the view's el tag
-		this.$el.append(BaristaTemplates.CMapPertSearchBar());
+		this.$el.append(BaristaTemplates.CMapPertSearchBar({placeholder: this.placeholder}));
 
 		// hook up the typeahead with backing datasets
 		$('#search',this.$el).typeahead([Barista.Datasets.CellID,
@@ -9171,7 +9584,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 // 												model: CompoundDetailModel,
 // 												bg_color: "#ffffff",
 // 												span_class: "col-lg-12"});
-Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
+Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "CompoundDetailView",
@@ -9179,13 +9592,18 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### model
 	// set up the view's default model
 	model: new Barista.Models.CompoundDetailModel(),
-	
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
 	initialize: function(){
 		// set up the plot height
-		this.options.plot_height = 130;
+		this.options.plot_height = 260;
+
+		// set up the open and closed state heights
+		this.open_height = this.options.plot_height;
+		this.closed_height = this.options.plot_height;
+		this.panel_open = false;
 
 		// initialize the view using the base view's built in method
 		this.base_initialize();
@@ -9194,27 +9612,33 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	// ### render
 	// completely render the view. Updates both static and dynamic content in the view.
 	render: function(){
+		// keep track of our scope at this level
 		var self = this;
+
 		// render the base view components
 		this.base_render();
 
-		// draw the static index reagent icon
-		this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
-		this.fg_layer.selectAll('.index_text_icon').data([1])
-							.enter().append("svg:image")
-							.attr("class","index_text_icon")
-			                .attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
-							.attr("x",10)
-							.attr("y",0)
-							.attr("height",40)
-							.attr("width",40);
+		// draw compound structure if there is one
+		if (this.model.get("structure_url")){
+			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+			this.fg_layer.selectAll('.index_text_icon').data([1])
+								.enter().append("svg:image")
+								.attr("class","index_text_icon")
+								.attr("xlink:href", this.model.get("structure_url"))
+								.attr("x",10)
+								.attr("y",100)
+								.attr("height",150)
+								.attr("width",300)
+								.style("cursor","pointer")
+								.on("click", function(){window.location = self.model.get('structure_url')});
+		}
 
 		// draw the static index reagent text
 		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
 		this.fg_layer.selectAll('.index_text').data([1])
 							.enter().append("text")
 							.attr("class","index_text")
-							.attr("x",60)
+							.attr("x",10)
 							.attr("y",30)
 							.attr("fill","#E69F00")
 							.attr("font-family","Helvetica Neue")
@@ -9222,38 +9646,126 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 							.text('Small Molecule Compound');
 
 		// (re)draw the pert_iname text
-		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_id_text').data([1])
+		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_iname_text').data([1])
 							.enter().append("text")
-							.attr("class","pert_id_text")
+							.attr("class","pert_iname_text")
 							.attr("x",10)
 							.attr("y",75)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-weight","bold")
 							.attr("font-size","36pt")
 							.text(this.model.get('pert_iname'));
-		
-		// (re)draw the pert_iname
-		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
-		this.fg_layer.selectAll('.pert_iname_text').data([1])
+
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
 							.enter()
 							.append("text")
-							.attr("class","pert_iname_text")
+							.attr("class","pert_id_text")
 							.attr("x",10)
 							.attr("y",100)
 							.attr("font-family","Helvetica Neue")
 							.attr("font-size","14pt")
 							.text(this.model.get('pert_id'));
 
+		// render additional labels
+		this.label_y_position = 100;
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('collection', 'Collection', 'pert_icollection', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('summly', 'In Summly', 'in_summly', false, 320);
+
+
+		// set the y position to be below the fold
+		this.label_y_position = 260;
+
+		// (re)draw the weight label and weight
+		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('formula', 'Formula', Barista.NumbersToSubscript(this.model.get('molecular_formula')),true);
+
+		// (re)draw the logp and label
+		this.render_label_and_value('logp', 'LogP', 'logp');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
+
+		// (re)draw the pubchem_cid and label
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+
+		// (re)draw the InChIKey label and InChIKey
+		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+
+		// (re)draw the InChI string
+		// this.render_label_and_value('inchi_string', 'InChI String', this.model.get("inchi_string").split("InChI=")[1], true);
+
+		// (re)draw the SMILES
+		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
+
+		// draw alternate names
+		this.label_y_position += 20;
+		if (this.model.get('alt_name')){
+			this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'white', '#BDBDBD');
+		}
+
+		// draw the cell lines that the compound has been profiled in
+		if (this.model.get('cell_id')){
+			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the compound
+		if (this.model.get('sig_id')){
+			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the compound
+		if (this.model.get('sig_id_gold')){
+			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
+		}
+
 		// (re)draw the pert_summary or clear it if there pert_summary is null
 		if (this.model.get('pert_summary')){
 			this.render_summary({summary_string: this.model.get('pert_summary'),
-								 top: 36,
-								 bottom: 136,
-								 left: this.model.get('pert_iname').length*36*.85});
+								 top: 45,
+								 bottom: 100,
+								 left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 30});
 		}else{
 			this.clear_summary();
 		}
+
+		// add a png export overlay
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+			.attr("class", this.div_string + "png_export no_png_export")
+			.attr("x",10)
+			.attr("y",this.height - 20)
+			.attr("opacity",0.25)
+			.style("cursor","pointer")
+			.text("png")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+			.on("click",function(){self.save_png();});
 
 		// check to see if there is a pubchem id and draw a link for it if there
 		// is one
@@ -9262,7 +9774,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([1]).enter().append("text")
 				.attr("class", this.div_string + "pubchem_link no_png_export")
 				.attr("x",this.width - 10)
-				.attr("y",this.height - 10)
+				.attr("y",this.height - 20)
 				.attr("opacity",0.25)
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
@@ -9279,7 +9791,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([1]).enter().append("text")
 				.attr("class", this.div_string + "wiki_link no_png_export")
 				.attr("x",this.width - 80)
-				.attr("y",this.height - 10)
+				.attr("y",this.height - 20)
 				.attr("opacity",0.25)
 				.attr("text-anchor","end")
 				.style("cursor","pointer")
@@ -9289,6 +9801,44 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
 
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", this.cevron_image_link)
+			.attr("x",this.width/2 - 9)
+			.attr("y",function(){
+				if (self.panel_open){
+					return self.height - 15;
+				}else{
+					return self.height - 20;
+				}
+			})
+			.attr("height",20)
+			.attr("width", 18)
+			.attr("transform", "rotate(0)")
+			.style("cursor","pointer")
+			.on("click", function(){self.toggle_panel_state()});
+
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 15)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",15)
+			.attr("width",this.width)
+			.attr("opacity",0)
+			.style("cursor","pointer")
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
+			.on("click", function(){self.toggle_panel_state()})
+
 		return this;
 	},
 
@@ -9297,6 +9847,76 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 	update: function(){
 		this.render();
 		return this;
+	},
+
+	// ### render_label_and_value
+	// utility function to draw a standard label and value for that label under
+	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
+	// pass the value in model_field as text instead of serching for it in the model
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link){
+		// set up a local variable to keep our scope straight
+		var self = this;
+
+		// make sure that we have a label_y_position set
+		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
+		this.label_y_position += 25;
+
+		// make sure that there is a base position for the x_label set
+		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
+
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
+
+		// (re)draw the label
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class",class_name_base + '_label_text')
+							.attr("x",x_pos_base)
+							.attr("y",this.label_y_position)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(label_text + ':');
+
+		// (re)draw the text
+		this.fg_layer.selectAll('.' + class_name_base + '_text').data([]).exit().remove();
+		var model_text = '';
+		if (pass_model_field_as_text){
+			model_text = model_field;
+		}else{
+			model_text = this.model.get(model_field);
+		}
+		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
+
+		// if there is a value link supplied, use it as a link on the text, otherwise, render plain text
+		if (value_link){
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.style("cursor","pointer")
+								.on("mouseover",function(){d3.select(this).transition().duration(500).attr("fill","#56B4E9");})
+								.on("mouseout",function(){d3.select(this).transition().duration(500).attr("fill","#BDBDBD");})
+								.on("click", function(){window.location = value_link})
+								.text(model_text);
+		}else{
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.text(model_text);
+		}
 	},
 
 	// ### render_summary
@@ -9314,7 +9934,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		var self = this;
 
 		// default arguments if they are not present
-		summary_string = (options.summary_string !== undefined) ? options.summary_string : "";
+		summary_string = this.model.get("pert_summary");
 		top_edge = (options.top !== undefined) ? options.top : 0;
 		bottom_edge = (options.bottom !== undefined) ? options.bottom : 100;
 		right_edge = (options.right !== undefined) ? options.right : this.width;
@@ -9331,6 +9951,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		// many lines the summary would need if we rendered all of it
 		this.line_width = right_edge - left_edge;
 		this.num_char = Math.floor(this.line_width / 13 / .75);
+		this.num_char = (this.num_char > 60) ? 60 : this.num_char;
 		this.num_lines = Math.ceil(summary_string.length / this.num_char);
 
 		// compute the line splits to display in the wiki summary
@@ -9342,6 +9963,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			}else{
 				var l = summary_string.slice(i*this.num_char,(i+1)*this.num_char - 3) + '...';
 				this.lines.push(l);
+				break;
 			}
 		}
 
@@ -9354,9 +9976,89 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 				.attr("y",function(d,i){return top_edge + 13 + i*15;})
 				.attr("font-family","Helvetica Neue")
 				.attr("font-size","13pt")
-				.attr("fill","#777777")
+				.attr("fill","#BDBDBD")
 				// .attr("text-anchor", "middle")
 				.text(function(d){return d;});
+	},
+
+	// ### toggle_panel_state
+	// utility to open or close the view
+	toggle_panel_state: function(){
+		var self = this;
+		var h;
+		if (this.panel_open){
+			h = this.options.plot_height;
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = false;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
+		}else{
+			h = this.open_height
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = true;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
+		}
+		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
+		this.vis.transition().duration(500).attr("height",h);
+	},
+
+	// ### draw tags
+	// utility function to draw tags given an array.
+	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
+		var x_offsets = [10];
+		var row_number = 0;
+		var y_offsets = [];
+		var lengths = [];
+		var tags = [];
+		var self = this;
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
+
+		// draw the foreground text of all the tags
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data(data).enter().append('text')
+			.attr("class", class_name_base + "tag_list_text")
+			.text(function(d){return d;})
+			.attr("x",function(d,i){
+				lengths.push(this.getComputedTextLength() + 15);
+				var current_x_offset = x_offsets[i];
+				if (current_x_offset + lengths[i] > self.width){
+					x_offsets[i] = 5;
+					x_offsets.push(lengths[i] + x_offsets[i]);
+					row_number += 1;
+				}else{
+					x_offsets.push(lengths[i] + x_offsets[i]);
+				}
+				y_offsets.push((row_number * 1.5 + 1));
+				return x_offsets[i];
+			})
+			.attr("y",function(d,i){return self.label_y_position + y_offsets[i] * EmSize;})
+			.attr("opacity",1)
+			.attr("fill",fg_color)
+
+		// draw the background of all the tags
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data([]).exit().remove();
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data(data).enter().append('rect')
+			.attr("class", class_name_base + "tag_list_rect")
+			.attr("x",function(d,i){return x_offsets[i] - 5;})
+			.attr("y",function(d,i){return self.label_y_position + (y_offsets[i] - 1) * EmSize;})
+			.attr("rx",4)
+			.attr("ry",4)
+			.attr('width',function(d,i){return lengths[i] - 4;})
+			.attr('height','1.2em')
+			.attr("opacity",1)
+			.attr("fill",tag_color);
+
+		// update the label_y_position
+		this.label_y_position += 10 + y_offsets.slice(-1)[0] * EmSize;
+
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
+
+		return this
 	},
 
 	// ### clear_summary
@@ -9365,7 +10067,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
 	},
 
-	
+
 	// ### save_png_pre
 	// overide the base views save_png_pre method to clear out the image so we
 	// can render the png properly
@@ -9398,6 +10100,7 @@ Barista.Views.CompoundDetailView =Barista.Views.BaristaBaseView.extend({
 			.attr('x',60)
 	}
 });
+
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete
 functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the
@@ -9574,18 +10277,33 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// set up the span size
 		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "span4";
 
+		// set up the default height for the plot
+		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
+
+		// allow for construction inside of a shadow DOM
+		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
+		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update_vis);
 
 		// compile the default template for the view
 		this.compile_template();
 
+		// set up a $div selector that can find the target div even if it is in a
+		// shadow DOM
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el).children("#" + this.div_string);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
+
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.top_svg = d3.select("#" + this.div_string).append("svg")
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
+		this.top_svg = d3.select(this.$div[0]).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height);
+						.attr("height",this.height)
 		this.vis = this.top_svg.append("g");
 		// this.vis_overlay = this.top_svg.append("g");
 
@@ -9598,10 +10316,10 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	compile_template: function(){
-		this.div_string = 'd3_target' + new Date().getTime();;
+		this.div_string = 'd3_target' + new Date().getTime();
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
-												height: 300}));
+												height: this.plot_height}));
 	},
 
 	render: function(){
@@ -9609,8 +10327,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// rescale the width of the vis
 		this.top_svg.transition().duration(1).attr("width",this.width);
@@ -9717,7 +10435,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// exit old elements
 		this.vis.data([this.data]).selectAll("rect").data(this.treemap.nodes).exit().remove();
-		
+
 		// // add tooltips
 		// this.add_tooltips();
 
@@ -9729,7 +10447,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	add_tooltips: function(){
 		// make a selection of all cells in the treemap
 		var cell_selection = $('.' + this.div_string + '_cell');
-		
+
 		// remove existing tooltips so we don confuse the labels
 		cell_selection.each(function(){
 			$(this).tooltip('destroy');
@@ -9801,6 +10519,13 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	savePng: function(){
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = this.$div;
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.top_svg.attr("width");
 		var height = this.top_svg.attr("height");
@@ -9826,6 +10551,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
+
 Barista.Views.GridView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
@@ -11121,7 +11847,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // # **PertCountView**
 
 // A Backbone.View that shows that number of perturbagens matching a given query.  Optionally, sub-category
-// counts are give for the type of perturbagen queried for.  This view is frequently paired with a 
+// counts are give for the type of perturbagen queried for.  This view is frequently paired with a
 // **PertCountModel** or **CellCountModel**
 
 // basic use:
@@ -11137,7 +11863,7 @@ Barista.Views.LDMapView = Backbone.View.extend({
 // 5.  {string}  **static\_text**  the static text header to use in the view, defaults to *"Reagents"*
 // 6.  {array}  **categories**  an array of objects to use as categories to display, defaults to *[]*
 
-//		count_view = new PertCountView({bg_color:"#ffffff", 
+//		count_view = new PertCountView({bg_color:"#ffffff",
 //									well_color: "#bdbdbd",
 //									fg_color: "#1b9e77",
 //									span_class: "span4",
@@ -11172,6 +11898,10 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// set up the default plot height
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 120;
 
+		// allow for construction inside of a shadow DOM
+		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
+		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
+
 		// set up default categories to display
 		this.categories = (this.options.categories !== undefined) ? this.options.categories : [];
 		this.category_ids = _.pluck(this.categories,'_id');
@@ -11179,19 +11909,27 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		// get categories from model and determine the maximum category count
 		// this.categories = this.model.get('pert_types');
 		this.max_category_count = _.max(_.pluck(this.categories,'count'));
-		
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.render);
 
 		// compile the default template for the view
 		this.compile_template();
 
+		// set up a $div selector that can find the target div even if it is in a
+		// shadow DOM
+		if (this.shadow_el && this.shadow_root){
+			this.$div = $(this.shadow_root).children(this.shadow_el).children("#" + this.div_string);
+		}else{
+			this.$div = $("#" + this.div_string);
+		}
+
 		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
+		this.vis = d3.select(this.$div[0]).append("svg")
 						.attr("width",this.width)
-						.attr("height",this.height);
+						.attr("height",this.height)
 
 		// render the vis
 		this.redraw();
@@ -11224,8 +11962,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// rescale the width of the vis
 		this.vis.transition().duration(1).attr("width",this.width);
@@ -11341,8 +12079,8 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		var self = this;
 
 		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		this.width = this.$div.width();
+		this.height = this.$div.outerHeight();
 
 		// draw the pert count info
 		var count = this.model.get('count');
@@ -11395,6 +12133,13 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### savePng
 	// save the current state of the view into a png image
 	save_png: function(){
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = this.$div;
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
+
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;
 		var height = this.height;
@@ -11424,9 +12169,10 @@ Barista.Views.PertCountView = Backbone.View.extend({
 		png_selection.attr("opacity",png_opacity);
 	}
 });
+
 // # **PertDetailView**
 
-// A Backbone.View that shows the name and short description of a single purturbagen.  This view is
+// A Backbone.View that shows information about a small molecule compound or gene.  This view is
 // frequently paired with a PertDetailModel.
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector")});
@@ -11434,13 +12180,13 @@ Barista.Views.PertCountView = Backbone.View.extend({
 // optional arguments:
 
 // 1.  {string}  **bg\_color**  the hex color code to use as the backgound of the view, defaults to *#ffffff*
-// 2.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
+// 2.  {string}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"col-lg-12"*
 
 //		pert_detail_view = new PertDetailView({el: $("target_selector"),
-//												model: PertDetailModel,
-//												bg_color: "#ffffff",
-//												span_class: "span4"});
-Barista.Views.PertDetailView = Backbone.View.extend({
+// 												model: PertDetailModel,
+// 												bg_color: "#ffffff",
+// 												span_class: "col-lg-12"});
+Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "PertDetailView",
@@ -11448,120 +12194,65 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 	// ### model
 	// set up the view's default model
 	model: new Barista.Models.PertDetailModel(),
-	
+
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
-	
-	//		pert_detail_view.initialize();
 	initialize: function(){
-		// set up color options.  default if not specified
-		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
-
-		// set up the span class
-		this.span_class = (this.options.span_class !== undefined) ? this.options.span_class : "#col-lg-12";
-
-		// bind render to model changes
-		this.listenTo(this.model,'change', this.render);
-
-		// compile the default template for the view
-		this.compile_template();
-
-		// define the location where d3 will build its plot
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
-		this.vis = d3.select("#" + this.div_string).append("svg")
-						.attr("width",this.width)
-						.attr("height",this.height);
-
-		// render the vis
-		this.redraw();
-
-		// bind window resize events to redraw
 		var self = this;
-		$(window).resize(function() {self.redraw();} );
+		// set up the plot height
+		this.options.plot_height = 260;
+
+		// set up the open and closed state heights
+		this.open_height = this.options.plot_height;
+		this.closed_height = this.options.plot_height;
+		this.panel_open = false;
+
+		//populate the model with an initial compound and then render the view
+		this.model.fetch("war","compound").then(function(){
+			console.log(self.model.attibutes);
+			self.base_initialize();
+		});
+
 	},
 
-	// ### compile_template
-	// use Handlebars to compile the template for the view
-
-	// arguments:
-
-	// 1.  {string}  **template\_string**  an html string specifying the template to compile and render. defaults to `'<div id="' + this.div_string + '" class="' + this.span_class + '" style="height:180px"></div>'`
-
-	//		pert_detail_view.compile_template(template\_string);
-	compile_template: function(template_string){
-		this.div_string = 'd3_target' + new Date().getTime();;
-		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
-												span_class: this.span_class}));
-	},
-
-	// ### redraw
-	// perform a full redraw of the view, including wiping out all d3 drawn components in the view and 
-	// initializing them again from scratch.
-	
-	//		pert_detail_view.redraw();
-	redraw: function(){
-		this.init_view();
-		this.render();
-	},
-
-	// ### init_view
-	// set up the view from scratch.  Draw a background panel and place all dynamic content on that panel
-	// with defualt values
-
-	//		pert_detail_view.init_view();
-	init_view: function(){
-		// stuff "this" into a variable for use inside of scoped funcitons
+	// ### render
+	// completely render the view. Updates both static and dynamic content in the view.
+	render: function(){
+		// keep track of our scope at this level
 		var self = this;
 
-		// set up the panel's width and height
-		this.width = $("#" + this.div_string).width();
-		this.height = $("#" + this.div_string).outerHeight();
+		// render the base view components
+		this.base_render();
 
-		// rescale the width of the vis
-		this.vis.attr("width",this.width);
-
-		// draw the background of the panel
-		this.vis.selectAll('.bg_panel').data([]).exit().remove();
-		this.vis.selectAll('.bg_panel').data([1]).enter().append('rect')
-			.attr("class","bg_panel")
-			.attr("height",this.height)
-			.attr("width",this.width)
-			.attr("fill",this.bg_color);
-
-		// draw the static index reagent icon
-		this.vis.selectAll('.index_text_icon').data([]).exit().remove();
-		this.vis.selectAll('.index_text_icon').data([1])
-							.enter().append("foreignObject")
-							.attr("class","index_text_icon")
-							.attr("x",10)
-							.attr("y",0)
-							.attr("height",40)
-							.attr("width",40)
-							.append("xhtml:div")
-							.attr("id",this.div_id + "_index_text")
-							.style("background-color",this.bg_color)
-							.html('<p class="cmap-subhead-text"><font color="#56B4E9"><i class="icon-map-marker"></i></font><p>');
-
-		// draw the static index reagent text
-		this.vis.selectAll('.index_text').data([]).exit().remove();
-		this.vis.selectAll('.index_text').data([1])
+		// (re)draw the pert_iname text
+		this.fg_layer.selectAll('.pert_iname_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_iname_text').data([1])
 							.enter().append("text")
-							.attr("class","index_text")
-							.attr("x",25)
-							.attr("y",17)
-							.attr("fill","#56B4E9")
+							.attr("class","pert_iname_text")
+							.attr("x",10)
+							.attr("y",75)
 							.attr("font-family","Helvetica Neue")
-							.attr("font-size","14pt")
-							.text('INDEX REAGENT');
+							.attr("font-weight","bold")
+							.attr("font-size","36pt")
+							.text(this.model.get('pert_iname'));
+
+		// (re)draw the pert_summary or clear it if there pert_summary is null
+		if (this.model.get('pert_summary')){
+			this.render_summary({summary_string: this.model.get('pert_summary'),
+								top: 45,
+								bottom: 100,
+								left: this.fg_layer.selectAll('.pert_iname_text').node().getComputedTextLength() + 30});
+		}else{
+			this.clear_summary();
+		}
 
 		// add a png export overlay
-		this.vis.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
-		this.vis.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1]).enter().append("text")
 			.attr("class", this.div_string + "png_export no_png_export")
 			.attr("x",10)
-			.attr("y",this.height - 10)
+			.attr("y",this.height - 20)
 			.attr("opacity",0.25)
 			.style("cursor","pointer")
 			.text("png")
@@ -11569,233 +12260,590 @@ Barista.Views.PertDetailView = Backbone.View.extend({
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
 
+		// render an image that will to indicate that the user can click the content to unfold the panel
+		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+
+		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
+		this.controls_layer.selectAll('.cevron_icon').data([1])
+			.enter().append("svg:image")
+			.attr("class","cevron_icon")
+			.attr("xlink:href", this.cevron_image_link)
+			.attr("x",this.width/2 - 9)
+			.attr("y",function(){
+				if (self.panel_open){
+					return self.height - 15;
+				}else{
+					return self.height - 20;
+				}
+			})
+			.attr("height",20)
+			.attr("width", 18)
+			.attr("transform", "rotate(0)")
+			.style("cursor","pointer")
+			.on("click", function(){self.toggle_panel_state()});
+
+		// render a button to allow the user to expand the view to show its full content
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([]).exit().remove();
+		this.controls_layer.selectAll("." + this.div_string + "more_button").data([1]).enter()
+			.append("rect")
+			.attr("x",0)
+			.attr("y",this.height - 15)
+			.attr("class",this.div_string + "more_button")
+			.attr("height",15)
+			.attr("width",this.width)
+			.attr("opacity",0)
+			.style("cursor","pointer")
+			.attr("fill","#BDBDBD")
+			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",0.25);})
+			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0);})
+			.on("click", function(){self.toggle_panel_state()})
+
+		// render the compound or gene specfic portion of the view
+		switch (this.model.get("pert_type")){
+		case "trt_cp":
+			this.render_compound();
+			break;
+		case "gene":
+			this.render_gene();
+			break;
+		};
+
+		return this;
 	},
 
-	// ### render
-	// render the dynamic content of the view based on the current state of the view's data model
-
-	//		pert_detail_view.render();
-	render: function(){
+	// ### render_compound
+	// utility to render the compound specific parts of the view
+	render_compound: function(){
+		this.clear_label_and_text();
 		var self = this;
-		// (re)draw a link to the gene's wikipedia article if it is a gene.
-		this.vis.selectAll('.' + this.div_string + 'gene_wiki_link').data([]).exit().remove();
-		this.vis.selectAll('.gene_wiki_text').data([]).exit().remove();
-		
-		// check for a link definition for wikipedia.  If there is one, draw a card that
-		// displays a link out to the article and the extract of the article.  If there
-		// is no link provided, just display the short and long name version of the card
-		if (this.model.get('gene_wiki_link') !== ""){
+		// (re)draw the pert_id text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.pert_id_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class","pert_id_text")
+							.attr("x",10)
+							.attr("y",100)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(this.model.get('pert_id'));
 
-			// set up wikipedia API query parameters
-			var params = {action: "query",
-							titles: this.model.get("short_description") + "_(gene)",
-							prop: "extracts",
-							format: "json",
-							exchars: 200,
-							exlimit: 1,
-							exintro: true,
-							exsectionformat: "wiki",
-							redirects: true,
-							explaintext: true};
-
-			// make a query into the wikipedia API to get the article extract.  Once the
-			// extract has come back, draw the short description, long description , 
-			// the wiki link, and article stub
-			$.getJSON('http://en.wikipedia.org/w/api.php?callback=?',params,function(res) {
-				
-				// (re)draw the short name of the perturbagen
-				self.vis.selectAll('.short_description_text').data([]).exit().remove();
-				self.vis.selectAll('.short_description_text').data([1])
-									.enter().append("text")
-									.attr("class","short_description_text")
-									.attr("x",10)
-									.attr("y",60)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-weight","bold")
-									.attr("font-size","36pt")
-									.text(self.model.get('short_description'));
-
-				// (re)draw the long name of the perturbagen
-				self.vis.selectAll('.long_description_text').data([]).exit().remove();
-				self.vis.selectAll('.long_description_text').data([1])
-									.enter()
-									.append("text")
-									.attr("class","long_description_text")
-									.attr("x",10)
-									.attr("y",85)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","14pt")
-									.text(self.model.get('long_description'));
-
-				// draw the wiki link
-				self.vis.selectAll('.' + self.div_string + 'gene_wiki_link').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_link no_png_export')
-									.attr("x",40)
-									.attr("y",self.height - 10)
-									.attr("opacity",0.25)
-									.style("cursor","pointer")
-									.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
-									.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-									.on("click", function(){window.location.href = self.model.get("gene_wiki_link")})
-									.text('wiki');
-			
-				// drill into the wikipedia API response and grab the article extract.
-				// break it into 50 character lines to display and draw each of those lines.
-				// If line breaks fall in the middle of a word, place a dash at the end of
-				// the line.  If the extract does not fit on four lines (200 characters),
-				// add an ellipsis to the end of the line.
-				for (var p in res.query.pages){
-					if (res.query.pages.propertyIsEnumerable(p)){
-						var extract = res.query.pages[p].extract;
-						if (extract !== undefined){
-							// compute the line splits to display in the wiki summary
-							var lines = ["","","",""];
-							lines[0] = (extract.slice(0,50).slice(-1) != " ") ? extract.slice(0,50) + '-': extract.slice(0,50);
-							lines[1] = (extract.slice(50,100).slice(-1) != " " && extract.slice(50,100).slice(49,50) != "") ? extract.slice(50,100)  + '-': extract.slice(50,100);
-							lines[2] = (extract.slice(100,150).slice(-1) != " " && extract.slice(100,150).slice(49,50) != "") ? extract.slice(100,150)  + '-': extract.slice(100,150);
-							lines[3] = (extract.slice(100,150) != "") ? extract.slice(150,200) + ' ...' : "";
-
-							// draw line 1
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text1').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text1 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",12)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[0]);
-
-							// draw line 2
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text2 ').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text2 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",29)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[1]);
-
-							// draw line 3
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text3').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text3 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",46)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[2]);
-
-							// draw line 4
-							self.vis.selectAll('.' + self.div_string + 'gene_wiki_text4').data([1])
-									.enter()
-									.append("text")
-									.attr("class",self.div_string + 'gene_wiki_text4 gene_wiki_text')
-									.attr("x",self.width - 425)
-									.attr("y",64)
-									.attr("font-family","Helvetica Neue")
-									.attr("font-size","13pt")
-									.attr("fill","#777777")
-									.text(lines[3]);
-						}
-					}
-				}
-			});
-
-		}else{
-			// (re)draw the short name of the perturbagen
-			this.vis.selectAll('.short_description_text').data([]).exit().remove();
-			this.vis.selectAll('.short_description_text').data([1])
-								.enter().append("text")
-								.attr("class","short_description_text")
+		// draw compound structure if there is one
+		if (this.model.get("structure_url")){
+			this.fg_layer.selectAll('.index_text_icon').data([]).exit().remove();
+			this.fg_layer.selectAll('.index_text_icon').data([1])
+								.enter().append("svg:image")
+								.attr("class","index_text_icon")
+								.attr("xlink:href", this.model.get("structure_url"))
 								.attr("x",10)
-								.attr("y",60)
-								.attr("font-family","Helvetica Neue")
-								.attr("font-weight","bold")
-								.attr("font-size","36pt")
-								.text(this.model.get('short_description'));
+								.attr("y",100)
+								.attr("height",150)
+								.attr("width",300)
+								.style("cursor","pointer")
+								.on("click", function(){window.location = self.model.get('structure_url')});
+		}
 
-			// (re)draw the long name of the perturbagen
-			this.vis.selectAll('.long_description_text').data([]).exit().remove();
-			this.vis.selectAll('.long_description_text').data([1])
-								.enter()
-								.append("text")
-								.attr("class","long_description_text")
-								.attr("x",10)
-								.attr("y",85)
-								.attr("font-family","Helvetica Neue")
-								.attr("font-size","14pt")
-								.text(this.model.get('long_description'));
+		// draw the static index reagent text
+		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.index_text').data([1])
+							.enter().append("text")
+							.attr("class","index_text")
+							.attr("x",10)
+							.attr("y",30)
+							.attr("fill","#E69F00")
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","20pt")
+							.text('Small Molecule Compound');
+
+		// render additional labels
+		this.label_y_position = 100;
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('collection', 'Collection', 'pert_icollection', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_sig', 'Signatures', 'num_sig', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('gold_sig', 'Gold Signatures', 'num_gold', false, 320);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('num_inst', 'Experiments', 'num_inst', false, 320);
+
+		// (re)draw the in_summly annotation
+		this.render_label_and_value('summly', 'In Summly', 'in_summly', false, 320);
+
+
+		// set the y position to be below the fold
+		this.label_y_position = 260;
+
+		// (re)draw the weight label and weight
+		this.render_label_and_value('weight', 'Weight', 'molecular_wt');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('formula', 'Formula', Barista.NumbersToSubscript(this.model.get('molecular_formula')),true);
+
+		// (re)draw the logp and label
+		this.render_label_and_value('logp', 'LogP', 'logp');
+
+		// (re)draw the formula and label
+		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
+
+		// (re)draw the pubchem_cid and label
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+
+		// (re)draw the InChIKey label and InChIKey
+		if(this.model.get("inchi_key")){
+			this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
+		}
+
+		// (re)draw the InChI string
+		// this.render_label_and_value('inchi_string', 'InChI String', this.model.get("inchi_string").split("InChI=")[1], true);
+
+		// (re)draw the SMILES
+		this.render_label_and_value('smiles', 'SMILES', 'canonical_smiles');
+
+		// draw alternate names
+		this.label_y_position += 20;
+		if (this.model.get('alt_name')){
+			this.render_label_and_value('alt_name_label', 'Alternate Names', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('alt_name', 'Alternate Names', this.model.get('alt_name'), 'white', '#BDBDBD');
+		}
+
+		// draw the cell lines that the compound has been profiled in
+		if (this.model.get('cell_id')){
+			this.render_label_and_value('cell_id_label', 'Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('cell_id', 'Cell Lines', this.model.get('cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the compound
+		if (this.model.get('sig_id')){
+			this.render_label_and_value('sig_id_label', 'Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('sig_id', 'Signature IDs', this.model.get('sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the compound
+		if (this.model.get('sig_id_gold')){
+			this.render_label_and_value('gold_sig_id_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('gold_sig_id', 'Gold Signature IDs', this.model.get('sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+		// check to see if there is a pubchem id and draw a link for it if there
+		// is one
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([]).exit().remove();
+		if (this.model.get('pubchem_cid')){
+			this.controls_layer.selectAll("." + this.div_string + "pubchem_link").data([1]).enter().append("text")
+				.attr("class", this.div_string + "pubchem_link no_png_export")
+				.attr("x",this.width - 10)
+				.attr("y",this.height - 20)
+				.attr("opacity",0.25)
+				.attr("text-anchor","end")
+				.style("cursor","pointer")
+				.text("PubChem")
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+				.on("click", function(){window.location = "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
+		}
+
+		// check to see if there is a wikipedia url and draw a link for it if there
+		// is one
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([]).exit().remove();
+		if (this.model.get('wiki_url')){
+			this.controls_layer.selectAll("." + this.div_string + "wiki_link").data([1]).enter().append("text")
+				.attr("class", this.div_string + "wiki_link no_png_export")
+				.attr("x",this.width - 80)
+				.attr("y",this.height - 20)
+				.attr("opacity",0.25)
+				.attr("text-anchor","end")
+				.style("cursor","pointer")
+				.text("Wiki")
+				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
+				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
+				.on("click", function(){window.location = self.model.get('wiki_url')});
 		}
 	},
 
-	// ### hide
-	// hides the view by dimming the opacity and hiding it in the DOM
-
-	// arguments
-
-	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *1*
-
-	//		pert_detail_view.hide(duration);
-	hide: function(duration){
-		duration = (duration !== undefined) ? duration : 1;
+	// ### render_gene
+	// utility to render the gene specific parts of the view
+	render_gene: function(){
+		this.clear_label_and_text();
 		var self = this;
-		this.$el.animate({opacity:0},duration);
-		setTimeout(function(){self.$el.hide();},duration);
+		// draw the static index reagent text
+		this.fg_layer.selectAll('.index_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.index_text').data([1])
+							.enter().append("text")
+							.attr("class","index_text")
+							.attr("x",10)
+							.attr("y",30)
+							.attr("fill","#0072B2")
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","20pt")
+							.text('Gene');
+
+		// (re)draw the static knockdown text
+		this.fg_layer.selectAll('.pert_id_text').data([]).exit().remove();
+		var static_text_enter = this.fg_layer.selectAll('.pert_id_text').data([1]).enter();
+		if (this.model.get("has_kd")){
+			this.fg_layer.selectAll('.kd_pert_id_text').data([]).exit().remove();
+			this.fg_layer.selectAll('.kd_pert_id_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class","kd_pert_id_text pert_id_text")
+								.attr("x",10)
+								.attr("y",100)
+								.attr("fill","#56B4E8")
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.text("Knockdown");
+		}
+
+		// (re)draw the static overexpression text
+		if (this.model.get("has_oe")){
+			this.fg_layer.selectAll('.oe_pert_id_text').data([]).exit().remove();
+			this.fg_layer.selectAll('.oe_pert_id_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class","oe_pert_id_text pert_id_text")
+								.attr("x",350)
+								.attr("y",100)
+								.attr("fill","#D55E00")
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.text("Over Expression");
+		}
+
+		// render additional labels
+		this.label_y_position = 100;
+
+		// (re)draw the pert_id annotation
+		this.render_label_and_value('trt_sh_pert_id', 'ID', 'trt_sh_pert_id');
+		this.render_label_and_value('trt_oe_pert_id', 'ID', 'trt_oe_pert_id', false, 350, null,false);
+
+		// (re)draw the signatures annotation
+		this.render_label_and_value('trt_sh_num_sig', 'Signatures', 'trt_sh_num_sig');
+		this.render_label_and_value('trt_oe_num_sig', 'Signatures', 'trt_oe_num_sig', false, 350, null,false);
+
+		// (re)draw the gold signatures annotation
+		this.render_label_and_value('trt_sh_num_gold', 'Gold Signatures', 'trt_sh_num_gold');
+		this.render_label_and_value('trt_oe_num_gold', 'Gold Signatures', 'trt_oe_num_gold', false, 350, null,false);
+
+		// (re)draw the experiments annotation
+		this.render_label_and_value('trt_sh_num_inst', 'Experiments', 'trt_sh_num_inst');
+		this.render_label_and_value('trt_oe_num_inst', 'Experiments', 'trt_oe_num_inst', false, 350, null,false);
+
+
+		// set the y position to be below the fold
+		this.label_y_position = 260;
+
+		// (re)draw the vector_id annotation
+		this.render_label_and_value('trt_sh_vector_id', 'Knockdown Vector', 'trt_sh_vector_id');
+
+		// (re)draw the target region annotation
+		this.render_label_and_value('trt_sh_target_region', 'Knockdown Target Region', 'trt_sh_target_region');
+
+		// (re)draw the 6 base seed annotation
+		this.render_label_and_value('trt_sh_seed_seq6', 'Knockdown 6 Base Seed Sequence', 'trt_sh_seed_seq6');
+
+		// (re)draw the 7 base seed annotation
+		this.render_label_and_value('trt_sh_seed_seq7', 'Knockdown 7 Base Seed Sequence', 'trt_sh_seed_seq7');
+
+		// (re)draw the target sequence annotation
+		this.render_label_and_value('trt_sh_target_seq', 'Knockdown Target Sequence', 'trt_sh_target_seq');
+
+		// (re)draw the oligo sequence annotation
+		this.render_label_and_value('trt_sh_oligo_seq', 'Knockdown Oligo Sequence', 'trt_sh_oligo_seq');
+
+		// draw the cell lines that the knockdown has been profiled in
+		this.label_y_position += 20;
+		if (this.model.get('trt_sh_cell_id')){
+			this.render_label_and_value('trt_sh_cell_id_label', 'Knockdown Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_sh_cell_id', 'Cell Lines', this.model.get('trt_sh_cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the knockknockdown
+		if (this.model.get('trt_sh_sig_id')){
+			this.render_label_and_value('trt_sh_sig_id_label', 'Knockdown Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_sh_sig_id', 'Signature IDs', this.model.get('trt_sh_sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the knockdown
+		if (this.model.get('trt_sh_sig_id_gold')){
+			this.render_label_and_value('trt_sh_sig_id_gold_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_sh_sig_id_gold', 'Knockdown Gold Signature IDs', this.model.get('trt_sh_sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+		// draw the cell lines that the over expression has been profiled in
+		this.label_y_position += 20;
+		if (this.model.get('trt_oe_cell_id')){
+			this.render_label_and_value('trt_oe_cell_id_label', 'Over Expression Cell Lines', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_cell_id', 'Cell Lines', this.model.get('trt_oe_cell_id'), 'white', '#CC79A7');
+		}
+
+		// draw the signatures for the over expression
+		if (this.model.get('trt_oe_sig_id')){
+			this.render_label_and_value('trt_oe_sig_id_label', 'Over Expression Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_sig_id', 'Signature IDs', this.model.get('trt_oe_sig_id'), 'white', '#BDBDBD');
+		}
+
+		// draw the gold signatures for the over expression
+		if (this.model.get('trt_oe_sig_id_gold')){
+			this.render_label_and_value('trt_oe_sig_id_gold_label', 'Gold Signature IDs', '', true);
+			this.label_y_position += 5;
+			this.draw_tags('trt_oe_sig_id_gold', 'Over Expression Gold Signature IDs', this.model.get('trt_oe_sig_id_gold'), 'white', '#BDBDBD');
+		}
+
+
+		return this;
 	},
 
-	// ### show
-	// shows the view by brightening the opacity and showing it in the DOM
-
-	// arguments
-
-	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *1*
-
-	//		pert_detail_view.show(duration);
-	show: function(duration){
-		duration = (duration !== undefined) ? duration : 1;
-		this.$el.show();
-		this.$el.animate({opacity:1},duration);
+	// ### update
+	// update the dynamic potions of the view
+	update: function(){
+		this.render();
+		return this;
 	},
 
-	// ### savePng
-	// save the current state of the view into a png image
+	// ### render_label_and_value
+	// utility function to draw a standard label and value for that label under
+	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
+	// pass the value in model_field as text instead of serching for it in the model
+	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link,increment_y){
+		// set up a local variable to keep our scope straight
+		var self = this;
 
-	//		pert_detail_view.save_png();
-	save_png: function(){
-		// build a canvas element to store the image temporarily while we save it
-		var width = this.vis.attr("width");
-		var height = this.vis.attr("height");
-		var html_snippet = '<canvas id="tmpCanvas" width="' + width + 'px" height="' + height + 'px"></canvas>';
-		$('body').append(html_snippet);
+		// make sure that we have a label_y_position set
+		this.label_y_position = (this.label_y_position !== undefined) ? this.label_y_position: 100;
+		if (increment_y === undefined){
+			increment_y = true;
+		}
+		if (increment_y){
+			this.label_y_position += 25;
+		}
 
-		// dim the png label on the image
-		var png_selection = this.vis.selectAll(".no_png_export");
-		var png_opacity = png_selection.attr("opacity");
-		png_selection.attr("opacity",0);
 
-		// grab the content of the target svg and place it in the canvas element
-		var svg_snippet = this.vis.node().parentNode.innerHTML;
-		canvg(document.getElementById('tmpCanvas'), '<svg>' + svg_snippet + '</svg>', { ignoreMouse: true, ignoreAnimation: true });
+		// make sure that there is a base position for the x_label set
+		var x_pos_base = (x_pos_base !== undefined) ? x_pos_base: 10;
 
-		// save the contents of the canvas to file and remove the canvas element
-		var canvas = $("#tmpCanvas")[0];
-		var filename = "cmapPertDetailView" + new Date().getTime() + ".png";
-		if (canvas.toBlob){canvas.toBlob(function(blob){saveAs(blob,filename);})};
-		$('#tmpCanvas').remove();
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
 
-		// make the png label on the image visible again
-		png_selection.attr("opacity",png_opacity);
+		// (re)draw the label
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + '_label_text').data([1])
+							.enter()
+							.append("text")
+							.attr("class",class_name_base + '_label_text label_and_text')
+							.attr("x",x_pos_base)
+							.attr("y",this.label_y_position)
+							.attr("font-family","Helvetica Neue")
+							.attr("font-size","14pt")
+							.text(label_text + ':');
+
+		// (re)draw the text
+		this.fg_layer.selectAll('.' + class_name_base + '_text').data([]).exit().remove();
+		var model_text = '';
+		if (pass_model_field_as_text){
+			model_text = model_field;
+		}else{
+			model_text = this.model.get(model_field);
+		}
+		var x_pos = x_pos_base + this.fg_layer.selectAll('.' + class_name_base + '_label_text').node().getComputedTextLength() + 10;
+
+		// if there is a value link supplied, use it as a link on the text, otherwise, render plain text
+		if (value_link){
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text label_and_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.style("cursor","pointer")
+								.on("mouseover",function(){d3.select(this).transition().duration(500).attr("fill","#56B4E9");})
+								.on("mouseout",function(){d3.select(this).transition().duration(500).attr("fill","#BDBDBD");})
+								.on("click", function(){window.location = value_link})
+								.text(model_text);
+		}else{
+			this.fg_layer.selectAll('.' + class_name_base + '_text').data([1])
+								.enter()
+								.append("text")
+								.attr("class",class_name_base + '_text label_and_text')
+								.attr("x",x_pos)
+								.attr("y",this.label_y_position)
+								.attr("font-family","Helvetica Neue")
+								.attr("font-size","14pt")
+								.attr("fill","#BDBDBD")
+								.text(model_text);
+		}
+	},
+
+	// ### render_summary
+	// utility function to break a long summary string into a multiline
+	// and draw it at the desired location
+
+	// options
+
+	// 1.  {string}  **summary_string**  the string to be displayed, defaults to *""*
+	// 2.  {right}  **right**  the x position to place the **right** edge of text, defaults to *this.width*
+	// 3.  {left}  **left**  the x position to place the **left** edge of text, defaults to *this.width - 500*
+	// 4.  {top}  **top**  the y position to place the **top** edge of text, defaults to *0*
+	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
+	render_summary: function(options){
+		var self = this;
+
+		// default arguments if they are not present
+		summary_string = this.model.get("pert_summary");
+		top_edge = (options.top !== undefined) ? options.top : 0;
+		bottom_edge = (options.bottom !== undefined) ? options.bottom : 100;
+		right_edge = (options.right !== undefined) ? options.right : this.width;
+		left_edge = (options.left !== undefined) ? options.left : this.width - 500;
+
+		// clear existing summary
+		this.clear_summary();
+
+		// compute the number of lines we have room for
+		this.line_height = 15;
+		this.num_lines_allowed = Math.floor((bottom_edge - top_edge) / this.line_height);
+
+		// compute the number of characters per line we will allow and how
+		// many lines the summary would need if we rendered all of it
+		this.line_width = right_edge - left_edge;
+		this.num_char = Math.floor(this.line_width / 13 / .75);
+		this.num_char = (this.num_char > 60) ? 60 : this.num_char;
+		this.num_lines = Math.ceil(summary_string.length / this.num_char);
+
+		// compute the line splits to display in the summary
+		this.lines = [];
+		for (var i=0; i<this.num_lines; i++){
+			if (i < this.num_lines_allowed - 1){
+				var l = (summary_string.slice(i*this.num_char,(i+1)*this.num_char).slice(-1) != " " && summary_string.slice(i*this.num_char,(i+1)*this.num_char).slice(this.num_char-1,this.num_char) != "") ? summary_string.slice(i*this.num_char,(i+1)*this.num_char)  + '-': summary_string.slice(i*this.num_char,(i+1)*this.num_char);
+				this.lines.push(l);
+			}else{
+				var l = summary_string.slice(i*this.num_char,(i+1)*this.num_char - 3) + '...';
+				this.lines.push(l);
+				break;
+			}
+		}
+
+		// draw lines
+		self.fg_layer.selectAll('.' + self.div_string + 'summary_text' + i).data(this.lines)
+				.enter()
+				.append("text")
+				.attr("class",self.div_string + "summary_text")
+				.attr("x",left_edge)
+				.attr("y",function(d,i){return top_edge + 13 + i*15;})
+				.attr("font-family","Helvetica Neue")
+				.attr("font-size","13pt")
+				.attr("fill","#BDBDBD")
+				// .attr("text-anchor", "middle")
+				.text(function(d){return d;});
+	},
+
+	// ### toggle_panel_state
+	// utility to open or close the view
+	toggle_panel_state: function(){
+		var self = this;
+		var h;
+		if (this.panel_open){
+			h = this.options.plot_height;
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = false;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
+		}else{
+			h = this.open_height
+			$("#" + this.div_string).animate({height:h},500);
+			this.panel_open = true;
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
+		}
+		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
+		this.controls_layer.selectAll("." + this.div_string + "wiki_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "pubchem_link").transition().duration(500).attr("y",h - 20);
+		this.controls_layer.selectAll("." + this.div_string + "png_export").transition().duration(500).attr("y",h - 20);
+		this.vis.transition().duration(500).attr("height",h);
+	},
+
+	// ### draw tags
+	// utility function to draw tags given an array.
+	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
+		var x_offsets = [10];
+		var row_number = 0;
+		var y_offsets = [];
+		var lengths = [];
+		var tags = [];
+		var self = this;
+		var EmSize = Barista.getEmSizeInPixels(this.div_string);
+
+		// draw the foreground text of all the tags
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data([]).exit().remove();
+		this.fg_layer.selectAll('.' + class_name_base + 'tag_list_text').data(data).enter().append('text')
+			.attr("class", class_name_base + "tag_list_text")
+			.text(function(d){return d;})
+			.attr("x",function(d,i){
+				lengths.push(this.getComputedTextLength() + 15);
+				var current_x_offset = x_offsets[i];
+				if (current_x_offset + lengths[i] > self.width){
+					x_offsets[i] = 5;
+					x_offsets.push(lengths[i] + x_offsets[i]);
+					row_number += 1;
+				}else{
+					x_offsets.push(lengths[i] + x_offsets[i]);
+				}
+				y_offsets.push((row_number * 1.5 + 1));
+				return x_offsets[i];
+			})
+			.attr("y",function(d,i){return self.label_y_position + y_offsets[i] * EmSize;})
+			.attr("opacity",1)
+			.attr("fill",fg_color)
+
+		// draw the background of all the tags
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data([]).exit().remove();
+		this.bg_layer.selectAll('.' + class_name_base + 'tag_list_rect').data(data).enter().append('rect')
+			.attr("class", class_name_base + "tag_list_rect")
+			.attr("x",function(d,i){return x_offsets[i] - 5;})
+			.attr("y",function(d,i){return self.label_y_position + (y_offsets[i] - 1) * EmSize;})
+			.attr("rx",4)
+			.attr("ry",4)
+			.attr('width',function(d,i){return lengths[i] - 4;})
+			.attr('height','1.2em')
+			.attr("opacity",1)
+			.attr("fill",tag_color);
+
+		// update the label_y_position
+		this.label_y_position += 10 + y_offsets.slice(-1)[0] * EmSize;
+
+		// update the open_height to the total height of all that we have drawn
+		this.open_height = (this.options.plot_height > this.label_y_position + 40) ? this.options.plot_height : this.label_y_position + 40;
+
+		return this
+	},
+
+	// ### clear_summary
+	// utility function to clear the pert summary
+	clear_summary: function(){
+		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
+	},
+
+	// ### clear_label_and_text
+	// utility function to clear all of the labels and text generated with the
+	// render_label_and_value function
+	clear_label_and_text: function(){
+		this.fg_layer.selectAll('.label_and_text').data([]).exit().remove();
 	}
-
 });
+
 /**
 A Backbone.View that exposes a custom search bar.  The search bar provides autocomplete
 functionality for Connectivity Map pert\_inames and cell\_ids.  When the user types in the
@@ -11840,7 +12888,12 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 			// once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
 			var change_callback = function () {
+				// get the value from the search bar. If the first character is '*',
+				// replace it with '.*' so we use the wildcard as expected in API
+				// saerches
 				var val  = $("#search",self.el).val();
+				val = (val[0] === '*') ? val.replace('*','.*') : val;
+
 				var type = "";
 				if (self.cell_lines.indexOf(val) != -1 && self.match_cell_lines){
 					type = "cell";
@@ -11857,7 +12910,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 				self.trigger("search:DidType",{val: val,type: type});
 			};
 
-			$("#search",self.el).bind('input propertychange change', _.throttle(change_callback,500));
+			$("#search",self.el).bind('input propertychange change', _.throttle(change_callback,250));
 
 			// bind a search:DidType event to the typeahead events coming out of typeahead.js
 			$(".typeahead",self.el).bind('typeahead:selected typeahead:autocompleted', function (obj,datum) {

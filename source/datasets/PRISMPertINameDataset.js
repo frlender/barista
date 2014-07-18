@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
-			// only return 2 items at a time in the autocomplete dropdown
-			limit: 2,
+			// only return 6 items at a time in the autocomplete dropdown
+			limit: 6,
 
 			// provide a name for the default typeahead data source
 			name: 'PRISMPertIName',
@@ -22,12 +22,17 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
-				url: ['http://api.lincscloud.org/prism/v1/profileinfo?',
-					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}}',
-					  '&f={"pert_iname":1}',
-					  '&l=100',
-					  '&s={"pert_iname":1}'].join(''),
-				
+				url: '',
+
+				replace: function(url,query){
+					query = (query[0] === "*") ? query.replace("*",".*") : query;
+					return ['http://api.lincscloud.org/prism/v1/profileinfo?',
+						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
+						'&f={"pert_iname":1}',
+						'&l=100',
+						'&s={"pert_iname":1}'].join('')
+				},
+
 				dataType: 'jsonp',
 
 				filter: function(response){
@@ -48,7 +53,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 					// add cell lines if required
 					// if (self.match_cell_lines){
-					// 	auto_data = auto_data.concat(self.cell_lines);	
+					// 	auto_data = auto_data.concat(self.cell_lines);
 					// }
 
 					// build a list of datum objects

@@ -45,6 +45,7 @@ Barista.Models.BarPlotModel = Backbone.Model.extend({
 		meta_data: {}
 	}
 });
+
 // # **CellCountModel**
 
 // A Backbone.Model that represents the count of a set of cell_lines.  The data model
@@ -83,11 +84,11 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     var cell_info = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       pert_params = {q:'{"pert_iname":{"$in":' + search_string + '},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      pert_params = {q:'{"pert_iname":{"$regex":"' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
+      pert_params = {q:'{"pert_iname":{"$regex":"^' + search_string + '","$options":"i"},"pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}', d:"cell_id"};
     }
     if (search_type === "cell") {
       pert_params = {q:'{"cell_id":"' + search_string + '"}', f:'{"cell_id":1}', l:1};
@@ -134,6 +135,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
      }
   }
 });
+
 // # **CellModel**
 
 // A Backbone.Model that represents a cell line
@@ -163,25 +165,34 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
   defaults: {
     pert_id: "",
     pert_iname: "",
     pert_summary: null,
     pubchem_cid: null,
     wiki_url: null,
+    molecular_formula: null,
+    molecular_wt: null,
+    pert_vendor: null,
+    num_gold: 0,
+    num_sig: 0,
+    cell_id: [],
+    inchi_key: "",
+    structure_url: ""
   },
 
   // ### fetch
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deferred = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
+    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
     // run the api request.  If the search string is "", set the short and long
@@ -195,9 +206,20 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_iname: "",
                   pert_summary: null,
                   pubchem_cid: null,
-                  wiki_url: null})
+                  wiki_url: null,
+                  molecular_formula: null,
+                  molecular_wt: null,
+                  pert_vendor: null,
+                  num_gold: 0,
+                  num_sig: 0,
+                  cell_id: [],
+                  inchi_key: "",
+                  structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
       }else{
+        //   set all fields on the model
+        self.set(perts[0]);
+
         // grab the wikipedia link if it is there
         var wiki_url = null;
         if (perts[0].pert_url){
@@ -222,20 +244,176 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
           pert_summary = perts[0].pert_summary;
         }
 
+        // grab the sstructure_url if it is there and there is a pubchem_cid (i.e. it is public).
+        var structure_url = null;
+        if (perts[0].structure_url && pubchem_cid){
+          structure_url = perts[0].structure_url;
+        }
+
         // set the fields on the model
         self.set({pert_id: perts[0].pert_id,
                   pert_iname: perts[0].pert_iname,
                   pert_summary: pert_summary,
                   pubchem_cid: pubchem_cid,
                   wiki_url: wiki_url,
+                  molecular_formula: perts[0].molecular_formula,
+                  molecular_wt: perts[0].molecular_wt,
+                  pert_vendor: perts[0].pert_vendor,
+                  num_gold: perts[0].num_gold,
+                  num_sig: perts[0].num_sig,
+                  cell_id: perts[0].cell_id,
+                  inchi_key: perts[0].inchi_key,
+                  structure_url: structure_url,
                   last_update: (new Date()).getTime()});
 
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+      deferred.resolve(self.attributes);
     });
+    return deferred;
   }
 });
+
+// # **GeneDetailModel**
+
+// A Backbone.Model that represents a single compound's description.  The data
+// model captures a number of fields including
+
+// 1. pert_id: the compound's perturbagen identifier
+// 2. pert_iname: the compound's standardized name
+// 3. pert_summary: a short description of the compound
+// 4. pubchem_cid: the PubChem identifier associated with the compound
+// 5. wiki_url: wikipedia url
+
+// `pert_detail_model = new GeneDetailModel()`
+
+Barista.Models.GeneDetailModel = Backbone.Model.extend({
+  // ### defaults
+  // describes the model's default parameters
+
+  defaults: {
+    cell_id: [],
+    clone_name: null,
+    has_kd: false,
+    has_oe: false,
+    num_gold: null,
+    num_inst: null,
+    num_sig: null,
+    oligo_seq: null,
+    pert_id: null,
+    pert_iname: null,
+    pert_summary: null,
+    seed_seq6: null,
+    seed_seq7: null,
+    sig_id: [],
+    sig_id_gold: [],
+    target_region: null,
+    target_seq: null,
+    vector_id: null
+  },
+
+  // ### kd_fields
+  // kd specific model fields
+  kd_fields: ['clone_name','oligo_seq','seed_seq6','seed_seq7','target_region','target_seq','vector_id'],
+
+  // ### array_fields
+  // fields that are arrays
+  array_fields: ['cell_id','sig_id','sig_id_gold'],
+
+  // ### fetch
+  // fetches new data from the pert_info api. All fields are replaced by the first item
+  // that matches the api search_string
+  fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deferred = $.Deferred();
+
+    // set up the api parameters to make a regular expression matched query against
+    // pert_inames in pertinfo
+    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var params = params = {
+        q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
+        f:'{"pert_iname":1}',
+        l:1
+    };
+
+    // get annotations for both KD and OE experiments of the matched gene name
+    var self = this;
+    $.getJSON(pert_info,params,function(perts) {
+          if (perts == 0 || search_string == ""){
+            // if there is no matched gene, go back to defaults
+            self.set(self.defaults);
+            self.trigger("GeneDetailModel:ModelIsNull");
+          }else{
+            // otherwise, populate the model with a combination of KD and OE annotations
+
+            // set up the deferred objects for calls to the pertinfo API
+            var search_string = perts[0].pert_iname;
+            KD_deferred = self.fetch_pert_type(search_string,"trt_sh");
+            OE_deferred = self.fetch_pert_type(search_string,"trt_oe");
+
+            // act on the deferred objects once they are resolved
+            $.when(KD_deferred,OE_deferred).done(function(kd_annots, oe_annots){
+                if ( kd_annots === null && oe_annots === null ){
+                    self.set(self.defaults);
+                    self.trigger("GeneDetailModel:ModelIsNull");
+                }else{
+                    var annots = {pert_type:"gene"};
+                    if (kd_annots === null){
+                        annots.has_kd = false;
+                        annots.has_oe = true;
+                        self.set(_.extend(oe_annots.unprefixed,oe_annots.prefixed,annots));
+                    }else if (oe_annots === null){
+                        annots.has_kd = true;
+                        annots.has_oe = false;
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,annots));
+                    }else{
+                        annots.has_kd = true;
+                        annots.has_oe = true;
+                        self.set(_.extend(kd_annots.unprefixed,kd_annots.prefixed,oe_annots.prefixed,annots));
+                    }
+                    // trigger an event to tell us that the model is not null
+                    self.trigger("GeneDetailModel:ModelIsNotNull");
+                }
+                deferred.resolve(self.attributes);
+            });
+          }
+        });
+        return deferred;
+    },
+
+    // ### fetch_pert_type
+    // fetches new data from the pert_info API for the given pert_type.
+    fetch_pert_type: function(search_string,pert_type){
+        // set up a deferred object that we can use in the fetch function above
+        var deferred = $.Deferred();
+
+        // set up the api parameters to make an exact matched query against
+        // pert_inames in pertinfo and retrieve the first result
+        var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+        var params = params = {q:'{"pert_type":"'+ pert_type + '","pert_iname":"' + search_string + '"}',
+                              l:1};
+
+        // run the api request.  If the search string is ""resolve the generated promise
+        // with a null value, otherwise resolve it with the returned pert annotations
+        var self = this;
+        $.getJSON(pert_info,params,function(perts) {
+            if (perts == 0 || search_string == ""){
+                deferred.resolve(null);
+            }else{
+                var annots = {};
+                for (field in perts[0]){
+                    annots[pert_type + '_' + field] = perts[0][field];
+                }
+                deferred.resolve({prefixed: annots, unprefixed: perts[0]});
+            }
+        });
+
+        return deferred;
+    }
+});
+
 // # **GenericCountModel**
 
 // A Backbone.Model that represents the count of a set CMap databbase items.  The data model
@@ -259,7 +437,8 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     "url": "http://api.lincscloud.org/a2/pertinfo",
     "count": 0,
     "last_update": (new Date()).getTime(),
-    "search_string": ""
+    "search_string": "",
+    "distinct": false
   },
 
   // ## initialize
@@ -272,15 +451,19 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   },
 
   // ### fetch
-  // fetches new data from the API.  the count is updated with a new 
+  // fetches new data from the API.  the count is updated with a new
   // count based on the results of the api call
   fetch: function(search_string){
     // update the model's search string attribute
     this.set("search_string",search_string);
 
     // set up API call parameters
-    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"' + search_string + '","$options":"i"}}',
+    search_string = (search_string[0] === "*") ? search_string.replace("*",".*") : search_string;
+    var params = {q:'{"' + this.get("search_field") + '":{"$regex":"^' + search_string + '","$options":"i"}}',
               c:true};
+    if (this.get("distinct")){
+        _.extend(params,{d:this.get("search_field")});
+    }
 
     // run the api request
     var self = this;
@@ -296,6 +479,7 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **GenericMongoModel**
 
 // A Backbone.Model that represents a generic MongoDB object.  All fields in the document
@@ -379,11 +563,11 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$in":' + search_string + '}}', g:"cell_id"};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}', g:"cell_id"};
+      params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}', g:"cell_id"};
     }
     if (search_type === "cell") {
       params = {q:'{' + this.get('filter') + '"pert_iname":{"$regex":""}}', g:"cell_id"};
@@ -446,11 +630,11 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
@@ -474,72 +658,65 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     });
   }
 });
+
 // # **PertDetailModel**
 
 // A Backbone.Model that represents a single perturbagen's description.  The data
-// model captures both the short and long description of a single perturbagen that 
-// meet a search criteria.
-
-// optional arguments:
-
-// 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-// 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-// 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
+// model captures annotation data from compounds or genes.  To do this, the model
+// uses CompoundDetailModel and GeneDetailModel under the hood and pulls in their
+// attributes depending on how the model's fetch method is called
 
 // `pert_detail_model = new PertDetailModel()`
 
 Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
-  // describes the model's default parameters
-
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
+  // describes the model's default parameters.  This an incomplete list of defaults, only those
+  // that are common to all perturbagens
   defaults: {
-    short_description: "",
-    long_description: "",
-    gene_wiki_link: ""
+    cell_id: [],
+    num_gold: null,
+    num_inst: null,
+    num_sig: null,
+    pert_id: null,
+    pert_iname: null,
+    pert_type: null,
+    sig_id: [],
+    sig_id_gold: []
   },
 
-  // ### fetch
-  // fetches new data from the pert_info api.  the short_description and long_description
-  // are replaced with new data coming from the api call
-  fetch: function(search_string){
-    // set up the api parameters to make a regular expression matched query against
-    // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
-                          l:1};
+  // ### compound_sub_model
+  // a sub-model to be used when the PertDetailModel model needs to fetch Compound annotations
+  compound_sub_model: new Barista.Models.CompoundDetailModel(),
 
-    // run the api request.  If the search string is "", set the short and long
-    // description to undefined and trigger a "PertDetailModel:ModelIsNull" event.
-    // Otherwise, retrive the pert_iname and pert_desc of the response and set
-    // them to the model and trigger a "PertDetailModel:ModelIsNotNull" event
-    var self = this;
-    var short_description, long_description, num_perts;
-    $.getJSON(pert_info,params,function(perts) {
-      if (perts == 0 || search_string == ""){
-        short_description = undefined;
-        long_description = undefined;
-        self.trigger("PertDetailModel:ModelIsNull");
-      }else{
-        short_description = perts[0].pert_iname;
-        if (perts[0].gene_title !== undefined){
-          long_description = perts[0].gene_title;
-          self.set({gene_wiki_link: 'http://en.wikipedia.org/wiki/' + short_description + '_(gene)'});
-        }
-        if(perts[0].pubchem_cid !== undefined){
-          long_description = "PubChem ID: " + perts[0].pubchem_cid;
-          self.set({gene_wiki_link: ""});
-        }
-        self.trigger("PertDetailModel:ModelIsNotNull");
+  // ### gene_sub_model
+  // a sub-model to be used when the PertDetailModel model needs to fetch Gene annotations
+  gene_sub_model: new Barista.Models.GeneDetailModel(),
+
+  // ### fetch
+  // fetches new data from the pert_info API. depending on the model_type parameter,
+  // the method calls the appropriate fetch method for the given sub model type and fills
+  // the PertDetailModel's attributes with that of the sub model
+  fetch: function(search_string, model_type){
+      var self = this;
+      var deferred = $.Deferred();
+      switch (model_type){
+      case "compound":
+          this.compound_sub_model.fetch(search_string).then(function(attributes){
+              self.clear().set(attributes);
+              deferred.resolve();
+          });
+          break;
+      case "gene":
+          this.gene_sub_model.fetch(search_string).then(function(attributes){
+              self.clear().set(attributes);
+              deferred.resolve();
+          });
+          break;
       }
-      var t = (new Date()).getTime();
-      self.set({short_description: short_description, long_description: long_description, last_update: t});
-      self.set(perts[0])
-    });
+      return deferred;
   }
 });
+
 // # **PertModel**
 
 // A Backbone.Model that represents a single perturbagen
@@ -628,11 +805,11 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
     var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};

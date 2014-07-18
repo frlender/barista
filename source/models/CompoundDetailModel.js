@@ -15,25 +15,34 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
 
-  // 1.  {String}  **short\_description**  the short description of a perturbagen (pert_iname), defaults to *""*
-  // 2.  {Number}  **long\_description**  the long description of a perturbagen (pert_desc), defaults to *""*
-  // 3.  {String}  **gene\_wiki\_link**  the link to a gene's wikipedia link if the perturbagen is a gene, defaults to *""*
   defaults: {
     pert_id: "",
     pert_iname: "",
     pert_summary: null,
     pubchem_cid: null,
     wiki_url: null,
+    molecular_formula: null,
+    molecular_wt: null,
+    pert_vendor: null,
+    num_gold: 0,
+    num_sig: 0,
+    cell_id: [],
+    inchi_key: "",
+    structure_url: ""
   },
 
   // ### fetch
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
   fetch: function(search_string){
+    // set up a deferred object that can be used by outside functions.  This deferred will be
+    // resolved with the contents of the model attributes
+    var deferred = $.Deferred();
+
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"' + search_string + '", "$options":"i"}}',
+    var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
     // run the api request.  If the search string is "", set the short and long
@@ -47,9 +56,20 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
                   pert_iname: "",
                   pert_summary: null,
                   pubchem_cid: null,
-                  wiki_url: null})
+                  wiki_url: null,
+                  molecular_formula: null,
+                  molecular_wt: null,
+                  pert_vendor: null,
+                  num_gold: 0,
+                  num_sig: 0,
+                  cell_id: [],
+                  inchi_key: "",
+                  structure_url: ""})
         self.trigger("CompoundDetailModel:ModelIsNull");
       }else{
+        //   set all fields on the model
+        self.set(perts[0]);
+
         // grab the wikipedia link if it is there
         var wiki_url = null;
         if (perts[0].pert_url){
@@ -74,17 +94,33 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
           pert_summary = perts[0].pert_summary;
         }
 
+        // grab the sstructure_url if it is there and there is a pubchem_cid (i.e. it is public).
+        var structure_url = null;
+        if (perts[0].structure_url && pubchem_cid){
+          structure_url = perts[0].structure_url;
+        }
+
         // set the fields on the model
         self.set({pert_id: perts[0].pert_id,
                   pert_iname: perts[0].pert_iname,
                   pert_summary: pert_summary,
                   pubchem_cid: pubchem_cid,
                   wiki_url: wiki_url,
+                  molecular_formula: perts[0].molecular_formula,
+                  molecular_wt: perts[0].molecular_wt,
+                  pert_vendor: perts[0].pert_vendor,
+                  num_gold: perts[0].num_gold,
+                  num_sig: perts[0].num_sig,
+                  cell_id: perts[0].cell_id,
+                  inchi_key: perts[0].inchi_key,
+                  structure_url: structure_url,
                   last_update: (new Date()).getTime()});
 
         // trigger an event to tell us that the model is not null
         self.trigger("CompoundDetailModel:ModelIsNotNull");
       }
+      deferred.resolve(self.attributes);
     });
+    return deferred;
   }
 });

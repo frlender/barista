@@ -16,7 +16,7 @@
 // 4.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
 //		base_view = new BaristaBaseView({el: $("target_selector",
-//									bg_color:"#ffffff", 
+//									bg_color:"#ffffff",
 //									fg_color: "#1b9e77",
 //									span_class: "col-lg-12",
 //									plot_height: 120});
@@ -54,7 +54,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 
 	// ### base_initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
-	// template, bind model changes to view updates, and render the view.  This method is provided so it 
+	// template, bind model changes to view updates, and render the view.  This method is provided so it
 	// can be used in view that extend BaristaBaseView
 	base_initialize: function(){
 		// set up color options.  default if not specified
@@ -80,6 +80,9 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 						.attr("width",this.width)
 						.attr("height",this.height);
 
+		// make sure that the top level div target is set to hide overflow content
+		$("#" + this.div_string).css("overflow","hidden");
+
 		// render the vis
 		this.render();
 
@@ -94,7 +97,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view
 	compile_template: function(){
 		var self = this;
-		this.div_string = 'barista_view' + new Date().getTime();;
+		this.div_string = 'barista_view' + new Date().getTime();
 		this.compiled_template = BaristaTemplates.d3_target;
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
 												span_class: this.span_class,
@@ -185,6 +188,13 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	save_png: function(){
 		// do any pre save work that the child class may require
 		this.save_png_pre();
+
+		//set the animate the div containing the view by applying and then removing
+		// css classes that defined the transitions we want
+		var $div = $("#" + this.div_string);
+		$div.addClass("barista-base-view");
+		$div.toggleClass("exporting");
+		setTimeout(function(){$div.toggleClass("exporting");},500);
 
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;

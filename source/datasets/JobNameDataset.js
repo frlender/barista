@@ -8,8 +8,8 @@
 Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
-            // only return 2 items at a time in the autocomplete dropdown
-            limit: 2,
+            // only return 6 items at a time in the autocomplete dropdown
+            limit: 6,
 
             // provide a name for the default typeahead data source
             name: 'JobName',
@@ -22,10 +22,15 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
             remote: {
                 // set the remote data source to use cellinfo with custom query params
-                url: ['http://api.lincscloud.org/compute_status?',
-                      'q={"params.rpt":{"$regex":"%QUERY", "$options":"i"}}',
-                      '&l=10',
-                      '&s={"job_id":1}'].join(''),
+                url: '',
+
+                reomote: function(url,query){
+                    query = (query[0] === "*") ? query.replace("*",".*") : query;
+                    return ['http://api.lincscloud.org/compute_status?',
+                          'q={"params.rpt":{"$regex":"^' + query + '", "$options":"i"}}',
+                          '&l=10',
+                          '&s={"job_id":1}'].join('');
+                },
 
                 dataType: 'jsonp',
 

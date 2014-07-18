@@ -38,11 +38,11 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
-      search_string = '["' + search_string.split(":").join('","') + '"]';
+      search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$in":' + search_string + '}}',c:true};
     }
     if (search_type === "single" || search_type === undefined){
-      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"' + search_string + '","$options":"i"}}',c:true};
+      params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"^' + search_string + '","$options":"i"}}',c:true};
     }
     if (search_type === "cell") {
       params = {q:'{"pert_type":{"$in":' + this.get('type_string') + '},"pert_iname":{"$regex":"","$options":"i"},"cell_id":"' + search_string + '"}', c:true};
