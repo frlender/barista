@@ -5333,11 +5333,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n						<p title=\"profile\" class=\"cmap-header-username pull-right\">";
+  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">logout</p>\n						<p title=\"profile\" class=\"cmap-header-username pull-right\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">logout</p>\n					";
+    + "</p>\n					";
   return buffer;
   }
 
@@ -5370,7 +5370,7 @@ function program9(depth0,data) {
   return "\n	                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n	                                 ";
   }
 
-  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-2\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a>\n				</div>\n				<div class=\"col-xs-offset-8 col-xs-2\">\n					";
+  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-2\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a>\n				</div>\n				<div class=\"col-xs-10\">\n					";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n				</div>\n			</div>\n		</div>\n		<div class=\"row\">\n			<h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
