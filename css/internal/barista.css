@@ -123,6 +123,10 @@
 	height: 30px;
 }
 
+.cmap-header-toolbar{
+	background: #2B2B2B;
+}
+
 .cmap-active-grid-row{
 	background-color: #BDBDBD;
 }

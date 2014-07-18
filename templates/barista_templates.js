@@ -221,7 +221,7 @@ function program5(depth0,data) {
   return "\n	                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n	                                 ";
   }
 
-  buffer += "<div class=\"cmap-header\">\n	<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12\">\n				<div class=\"col-xs-2\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a>\n				</div>\n			</div>\n		</div>\n		<div class=\"row\">\n			<h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
+  buffer += "<div class=\"cmap-header\">\n	<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-2\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a>\n				</div>\n			</div>\n		</div>\n		<div class=\"row\">\n			<h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
