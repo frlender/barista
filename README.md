@@ -1,10 +1,9 @@
 ![barista.js](http://coreyflynn.github.io/Bellhop/img/cmap_broad_logo_small.png)
 
-
 # **Barista.js**
 ### LINCS javascript components
 
-Barista provides a library of components for working with data provided by the LINCS/Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in [Backbone.js](http://backbonejs.org/ "Backbone").  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data. 
+Barista provides a library of components for working with data provided by the LINCS/Connectivity Map group at the Broad Institute.  These components are centered around the core structures of Models, Collections, and Views set up in [Backbone.js](http://backbonejs.org/ "Backbone").  The models provide sensible data objects for commonly used data types within Connectivity Map data.  The Collections group those models into common sets of data types.  The Views handle the on-screen display of either Models or Collections.  These components do not depend on each other and are meant to be the building blocks of larger applications that consume Connectivity Map data.
 
 ## **Installation**
 All of barista's dependencies are included in the main barista css and javascript files which we provide via a CDN, so all you need is
@@ -17,7 +16,7 @@ and
 
 in your HTML and you're all set.
 
-If you want to use only parts of the library or roll your own extensions to it, go right ahead!  Just download the code or fork it and go wild!  We welcome pull requests and feedback. 
+If you want to use only parts of the library or roll your own extensions to it, go right ahead!  Just download the code or fork it and go wild!  We welcome pull requests and feedback.
 
 
 # **Components**
@@ -68,7 +67,7 @@ many more complicated views in barista and handles common tasks such as standard
 
 ```javascript
 MySweetView = Barista.Views.BaristaBaseView.extend({
-	// your sweet code here 
+	// your sweet code here
 });
 ```
 
