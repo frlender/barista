@@ -77,6 +77,22 @@
 	transition: all 0.1s ease-out;
 }
 
+.cmap-header-link-no-border{
+	font-family: 'Roboto Slab', Cambria, serif;
+	font-size: 20px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+	opacity: 0.54;
+    position: relative;
+    top: 10px;
+	-webkit-transition: all 0.1s ease-out;
+	-moz-transition: all 0.1s ease-out;
+	-ms-transition: all 0.1s ease-out;
+	-o-transition: all 0.1s ease-out;
+	transition: all 0.1s ease-out;
+}
+
 .cmap-header-sublink{
 	color: #FF9B7A;
 }
