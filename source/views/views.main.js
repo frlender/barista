@@ -1114,7 +1114,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.compile_template();
 
 		// render the template
-		this.render();
+//		this.render();
 	},
 
 	// ### compile_template
