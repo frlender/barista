@@ -386,6 +386,13 @@ margin: 0 auto;
     padding: 15px;
 }
 
+.cmap-navigation-menu-item{
+	font-family: 'Roboto Slab', Cambria, serif;
+	font-size: 20px;
+	color: white;
+	opacity: 0.87;
+}
+
 .cmap-navigation-wrapper.show-nav .cmap-navigation-content {
     -webkit-transform: translateX(300px);
     transform: translateX(300px);
