@@ -4277,8 +4277,11 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
-		// render the template
-//		this.render();
+		// register an event for clicking on the menu button
+        $("#cmapHeaderMenuButton",this.$el).on("click",function(){
+            console.log("cmapHeaderMenuButton clicked");
+        });
+        
 	},
 
 	// ### compile_template
