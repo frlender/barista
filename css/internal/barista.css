@@ -1,3 +1,10 @@
+/*font definitions*/
+/*Roboto Slab at 300(light)*/
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300);
+
+/*Open Sans at 300(light) and 700(bold)*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
+
 .cmap-shadow{
 	-webkit-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
 	-moz-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
@@ -50,12 +57,12 @@
 }
 
 .cmap-header-link:hover, .cmap-header-sublink:hover{
-	color: #EA3A00;
+	opacity: 0.87;
 }
 
 .cmap-header-link{
 	color: white;
-	opacity: 0.87;
+	opacity: 0.54;
 	-webkit-transition: all 0.1s ease-out;
 	-moz-transition: all 0.1s ease-out;
 	-ms-transition: all 0.1s ease-out;
@@ -68,8 +75,10 @@
 }
 
 .cmap-header-username{
-	font-size: 18pt;
-	color: #BDBDBD;
+	font-family: 'Roboto Slab', Cambria, serif;
+	font-size: 20px;
+	color: white;
+    opacity: 0.87;
 	cursor: default;
 	position: relative;
 	padding-right: 5px;
