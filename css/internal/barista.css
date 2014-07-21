@@ -114,16 +114,15 @@
 }
 
 .cmap-title-text{
-	font-family:Helvetica;
-	font-weight: bold;
-	font-size: 30pt;
-	padding: 2pt;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-weight: 300;
+	font-size: 50px;
 }
 
 .cmap-subhead-text{
-	font-family:Helvetica;
-	font-weight: regular;
-	font-size: 12pt;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-weight: 300;
+	font-size: 20px;
 }
 
 .cmap-header-top-margin{
