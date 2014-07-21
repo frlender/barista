@@ -61,7 +61,9 @@
 }
 
 .cmap-header-link{
-	color: white;
+	font-family: 'Roboto Slab', Cambria, serif;
+	font-size: 20px;
+    color: white;
 	opacity: 0.54;
 	-webkit-transition: all 0.1s ease-out;
 	-moz-transition: all 0.1s ease-out;
