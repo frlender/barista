@@ -3983,18 +3983,18 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
     // wrap all existing content in the elements we need to work
     // the slide out navigation that we are going to build
     wrap_content: function(){
-        $("body").children().wrapAll('<div class="cmap-navigation-wrapper"/>');
-        $(".cmap-navigation-wrapper").wrapAll('<div class="cmap-navigation-content"/>');
+        $("body").children().wrapAll('<div class="cmap-navigation-content"/>');
+        $(".cmap-navigation-content").wrapAll('<div class="cmap-navigation-wrapper"/>');
     },
 
     // ### build navigation
     // build the navigation pane using all reuested menu items and links
     build_navigation: function(){
         var self = this;
-        $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu"></div>');
+        $(".cmap-navigation-content").prepend('<div class="cmap-navigation-menu"></div>');
         var $el = $(".cmap-navigation-menu");
         this.items.forEach(function(item,i){
-			$el.append('<a href="' + self.links[i] + '">' + item + '</a>');	
+			$el.append('<a href="' + self.links[i] + '">' + item + '</a>');
 		});
     }
 });
