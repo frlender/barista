@@ -25,7 +25,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
-		// store passed parameters as attributes of the view
+        var self = this;
+		
+        // store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
