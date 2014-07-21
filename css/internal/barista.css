@@ -64,7 +64,12 @@
 	font-family: 'Roboto Slab', Cambria, serif;
 	font-size: 20px;
     color: white;
+    padding-left: 10px;
+    border-left: white solid 2px;
+    border-right: white solid 2px;
 	opacity: 0.54;
+    position: relative;
+    top: 10px;
 	-webkit-transition: all 0.1s ease-out;
 	-moz-transition: all 0.1s ease-out;
 	-ms-transition: all 0.1s ease-out;
@@ -83,8 +88,7 @@
     opacity: 0.87;
 	cursor: default;
 	position: relative;
-	padding-right: 5px;
-	margin-bottom: 0px;
+	top: 10px;
 }
 
 .cmap-header-signin-signout{
