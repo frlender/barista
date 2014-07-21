@@ -44,18 +44,6 @@
 	text-transform: uppercase;
 }
 
-.cmap-header-link, .cmap-header-sublink{
-	font-size: 18pt;
-	letter-spacing: 2pt;
-	cursor: pointer;
-	cursor: hand;
-	-webkit-transition: all 0.1s ease-out;
-	-moz-transition: all 0.1s ease-out;
-	-ms-transition: all 0.1s ease-out;
-	-o-transition: all 0.1s ease-out;
-	transition: all 0.1s ease-out;
-}
-
 .cmap-header-link:hover, .cmap-header-sublink:hover{
 	opacity: 0.87;
 }
