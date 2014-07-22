@@ -1180,7 +1180,7 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
     // build the navigation pane using all reuested menu items and links
     build_navigation: function(){
         var self = this;
-        $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu row"></div>');
+        $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu"></div>');
         var $el = $(".cmap-navigation-menu");
         this.items.forEach(function(item,i){
 			$el.append('<a href="' + self.links[i] + '" class="col-xs-12 cmap-navigation-menu-item">' + item + '</a>');
