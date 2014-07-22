@@ -4320,8 +4320,8 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
         var self = this;
 
         // store passed parameters as attributes of the view
-		this.items = (this.options.items !== undefined) ? this.options.items : ["data synopsis","query"];
-        this.links = (this.options.links !== undefined) ? this.options.links : ["/data_synopsis","/query"];
+		this.items = (this.options.items !== undefined) ? this.options.items : ["data synopsis","query","compound digest","gene digest","history"];
+        this.links = (this.options.links !== undefined) ? this.options.links : ["/data_synopsis","/query","/compound_digest","/gene_digest","/history"];
 
 
         // wrap the content
