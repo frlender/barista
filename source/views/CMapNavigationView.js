@@ -45,6 +45,7 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
         this.items.forEach(function(item,i){
 			$el.append('<a href="' + self.links[i] + '" class="col-xs-12 cmap-navigation-menu-item">' + item + '</a>');
 		});
+		$el.prepend("<div class='cmap-spacer-large'></div>");
 		$el.prepend("<p id='cmap-nvigation-menu-close' title='close' class='cmap-header-link-no-border class=col-xs-12'>X</p>");
 		$("#cmap-nvigation-menu-close",$el).on("click",function(){
 			$(".cmap-navigation-wrapper").toggleClass("show-nav");
