@@ -44,10 +44,6 @@
 	text-transform: uppercase;
 }
 
-.cmap-header-link:hover, .cmap-header-sublink:hover{
-	opacity: 0.87;
-}
-
 .cmap-header-link{
 	font-family: 'Roboto Slab', Cambria, serif;
 	font-size: 20px;
@@ -81,6 +77,10 @@
 	-ms-transition: all 0.1s ease-out;
 	-o-transition: all 0.1s ease-out;
 	transition: all 0.1s ease-out;
+}
+
+.cmap-header-link:hover, .cmap-header-link-no-border:hover, .cmap-header-sublink:hover{
+	opacity: 0.87;
 }
 
 .cmap-header-sublink{
