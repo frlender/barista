@@ -391,6 +391,12 @@ margin: 0 auto;
 	font-size: 20px;
 	color: white;
 	opacity: 0.87;
+	text-decoration: none;
+	-webkit-transition: .3s ease all;
+}
+
+.cmap-navigation-menu-item:hover{
+	opacity: 1.0;
 }
 
 .cmap-navigation-wrapper.show-nav .cmap-navigation-content {
