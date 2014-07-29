@@ -777,8 +777,8 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	}
 });
 // # **BubbleView**
-// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
-// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute.
 
 // basic use:
 
@@ -986,6 +986,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				.attr("cx", function(d){return d.x;})
 				.attr("cy", function(d){return d.y;})
 				.attr("stroke","white")
+				.attr("v_category",function(d){
+					if (self.v_split !== undefined){
+						return d[self.v_split];
+					}else{
+						return null;
+					}
+				})
 				.attr("_id",function(d){return d._id;})
 				.attr("r",0);
 
@@ -1014,6 +1021,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 
 	}
 });
+
 // # **CMapFooterView**
 
 // A view that provides the standard Connectivity map page footer for apps built on apps.lincscloud.org
