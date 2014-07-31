@@ -2165,12 +2165,10 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
 			.enter().append("foreignObject")
 			.attr("class","foreign")
-			.attr("height",function(d){
-				return d.dy;
-			})
-			.attr("width",function(d){
-				return d.dx;
-			})
+			.attr("x",function(d){return d.x;})
+			.attr("y",function(d){return d.y;})
+			.attr("height",function(d){return d.dy;})
+			.attr("width",function(d){return d.dx;})
 			.append("xhtml:body")
 			.html("<p>foo</p>")
 	},
