@@ -5355,6 +5355,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			})
 			.append("xhtml:body")
 			.style("background-color","rgba(0,0,0,0)")
+			.style("height","100%")
+			.style("width","100%")
 			.html("<img src='http://coreyflynn.github.io/Bellhop/img/weather/Cloud-Drizzle.png'></img>")
 	},
 
