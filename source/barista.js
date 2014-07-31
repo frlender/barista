@@ -4870,6 +4870,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("stroke-width", 2);
 		this.draw_text();
 		this.add_tooltips();
+		this.draw_foreignObject();
 
 		// add a png export overlay
 		this.top_svg.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
@@ -4937,7 +4938,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){ self.draw_text(); self.add_tooltips();},500);
+		setTimeout(function(){ self.draw_text(); self.add_tooltips(); self.draw_foreignObject();},500);
 	},
 
 	add_tooltips: function(){
@@ -4966,6 +4967,24 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	clear_text: function(){
 		this.vis.data([this.data]).selectAll("text.name").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll("text.count").data([]).exit().remove();
+		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
+	},
+
+	// add a foreignObject DOM snippet for each cell in the treemap based on
+	// an input mapping of DOM snippets
+	draw_foreignObject: function(){
+		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
+		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
+			.enter().append("foreignObject")
+			.attr("class","foreign")
+			.attr("height",function(d){
+				return d.dy;
+			})
+			.attr("width",function(d){
+				return d.dx;
+			})
+			.append("xhtml:body")
+			.html("<p>foo</p>")
 	},
 
 	draw_text: function(){
