@@ -233,7 +233,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("background-color","rgba(0,0,0,0)")
 			.style("height","100%")
 			.style("width","100%")
-			.html("<img src='http://coreyflynn.github.io/Bellhop/img/weather/Cloud-Drizzle.png'></img>")
+			.html("<span style='display:inline-block,height:100%,vertical-align:middle'></span><img style='vertical-align:middle' src='http://coreyflynn.github.io/Bellhop/img/weather/Cloud-Drizzle.png'></img>")
 	},
 
 	draw_text: function(){
