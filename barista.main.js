@@ -10478,7 +10478,13 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("y",function(d){return d.y;})
 			.attr("height",function(d){return d.dy;})
 			.attr("width",function(d){return d.dx;})
-			.attr("opacity",0)
+			.attr("opacity",function(d) {
+				if (d.dy < 30 || d.dx < 30){
+					return 0;
+				}else{
+					return 1;
+				}
+			})
 			.append("xhtml:body")
 			.style("background-color","rgba(0,0,0,0)")
 			.html("<p>foo</p>")
