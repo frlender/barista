@@ -10435,7 +10435,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){ self.draw_text(); self.add_tooltips(); self.draw_foreignObject();},500);
+		setTimeout(function(){  self.add_tooltips(); self.draw_foreignObject();},500);
 	},
 
 	add_tooltips: function(){
@@ -10479,7 +10479,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("height",function(d){return d.dy;})
 			.attr("width",function(d){return d.dx;})
 			.attr("opacity",function(d) {
-				if (d.dy < 30 || d.dx < 30){
+				if (d.dy < 50 || d.dx < 50){
 					return 0;
 				}else{
 					return 1;
