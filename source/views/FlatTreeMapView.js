@@ -249,6 +249,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.html(function(d){
 				if (d.children === undefined){
 					return self.category_html[d._id];
+				}else{
+					return "";
 				}
 			})
 	},
