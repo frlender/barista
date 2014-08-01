@@ -243,7 +243,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Snow-Alt.png'></img>",
 						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Sun.png'></img>",
 						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/SnowFlake.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Snowflake.png'></img>",
 						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Sun.png'></img>",
 						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Wind.png'></img>",
 					]
