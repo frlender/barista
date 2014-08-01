@@ -254,6 +254,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 					return "";
 				}
 			})
+			.opacity(0)
+			.transition().duration(500).attr("opacity",1);
 	},
 
 	draw_text: function(){
