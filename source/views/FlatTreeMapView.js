@@ -234,6 +234,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("height","100%")
 			.style("width","100%")
 			.style("display","flex")
+			.style("pointer-events","none")
 			.html(function(d){
 				if (d.children === undefined){
 					icons = [
