@@ -17,6 +17,9 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// set up the default height for the plot
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
 
+		// allow for the drawing of arbitrary html in treemap cells rather than counts
+		this.category_html = (this.options.category_html !== undefined) ? this.options.category_html : null;
+
 		// allow for construction inside of a shadow DOM
 		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
 		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
@@ -109,9 +112,13 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
 			.attr("stroke-width", 2);
-		this.draw_text();
-		this.add_tooltips();
-		this.draw_foreignObject();
+
+		if (this.category_html){
+			self.draw_foreignObject();
+		}else{
+			self.draw_text();
+			self.add_tooltips();
+		}
 
 		// add a png export overlay
 		this.top_svg.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
@@ -179,7 +186,12 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){  self.add_tooltips(); self.draw_foreignObject();},500);
+		if (this.category_html){
+			setTimeout(function(){self.draw_foreignObject();},500);
+		}else{
+			setTimeout(function(){self.draw_text(); self.add_tooltips();},500);
+		}
+
 	},
 
 	add_tooltips: function(){
@@ -236,18 +248,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("display","flex")
 			.html(function(d){
 				if (d.children === undefined){
-					icons = [
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Drizzle.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Fog.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Hail.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Snow-Alt.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Sun.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-White.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Snowflake.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Sun.png'></img>",
-						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Wind.png'></img>",
-					]
-					return icons[Math.floor(Math.random()*icons.length)];
+					return self.category_html[d._id];
 				}
 			})
 	},
