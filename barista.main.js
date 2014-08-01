@@ -10273,6 +10273,9 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// set up the default height for the plot
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 300;
 
+		// allow for the drawing of arbitrary html in treemap cells rather than counts
+		this.category_html = (this.options.category_html !== undefined) ? this.options.category_html : null;
+
 		// allow for construction inside of a shadow DOM
 		this.shadow_el = (this.options.shadow_el !== undefined) ? this.options.shadow_el : null;
 		this.shadow_root = (this.options.shadow_root !== undefined) ? this.options.shadow_root : null;
@@ -10365,8 +10368,13 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.attr("height", function(d) {return d.dy;})
 			.attr("stroke", "white")
 			.attr("stroke-width", 2);
-		this.draw_text();
-		this.add_tooltips();
+
+		if (this.category_html){
+			self.draw_foreignObject();
+		}else{
+			self.draw_text();
+			self.add_tooltips();
+		}
 
 		// add a png export overlay
 		this.top_svg.selectAll("." + this.div_string + "png_export").data([]).exit().remove();
@@ -10434,7 +10442,12 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 		// draw_text on the elements that have room for it
 		this.clear_text();
-		setTimeout(function(){ self.draw_text(); self.add_tooltips();},500);
+		if (this.category_html){
+			setTimeout(function(){self.draw_foreignObject();},500);
+		}else{
+			setTimeout(function(){self.draw_text(); self.add_tooltips();},500);
+		}
+
 	},
 
 	add_tooltips: function(){
@@ -10463,6 +10476,37 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	clear_text: function(){
 		this.vis.data([this.data]).selectAll("text.name").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll("text.count").data([]).exit().remove();
+		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
+	},
+
+	// add a foreignObject DOM snippet for each cell in the treemap based on
+	// an input mapping of DOM snippets
+	draw_foreignObject: function(){
+		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
+		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
+			.enter().append("foreignObject")
+			.attr("class","foreign")
+			.attr("x",function(d){return d.x;})
+			.attr("y",function(d){return d.y;})
+			.attr("height",function(d){return d.dy;})
+			.attr("width",function(d){return d.dx;})
+			.attr("opacity",function(d) {
+				if (d.dy < 50 || d.dx < 50){
+					return 0;
+				}else{
+					return 1;
+				}
+			})
+			.append("xhtml:body")
+			.style("background-color","rgba(0,0,0,0)")
+			.style("height","100%")
+			.style("width","100%")
+			.style("display","flex")
+			.html(function(d){
+				if (d.children === undefined){
+					return self.category_html[d._id];
+				}
+			})
 	},
 
 	draw_text: function(){
