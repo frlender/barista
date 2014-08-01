@@ -236,7 +236,18 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("display","flex")
 			.html(function(d){
 				if (d.children === undefined){
-					return "<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/weather/Cloud-Drizzle.png'></img>";
+					icons = [
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Drizzle.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Fog.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Hail.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Snow-Alt.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud-Sun.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Cloud.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/SnowFlake.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Sun.png'></img>",
+						"<img style='margin:auto' src='http://coreyflynn.github.io/Bellhop/img/climacons/Wind.png'></img>",
+					]
+					return icons[Math.floor(Math.random()*icons.length)];
 				}
 			})
 	},
