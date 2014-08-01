@@ -226,6 +226,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	// add a foreignObject DOM snippet for each cell in the treemap based on
 	// an input mapping of DOM snippets
 	draw_foreignObject: function(){
+		var self = this;
 		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
 			.enter().append("foreignObject")
