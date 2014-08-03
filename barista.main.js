@@ -10551,6 +10551,9 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("height","100%")
 			.style("width","100%")
 			.style("display","flex")
+			.style("display", "-webkit-box")
+  			.style("display", "-webkit-flex")
+			.style("display", "-ms-flexbox")
 			.html(function(d){
 				if (d.children === undefined){
 					return self.category_html[d._id];
