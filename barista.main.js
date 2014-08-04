@@ -9086,8 +9086,8 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	}
 });
 // # **BubbleView**
-// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
-// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute.
 
 // basic use:
 
@@ -9131,6 +9131,9 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up splitting categories
 		this.v_split = (this.options.v_split !== undefined) ? this.options.v_split : undefined;
 		this.h_split = (this.options.h_split !== undefined) ? this.options.h_split : undefined;
+
+		// set up splitting category centers
+		this.category_centers = this.v_split = (this.options.v_split !== undefined) ? this.options.v_split : {up: {x:0,y:-10},down: {x:0,y:+10}};
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
@@ -9248,12 +9251,8 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection = this.vis.selectAll('circle');
 		bubble_selection
 			.attr("cy",function(d){
-					if (d[self.v_split] == 'up'){
-						d.y = d.y + (self.v_center - 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}else{
-						d.y = d.y + (self.v_center + 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}
-					return(d.y);
+				var category_y = self.category_centers[d[self.v_split]];
+				return d.y + (self.v_center - category_y - d.y) * (self.damp + 0.02) * alpha * 1.1;
 			});
 	},
 
@@ -9323,6 +9322,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 
 	}
 });
+
 // # **CMapFooterView**
 
 // A view that provides the standard Connectivity map page footer for apps built on apps.lincscloud.org
