@@ -4119,8 +4119,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection = this.vis.selectAll('circle');
 		bubble_selection
 			.attr("cy",function(d){
-				var category_y = self.category_centers[d[self.v_split]].y;
-				return d.y + (self.v_center - category_y - d.y) * (self.damp + 0.02) * alpha * 1.1;
+				// var category_y = self.category_centers[d[self.v_split]].y;
+				if (d[self.v_split] === "up"){
+					return d.y + (self.v_center -10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
+				}else{
+					return d.y + (self.v_center +10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
+				}
+				// return d.y + (self.v_center - category_y - d.y) * (self.damp + 0.02) * alpha * 1.1;
 			})
 			// .attr("cx",function(d){
 			// 	var category_x = self.category_centers[d[self.v_split]].x;
