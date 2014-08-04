@@ -824,7 +824,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.h_split = (this.options.h_split !== undefined) ? this.options.h_split : undefined;
 
 		// set up splitting category centers
-		this.category_centers = (this.options.category_centers !== undefined) ? this.options.category_centers : {up: {x:0,y:-10},dn: {x:0,y:+10}};
+		this.category_centers = (this.options.category_centers !== undefined) ? this.options.category_centers : {up: {x:0,y:-10},dn: {x:0,y:10}};
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
