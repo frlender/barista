@@ -945,10 +945,10 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				var category_y = self.category_centers[d[self.v_split]].y;
 				return d.y + (self.v_center - category_y - d.y) * (self.damp + 0.02) * alpha * 1.1;
 			})
-			.attr("cx",function(d){
-				var category_x = self.category_centers[d[self.v_split]].x;
-				return d.x + (self.h_center - category_x - d.x) * (self.damp + 0.02) * alpha * 1.1;
-			});
+			// .attr("cx",function(d){
+			// 	var category_x = self.category_centers[d[self.v_split]].x;
+			// 	return d.x + (self.h_center - category_x - d.x) * (self.damp + 0.02) * alpha * 1.1;
+			// });
 	},
 
 	// ### update
