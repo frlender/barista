@@ -169,7 +169,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 			})
 			.attr("cx",function(d){
 				var category_x = self.category_centers[d[self.v_split]].x;
-				return d.x + (self.v_center - category_x - d.x) * (self.damp + 0.02) * alpha * 1.1;
+				return d.x + (self.h_center - category_x - d.x) * (self.damp + 0.02) * alpha * 1.1;
 			});
 	},
 
