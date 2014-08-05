@@ -826,6 +826,9 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up splitting category centers
 		this.category_centers = (this.options.category_centers !== undefined) ? this.options.category_centers : {up: {x:0,y:-10},dn: {x:0,y:10}};
 
+		// set up category colors
+		this.category_colors = (this.options.category_colors !== undefined) ? this.options.category_colors : {up: "#D55E00",dn: "#56B4E9"};
+
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
 
@@ -904,7 +907,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.vis.selectAll("circle").data(this.force.nodes())
 				.enter().append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("v_category",function(d){
 					if (self.v_split !== undefined){
 						return d[self.v_split];
