@@ -9319,7 +9319,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection.enter()
 				.append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("cx", function(d){return d.x;})
 				.attr("cy", function(d){return d.y;})
 				.attr("stroke","white")
