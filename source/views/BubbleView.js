@@ -118,7 +118,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 						.friction(0.9)
 						.size([this.width, this.height])
 						.on("tick",function(e){tick(e);})
-						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/8;})
+						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/4;})
 						.start();
 
 		// draw the initial layout
