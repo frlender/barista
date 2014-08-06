@@ -9265,9 +9265,9 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				}
 				var category_y = self.category_centers[d[self.v_split]].y;
 				if (category_y === 0){
-					return(d.y);
+					return(self.v_center - d.y);
 				}else{
-					d.y = d.y + (self.v_center + category_y - d.y) * (self.damp + 0.03) * alpha * 1.1;
+					d.y = d.y + (category_y - d.y) * (self.damp + 0.03) * alpha * 1.1;
 					return(d.y);
 				}
 			})
@@ -9277,9 +9277,9 @@ Barista.Views.BubbleView = Backbone.View.extend({
 				}
 				var category_x = self.category_centers[d[self.v_split]].x;
 				if (category_x === 0){
-					return(d.x);
+					return(self.h_center - d.x);
 				}else{
-					d.x = d.x + (self.h_center - category_x - d.x) * (self.damp + 0.03) * alpha * 1.1;
+					d.x = d.x + (category_x - d.x) * (self.damp + 0.03) * alpha * 1.1;
 					return (d.x);
 				}
 			});
