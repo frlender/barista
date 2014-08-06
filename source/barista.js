@@ -3951,7 +3951,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
-		// store passed parameters as attributes of the view
+        var self = this;
+
+        // store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
@@ -3960,8 +3962,12 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
-		// render the template
-		this.render();
+		// register an event for clicking on the menu button
+        $("#cmapHeaderMenuButton",this.$el).on("click",function(){
+            self.trigger("cmapHeaderMenuButton:DidClick");
+			$(".cmap-navigation-wrapper").toggleClass("show-nav");
+        });
+
 	},
 
 	// ### compile_template
@@ -3977,6 +3983,61 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 										tour: this.tour
 									}));
 	}
+});
+
+// # **CMapNavigationView**
+
+// A view the provides the standard Connectivity map application navigation for apps built on apps.lincscloud.org
+// basic use:
+
+//		nav = new CMapNavigationView({el:"header_target"});
+
+Barista.Views.CMapNavigationView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapNavigationView",
+
+	// ### initialize
+	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	initialize: function(){
+        var self = this;
+
+        // store passed parameters as attributes of the view
+		this.items = (this.options.items !== undefined) ? this.options.items : ["data synopsis","query","compound digest","gene digest","history"];
+        this.links = (this.options.links !== undefined) ? this.options.links : ["/data_synopsis","/query","/compound_digest","/gene_digest","/history"];
+
+
+        // wrap the content
+        this.wrap_content();
+
+        // build the navigation panel
+        this.build_navigation();
+
+	},
+
+    // ### wrap_content
+    // wrap all existing content in the elements we need to work
+    // the slide out navigation that we are going to build
+    wrap_content: function(){
+        $("body").children().wrapAll('<div class="cmap-navigation-content"/>');
+        $(".cmap-navigation-content").wrapAll('<div class="cmap-navigation-wrapper"/>');
+    },
+
+    // ### build navigation
+    // build the navigation pane using all reuested menu items and links
+    build_navigation: function(){
+        var self = this;
+        $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu"></div>');
+        var $el = $(".cmap-navigation-menu");
+        this.items.forEach(function(item,i){
+			$el.append('<a href="' + self.links[i] + '" class="col-xs-12 cmap-navigation-menu-item">' + item + '</a>');
+		});
+		$el.prepend("<div class='cmap-spacer-large'></div>");
+		$el.prepend("<p id='cmap-navigation-menu-close' title='close' class='cmap-navigation-menu-item cmap-header-link-no-border class=col-xs-12'>X</p>");
+		$(".cmap-navigation-menu-item",$el).on("click",function(){
+			$(".cmap-navigation-wrapper").toggleClass("show-nav");
+		});
+    }
 });
 
 /**
@@ -5020,6 +5081,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	// add a foreignObject DOM snippet for each cell in the treemap based on
 	// an input mapping of DOM snippets
 	draw_foreignObject: function(){
+		var self = this;
 		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
 			.enter().append("foreignObject")
@@ -5040,9 +5102,14 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("height","100%")
 			.style("width","100%")
 			.style("display","flex")
+			.style("display", "-webkit-box")
+  			.style("display", "-webkit-flex")
+			.style("display", "-ms-flexbox")
 			.html(function(d){
 				if (d.children === undefined){
 					return self.category_html[d._id];
+				}else{
+					return "";
 				}
 			})
 	},
