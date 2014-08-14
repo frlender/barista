@@ -1,6 +1,6 @@
 // # **BubbleView**
-// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
-// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute.
 
 // basic use:
 
@@ -44,6 +44,12 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up splitting categories
 		this.v_split = (this.options.v_split !== undefined) ? this.options.v_split : undefined;
 		this.h_split = (this.options.h_split !== undefined) ? this.options.h_split : undefined;
+
+		// set up splitting category centers
+		this.category_centers = (this.options.category_centers !== undefined) ? this.options.category_centers : {up: {x:0,y:-10},dn: {x:0,y:10}};
+
+		// set up category colors
+		this.category_colors = (this.options.category_colors !== undefined) ? this.options.category_colors : {up: "#D55E00",dn: "#56B4E9"};
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
@@ -115,7 +121,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 						.friction(0.9)
 						.size([this.width, this.height])
 						.on("tick",function(e){tick(e);})
-						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/8;})
+						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/6;})
 						.start();
 
 		// draw the initial layout
@@ -123,7 +129,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.vis.selectAll("circle").data(this.force.nodes())
 				.enter().append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("v_category",function(d){
 					if (self.v_split !== undefined){
 						return d[self.v_split];
@@ -161,12 +173,28 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection = this.vis.selectAll('circle');
 		bubble_selection
 			.attr("cy",function(d){
-					if (d[self.v_split] == 'up'){
-						d.y = d.y + (self.v_center - 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}else{
-						d.y = d.y + (self.v_center + 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}
+				if (self.category_centers[d[self.v_split]] === undefined){
 					return(d.y);
+				}
+				var category_y = self.category_centers[d[self.v_split]].y;
+				if (category_y === 0){
+					return(d.y);
+				}else{
+					d.y = d.y + (self.v_center + category_y - d.y) * (self.damp + 0.03) * alpha * 1.1;
+					return(d.y);
+				}
+			})
+			.attr("cx",function(d){
+				if (self.category_centers[d[self.v_split]] === undefined){
+					return(d.x);
+				}
+				var category_x = self.category_centers[d[self.v_split]].x;
+				if (category_x === 0){
+					return(d.x);
+				}else{
+					d.x = d.x + (self.h_center - category_x - d.x) * (self.damp + 0.03) * alpha * 1.1;
+					return (d.x);
+				}
 			});
 	},
 
@@ -204,7 +232,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection.enter()
 				.append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("cx", function(d){return d.x;})
 				.attr("cy", function(d){return d.y;})
 				.attr("stroke","white")

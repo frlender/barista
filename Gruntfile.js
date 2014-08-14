@@ -134,9 +134,14 @@ module.exports = function(grunt) {
           'css/internal.css': ['css/internal/barista.css']
         }
       },
+      fonts: {
+        files: {
+          'css/fonts.css': ['css/fonts/google.css']
+        }
+      },
       main: {
         files: {
-          '<%= pkg.name %>.main.min.css': ['css/external.css','css/internal.css']
+          '<%= pkg.name %>.main.min.css': ['css/fonts.css','css/external.css','css/internal.css']
         }
       }
     },

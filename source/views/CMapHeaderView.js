@@ -25,7 +25,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
-		// store passed parameters as attributes of the view
+        var self = this;
+
+        // store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
@@ -34,8 +36,12 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
-		// render the template
-		this.render();
+		// register an event for clicking on the menu button
+        $("#cmapHeaderMenuButton",this.$el).on("click",function(){
+            self.trigger("cmapHeaderMenuButton:DidClick");
+			$(".cmap-navigation-wrapper").toggleClass("show-nav");
+        });
+
 	},
 
 	// ### compile_template

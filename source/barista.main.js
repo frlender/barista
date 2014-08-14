@@ -200,28 +200,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  
-  return "\n			             <span title=\"signout\" class=\"label cmap-header-signin-signout\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">Sign Out</span>\n			         ";
+  var buffer = "", stack1;
+  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">logout</p>\n						<p title=\"profile\" class=\"cmap-header-username pull-right\">";
+  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n					";
+  return buffer;
   }
 
 function program3(depth0,data) {
   
   
-  return "\n			             <span title=\"signin\" class=\"label cmap-header-signin-signout\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\">Sign In</span>\n			         ";
+  return "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></p>\n					";
   }
 
 function program5(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n			         <p class=\"cmap-header-username pull-right\">";
-  if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + " </p>\n			     ";
-  return buffer;
-  }
-
-function program7(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n	                                     ";
@@ -232,45 +226,38 @@ function program7(depth0,data) {
   return buffer;
   }
 
-function program9(depth0,data) {
+function program7(depth0,data) {
   
   
   return "\n	                                     <i title=\"signout\" class=\"fa fa-sign-out cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></i>\n	                                 ";
   }
 
-function program11(depth0,data) {
+function program9(depth0,data) {
   
   
   return "\n	                                     <i title=\"signin\" class=\"fa fa-sign-in cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signin';\"></i>\n	                                 ";
   }
 
-  buffer += "<div class=\"cmap-header\">\n	<div id=\"spacer\" style=\"min-height:10px\"></div>\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<!-- logo and navigation buttons -->\n		<div class=\"col-sm-offset-1 col-sm-3\">\n\n			<!-- logo -->\n			<div class=\"row\">\n				<div class=\"col-xs-12\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://coreyflynn.github.io/Bellhop/img/lincscloud_logo.png\"></a>\n				</div>\n			</div>\n\n			<div class=\"row\">\n				<div class=\"cmap-spacer-medium\"></div>\n			</div>\n\n			<!-- navigation buttons -->\n			<div class=\"row\">\n				<div class=\"col-sm-12\">\n\n					<!-- apps sub-list -->\n					<i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\">\n			            <div class=\"cmap-header-dropdownContain\">\n			                <div class=\"cmap-header-dropOut cmap-header-apps\">\n			                    <i class=\"cmap-header-link  fa fa-search\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-apps-container\">\n				                    <a href=\"//apps.lincscloud.org/query\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Query.png\" alt=\"\" /></a>\n									<a href=\"//apps.lincscloud.org/data_synopsis\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Data_Synopsis.png\" alt=\"\" /></a><br>\n									<a href=\"//apps.lincscloud.org/compound_digest\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Compound_Digest.png\" alt=\"\" /></a>\n									<a href=\"//apps.lincscloud.org/gene_digest\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Gene_Digest.png\" alt=\"\" /></a><br>\n									<a href=\"//apps.lincscloud.org/history\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_History.png\" alt=\"\" /></a><br>\n\n								</div>\n			                </div>\n			            </div>\n			        </i>\n\n					<!-- developer tools sub-list -->\n					<i title=\"Developer\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://developer.lincscloud.org/';\">\n						<div class=\"cmap-header-dropdownContain\">\n							<div class=\"cmap-header-dropOut cmap-header-developer\">\n								<i class=\"cmap-header-link  fa fa-cogs\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-developer-container\">\n									<a href=\"//api.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_API.png\" alt=\"\" /></a>\n									<a href=\"//c3.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_C3.png\" alt=\"\" /></a><br>\n									<a href=\"//download.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Download.png\" alt=\"\" /></a>\n									<a href=\"//code.lincscloud.org\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_Code.png\" alt=\"\" /></a><br>\n								</div>\n							</div>\n						</div>\n					</i>\n\n					<!-- projects sub-list -->\n					<i title=\"Projects\" class=\"fa fa-book cmap-header-link\" onclick=\"window.location.href = 'http://projects.lincscloud.org/';\">\n						<div class=\"cmap-header-dropdownContain\">\n							<div class=\"cmap-header-dropOut cmap-header-projects\">\n								<i class=\"cmap-header-link  fa fa-cogs\" style=\"opacity:0;\"></i><br>\n								<div class=\"cmap-header-dropOut-projects-container\">\n									<a href=\"//projects.lincscloud.org#LJP\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_LJP.png\" alt=\"\" /></a>\n									<a href=\"//projects.lincscloud.org#LTC\"><img src=\"http://coreyflynn.github.io/Bellhop/ai/header_dropout_icons_LTC.png\" alt=\"\" /></a><br>\n								</div>\n							</div>\n						</div>\n					</i>\n\n					<!-- support -->\n					<i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
-  if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "';\"></i>\n			    </div>\n			</div>\n\n		</div>\n\n		<!-- app title and subtitle -->\n		<div class=\"col-sm-4\">\n			<h3 class=\"col-xs-12 cmap-title-text cmap-center-text cmap-header-top-margin\">";
+  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-1\">\n					<p id=\"cmapHeaderMenuButton\" title=\"menu\" class=\"cmap-header-link-no-border pull-left\">menu</p>\n				</div>\n				<div class=\"col-xs-2\">\n					<a href=\"http://lincscloud.org/\"><img class=\"cmap-header-image\" src=\"http://cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a>\n				</div>\n				<div class=\"col-xs-9\">\n					";
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n				</div>\n			</div>\n		</div>\n		<div class=\"row\">\n			<h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n			<p class=\"col-xs-12 text-muted cmap-subhead-text cmap-center-text\">";
+    + "</h3>\n		</div>\n		<div class=\"row\">\n			<p class=\"col-sm-offset-1 col-sm-10 text-muted cmap-subhead-text cmap-center-text\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n		</div>\n\n		<!-- signin/signout and support -->\n		<div class=\"col-sm-3\">\n\n			<!-- user and signin/out -->\n			<div class=\"row cmap-header-top-margin\">\n				<h4 class=\"pull-right\">\n			         ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n			     </h4>\n			     ";
+    + "</p>\n		</div>\n	</div>\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n	                         <div class=\"col-xs-offset-1 col-xs-10\">\n	                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n	                                 ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n			</div>\n		</div>\n	</div>\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n	                         <div class=\"col-xs-offset-1 col-xs-10\">\n	                             <p class=\"col-xs-12 cmap-center-text cmap-header-username\">\n	                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	                                 <i title=\"Home\" class=\"fa fa-home cmap-header-link\" onclick=\"window.location.href = 'http://lincscloud.org';\"></i>\n	                                 <i title=\"Apps\" class=\"fa fa-th-large cmap-header-link\" onclick=\"window.location.href = 'http://apps.lincscloud.org/app_list';\"></i>\n	                                 <i title=\"Developer\" class=\"fa fa-cogs cmap-header-link\" onclick=\"window.location.href = 'http://developer.lincscloud.org/';\"></i>\n									 <i title=\"Projects\" class=\"fa fa-book cmap-header-link\" onclick=\"window.location.href = 'http://projects.lincscloud.org/';\"></i>\n	                                 <i title=\"Support\" class=\"fa fa-question-circle cmap-header-link\" onclick=\"window.location.href = '";
   if (stack1 = helpers.support_link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.support_link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "';\"></i>\n	                                 <!-- <i data-toggle=\"modal\" href=\"#aboutModal\" title=\"about\" class=\"fa fa-info-circle cmap-header-link\"></i> -->\n	                                 ";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	                             </p>\n	                         </div>\n\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -3954,8 +3941,8 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	}
 });
 // # **BubbleView**
-// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a 
-// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute. 
+// A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a
+// model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute.
 
 // basic use:
 
@@ -3999,6 +3986,12 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		// set up splitting categories
 		this.v_split = (this.options.v_split !== undefined) ? this.options.v_split : undefined;
 		this.h_split = (this.options.h_split !== undefined) ? this.options.h_split : undefined;
+
+		// set up splitting category centers
+		this.category_centers = (this.options.category_centers !== undefined) ? this.options.category_centers : {up: {x:0,y:-10},dn: {x:0,y:10}};
+
+		// set up category colors
+		this.category_colors = (this.options.category_colors !== undefined) ? this.options.category_colors : {up: "#D55E00",dn: "#56B4E9"};
 
 		// bind render to model changes
 		this.listenTo(this.model,'change', this.update);
@@ -4070,7 +4063,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 						.friction(0.9)
 						.size([this.width, this.height])
 						.on("tick",function(e){tick(e);})
-						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/8;})
+						.charge(function(d){return -Math.pow(self.data_scale(d.count),2)/6;})
 						.start();
 
 		// draw the initial layout
@@ -4078,7 +4071,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		this.vis.selectAll("circle").data(this.force.nodes())
 				.enter().append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("v_category",function(d){
 					if (self.v_split !== undefined){
 						return d[self.v_split];
@@ -4116,12 +4115,28 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection = this.vis.selectAll('circle');
 		bubble_selection
 			.attr("cy",function(d){
-					if (d[self.v_split] == 'up'){
-						d.y = d.y + (self.v_center - 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}else{
-						d.y = d.y + (self.v_center + 10 - d.y) * (self.damp + 0.02) * alpha * 1.1;
-					}
+				if (self.category_centers[d[self.v_split]] === undefined){
 					return(d.y);
+				}
+				var category_y = self.category_centers[d[self.v_split]].y;
+				if (category_y === 0){
+					return(d.y);
+				}else{
+					d.y = d.y + (self.v_center + category_y - d.y) * (self.damp + 0.03) * alpha * 1.1;
+					return(d.y);
+				}
+			})
+			.attr("cx",function(d){
+				if (self.category_centers[d[self.v_split]] === undefined){
+					return(d.x);
+				}
+				var category_x = self.category_centers[d[self.v_split]].x;
+				if (category_x === 0){
+					return(d.x);
+				}else{
+					d.x = d.x + (self.h_center - category_x - d.x) * (self.damp + 0.03) * alpha * 1.1;
+					return (d.x);
+				}
 			});
 	},
 
@@ -4159,7 +4174,13 @@ Barista.Views.BubbleView = Backbone.View.extend({
 		bubble_selection.enter()
 				.append("circle")
 				.attr("class",this.div_string + "_circle")
-				.attr("fill",this.fg_color)
+				.attr("fill",function(d){
+					if (self.category_colors[d[self.v_split]] !== undefined){
+						return self.category_colors[d[self.v_split]];
+					}else{
+						return self.fg_color;
+					}
+				})
 				.attr("cx", function(d){return d.x;})
 				.attr("cy", function(d){return d.y;})
 				.attr("stroke","white")
@@ -4191,6 +4212,7 @@ Barista.Views.BubbleView = Backbone.View.extend({
 
 	}
 });
+
 // # **CMapFooterView**
 
 // A view that provides the standard Connectivity map page footer for apps built on apps.lincscloud.org
@@ -4281,7 +4303,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	initialize: function(){
-		// store passed parameters as attributes of the view
+        var self = this;
+
+        // store passed parameters as attributes of the view
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
@@ -4290,8 +4314,12 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		// compile the default template for the view
 		this.compile_template();
 
-		// render the template
-		this.render();
+		// register an event for clicking on the menu button
+        $("#cmapHeaderMenuButton",this.$el).on("click",function(){
+            self.trigger("cmapHeaderMenuButton:DidClick");
+			$(".cmap-navigation-wrapper").toggleClass("show-nav");
+        });
+
 	},
 
 	// ### compile_template
@@ -4307,6 +4335,61 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 										tour: this.tour
 									}));
 	}
+});
+
+// # **CMapNavigationView**
+
+// A view the provides the standard Connectivity map application navigation for apps built on apps.lincscloud.org
+// basic use:
+
+//		nav = new CMapNavigationView({el:"header_target"});
+
+Barista.Views.CMapNavigationView = Backbone.View.extend({
+	// ### name
+	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	name: "CMapNavigationView",
+
+	// ### initialize
+	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	initialize: function(){
+        var self = this;
+
+        // store passed parameters as attributes of the view
+		this.items = (this.options.items !== undefined) ? this.options.items : ["data synopsis","query","compound digest","gene digest","history"];
+        this.links = (this.options.links !== undefined) ? this.options.links : ["/data_synopsis","/query","/compound_digest","/gene_digest","/history"];
+
+
+        // wrap the content
+        this.wrap_content();
+
+        // build the navigation panel
+        this.build_navigation();
+
+	},
+
+    // ### wrap_content
+    // wrap all existing content in the elements we need to work
+    // the slide out navigation that we are going to build
+    wrap_content: function(){
+        $("body").children().wrapAll('<div class="cmap-navigation-content"/>');
+        $(".cmap-navigation-content").wrapAll('<div class="cmap-navigation-wrapper"/>');
+    },
+
+    // ### build navigation
+    // build the navigation pane using all reuested menu items and links
+    build_navigation: function(){
+        var self = this;
+        $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu"></div>');
+        var $el = $(".cmap-navigation-menu");
+        this.items.forEach(function(item,i){
+			$el.append('<a href="' + self.links[i] + '" class="col-xs-12 cmap-navigation-menu-item">' + item + '</a>');
+		});
+		$el.prepend("<div class='cmap-spacer-large'></div>");
+		$el.prepend("<p id='cmap-navigation-menu-close' title='close' class='cmap-navigation-menu-item cmap-header-link-no-border class=col-xs-12'>X</p>");
+		$(".cmap-navigation-menu-item",$el).on("click",function(){
+			$(".cmap-navigation-wrapper").toggleClass("show-nav");
+		});
+    }
 });
 
 /**
@@ -5350,6 +5433,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	// add a foreignObject DOM snippet for each cell in the treemap based on
 	// an input mapping of DOM snippets
 	draw_foreignObject: function(){
+		var self = this;
 		this.vis.data([this.data]).selectAll(".foreign").data([]).exit().remove();
 		this.vis.data([this.data]).selectAll(".foreign").data(this.treemap.nodes)
 			.enter().append("foreignObject")
@@ -5370,9 +5454,14 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.style("height","100%")
 			.style("width","100%")
 			.style("display","flex")
+			.style("display", "-webkit-box")
+  			.style("display", "-webkit-flex")
+			.style("display", "-ms-flexbox")
 			.html(function(d){
 				if (d.children === undefined){
 					return self.category_html[d._id];
+				}else{
+					return "";
 				}
 			})
 	},
