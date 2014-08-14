@@ -4365,6 +4365,13 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
         // build the navigation panel
         this.build_navigation();
 
+		// make sure the height of the html and body element is set to 100%
+		// so our pull out menu looks like it extends all the way down the
+		// page even if the browser window is larger than the content of the
+		// page
+		$("html").css("height","100%");
+		$("body").css("height","100%");
+
 	},
 
     // ### wrap_content
