@@ -355,7 +355,6 @@ margin: 0 auto;
 /*app navigation css*/
 .cmap-navigation-wrapper{
 	position: relative;
-    overflow: hidden;
     width: 100%;
 }
 
@@ -364,7 +363,6 @@ margin: 0 auto;
     height: 100%;
     position: relative;
 	background-color: white;
-	overflow: hidden;
     -webkit-transform: translateX(0);
     transform: translateX(0);
     -webkit-transition: .3s ease all;
