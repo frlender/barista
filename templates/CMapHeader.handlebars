@@ -12,10 +12,10 @@
 				</div>
 				<div class="col-xs-9">
 					{{#if user}}
-						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = 'http://apps.lincscloud.org/signout';">logout</p>
+						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = '/signout';">logout</p>
 						<p title="profile" class="cmap-header-username pull-right">{{user}}</p>
 					{{else}}
-						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = 'http://apps.lincscloud.org/signout';"></p>
+						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = '/start';">login</p>
 					{{/if}}
 				</div>
 			</div>

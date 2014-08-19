@@ -201,7 +201,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\">logout</p>\n						<p title=\"profile\" class=\"cmap-header-username pull-right\">";
+  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/signout';\">logout</p>\n						<p title=\"profile\" class=\"cmap-header-username pull-right\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -212,7 +212,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = 'http://apps.lincscloud.org/signout';\"></p>\n					";
+  return "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/start';\">login</p>\n					";
   }
 
 function program5(depth0,data) {
@@ -4364,6 +4364,13 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 
         // build the navigation panel
         this.build_navigation();
+
+		// make sure the height of the html and body element is set to 100%
+		// so our pull out menu looks like it extends all the way down the
+		// page even if the browser window is larger than the content of the
+		// page
+		$("html").css("height","100%");
+		$("body").css("height","100%");
 
 	},
 
