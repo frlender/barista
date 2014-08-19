@@ -92,43 +92,27 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<a class=\"cmap-card-link\" href=\"";
-  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">\n  <div id=\"";
+  buffer += "<div id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"";
+    + "\" class=\"cmap-card-wrapper ";
   if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n    <div class=\"col-xs-12\" style=\"background-color: ";
-  if (stack1 = helpers.fg_color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.fg_color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    + "\">\n    <div class=\"cmap-card\">\n        <a href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n        <div class=\"cmap-spacer-tiny\"></div>\n        <p class=\"hidden-xs cmap-center-text cmap-card-title-text\">";
+    + "\">\n            <div class='cmap-card-title'>";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n        <p class=\"visible-xs cmap-center-text cmap-card-title-text-small\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</p>\n        <div style=\"min-height:2px\"></div>\n      </div>\n\n    <div class=\"col-xs-12 cmap-card\">\n\n        <img src=\"";
-  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" class=\"col-xs-4 img-responsive\" alt=\"\">\n        <h4 class=\"hidden-xs col-xs-8 cmap-card-subtitle-text text-muted\">";
+    + "</div>\n            <p class=\"cmap-card-subtitle\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h4>\n        <p class=\"visible-xs col-xs-8 cmap-card-subtitle-text-small text-muted\">";
-  if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</p>\n        <div class=\"col-xs-12 cmap-spacer-tiny\"></div>\n    </div>\n  </div>\n</a>\n";
+    + "</p>\n        </a>\n    </div>\n</div>\n";
   return buffer;
   });
 
