@@ -185,7 +185,19 @@ module.exports = function(grunt) {
         files: ['css/internal/**/*.css'],
         tasks: ['cssmin']
       }
-    }
+    },
+
+    // configure compilation of sccs to css
+    sass: {
+        dist: {
+          options: {
+            style: 'expanded'
+          },
+          files: {
+            'css/internal/barista.css': 'css/internal/barista.scss'
+          }
+        }
+      }
   });
 
   // Load the plugin that provides the "concat" task.
@@ -209,8 +221,11 @@ module.exports = function(grunt) {
   // load the plugin that provides the "watch" task
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  // load the plugin that provides the "sass" task
+  grunt.loadNpmTasks('grunt-contrib-sass');
+
   // nodoc task
-  grunt.registerTask('nodoc', ['handlebars','concat_internal','uglify:main','concat_main','cssmin']);
+  grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
   // task to concat and minimized external sources
   grunt.registerTask('build_external',['concat:js_external','uglify:external']);
@@ -229,7 +244,7 @@ module.exports = function(grunt) {
   grunt.registerTask('concat_main',['concat:js_barista_main_min']);
 
   // Default task(s).
-  grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','cssmin','groc']);
+  grunt.registerTask('doc', ['handlebars','concat_internal','uglify:main','concat_main','sass','cssmin','groc']);
 
 
 
