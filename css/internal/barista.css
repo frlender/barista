@@ -1,3 +1,7 @@
+.cmap-card-wrapper {
+  padding-bottom: 20px;
+}
+
 .cmap-card {
   background-color: #03a9f4;
   top: 50px;
