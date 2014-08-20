@@ -6,7 +6,7 @@
 // optional arguments:
 
 // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
-// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
 
 // `generic_count_model = new GenericCountModel()`
 
@@ -15,10 +15,10 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // describes the model's default parameters
 
   // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
-  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
   defaults: {
     "search_field": "pert_iname",
-    "url": "http://api.lincscloud.org/a2/pertinfo",
+    "url": "//api.lincscloud.org/a2/pertinfo",
     "count": 0,
     "last_update": (new Date()).getTime(),
     "search_string": "",

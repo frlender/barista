@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://prefix:8080/p100/v1/profileinfo?',
+					return ['//prefix:8080/p100/v1/profileinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&f={"pert_iname":1}',
 						'&l=100',

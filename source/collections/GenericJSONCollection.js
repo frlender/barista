@@ -12,7 +12,7 @@
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 //		pert_collection = new PertCollection({model: PertModel,
-//											url: 'http://api.lincscloud.org/a2/pertinfo?callback=?',
+//											url: '//api.lincscloud.org/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
 Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({

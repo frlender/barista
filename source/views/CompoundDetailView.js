@@ -134,7 +134,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the pubchem_cid and label
-		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
@@ -211,7 +211,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 				.text("PubChem")
 				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-				.on("click", function(){window.location = "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
+				.on("click", function(){window.location = "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
 		}
 
 		// check to see if there is a wikipedia url and draw a link for it if there
@@ -232,7 +232,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		}
 
 		// render an image that will to indicate that the user can click the content to unfold the panel
-		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+		this.cevron_image_link = (this.panel_open) ? '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
 
 		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
 		this.controls_layer.selectAll('.cevron_icon').data([1])
@@ -420,13 +420,13 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 			h = this.options.plot_height;
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = false;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
 		}else{
 			h = this.open_height
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
 		}
 		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
@@ -519,7 +519,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.index_text_icon').data([1])
 							.enter().append("svg:image")
 							.attr("class","index_text_icon")
-			                .attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
+			                .attr("xlink:href", "//coreyflynn.github.io/Bellhop/img/CP.png")
 							.attr("x",10)
 							.attr("y",0)
 							.attr("height",40)

@@ -249,7 +249,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// file_url attribute and change the link in the slice button to expose the
 		// link.  If it does not exist, the slice failed and we display a failure
 		// message asking the user to try again
-		sig_slice = 'http://prefix:8080/a2/sigslice?callback=?';
+		sig_slice = '//prefix:8080/a2/sigslice?callback=?';
 		$.ajax({
 			dataType: 'json',
 			url: sig_slice,

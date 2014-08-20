@@ -142,7 +142,7 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 305;
 
 		// set up the platform icon
-		this.platform_icon = (this.options.platform_icon !== undefined) ? this.options.platform_icon : 'http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png';
+		this.platform_icon = (this.options.platform_icon !== undefined) ? this.options.platform_icon : '//coreyflynn.github.io/Bellhop/img/cmap_logo_small.png';
 
 		// set up static export table, default if not specified
 		this.export_text = (this.options.export_text !== undefined) ? this.options.export_text : "download table";
@@ -150,7 +150,7 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 		// set up static view details, default if not specified
 		this.details_text = (this.options.details_text !== undefined) ? this.options.details_text : "view details";
-		this.details_url = (this.options.details_url !== undefined) ? this.options.details_url : "http://apps.lincscloud.org";
+		this.details_url = (this.options.details_url !== undefined) ? this.options.details_url : "//apps.lincscloud.org";
 		this.details_target = (this.options.details_target !== undefined) ? this.options.details_target : "_self";
 
 		// set up default categories to display

@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['http://api.lincscloud.org/compute_status?',
+                    return ['//api.lincscloud.org/compute_status?',
                           'q={"user_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"user_id":1}'].join('');

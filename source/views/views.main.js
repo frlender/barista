@@ -1061,16 +1061,16 @@ Barista.Views.BubbleView = Backbone.View.extend({
 // optional arguments:
 
 // 1.  {string}  **organization**  the name of the organization that claims copyright. Defaults to *Broad Institute*
-// 2.  {string}  **terms_url**  The url on which to find terms and conditions. Defaults to *http://lincscloud.org/terms-and-conditions/*
-// 3.  {Array}  **logo**  The urls to organization logos to use. Defaults to *['http://coreyflynn.github.io/Bellhop/img/broad_logo_small.png','http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png']*
-// 4.  {Array}  **logo_url**  The urls to organization links to use. Defaults to *['http://www.broadinstitute.org/','http://lincscloud.org/']*
+// 2.  {string}  **terms_url**  The url on which to find terms and conditions. Defaults to *//lincscloud.org/terms-and-conditions/*
+// 3.  {Array}  **logo**  The urls to organization logos to use. Defaults to *['//coreyflynn.github.io/Bellhop/img/broad_logo_small.png','//coreyflynn.github.io/Bellhop/img/cmap_logo_small.png']*
+// 4.  {Array}  **logo_url**  The urls to organization links to use. Defaults to *['//www.broadinstitute.org/','//lincscloud.org/']*
 // 5.  {string}  **template**  The path to a handlebars template to use. Defaults to *templates/CMapFooter.handlebars*
 
 //		header = new CMapFooterView({el:"footer_target",
 //									organization: "Broad Institute",
-//									terms_url: "http://lincscloud.org/terms-and-conditions/",
+//									terms_url: "//lincscloud.org/terms-and-conditions/",
 // 									logo: ['../img/broad_logo_small.png','../img/cmap_logo_small.png'],
-// 									logo_url: ['http://www.broadinstitute.org/','http://lincscloud.org/'],
+// 									logo_url: ['//www.broadinstitute.org/','//lincscloud.org/'],
 //									template: "../templates/CMapFooter.handlebars"});
 Barista.Views.CMapFooterView = Backbone.View.extend({
 	// ### name
@@ -1082,9 +1082,9 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 	initialize: function(){
 		// store passed parameters as attributes of the view
 		this.organization = (this.options.organization !== undefined) ? this.options.organization : "Broad Institute";
-		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "http://lincscloud.org/terms-and-conditions/";
-		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['http://coreyflynn.github.io/Bellhop/img/broad_logo_small_text.png','http://coreyflynn.github.io/Bellhop/img/CMap-logox.png','http://coreyflynn.github.io/Bellhop/img/skunkworks-logo.png','http://coreyflynn.github.io/Bellhop/img/NIH_LINCS_logo.gif'];
-		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['http://www.broadinstitute.org/','http://lincscloud.org/','http://www.broadinstitute.org/vis','http://www.lincsproject.org/'];
+		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "//lincscloud.org/terms-and-conditions/";
+		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['//coreyflynn.github.io/Bellhop/img/broad_logo_small_text.png','//coreyflynn.github.io/Bellhop/img/CMap-logox.png','//coreyflynn.github.io/Bellhop/img/skunkworks-logo.png','//coreyflynn.github.io/Bellhop/img/NIH_LINCS_logo.gif'];
+		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['//www.broadinstitute.org/','//lincscloud.org/','//www.broadinstitute.org/vis','//www.lincsproject.org/'];
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapFooter.handlebars";
 
 		// compile the default template for the view
@@ -1145,7 +1145,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.title = (this.options.title !== undefined) ? this.options.title : "";
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
-		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "http://support.lincscloud.org";
+		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "//support.lincscloud.org";
 
 		// compile the default template for the view
 		this.compile_template();
@@ -1266,7 +1266,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : "search cell lines";
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -1320,7 +1320,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     **/
 	random_val: function(){
 		var self = this;
-		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
 
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
@@ -1491,7 +1491,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the pubchem_cid and label
-		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
 
 		// (re)draw the InChIKey label and InChIKey
 		this.render_label_and_value('inchi_key', 'InChIKey', this.model.get("inchi_key").split("InChIKey=")[1], true);
@@ -1568,7 +1568,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 				.text("PubChem")
 				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-				.on("click", function(){window.location = "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
+				.on("click", function(){window.location = "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
 		}
 
 		// check to see if there is a wikipedia url and draw a link for it if there
@@ -1589,7 +1589,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		}
 
 		// render an image that will to indicate that the user can click the content to unfold the panel
-		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+		this.cevron_image_link = (this.panel_open) ? '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
 
 		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
 		this.controls_layer.selectAll('.cevron_icon').data([1])
@@ -1777,13 +1777,13 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 			h = this.options.plot_height;
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = false;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
 		}else{
 			h = this.open_height
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
 		}
 		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
@@ -1876,7 +1876,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 		this.fg_layer.selectAll('.index_text_icon').data([1])
 							.enter().append("svg:image")
 							.attr("class","index_text_icon")
-			                .attr("xlink:href", "http://coreyflynn.github.io/Bellhop/img/CP.png")
+			                .attr("xlink:href", "//coreyflynn.github.io/Bellhop/img/CP.png")
 							.attr("x",10)
 							.attr("y",0)
 							.attr("height",40)
@@ -1950,7 +1950,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":"trt_cp"}',
 					f:'{"pert_iname":1}',
 										l:1,
@@ -1992,7 +1992,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
-				url: ['http://api.lincscloud.org/a2/pertinfo?',
+				url: ['//api.lincscloud.org/a2/pertinfo?',
 					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',
@@ -2640,7 +2640,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		// file_url attribute and change the link in the slice button to expose the
 		// link.  If it does not exist, the slice failed and we display a failure
 		// message asking the user to try again
-		sig_slice = 'http://prefix:8080/a2/sigslice?callback=?';
+		sig_slice = '//prefix:8080/a2/sigslice?callback=?';
 		$.ajax({
 			dataType: 'json',
 			url: sig_slice,
@@ -4098,7 +4098,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			.on("click",function(){self.save_png();});
 
 		// render an image that will to indicate that the user can click the content to unfold the panel
-		this.cevron_image_link = (this.panel_open) ? 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
+		this.cevron_image_link = (this.panel_open) ? '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png' : '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png';
 
 		this.controls_layer.selectAll('.cevron_icon').data([]).exit().remove();
 		this.controls_layer.selectAll('.cevron_icon').data([1])
@@ -4227,7 +4227,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 		this.render_label_and_value('vendor', 'Vendor', 'pert_vendor');
 
 		// (re)draw the pubchem_cid and label
-		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
+		this.render_label_and_value('pubchem_cid', 'PubChem CID', 'pubchem_cid', false, 10, "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid'));
 
 		// (re)draw the InChIKey label and InChIKey
 		if(this.model.get("inchi_key")){
@@ -4283,7 +4283,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 				.text("PubChem")
 				.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 				.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-				.on("click", function(){window.location = "http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
+				.on("click", function(){window.location = "//pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=" + self.model.get('pubchem_cid')});
 		}
 
 		// check to see if there is a wikipedia url and draw a link for it if there
@@ -4596,13 +4596,13 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 			h = this.options.plot_height;
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = false;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/down_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 20);
 		}else{
 			h = this.open_height
 			$("#" + this.div_string).animate({height:h},500);
 			this.panel_open = true;
-			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", 'http://coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
+			this.controls_layer.selectAll(".cevron_icon").attr("xlink:href", '//coreyflynn.github.io/Bellhop/img/up_arrow_select.png')
 			this.controls_layer.selectAll('.cevron_icon').transition().duration(500).attr("y",h - 15);
 		}
 		this.controls_layer.selectAll("." + this.div_string + "more_button").transition().duration(500).attr("y",h - 15);
@@ -4717,7 +4717,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : 'search gene, compound or cell type name';
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -4776,7 +4776,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":{"$in":["trt_cp","trt_sh"]}}',
 					f:'{"pert_iname":1}',
 										l:1,
@@ -4951,7 +4951,7 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 		this.plot_height = (this.options.plot_height !== undefined) ? this.options.plot_height : 305;
 
 		// set up the platform icon
-		this.platform_icon = (this.options.platform_icon !== undefined) ? this.options.platform_icon : 'http://coreyflynn.github.io/Bellhop/img/cmap_logo_small.png';
+		this.platform_icon = (this.options.platform_icon !== undefined) ? this.options.platform_icon : '//coreyflynn.github.io/Bellhop/img/cmap_logo_small.png';
 
 		// set up static export table, default if not specified
 		this.export_text = (this.options.export_text !== undefined) ? this.options.export_text : "download table";
@@ -4959,7 +4959,7 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 		// set up static view details, default if not specified
 		this.details_text = (this.options.details_text !== undefined) ? this.options.details_text : "view details";
-		this.details_url = (this.options.details_url !== undefined) ? this.options.details_url : "http://apps.lincscloud.org";
+		this.details_url = (this.options.details_url !== undefined) ? this.options.details_url : "//apps.lincscloud.org";
 		this.details_target = (this.options.details_target !== undefined) ? this.options.details_target : "_self";
 
 		// set up default categories to display

@@ -23,7 +23,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';

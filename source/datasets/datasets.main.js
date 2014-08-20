@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/cellinfo?',
+					return ['//api.lincscloud.org/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('');
@@ -101,7 +101,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url, query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/cellinfo?',
+					return ['//api.lincscloud.org/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('')
@@ -176,7 +176,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/cellinfo?',
+					return ['//api.lincscloud.org/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('');
@@ -251,7 +251,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/cellinfo?',
+					return ['//api.lincscloud.org/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
 						'&d=mutations'].join('');
 				},
@@ -319,7 +319,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/pertinfo?',
+					return ['//api.lincscloud.org/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":"trt_cp"}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -426,7 +426,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/pertinfo?',
+					return ['//api.lincscloud.org/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_oe.mut"]}}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -533,7 +533,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    ['http://api.lincscloud.org/compute_status?',
+                    ['//api.lincscloud.org/compute_status?',
                           'q={"job_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"job_id":1}'].join('');
@@ -608,7 +608,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 reomote: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['http://api.lincscloud.org/compute_status?',
+                    return ['//api.lincscloud.org/compute_status?',
                           'q={"params.rpt":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"job_id":1}'].join('');
@@ -683,7 +683,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['http://api.lincscloud.org/compute_status?',
+                    return ['//api.lincscloud.org/compute_status?',
                           'q={"status":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"status":1}'].join('')
@@ -758,7 +758,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://prefix:8080/p100/v1/profileinfo?',
+					return ['//prefix:8080/p100/v1/profileinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&f={"pert_iname":1}',
 						'&l=100',
@@ -839,7 +839,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/prism/v1/profileinfo?',
+					return ['//api.lincscloud.org/prism/v1/profileinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&f={"pert_iname":1}',
 						'&l=100',
@@ -920,7 +920,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['http://api.lincscloud.org/a2/pertinfo?',
+					return ['//api.lincscloud.org/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -1027,7 +1027,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['http://api.lincscloud.org/compute_status?',
+                    return ['//api.lincscloud.org/compute_status?',
                           'q={"tool_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"tool_id":1}'].join('');
@@ -1102,7 +1102,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['http://api.lincscloud.org/compute_status?',
+                    return ['//api.lincscloud.org/compute_status?',
                           'q={"user_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"user_id":1}'].join('');

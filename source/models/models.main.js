@@ -79,9 +79,9 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
-    var cell_info = 'http://api.lincscloud.org/a2/cellinfo?callback=?';
+    var sig_info = '//api.lincscloud.org/a2/siginfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var cell_info = '//api.lincscloud.org/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -191,7 +191,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
     var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
@@ -331,7 +331,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
     var params = params = {
         q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
         f:'{"pert_iname":1}',
@@ -391,7 +391,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
         // set up the api parameters to make an exact matched query against
         // pert_inames in pertinfo and retrieve the first result
-        var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+        var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
         var params = params = {q:'{"pert_type":"'+ pert_type + '","pert_iname":"' + search_string + '"}',
                               l:1};
 
@@ -422,7 +422,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 // optional arguments:
 
 // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
-// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+// 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
 
 // `generic_count_model = new GenericCountModel()`
 
@@ -431,10 +431,10 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // describes the model's default parameters
 
   // 1.  {string}  **search_field**  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
-  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"http://api.lincscloud.org/a2/pertinfo"*
+  // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
   defaults: {
     "search_field": "pert_iname",
-    "url": "http://api.lincscloud.org/a2/pertinfo",
+    "url": "//api.lincscloud.org/a2/pertinfo",
     "count": 0,
     "last_update": (new Date()).getTime(),
     "search_string": "",
@@ -560,7 +560,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -627,7 +627,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var pert_info = 'http://api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -802,7 +802,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var sig_info = 'http://api.lincscloud.org/a2/siginfo?callback=?';
+    var sig_info = '//api.lincscloud.org/a2/siginfo?callback=?';
     var params = {};
     if (search_type === "multi") {
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
