@@ -12,7 +12,7 @@ $accent: #eeeeee;
   background-color: $base500;
   top: 50px;
   position: relative;
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 5px 0px 0px $base700,0px 3px 3px 0px rgba(0,0,0,0.24);
 
   a{
@@ -30,8 +30,8 @@ $accent: #eeeeee;
   }
   font-weight: 700;
   text-align:center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   border-bottom: 10px solid $base100;
   position: relative;
   top: -1px;
