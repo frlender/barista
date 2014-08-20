@@ -6,7 +6,6 @@
   background-color: #03a9f4;
   top: 50px;
   position: relative;
-  border-radius: 5px;
 }
 .cmap-card a {
   text-decoration: none;
@@ -18,8 +17,6 @@
   font-size: 40pt;
   font-weight: 700;
   text-align: center;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   border-bottom: 10px solid #b3e5fc;
   position: relative;
   top: -1px;
