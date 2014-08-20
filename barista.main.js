@@ -6714,22 +6714,35 @@ Barista.getEmSizeInPixels = function(id) {
 Barista.numberWithCommas = function(x){
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+// # **setAPIPrefilter**
+
+// a utility function to set up
+// ajax calls to api.lincscloud.org to pass Barista.user_key as a parameter
+
+// arguments
+//
+// 1.  {string}  **api_endpoint**  The location of the API endpoint to prefilter call from. defaults to *"api.lincscloud.org"*
+Barista.setAPIPrefilter = function(api_endpoint) {
+    api_endpoint = (api_endpoint !== undefined) ? api_endpoint : 'api.lincscloud.org';
+    // configure ajax calls to add the user key parameter on calls to api.lincscloud.org
+    $.ajaxPrefilter(function( options, originalOptions, jqXHR ){
+        var re = new RegExp(api_endpoint);
+        if (re.test(options.url)){
+            options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
+        }
+    });
+};
+
 // # **setUserKey**
 
 // a utility function to set a user_key attribute on the Barista object and set up
 // ajax calls to api.lincscloud.org to pass that user_key as a parameter
 
 // arguments
-// 
+//
 // 1.  {string}  **key**  The user_key to use or a path to a JSON file containing a user_key attribute, defaults to *""*
 Barista.setUserKey = function(key) {
-	// configure ajax calls to add the user key parameter on calls to api.lincscloud.org
-	$.ajaxPrefilter(function( options, originalOptions, jqXHR ){
-		var re = new RegExp('api.lincscloud.org');
-		if (re.test(options.url)){
-			options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
-		}
-	});
+	Barista.setAPIPrefilter();
 
 	// grab the user_key from the url given by string passed in 'key' or set the string itself
 	// as user_key if an ajax call to the string fails
@@ -6741,6 +6754,7 @@ Barista.setUserKey = function(key) {
 		Barista.user_key = key;
 	});
 };
+
 // # **AnalysisHistoryModel**
 
 // A Backbone.Model that represents an analysis history object.
