@@ -7,7 +7,6 @@
   top: 50px;
   position: relative;
   border-radius: 5px;
-  box-shadow: 0px 5px 0px 0px #0288d1, 0px 3px 3px 0px rgba(0, 0, 0, 0.24);
 }
 .cmap-card a {
   text-decoration: none;
