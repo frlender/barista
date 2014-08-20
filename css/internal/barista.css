@@ -500,41 +500,37 @@ a.cmap-navigation-menu-item:hover {
     transform: rotate(359deg);
   }
 }
-
 @-moz-keyframes rotate {
   100% {
     -moz-transform: rotate(359deg);
     transform: rotate(359deg);
   }
 }
-
 @-o-keyframes rotate {
   100% {
     -moz-transform: rotate(359deg);
     transform: rotate(359deg);
   }
 }
-
 @keyframes rotate {
   100% {
     transform: rotate(359deg);
   }
 }
-
 /*float*/
 @-webkit-keyframes float {
   0% {
     -webkit-transform: translateY(0) scale(1, 1);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   }
-
   50% {
     -webkit-transform: translateY(-10px) scale(1.02, 1.02);
     box-shadow: 0 11px 18px rgba(0, 0, 0, 0.2);
   }
-
   100% {
     -webkit-transform: translateY(0) scale(1, 1);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
+
+/*# sourceMappingURL=barista.css.map */

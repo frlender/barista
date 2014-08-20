@@ -1259,7 +1259,8 @@ Barista.setAPIPrefilter = function(api_endpoint) {
     // configure ajax calls to add the user key parameter on calls to api.lincscloud.org
     $.ajaxPrefilter(function( options, originalOptions, jqXHR ){
         var re = new RegExp(api_endpoint);
-        if (re.test(options.url)){
+        var re_default = new RegExp('api.lincscloud.org');
+        if (re.test(options.url) || re_default.test(options.url)){
             options.data = $.param($.extend(originalOptions.data,{user_key:Barista.user_key}));
         }
     });
