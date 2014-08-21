@@ -48,9 +48,9 @@
 }
 
 .cmap-loading {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  /*position: absolute;*/
+  /*left: 50%;*/
+  /*top: 50%;*/
   /*margin: -60px 0 0 -60px;*/
   background-image: url("//coreyflynn.github.io/Bellhop/img/cmap_logo_small.png");
   background-size: 100% 100%;
