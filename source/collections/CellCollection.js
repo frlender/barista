@@ -17,7 +17,7 @@
 Barista.Collections.CellCollection = Backbone.Collection.extend({
     // #### initialize
     initialize: function(){
-        #### initialize
+        // #### url
         // the url from which model data is fetched
         this.url =  Barista.APIURL + '/a2/cellinfo?callback=?';
     },
