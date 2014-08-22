@@ -16,7 +16,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/compute_status?callback=?',
+    url: Barista.APIURL + '/compute_status?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.

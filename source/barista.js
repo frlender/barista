@@ -1,5 +1,5 @@
 //		Barista.js 0.2.0
-//		(c) 2013 Corey Flynn, Broad Institute.
+//		(c) 2014 Corey Flynn, Broad Institute.
 //		For all documentation:
 //		http://cmap.github.io/barista
 
@@ -17,6 +17,10 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// build a set of configuration attributes that are referenced throughout the
+// library
+Barista.APIURL = '//api.lincscloud.org';
 
 // build an object of utilities that we need to make sure are not overwritten
 Barista.Utils = {cookie: $.cookie};
@@ -49,7 +53,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/cellinfo?',
+					return [Barista.APIURL + '/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_histology":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('');
@@ -124,7 +128,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url, query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/cellinfo?',
+					return [Barista.APIURL + '/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_id":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('')
@@ -199,7 +203,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/cellinfo?',
+					return [Barista.APIURL + '/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]},"cell_lineage":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&l=10',
 						'&s={"cell_id":1}'].join('');
@@ -274,7 +278,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/cellinfo?',
+					return [Barista.APIURL + '/a2/cellinfo?',
 						'q={"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}',
 						'&d=mutations'].join('');
 				},
@@ -342,7 +346,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/pertinfo?',
+					return [Barista.APIURL + '/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":"trt_cp"}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -449,7 +453,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/pertinfo?',
+					return [Barista.APIURL + '/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$in":["trt_sh","trt_oe","trt_oe.mut"]}}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -556,7 +560,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    ['//api.lincscloud.org/compute_status?',
+                    [Barista.APIURL + '/compute_status?',
                           'q={"job_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"job_id":1}'].join('');
@@ -631,7 +635,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 reomote: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['//api.lincscloud.org/compute_status?',
+                    return [Barista.APIURL + '/compute_status?',
                           'q={"params.rpt":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"job_id":1}'].join('');
@@ -706,7 +710,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['//api.lincscloud.org/compute_status?',
+                    return [Barista.APIURL + '/compute_status?',
                           'q={"status":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"status":1}'].join('')
@@ -862,7 +866,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/prism/v1/profileinfo?',
+					return [Barista.APIURL + '/prism/v1/profileinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}}',
 						'&f={"pert_iname":1}',
 						'&l=100',
@@ -943,7 +947,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/pertinfo?',
+					return [Barista.APIURL + '/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',
@@ -1050,7 +1054,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['//api.lincscloud.org/compute_status?',
+                    return [Barista.APIURL + '/compute_status?',
                           'q={"tool_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"tool_id":1}'].join('');
@@ -1125,7 +1129,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
-                    return ['//api.lincscloud.org/compute_status?',
+                    return [Barista.APIURL + '/compute_status?',
                           'q={"user_id":{"$regex":"^' + query + '", "$options":"i"}}',
                           '&l=10',
                           '&s={"user_id":1}'].join('');
@@ -1266,6 +1270,18 @@ Barista.setAPIPrefilter = function(api_endpoint) {
     });
 };
 
+// # **setAPIURL**
+
+// a utility function to set an APIURL attribute on the Barista object
+
+// arguments
+//
+// 1.  {string}  **url**  the url for an API endpoint that your would like barista to hit for all API calls. defaults to *"//api.lincscloud.org"*
+Barista.setAPIURL = function(url) {
+    url = (url !== undefined) ? url : '//api.lincscloud.org';
+    Barista.APIURL = url;
+};
+
 // # **setUserKey**
 
 // a utility function to set a user_key attribute on the Barista object and set up
@@ -1369,9 +1385,9 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var sig_info = '//api.lincscloud.org/a2/siginfo?callback=?';
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
-    var cell_info = '//api.lincscloud.org/a2/cellinfo?callback=?';
+    var sig_info = Barista.APIURL + '/a2/siginfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
+    var cell_info = Barista.APIURL + '/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -1481,7 +1497,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
@@ -1621,7 +1637,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = params = {
         q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
         f:'{"pert_iname":1}',
@@ -1681,7 +1697,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
         // set up the api parameters to make an exact matched query against
         // pert_inames in pertinfo and retrieve the first result
-        var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+        var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
         var params = params = {q:'{"pert_type":"'+ pert_type + '","pert_iname":"' + search_string + '"}',
                               l:1};
 
@@ -1850,7 +1866,7 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -1917,7 +1933,7 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = {};
     if (search_type === "multi") {
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -2092,7 +2108,7 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var sig_info = '//api.lincscloud.org/a2/siginfo?callback=?';
+    var sig_info = Barista.APIURL + '/a2/siginfo?callback=?';
     var params = {};
     if (search_type === "multi") {
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
@@ -2233,7 +2249,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/compute_status?callback=?',
+    url: Barista.APIURL + '/compute_status?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -2341,7 +2357,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new CellCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/pertinfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
@@ -2352,7 +2368,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/cellinfo?callback=?',
+    url: Barista.APIURL + '/a2/cellinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -2423,7 +2439,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 //		pert_collection = new PertCollection({model: PertModel,
-//											url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+//											url: Barista.APIURL + '/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
 Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
@@ -2497,7 +2513,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new PertCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/pertinfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
@@ -2508,7 +2524,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -2592,7 +2608,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 });
 
 // # **SignatureCollection**
-// A Backbone.Collection that represents a set of signatures.  This collection is suitable for 
+// A Backbone.Collection that represents a set of signatures.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -2603,25 +2619,25 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new SignatureCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/siginfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/siginfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
 Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // #### model
-    // the model used for the collection objects. 
+    // the model used for the collection objects.
     model: Barista.Models.SignatureModel,
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/siginfo?callback=?',
+    url: Barista.APIURL + '/a2/siginfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -2638,7 +2654,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // Gets additional data from the specified url and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
@@ -2715,6 +2731,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         return getData_promise;
     }
 });
+
 // # **SummlyResultCollection**
 // A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for
 // internal use in GridView.
@@ -2727,7 +2744,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 //		pert_collection = new PertCollection({model: PertModel,
-//											url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+//											url: Barista.APIURL + '/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
 
@@ -2738,7 +2755,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
 	// #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -4093,7 +4110,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : "search cell lines";
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -4147,7 +4164,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     **/
 	random_val: function(){
 		var self = this;
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
@@ -4777,7 +4794,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = Barista.APIURL + '/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":"trt_cp"}',
 					f:'{"pert_iname":1}',
 										l:1,
@@ -4819,7 +4836,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
-				url: ['//api.lincscloud.org/a2/pertinfo?',
+				url: [Barista.APIURL + '/a2/pertinfo?',
 					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',
@@ -7544,7 +7561,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : 'search gene, compound or cell type name';
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -7603,7 +7620,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = Barista.APIURL + '/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":{"$in":["trt_cp","trt_sh"]}}',
 					f:'{"pert_iname":1}',
 										l:1,

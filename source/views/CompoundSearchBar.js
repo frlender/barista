@@ -60,7 +60,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = Barista.APIURL + '/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":"trt_cp"}',
 					f:'{"pert_iname":1}',
 										l:1,
@@ -102,7 +102,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
-				url: ['//api.lincscloud.org/a2/pertinfo?',
+				url: [Barista.APIURL + '/a2/pertinfo?',
 					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',

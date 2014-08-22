@@ -54,7 +54,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = params = {
         q:'{"pert_type":{"$in":["trt_sh","trt_oe"]},"pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
         f:'{"pert_iname":1}',
@@ -114,7 +114,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
         // set up the api parameters to make an exact matched query against
         // pert_inames in pertinfo and retrieve the first result
-        var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+        var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
         var params = params = {q:'{"pert_type":"'+ pert_type + '","pert_iname":"' + search_string + '"}',
                               l:1};
 

@@ -16,7 +16,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/compute_status?callback=?',
+    url: Barista.APIURL + '/compute_status?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -124,7 +124,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new CellCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/pertinfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
@@ -135,7 +135,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/cellinfo?callback=?',
+    url: Barista.APIURL + '/a2/cellinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -206,7 +206,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 //		pert_collection = new PertCollection({model: PertModel,
-//											url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+//											url: Barista.APIURL + '/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
 Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
@@ -280,7 +280,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new PertCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/pertinfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
@@ -291,7 +291,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -375,7 +375,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 });
 
 // # **SignatureCollection**
-// A Backbone.Collection that represents a set of signatures.  This collection is suitable for 
+// A Backbone.Collection that represents a set of signatures.  This collection is suitable for
 // internal use in GridView.
 
 // optional arguments:
@@ -386,25 +386,25 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 // `pert_collection = new SignatureCollection({model: PertModel,
-                                          // url: '//api.lincscloud.org/a2/siginfo?callback=?',
+                                          // url: Barista.APIURL + '/a2/siginfo?callback=?',
                                           // skip: 0,
                                           // isLoading: false});`
 
 Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // #### model
-    // the model used for the collection objects. 
+    // the model used for the collection objects.
     model: Barista.Models.SignatureModel,
 
     // #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/siginfo?callback=?',
+    url: Barista.APIURL + '/a2/siginfo?callback=?',
 
     // #### skip
-    // the skip parameter used in api calls when the collection is updated. 
+    // the skip parameter used in api calls when the collection is updated.
     skip: 0,
 
     // #### isLoading
-    // indicates wether or not the collection is in the middle of a fetch operation. 
+    // indicates wether or not the collection is in the middle of a fetch operation.
     isLoading: false,
 
     // ### maxCount
@@ -421,7 +421,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // Gets additional data from the specified url and stores them as models in the collection
 
     // arguments
-    // 
+    //
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
@@ -498,6 +498,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
         return getData_promise;
     }
 });
+
 // # **SummlyResultCollection**
 // A Backbone.Collection that represents a set of CMap Summly results.  This collection is suitable for
 // internal use in GridView.
@@ -510,7 +511,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 //		pert_collection = new PertCollection({model: PertModel,
-//											url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+//											url: Barista.APIURL + '/a2/pertinfo?callback=?',
 //											skip: 0,
 //											isLoading: false});
 
@@ -521,7 +522,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
 	// #### url
     // the url from which model data is fetched
-    url: '//api.lincscloud.org/a2/pertinfo?callback=?',
+    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.

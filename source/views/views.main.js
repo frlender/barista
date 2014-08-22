@@ -1266,7 +1266,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : "search cell lines";
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -1320,7 +1320,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     **/
 	random_val: function(){
 		var self = this;
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 
 		var skip = Math.round(Math.random()*40);
 		var params = {q:'{"lincs_status":{"$in":["core_cline","core_pline","DIVR"]}}', l:1, sk:skip};
@@ -1950,7 +1950,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = Barista.APIURL + '/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":"trt_cp"}',
 					f:'{"pert_iname":1}',
 										l:1,
@@ -1992,7 +1992,7 @@ Barista.Views.CompoundSearchBar = Backbone.View.extend({
 
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
-				url: ['//api.lincscloud.org/a2/pertinfo?',
+				url: [Barista.APIURL + '/a2/pertinfo?',
 					  'q={"pert_iname":{"$regex":"%QUERY", "$options":"i"}, "pert_type":"trt_cp"}',
 					  '&f={"pert_iname":1,"pert_type":1}',
 					  '&l=100',
@@ -4717,7 +4717,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		this.placeholder = (this.options.placeholder !== undefined) ? this.options.placeholder : 'search gene, compound or cell type name';
 
 		// grab cell_ids and store them as an atribute of the view
-		var cellinfo = '//api.lincscloud.org/a2/cellinfo?callback=?';
+		var cellinfo = Barista.APIURL + '/a2/cellinfo?callback=?';
 		var params = {q:'{"cell_id":{"$regex":""}}',d:"cell_id"};
 		$.getJSON(cellinfo,params,function(res){
 			self.cell_lines = res;
@@ -4776,7 +4776,7 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 	random_val: function(){
 		var self = this;
 		skip = Math.round(Math.random()*40000);
-		var pertinfo = '//api.lincscloud.org/a2/pertinfo?callback=?';
+		var pertinfo = Barista.APIURL + '/a2/pertinfo?callback=?';
 		params = {q: '{"pert_type":{"$in":["trt_cp","trt_sh"]}}',
 					f:'{"pert_iname":1}',
 										l:1,

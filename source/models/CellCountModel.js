@@ -31,9 +31,9 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
     // if we are doing a single query, match that query as a regular expression. If we are
     // doing a multi query, match exact names. If we are doing a cell line query, only match
     // cell\_ids
-    var sig_info = '//api.lincscloud.org/a2/siginfo?callback=?';
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
-    var cell_info = '//api.lincscloud.org/a2/cellinfo?callback=?';
+    var sig_info = Barista.APIURL + '/a2/siginfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
+    var cell_info = Barista.APIURL + '/a2/cellinfo?callback=?';
     var params = {};
     if (search_type === "multi"){
       search_string = '["' + search_string.split(/[:, ]/).join('","') + '"]';
