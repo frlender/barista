@@ -15,13 +15,16 @@
                                           // isLoading: false});`
 
 Barista.Collections.CellCollection = Backbone.Collection.extend({
+    // #### initialize
+    initialize: function(){
+        #### initialize
+        // the url from which model data is fetched
+        this.url =  Barista.APIURL + '/a2/cellinfo?callback=?';
+    },
+
     // #### model
     // the model used for the collection objects.
     model: Barista.Models.CellModel,
-
-    // #### url
-    // the url from which model data is fetched
-    url: Barista.APIURL + '/a2/cellinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
