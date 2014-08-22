@@ -2555,13 +2555,16 @@ Barista.Models.TickModel = Backbone.Model.extend({
 // 4.  {Boolean}  **isLoading**  indicates wether or not the collection is in the middle of a fetch operation. defaults to *false*
 
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
+    // #### initialize
+    initialize: function(){
+        // #### url
+        // the url from which model data is fetched
+        this.url =  Barista.APIURL + '/compute_status?callback=?';
+    },
+
     // #### model
     // the model used for the collection objects.
     model: Barista.Models.AnalysisHistoryModel,
-
-    // #### url
-    // the url from which model data is fetched
-    url: Barista.APIURL + '/compute_status?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -2833,13 +2836,16 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
                                           // isLoading: false});`
 
 Barista.Collections.PertCollection = Backbone.Collection.extend({
+    // #### initialize
+    initialize: function(){
+        // #### url
+        // the url from which model data is fetched
+        this.url =  Barista.APIURL + '/a2/pertinfo?callback=?';
+    },
+
     // #### model
     // the model used for the collection objects.
     model: Barista.Models.PertModel,
-
-    // #### url
-    // the url from which model data is fetched
-    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -2939,13 +2945,16 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
                                           // isLoading: false});`
 
 Barista.Collections.SignatureCollection = Backbone.Collection.extend({
+    // #### initialize
+    initialize: function(){
+        // #### url
+        // the url from which model data is fetched
+        this.url =  Barista.APIURL + '/a2/siginfo?callback=?';
+    },
+
     // #### model
     // the model used for the collection objects.
     model: Barista.Models.SignatureModel,
-
-    // #### url
-    // the url from which model data is fetched
-    url: Barista.APIURL + '/a2/siginfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
@@ -3064,13 +3073,16 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 //											isLoading: false});
 
 Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
+	// #### initialize
+	initialize: function(){
+		// #### url
+		// the url from which model data is fetched
+		this.url =  Barista.APIURL + '/a2/pertinfo?callback=?';
+	},
+
 	// ### model
 	// the model used for collection objects
 	model: Barista.Models.SummlyResultModel,
-
-	// #### url
-    // the url from which model data is fetched
-    url: Barista.APIURL + '/a2/pertinfo?callback=?',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
