@@ -92,6 +92,26 @@ Barista.setAPIPrefilter = function(api_endpoint) {
     });
 };
 
+// # **setAPIURL**
+
+// a utility function to set an APIURL attribute on the Barista object
+
+// arguments
+//
+// 1.  {string}  **url**  the url for an API endpoint that your would like barista to hit for all API calls. defaults to *'//api.lincscloud.org'*
+Barista.setAPIURL = function(url) {
+    url = (url !== undefined) ? url : '//api.lincscloud.org';
+    // truncate explicit protocols
+    url.replace('https://','//');
+    url.replace('http://','//');
+
+    // make sure that the first two characters of the url are '//'
+    if (url[0].slice(0,2) !== '//'){
+        url = '//' + url;
+    }
+    Barista.APIURL = url;
+};
+
 // # **setUserKey**
 
 // a utility function to set a user_key attribute on the Barista object and set up
@@ -110,6 +130,7 @@ Barista.setUserKey = function(key) {
 		Barista.user_key = res.user_key;
 	});
 	key_request.fail(function(){
+		console.log("could not find a file at " + key + "; setting Barista.user_key to " + key);
 		Barista.user_key = key;
 	});
 };

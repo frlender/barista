@@ -26,7 +26,7 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
-					return ['//api.lincscloud.org/a2/pertinfo?',
+					return [Barista.APIURL + '/a2/pertinfo?',
 						'q={"pert_iname":{"$regex":"^' + query + '", "$options":"i"}, "pert_type":{"$regex":"^(?!.*c[a-z]s$).*$"}}',
 						'&f={"pert_iname":1,"pert_type":1}',
 						'&l=100',

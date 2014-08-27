@@ -1,5 +1,5 @@
 //		Barista.js 0.2.0
-//		(c) 2013 Corey Flynn, Broad Institute.
+//		(c) 2014 Corey Flynn, Broad Institute.
 //		For all documentation:
 //		http://cmap.github.io/barista
 
@@ -17,6 +17,10 @@ Barista.Views = {};
 
 // build an array to contain backing datasets definitions
 Barista.Datasets = {};
+
+// build a set of configuration attributes that are referenced throughout the
+// library
+Barista.APIURL = '//api.lincscloud.org';
 
 // build an object of utilities that we need to make sure are not overwritten
 Barista.Utils = {cookie: $.cookie};

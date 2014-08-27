@@ -41,7 +41,7 @@ Barista.Models.CompoundDetailModel = Backbone.Model.extend({
 
     // set up the api parameters to make a regular expression matched query against
     // pert_inames in pertinfo and retrieve the first result's pert_iname and pert_desc
-    var pert_info = '//api.lincscloud.org/a2/pertinfo?callback=?';
+    var pert_info = Barista.APIURL + '/a2/pertinfo?callback=?';
     var params = params = {q:'{"pert_type":"trt_cp","pert_iname":{"$regex":"^' + search_string + '", "$options":"i"}}',
                           l:1};
 
