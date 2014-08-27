@@ -53,4 +53,7 @@ $linkColor: #00ADE5;
 
 .cmap-user-badge{
   max-height: 4.236em;
+  @media only screen and (min-device-width : 320px) and (max-device-width : 568px){
+      max-height: 2.618em;
+  }
 }

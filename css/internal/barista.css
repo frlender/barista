@@ -122,6 +122,11 @@
 .cmap-user-badge {
   max-height: 4.236em;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .cmap-user-badge {
+    max-height: 2.618em;
+  }
+}
 
 .cmap-shadow {
   -webkit-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
