@@ -32,7 +32,7 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	model: new Backbone.Model(),
 
 	// ## initialize
-	// overide the view's default initialize method in order to catch options and 
+	// overide the view's default initialize method in order to catch options and
 	// render a custom template
 	initialize: function(){
 		// set up color options.  default if not specified

@@ -25,8 +25,10 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
         this.realName = (this.options.realName !== undefined) ? this.options.realName : "Name";
         this.username = (this.options.username !== undefined) ? this.options.username : "UserName";
         this.email = (this.options.email !== undefined) ? this.options.email : "user@email.com";
+        this.badges = (this.options.badges !== undefined) ? this.options.badges : [];
 
         // compile the default template for the view
+        this.map_badges();
         this.compile_template();
     },
 
@@ -39,6 +41,26 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
                                                 name: this.realName,
                                                 username: this.username,
                                                 email: this.email,
-                                                badges: this.badges}));
+                                                badges: this.badge_urls}));
+    },
+
+    // ### map_badges
+    // translate the passed array of badge names into image urls
+    map_badges: function(){
+        var self = this;
+        this.badge_urls = [];
+        this.badges.forEach(function(badge){
+            switch(badge){
+                case "active":
+                    self.badge_urls.push("http://coreyflynn.github.io/Bellhop/ai/badges/active.svg");
+                    break;
+                case "developer":
+                    self.badge_urls.push("http://coreyflynn.github.io/Bellhop/ai/badges/developer.svg");
+                    break;
+                case "explorer":
+                    self.badge_urls.push("http://coreyflynn.github.io/Bellhop/ai/badges/explorer.svg");
+                    break;
+            }
+        });
     }
 });
