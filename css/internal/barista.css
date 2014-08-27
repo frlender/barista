@@ -79,6 +79,11 @@
   font-size: 2.618em;
   font-weight: 700;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .cmap-user-name {
+    font-size: 1.618em;
+  }
+}
 
 .cmap-user-username {
   font-family: 'Open Sans', sans-serif;
@@ -87,6 +92,11 @@
   font-weight: 300;
   padding: 0em;
   margin: 0em;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .cmap-user-username {
+    font-size: 1em;
+  }
 }
 
 .cmap-user-email {
@@ -98,6 +108,11 @@
   margin: 0em;
   padding-bottom: 1em;
   color: #00ade5;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .cmap-user-email {
+    font-size: 1em;
+  }
 }
 
 .cmap-user-image-container {
