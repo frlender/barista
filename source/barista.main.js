@@ -236,6 +236,47 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
+this["BaristaTemplates"]["CMapUserCard"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "";
+  buffer += "\n                    <img src=\""
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "\" alt=\"\" class=\"cmap-user-badge pull-right\" />\n                ";
+  return buffer;
+  }
+
+  buffer += "<div id=\"";
+  if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"cmap-card-wrapper ";
+  if (stack1 = helpers.span_class) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.span_class; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    <div class=\"cmap-card row\">\n        <div class=\"col-xs-6\">\n            <h1 class=\"cmap-user-name\">";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n            <p class=\"cmap-user-username\">";
+  if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n            <p class=\"cmap-user-email\">";
+  if (stack1 = helpers.email) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.email; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"col-xs-6\">\n            <div class=\"cmap-user-image-container\">\n                ";
+  stack1 = helpers.each.call(depth0, depth0.badges, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            </div>\n        </div>\n    </div>\n</div>\n";
+  return buffer;
+  });
+
 this["BaristaTemplates"]["TypeaheadItem"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -3947,6 +3988,51 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 												fg_color: this.fg_color}));
 	}
 });
+// # **BaristaUserCardView**
+// A Backbone View that displays a card of information about a user
+
+// basic use:
+
+//		card_view = new BaristaUserCardView();
+
+// optional arguments:
+
+// 1.  {string}  **realName**  the name to display. defaults to *"Name"*
+// 2.  {string}  **username**  the name to display. defaults to *"Username"*
+// 3.  {string}  **email**  the email to display. defaults to "user@mail.com"
+// 2.  {string}  **badges**  an array of badge images to display. defaults to *[]*
+
+Barista.Views.BaristaUserCardView = Backbone.View.extend({
+    // ### name
+    // give the view a name to be used throughout the View's functions when it needs to know what its class name is
+    name: "BaristaUserCardView",
+
+    // ## initialize
+    // overide the view's default initialize method in order to catch options and
+    // render a custom template
+    initialize: function(){
+        // set up defaults
+        this.realName = (this.options.realName !== undefined) ? this.options.realName : "Name";
+        this.username = (this.options.username !== undefined) ? this.options.username : "UserName";
+        this.email = (this.options.email !== undefined) ? this.options.email : "user@email.com";
+
+        // compile the default template for the view
+        this.compile_template();
+    },
+
+    // ### compile_template
+    // use Handlebars to compile the template for the view
+    compile_template: function(){
+        var self = this;
+        this.div_string = 'barista_view' + new Date().getTime();;
+        this.$el.append(BaristaTemplates.CMapUserCard({div_string: this.div_string,
+                                                name: this.realName,
+                                                username: this.username,
+                                                email: this.email,
+                                                badges: this.badges}));
+    }
+});
+
 // # **BubbleView**
 // A Backbone.View that displays a single level tree of data as a bubble plot.  The view should be bound to a
 // model such as a **PertCellBreakdownModel** that captures tree data in a *tree_object* attribute.
