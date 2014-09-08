@@ -4,7 +4,7 @@
 
 .cmap-card {
   background-color: #03a9f4;
-  top: 2.618rem;
+  top: 2.618em;
   position: relative;
   box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
   max-width: 500;
@@ -18,7 +18,7 @@
   font-family: 'Open Sans', sans-serif;
   background-color: #eeeeee;
   color: #03a9f4;
-  font-size: 2.618rem;
+  font-size: 2.618em;
   font-weight: 700;
   text-align: center;
   position: relative;
@@ -26,7 +26,7 @@
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .cmap-card-title {
-    font-size: 1.618rem;
+    font-size: 1.618em;
   }
 }
 
@@ -35,14 +35,14 @@
   line-height: normal;
   font-smoothing: antialiased;
   color: #eeeeee;
-  font-size: 1.618rem;
+  font-size: 1.618em;
   font-weight: 500;
   text-align: center;
   padding-bottom: 20px;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .cmap-card-subtitle {
-    font-size: 1rem;
+    font-size: 1em;
   }
 }
 
