@@ -5727,7 +5727,8 @@ Barista.Views.GridView = Backbone.View.extend({
 				}
 
 				this.$el.css("opacity",0);
-				this.$el.animate({"opacity":1},1000);
+				this.$el.height(0);
+				this.$el.animate({"opacity":1,"height":"20px"},1000);
 
 				return this;
 			}
