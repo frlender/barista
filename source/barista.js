@@ -5343,6 +5343,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
 		this.no_slice = (this.options.no_slice !== undefined) ? this.options.no_slice : undefined;
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
+		this.delete = (this.options.delete !== undefined) ? this.options.delete : false;
 		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
 
