@@ -63,14 +63,14 @@ Barista.Views.GridView = Backbone.View.extend({
 
 			// overide Backgrid.Row's native remove method
 			remove: function () {
-				this.$el.animate({"opacity":1},1000);
+				this.$el.animate({"opacity":0},1000);
 				var self = this;
 				setTimeout(function(){
 					for (var i = 0; i < self.cells.length; i++) {
 						var cell = self.cells[i];
 						cell.remove.apply(cell, arguments);
 					}
-					return Backbone.View.prototype.remove.apply(this, arguments);
+					return Backbone.View.prototype.remove.apply(self, arguments);
 				},1000);
 			}
 		});
