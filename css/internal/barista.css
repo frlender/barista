@@ -128,7 +128,11 @@
 }
 
 .cmap-active-grid-row {
-  background-color: #e51c23;
+  background-color: #f69988;
+}
+
+.cmap-grid-delete-button {
+  color: #f69988;
 }
 
 .cmap_grid_to_top_button {
