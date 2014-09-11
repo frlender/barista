@@ -25,11 +25,11 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n		<p class=\"pull-left\" style=\"cursor: pointer\" id=\"";
+  buffer += "\n		<p class=\"pull-left\" style=\"padding-left: 8px; cursor: pointer\" id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "_delete\">\n			<font color=\"#e51c23\"> edit </font>\n		</p>\n	";
+    + "_delete\">\n			<font color=\"#e51c23\"><i class=\"fa fa-times-circle\"></i> edit </font>\n		</p>\n	";
   return buffer;
   }
 
@@ -1687,7 +1687,7 @@ Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
         }else{
             this.set({view_result_link: ''});
         }
-        this.set({delete_button: '<i class="fa fa-times-circle cmap-grid-delete-button" onclick="Backbone.trigger(' + "'AnalysisHistoryModel:delete'" + ',' + "'" +  this.get("job_id") + "'" + ')"></i>'});
+        this.set({edit: '<i class="fa fa-times-circle cmap-grid-delete-button" onclick="Backbone.trigger(' + "'AnalysisHistoryModel:delete'" + ',' + "'" +  this.get("job_id") + "'" + ')"></i>'});
   }
 });
 
@@ -5773,6 +5773,9 @@ Barista.Views.GridView = Backbone.View.extend({
 		// bind the download text to a function to download the data in the table
 		$("#" + this.div_string + "_download",this.el).click(function(){self.download_table();});
 
+		// bind the edit text to a function to edit the data in the table
+		$("#" + this.div_string + "_edit",this.el).click(function(){self.open_edit_table();});
+
 		// bind the download text to a function to slice the data in the table out of the
 		// Connectivity Map database.
 		self.change_slice_button_state("slice");
@@ -6077,6 +6080,25 @@ Barista.Views.GridView = Backbone.View.extend({
 			saveAs(blob, "CMapTable" + timestamp + ".txt");
 			$("#" + self.div_string + "_download",self.el).html('<font color="#0072B2"><i class="icon-share"></i> export table</font>');
 		});
+	},
+
+	// ### open_edit_table
+	// open up a column to show editing buttons
+	open_edit_table: function(){
+		this.grid.columns.unshift(({name: "edit", label: "Edit", cell: Barista.HTMLCell, editable: false}));
+		$("#" + this.div_string + "_edit",this.el).html('<font color="#e51c23"><i class="fa fa-times-circle"></i> done editing </font>');
+		$("#" + this.div_string + "_edit",this.el).unbind();
+		$("#" + this.div_string + "_edit",this.el).click(function(){self.close_edit_table();});
+	},
+
+	// ### close_edit_table
+	// close column showing editing buttons
+	close_edit_table: function(){
+		var idCol = grid.columns.where({ name: "edit" });
+		grid.removeColumn(idCol);
+		$("#" + this.div_string + "_edit",this.el).html('<font color="#e51c23"><i class="fa fa-times-circle"></i> edit </font>');
+		$("#" + this.div_string + "_edit",this.el).unbind();
+		$("#" + this.div_string + "_edit",this.el).click(function(){self.open_edit_table();});
 	},
 
 	// ### hide

@@ -25,11 +25,11 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n		<p class=\"pull-left\" style=\"cursor: pointer\" id=\"";
+  buffer += "\n		<p class=\"pull-left\" style=\"padding-left: 8px; cursor: pointer\" id=\"";
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "_delete\">\n			<font color=\"#e51c23\"> edit </font>\n		</p>\n	";
+    + "_delete\">\n			<font color=\"#e51c23\"><i class=\"fa fa-times-circle\"></i> edit </font>\n		</p>\n	";
   return buffer;
   }
 
