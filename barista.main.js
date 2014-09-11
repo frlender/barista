@@ -5161,7 +5161,7 @@ function program5(depth0,data) {
   if (stack1 = helpers.div_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.div_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "_delete\">\n			<font color=\"#e51c23\"><i class=\"fa fa-times-circle\"></i> edit </font>\n		</p>\n	";
+    + "_edit\">\n			<font color=\"#e51c23\"><i class=\"fa fa-times-circle\"></i> edit </font>\n		</p>\n	";
   return buffer;
   }
 
