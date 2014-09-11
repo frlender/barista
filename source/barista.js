@@ -5727,6 +5727,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	// ### open_edit_table
 	// open up a column to show editing buttons
 	open_edit_table: function(){
+		var self = this;
 		this.grid.columns.unshift(({name: "edit", label: "Edit", cell: Barista.HTMLCell, editable: false}));
 		$("#" + this.div_string + "_edit",this.el).html('<font color="#e51c23"><i class="fa fa-times-circle"></i> done editing </font>');
 		$("#" + this.div_string + "_edit",this.el).unbind();
@@ -5736,8 +5737,9 @@ Barista.Views.GridView = Backbone.View.extend({
 	// ### close_edit_table
 	// close column showing editing buttons
 	close_edit_table: function(){
+		var self = this;
 		var idCol = grid.columns.where({ name: "edit" });
-		grid.removeColumn(idCol);
+		this.grid.removeColumn(idCol);
 		$("#" + this.div_string + "_edit",this.el).html('<font color="#e51c23"><i class="fa fa-times-circle"></i> edit </font>');
 		$("#" + this.div_string + "_edit",this.el).unbind();
 		$("#" + this.div_string + "_edit",this.el).click(function(){self.open_edit_table();});
