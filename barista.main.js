@@ -6805,7 +6805,7 @@ Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
         }else{
             this.set({view_result_link: ''});
         }
-        this.set({delete_button: '<i class="fa fa-times-circle .cmap-grid-delete-button" onclick="Backbone.trigger(' + "'AnalysisHistoryModel:delete'" + ',' + "'" +  this.get("job_id") + "'" + ')"></i>'});
+        this.set({delete_button: '<i class="fa fa-times-circle cmap-grid-delete-button" onclick="Backbone.trigger(' + "'AnalysisHistoryModel:delete'" + ',' + "'" +  this.get("job_id") + "'" + ')"></i>'});
   }
 });
 
