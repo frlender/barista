@@ -7732,7 +7732,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     initialize: function(){
         // #### url
         // the url from which model data is fetched
-        this.url =  Barista.APIURL + '/compute_status?callback=?';
+        this.url =  Barista.APIURL + '/compute_status?';
     },
 
     // #### model
