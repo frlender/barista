@@ -37,8 +37,6 @@ Barista.Views.GridView = Backbone.View.extend({
 			},
 			onClick: function () {
 				self.trigger("grid:RowClick", this.model);
-				$(".cmap-active-grid-row").removeClass("cmap-active-grid-row");
-				this.$el.addClass("cmap-active-grid-row");
 			},
 			// overide Backgrid.Row's native render method
 			render: function () {
@@ -50,11 +48,6 @@ Barista.Views.GridView = Backbone.View.extend({
 				this.el.appendChild(fragment);
 				this.delegateEvents();
 
-				// if the row's model is active, highlight it
-				if (this.model.get('active_row')){
-					this.$el.addClass("cmap-active-grid-row");
-				}
-
 				this.$el.css("opacity",0);
 				this.$el.animate({"opacity":1},1000);
 
@@ -63,6 +56,7 @@ Barista.Views.GridView = Backbone.View.extend({
 
 			// overide Backgrid.Row's native remove method
 			remove: function () {
+				this.$el.addClass("cmap-active-grid-row");
 				this.$el.animate({"opacity":0},1000);
 				var self = this;
 				setTimeout(function(){

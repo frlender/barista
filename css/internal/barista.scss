@@ -2,6 +2,8 @@
 @import 'scss/cmap_card.scss';
 @import 'scss/cmap_loading.scss';
 @import 'scss/cmap_user_card.scss';
+@import 'scss/cmap_grid.scss';
+
 
 .cmap-shadow{
     -webkit-box-shadow: 0 50px 50px -70px rgba(0, 0, 0, 0.65);
@@ -147,24 +149,6 @@
 
 .cmap-header-toolbar{
     background: #2B2B2B;
-}
-
-.cmap-active-grid-row{
-    background-color: #BDBDBD;
-}
-
-.cmap_grid_to_top_button {
-    position: relative;
-    width: 55px;
-    height: 55px;
-    bottom: 90px;
-    right: -50%;
-    cursor: default;
-    background-color: #DDD;
-    color: #333;
-    opacity: 0;
-    border: 1px solid transparent;
-    border-radius: 50%;
 }
 
 .cmap-card-title-text{
