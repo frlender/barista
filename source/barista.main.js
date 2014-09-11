@@ -88,7 +88,7 @@ function program14(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.no_download, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
-  stack1 = helpers['if'].call(depth0, depth0['delete'], {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.edit, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
   stack1 = helpers['if'].call(depth0, depth0.no_slice, {hash:{},inverse:self.program(7, program7, data),fn:self.program(1, program1, data),data:data});
@@ -5701,7 +5701,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		this.no_download = (this.options.no_download !== undefined) ? this.options.no_download : undefined;
 		this.no_slice = (this.options.no_slice !== undefined) ? this.options.no_slice : undefined;
 		this.no_legend = (this.options.no_legend !== undefined) ? this.options.no_legend : undefined;
-		this.delete = (this.options.delete !== undefined) ? this.options.delete : false;
+		this.edit = (this.options.edit !== undefined) ? this.options.edit : false;
 		this.limit = (this.options.limit !== undefined) ? this.options.limit : 30;
 
 
@@ -5921,6 +5921,7 @@ Barista.Views.GridView = Backbone.View.extend({
 													   no_download: this.no_download,
 													   no_slice: this.no_slice,
 													   no_legend: this.no_legend,
+													   edit: this.edit,
 													}));
 	},
 
