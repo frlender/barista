@@ -10843,8 +10843,8 @@ Barista.Views.GridView = Backbone.View.extend({
 				$(".cmap-active-grid-row").removeClass("cmap-active-grid-row");
 				this.$el.addClass("cmap-active-grid-row");
 			},
+			// overide Backgrid.Row's native render method
 			render: function () {
-				// replicate Backgrid.Row's native render method
 				this.$el.empty();
 				var fragment = document.createDocumentFragment();
 				for (var i = 0; i < this.cells.length; i++) {
@@ -10859,10 +10859,21 @@ Barista.Views.GridView = Backbone.View.extend({
 				}
 
 				this.$el.css("opacity",0);
-				this.$el.height(0);
-				this.$el.animate({"opacity":1,"height":"20px"},1000);
+				this.$el.animate({"opacity":1},1000);
 
 				return this;
+			},
+
+			// overide Backgrid.Row's native remove method
+			remove: function () {
+				this.$el.animate({"opacity":1},1000);
+				setTimeout(function(){
+					for (var i = 0; i < this.cells.length; i++) {
+						var cell = this.cells[i];
+						cell.remove.apply(cell, arguments);
+					}
+					return Backbone.View.prototype.remove.apply(this, arguments);
+				},1000);
 			}
 		});
 
