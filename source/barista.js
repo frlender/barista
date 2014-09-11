@@ -1329,6 +1329,7 @@ Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
         }else{
             this.set({view_result_link: ''});
         }
+        this.set({delete_button: '<i class="fa fa-times-circle"></i>'});
   }
 });
 
