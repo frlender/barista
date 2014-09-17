@@ -2308,22 +2308,22 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
         }
         switch (search_type){
         case "job_id":
-            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"},"status":{"$ne":"deleted"}}';
             break;
         case "status":
-            this.q_param = '{' + user_q + '"status":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"status":{"$regex":"' + search_string + '", "$options":"i"},"status":{"$ne":"deleted"}}';
             break;
         case "tool_id":
-            this.q_param = '{' + user_q + '"tool_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"tool_id":{"$regex":"' + search_string + '", "$options":"i"},"status":{"$ne":"deleted"}}';
             break;
         case "job_name":
-            this.q_param = '{' + user_q + '"params.rpt":"' + search_string + '"}';
+            this.q_param = '{' + user_q + '"params.rpt":"' + search_string + '","status":{"$ne":"deleted"}}';
             break;
         case "user_id":
-            this.q_param = '{' + user_q + '"user_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"user_id":{"$regex":"' + search_string + '", "$options":"i"},"status":{"$ne":"deleted"}}';
             break;
         default:
-            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"}}';
+            this.q_param = '{' + user_q + '"job_id":{"$regex":"' + search_string + '", "$options":"i"},"status":{"$ne":"deleted"}}';
         }
 
 
