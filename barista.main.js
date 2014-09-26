@@ -9509,7 +9509,7 @@ Barista.Views.CMapFooterView = Backbone.View.extend({
 	initialize: function(){
 		// store passed parameters as attributes of the view
 		this.organization = (this.options.organization !== undefined) ? this.options.organization : "Broad Institute";
-		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "//terms";
+		this.terms_url = (this.options.terms_url !== undefined) ? this.options.terms_url : "/terms";
 		this.logo = (this.options.logo !== undefined) ? this.options.logo : ['//coreyflynn.github.io/Bellhop/img/broad_logo_small_text.png','//coreyflynn.github.io/Bellhop/img/CMap-logox.png','//coreyflynn.github.io/Bellhop/img/skunkworks-logo.png'];
 		this.logo_url = (this.options.logo_url !== undefined) ? this.options.logo_url : ['//www.broadinstitute.org/','//clue.io/','//www.broadinstitute.org/vis'];
 		this.template = (this.options.template !== undefined) ? this.options.template : "templates/CMapFooter.handlebars";
