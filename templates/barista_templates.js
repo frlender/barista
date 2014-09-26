@@ -184,7 +184,11 @@ function program3(depth0,data) {
   if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.organization; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " all rights reserved</p>\n		<p class=\"cmap-center-text\"><a href=\"http://www.lincscloud.org/license.html\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-xs-12 cmap-center-text\">\n	";
+    + " all rights reserved</p>\n		<p class=\"cmap-center-text\"><a href=\"";
+  if (stack1 = helpers.terms_url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.terms_url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">terms and conditions</a></p>\n	</div>\n	<div class=\"col-xs-12 cmap-center-text\">\n	";
   stack1 = helpers.each.call(depth0, depth0.logo_objects, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	</div>\n</div>\n<div class=\"cmap-spacer-medium\"></div>\n";
