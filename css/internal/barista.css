@@ -157,14 +157,13 @@
 .cmap-header-app-name {
   font-family: 'Roboto Slab', Cambria, serif;
   font-size: 20px;
+  font-weight: 700;
   color: black;
-  opacity: 0.54;
   padding-left: 10px;
   padding-right: 10px;
   position: relative;
   top: 10px;
   margin-left: 10px;
-  text-transform: uppercase;
   background-color: #DCDCDC;
   background-image: linear-gradient(#DCDCDC, #989898);
   background: #DCDCDC;
