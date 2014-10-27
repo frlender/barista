@@ -154,6 +154,18 @@
   z-index: 999;
 }
 
+.cmap-header-app-name {
+  font-family: 'Roboto Slab', Cambria, serif;
+  font-size: 20px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: red;
+  background-image: linear-gradient(red, orange);
+  background: red;
+  background: linear-gradient(red, orange);
+}
+
 .cmap-header-link-no-border, .cmap-header-link {
   font-family: 'Roboto Slab', Cambria, serif;
   font-size: 20px;
