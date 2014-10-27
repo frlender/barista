@@ -154,25 +154,7 @@
   z-index: 999;
 }
 
-.cmap-header-link {
-  font-family: 'Roboto Slab', Cambria, serif;
-  font-size: 20px;
-  color: white;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-left: white solid 2px;
-  opacity: 0.54;
-  position: relative;
-  top: 10px;
-  cursor: pointer;
-  -webkit-transition: all 0.1s ease-out;
-  -moz-transition: all 0.1s ease-out;
-  -ms-transition: all 0.1s ease-out;
-  -o-transition: all 0.1s ease-out;
-  transition: all 0.1s ease-out;
-}
-
-.cmap-header-link-no-border {
+.cmap-header-link-no-border, .cmap-header-link {
   font-family: 'Roboto Slab', Cambria, serif;
   font-size: 20px;
   color: white;
@@ -188,13 +170,19 @@
   -o-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
 }
-
-.cmap-header-link:hover, .cmap-header-link-no-border:hover, .cmap-header-sublink:hover {
+.cmap-header-link-no-border:hover, .cmap-header-link:hover {
   opacity: 0.87;
+}
+
+.cmap-header-link {
+  border-left: white solid 2px;
 }
 
 .cmap-header-sublink {
   color: #FF9B7A;
+}
+.cmap-header-sublink:hover {
+  opacity: 0.87;
 }
 
 .cmap-header-username {
@@ -218,7 +206,6 @@
   -o-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
 }
-
 .cmap-header-signin-signout:hover {
   background-color: #EA3A00;
 }
@@ -294,7 +281,7 @@
   transition: all 0.1s ease-out;
 }
 
-.cmap-header-link-no-border {
+.cmap-header-link-no-border, .cmap-header-link {
   font-family: 'Roboto Slab', Cambria, serif;
   font-size: 20px;
   color: white;
@@ -311,7 +298,7 @@
   transition: all 0.1s ease-out;
 }
 
-.cmap-header-link:hover, .cmap-header-link-no-border:hover, .cmap-header-sublink:hover {
+.cmap-header-link:hover, .cmap-header-link-no-border:hover, .cmap-header-link:hover, .cmap-header-sublink:hover {
   opacity: 0.87;
 }
 
