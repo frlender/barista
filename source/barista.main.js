@@ -207,7 +207,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/signout';\">logout</p>\n						<div class=\"dropdown\">\n							<p id=\"username\" title=\"profile\" class=\"cmap-header-username pull-right data-toggle\" data-toggle=\"dropdown\">";
+  buffer += "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/signout';\">logout</p>\n						<div class=\"dropdown pull-right\">\n							<p id=\"username\" title=\"profile\" class=\"cmap-header-username data-toggle\" data-toggle=\"dropdown\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
