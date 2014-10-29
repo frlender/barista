@@ -5360,7 +5360,7 @@ function program3(depth0,data) {
     + "</p>\n				</div>\n\n				<div class=\"col-xs-3\">\n					";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n				</div>\n			</div>\n		</div>\n	</div>\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
+  buffer += "\n				</div>\n			</div>\n		</div>\n	</div>\n\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -5368,7 +5368,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n		</div>\n	</div>\n</div>\n";
+    + "</p>\n		</div>\n	</div>\n\n	<!-- spacer -->\n	<div class=\"cmap-spacer-large\"></div>\n</div>\n";
   return buffer;
   });
 
