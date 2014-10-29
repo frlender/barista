@@ -12,15 +12,14 @@
 
 				<div class="col-xs-9">
 					{{#if user}}
-						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = '/signout';">logout</p>
 						<div class="dropdown pull-right">
-							<p id="username" title="profile" class="cmap-header-username data-toggle" data-toggle="dropdown">{{user}}</p>
+							<p id="username" title="profile" class="cmap-header-username data-toggle" data-toggle="dropdown">{{user}}<span class="caret"></span></p>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="username">
 						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
 						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
 						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
 						    <li role="presentation" class="divider"></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="/signout">logout</a></li>
 						  </ul>
 						</div>
 					{{else}}
