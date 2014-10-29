@@ -1,0 +1,91 @@
+.cmap-header {
+  position: relative;
+  z-index: 999;
+}
+
+.cmap-header-app-name{
+  font-family: 'Roboto Slab', Cambria, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  top: 10px;
+  margin-left: 10px;
+  background-color: #DCDCDC;
+  background-image: linear-gradient(#DCDCDC, #989898);
+  background: #DCDCDC;
+  background: linear-gradient(#DCDCDC, #989898);
+}
+
+.cmap-header-link-no-border {
+  font-family: 'Roboto Slab', Cambria, serif;
+  font-size: 20px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0.54;
+  position: relative;
+  top: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  &:hover{
+      opacity: 0.87;
+  }
+}
+
+.cmap-header-link {
+  @extend .cmap-header-link-no-border;
+  border-left: white solid 2px;
+}
+
+.cmap-header-sublink {
+  color: #FF9B7A;
+  &:hover{
+      opacity: 0.87;
+  }
+}
+
+.cmap-header-username {
+  font-family: 'Roboto Slab', Cambria, serif;
+  font-size: 20px;
+  color: white;
+  opacity: 0.87;
+  cursor: default;
+  position: relative;
+  padding-right: 10px;
+  top: 10px;
+}
+
+.cmap-header-signin-signout {
+  background-color: #FF6633;
+  cursor: pointer;
+  cursor: hand;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  &:hover{
+      background-color: #EA3A00;
+  }
+}
+
+.cmap-header-top-margin {
+  margin-top: 22px;
+}
+
+.cmap-header-image {
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.cmap-header-toolbar {
+  background: #2B2B2B;
+}
