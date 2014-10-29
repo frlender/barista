@@ -1,3 +1,4 @@
+$cmap_blue: #40B1D6;
 .cmap-header {
     position: relative;
     z-index: 999;
@@ -7,7 +8,7 @@
     font-family: 'Open Sans',Cambria,serif;
     font-size: 30px;
     font-weight: 700;
-    color: #2FF5A3;
+    color: $cmap_blue;
     border-left: 2px solid white;
     padding-left: 10px;
     padding-right: 10px;
