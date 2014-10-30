@@ -218,6 +218,7 @@
 
 .cmap-header-toolbar {
   background: #2B2B2B;
+  min-height: 50px;
 }
 
 .cmap-shadow {
