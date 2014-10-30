@@ -1,3 +1,7 @@
+body {
+  font-size: medium;
+}
+
 .cmap-card-wrapper {
   padding-bottom: 20px;
 }
@@ -156,7 +160,7 @@
 
 .cmap-header-app-name {
   font-family: 'Open Sans',Cambria,serif;
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: 700;
   color: white;
   border-left: 2px solid white;
