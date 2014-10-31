@@ -201,6 +201,16 @@ body {
   opacity: 0.87;
 }
 
+.cmap-header-subtitle {
+  font-family: 'Roboto Slab', Cambria, serif;
+  font-size: 1em;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  top: 14px;
+}
+
 .cmap-header-link {
   border-left: white solid 2px;
 }
@@ -227,6 +237,7 @@ body {
   height: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 100px;
 }
 
 .cmap-header-toolbar {
