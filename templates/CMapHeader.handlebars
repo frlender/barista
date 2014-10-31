@@ -9,7 +9,9 @@
 					<!-- <a href="/"> -->
 						<img class="cmap-header-image pull-left" src="//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png">
 					<!-- </a> -->
-					<p id="cmapHeaderMenuAppName" title="app name" class="cmap-header-app-name pull-left">{{ title }}</p>
+					{{#if title}}
+						<p id="cmapHeaderMenuAppName" title="app name" class="cmap-header-app-name pull-left">{{ title }}</p>
+					{{/if}}
 					<p id="cmapHeaderMenuAppDescription" title="description" class="cmap-header-subtitle pull-left">{{ subtitle }}</p>
 				</div>
 

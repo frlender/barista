@@ -5339,6 +5339,17 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
+  buffer += "\n						<p id=\"cmapHeaderMenuAppName\" title=\"app name\" class=\"cmap-header-app-name pull-left\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n					";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
   buffer += "\n						<div class=\"dropdown pull-right\">\n							<p id=\"username\" title=\"profile\" class=\"cmap-header-link-no-border data-toggle\" data-toggle=\"dropdown\">";
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -5347,22 +5358,21 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
+function program5(depth0,data) {
   
   
   return "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/start';\">login</p>\n					";
   }
 
-  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-9\">\n					<p id=\"cmapHeaderMenuButton\" title=\"menu\" class=\"cmap-header-link-no-border pull-left\"><i class=\"fa fa-bars\"></i> Menu</p>\n					<!-- <a href=\"/\"> -->\n						<img class=\"cmap-header-image pull-left\" src=\"//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\">\n					<!-- </a> -->\n					<p id=\"cmapHeaderMenuAppName\" title=\"app name\" class=\"cmap-header-app-name pull-left\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</p>\n					<p id=\"cmapHeaderMenuAppDescription\" title=\"description\" class=\"cmap-header-subtitle pull-left\">";
+  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-9\">\n					<p id=\"cmapHeaderMenuButton\" title=\"menu\" class=\"cmap-header-link-no-border pull-left\"><i class=\"fa fa-bars\"></i> Menu</p>\n					<!-- <a href=\"/\"> -->\n						<img class=\"cmap-header-image pull-left\" src=\"//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\">\n					<!-- </a> -->\n					";
+  stack1 = helpers['if'].call(depth0, depth0.title, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n					<p id=\"cmapHeaderMenuAppDescription\" title=\"description\" class=\"cmap-header-subtitle pull-left\">";
   if (stack1 = helpers.subtitle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.subtitle; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</p>\n				</div>\n\n				<div class=\"col-xs-3\">\n					";
-  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n				</div>\n			</div>\n		</div>\n	</div>\n\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
