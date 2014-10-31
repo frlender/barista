@@ -4083,6 +4083,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "//support.lincscloud.org";
+		this.app_color = (this.options.app_color !== undefined) ? this.options.app_color : undefined;
 
 		// compile the default template for the view
 		this.compile_template();
@@ -4093,6 +4094,10 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 			$(".cmap-navigation-wrapper").toggleClass("show-nav");
         });
 
+		//color the app name bar if a color is specified
+		if (this.app_color){
+			$('#cmapHeaderMenuAppName').css('border-bottom','5px solid ' + this.app_color);
+		}
 	},
 
 	// ### compile_template
