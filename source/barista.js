@@ -4079,7 +4079,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
         var self = this;
 
         // store passed parameters as attributes of the view
-		this.title = (this.options.title !== undefined) ? this.options.title : "";
+		this.title = (this.options.title !== undefined) ? this.options.title : undefined;
 		this.subtitle = (this.options.subtitle !== undefined) ? this.options.subtitle : "";
 		this.user = (this.options.user !== undefined) ? this.options.user : Barista.Utils.cookie("user_id");
 		this.support_link = (this.options.support_link !== undefined) ? this.options.support_link : "//support.lincscloud.org";
