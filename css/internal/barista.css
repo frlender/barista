@@ -178,7 +178,7 @@ body {
   left: -4px;
   right: -4px;
   bottom: -9px;
-  border: 2px solid white;
+  border: 1px solid white;
 }
 
 .cmap-header-link-no-border, .cmap-header-link {
@@ -189,7 +189,7 @@ body {
   padding-right: 10px;
   opacity: 0.54;
   position: relative;
-  top: 10px;
+  top: 14px;
   cursor: pointer;
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
@@ -231,7 +231,7 @@ body {
 
 .cmap-header-toolbar {
   background: #2B2B2B;
-  min-height: 50px;
+  min-height: 60px;
 }
 
 .cmap-shadow {

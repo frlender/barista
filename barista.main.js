@@ -5353,7 +5353,7 @@ function program3(depth0,data) {
   return "\n						<p title=\"signout\" class=\"cmap-header-link pull-right\" onclick=\"window.location.href = '/start';\">login</p>\n					";
   }
 
-  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-9\">\n					<p id=\"cmapHeaderMenuButton\" title=\"menu\" class=\"cmap-header-link-no-border pull-left\">Menu</p>\n					<!-- <a href=\"/\"><img class=\"cmap-header-image pull-left\" src=\"//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a> -->\n					<p id=\"cmapHeaderMenuAppName\" title=\"menu\" class=\"cmap-header-app-name pull-left\">";
+  buffer += "<div class=\"cmap-header\">\n\n	<!-- large screens -->\n	<div class=\"row hidden-xs\">\n		<div class=\"row\">\n			<div class=\"col-sm-12 cmap-header-toolbar\">\n				<div class=\"col-xs-9\">\n					<p id=\"cmapHeaderMenuButton\" title=\"menu\" class=\"cmap-header-link-no-border pull-left\"><i class=\"fa fa-bars\"></i>Menu</p>\n					<!-- <a href=\"/\"><img class=\"cmap-header-image pull-left\" src=\"//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png\"></a> -->\n					<p id=\"cmapHeaderMenuAppName\" title=\"menu\" class=\"cmap-header-app-name pull-left\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
