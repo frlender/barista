@@ -5,16 +5,25 @@
 
 .cmap-header-app-name{
     font-family: 'Open Sans',Cambria,serif;
-    font-size: 1.714285714em; //24px/18pt font
+    font-size: 1.714285714em;
     font-weight: 700;
-    color: white;
-    border-left: 2px solid white;
-    padding-left: 10px;
-    padding-right: 10px;
+    color: #fff;
+    border-bottom: 5px solid #999999;
+    padding-left: 2px;
+    padding-right: 2px;
     position: relative;
-    top: 10px;
-    opacity: .54;
+    top: 8px;
     margin-left: 10px;
+    &:before{
+        content: " ";
+        position: absolute;
+        z-index: -1;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        border: 5px solid #ffea00;
+    }
 }
 
 .cmap-header-link-no-border {
