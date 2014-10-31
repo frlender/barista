@@ -5,9 +5,14 @@
 		<div class="row">
 			<div class="col-sm-12 cmap-header-toolbar">
 				<div class="col-xs-9">
-					<p id="cmapHeaderMenuButton" title="menu" class="cmap-header-link-no-border pull-left"><i class="fa fa-bars"></i></p>
-					<a href="/"><img class="cmap-header-image pull-left" src="//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png"></a>
-					<p id="cmapHeaderMenuAppName" title="menu" class="cmap-header-app-name pull-left">{{ title }}</p>
+					<p id="cmapHeaderMenuButton" title="menu" class="cmap-header-link-no-border pull-left"><i class="fa fa-bars"></i> Menu</p>
+					<!-- <a href="/"> -->
+						<img class="cmap-header-image pull-left" src="//cmap.github.io/cdn/img/logos/linscloud_logo_RGB_small-cloud-web.png">
+					<!-- </a> -->
+					{{#if title}}
+						<p id="cmapHeaderMenuAppName" title="app name" class="cmap-header-app-name pull-left">{{ title }}</p>
+					{{/if}}
+					<p id="cmapHeaderMenuAppDescription" title="description" class="cmap-header-subtitle pull-left">{{ subtitle }}</p>
 				</div>
 
 				<div class="col-xs-3">
@@ -15,7 +20,7 @@
 						<div class="dropdown pull-right">
 							<p id="username" title="profile" class="cmap-header-link-no-border data-toggle" data-toggle="dropdown">{{user}}<span class="caret"></span></p>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="username">
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">settings</a></li>
+						    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">settings</a></li> -->
 						    <li role="presentation"><a role="menuitem" tabindex="-1" href="/signout">logout</a></li>
 						  </ul>
 						</div>

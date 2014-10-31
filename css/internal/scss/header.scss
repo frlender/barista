@@ -1,4 +1,3 @@
-$cmap_blue: #40B1D6;
 .cmap-header {
     position: relative;
     z-index: 999;
@@ -6,16 +5,25 @@ $cmap_blue: #40B1D6;
 
 .cmap-header-app-name{
     font-family: 'Open Sans',Cambria,serif;
-    font-size: 28px;
+    font-size: 1.714285714em;
     font-weight: 700;
-    color: $cmap_blue;
-    border-left: 2px solid white;
-    padding-left: 10px;
-    padding-right: 10px;
+    color: #fff;
+    border-bottom: 5px solid #999999;
+    padding-left: 2px;
+    padding-right: 2px;
     position: relative;
-    top: 5px;
-    opacity: .54;
+    top: 8px;
     margin-left: 10px;
+    &:before{
+        content: " ";
+        position: absolute;
+        z-index: 0;
+        top: 0px;
+        left: -4px;
+        right: -4px;
+        bottom: -9px;
+        border: 1px solid white;
+    }
 }
 
 .cmap-header-link-no-border {
@@ -26,7 +34,7 @@ $cmap_blue: #40B1D6;
     padding-right: 10px;
     opacity: 0.54;
     position: relative;
-    top: 10px;
+    top: 14px;
     cursor: pointer;
     -webkit-transition: all 0.1s ease-out;
     -moz-transition: all 0.1s ease-out;
@@ -36,6 +44,19 @@ $cmap_blue: #40B1D6;
     &:hover{
         opacity: 0.87;
     }
+}
+
+.cmap-header-subtitle{
+    font-family: 'Open Sans', Cambria, serif;
+    font-weight: 400;
+    font-size: 1em;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    top: 18px;
+    opacity: 0.54;
+    cursor: default;
 }
 
 .cmap-header-link {
@@ -65,8 +86,10 @@ $cmap_blue: #40B1D6;
   height: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 100px;
 }
 
 .cmap-header-toolbar {
   background: #2B2B2B;
+  min-height: 60px;
 }
