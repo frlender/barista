@@ -228,6 +228,11 @@ body {
 }
 
 .cmap-header-link-right-border:before {
+  content: " ";
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  right: -4px;
   border-right: white solid 2px;
 }
 
