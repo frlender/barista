@@ -16,6 +16,7 @@
 				</div>
 
 				<div class="col-xs-3">
+					<p title="tour" class="cmap-header-link-right-border pull-right" onclick="start_tour();">Tour</p>
 					{{#if user}}
 						<div class="dropdown pull-right">
 							<p id="username" title="profile" class="cmap-header-link-no-border data-toggle" data-toggle="dropdown">{{user}}<span class="caret"></span></p>
@@ -25,7 +26,7 @@
 						  </ul>
 						</div>
 					{{else}}
-						<p title="signout" class="cmap-header-link pull-right" onclick="window.location.href = '/start';">login</p>
+						<p title="login" class="cmap-header-link-left-border pull-right" onclick="window.location.href = '/start';">login</p>
 					{{/if}}
 				</div>
 			</div>

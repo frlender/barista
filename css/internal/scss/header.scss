@@ -59,9 +59,14 @@
     cursor: default;
 }
 
-.cmap-header-link {
+.cmap-header-link-left-border {
     @extend .cmap-header-link-no-border;
     border-left: white solid 2px;
+}
+
+.cmap-header-link-right-border {
+    @extend .cmap-header-link-no-border;
+    border-right: white solid 2px;
 }
 
 .cmap-header-sublink {
