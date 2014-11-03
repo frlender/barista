@@ -227,7 +227,7 @@ body {
   border-left: white solid 2px;
 }
 
-.cmap-header-link-right-border {
+.cmap-header-link-right-border:before {
   border-right: white solid 2px;
 }
 

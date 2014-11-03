@@ -66,7 +66,9 @@
 
 .cmap-header-link-right-border {
     @extend .cmap-header-link-no-border;
-    border-right: white solid 2px;
+    &:before{
+        border-right: white solid 2px;    
+    }
 }
 
 .cmap-header-sublink {
