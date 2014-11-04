@@ -52,7 +52,7 @@
     &:hover{
         color: lighten( $cmap_blue, 10% );
     }
-    &:after{
+    &:before{
         content: " ";
         position: absolute;
         opacity:1;
