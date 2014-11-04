@@ -217,6 +217,10 @@ body {
   color: #6ac2df;
 }
 
+.cmap-header-caret {
+  color: white;
+}
+
 .cmap-header-splitter {
   margin-bottom: 0;
   height: 60px;
