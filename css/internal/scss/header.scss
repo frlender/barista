@@ -49,6 +49,9 @@
 .cmap-header-username{
     @extend .cmap-header-link-no-border;
     color: $cmap_blue;
+    &:hover{
+        color: lighten( $cmap_blue, 10% );
+    }
 }
 
 .cmap-header-subtitle{

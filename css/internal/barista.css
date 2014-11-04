@@ -213,6 +213,9 @@ body {
 .cmap-header-username {
   color: #40B1D6;
 }
+.cmap-header-username:hover {
+  color: #6ac2df;
+}
 
 .cmap-header-subtitle {
   font-family: 'Open Sans', Cambria, serif;
