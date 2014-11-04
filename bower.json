@@ -22,7 +22,8 @@
     "jquery.cookie": "~1.4.1",
     "offline": "~0.7.3",
     "Blob": "*",
-    "bootstrap": "~3.3.0"
+    "bootstrap": "~3.3.0",
+    "bootstrap-select": "~1.6.3"
   },
   "resolutions": {
     "bootstrap": "~3.3.0"
