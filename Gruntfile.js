@@ -73,7 +73,7 @@ module.exports = function(grunt) {
               'external_source/intro.min.js',
               'external_source/rgbcolor.js',
               'external_source/canvg.js',
-              'external_source/Blob.js',
+              'bower_components/Blob/Blob.js',
               'external_source/canvas-toBlob.js',
               'external_source/typeahead.min.js',
               'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
