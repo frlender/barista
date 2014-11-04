@@ -222,7 +222,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "<span class=\"caret\"></span></p>\n							<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"username\">\n						    <!-- <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/settings\">settings</a></li> -->\n						    <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/signout\">logout</a></li>\n						  </ul>\n						</div>\n					";
+    + "<span class=\"caret\"></span></p>\n							<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"username\">\n						    <li role=\"presentation\"><a id=\"logout\" role=\"menuitem\" tabindex=\"-1\" href=\"/signout\">Logout</a></li>\n							<li role=\"presentation\"><a id=\"settings\" role=\"menuitem\" tabindex=\"-1\" href=\"/settings\">Account settings</a></li>\n						  </ul>\n						</div>\n					";
   return buffer;
   }
 
@@ -242,7 +242,7 @@ function program5(depth0,data) {
     + "</p>\n				</div>\n\n				<div class=\"col-xs-3\">\n					";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n					<p title=\"tour\" class=\"cmap-header-link-no-border pull-right\" onclick=\"start_tour();\">Tour</p>\n				</div>\n			</div>\n		</div>\n	</div>\n\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
+  buffer += "\n					<p title=\"tour\" class=\"cmap-header-link-no-border pull-right\" onclick=\"tour();\">Tour</p>\n					<p title=\"about\" class=\"cmap-header-link-no-border pull-right\" onclick=\"about();\">About</p>\n				</div>\n			</div>\n		</div>\n	</div>\n\n\n\n	<!-- small screens -->\n	<div class=\"row visible-xs\">\n		<div class=\"row\">\n		    <h3 class=\"col-sm-offset-1 col-sm-10 cmap-title-text cmap-center-text\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
