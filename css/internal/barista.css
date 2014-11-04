@@ -212,11 +212,19 @@ body {
 
 .cmap-header-username {
   color: #40B1D6;
-  opacity: 1;
-  border-left: solid 1px white;
 }
 .cmap-header-username:hover {
   color: #6ac2df;
+}
+.cmap-header-username:before {
+  content: " ";
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: -4px;
+  right: -4px;
+  bottom: -9px;
+  border: 1px solid white;
 }
 
 .cmap-header-subtitle {

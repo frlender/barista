@@ -49,10 +49,18 @@
 .cmap-header-username{
     @extend .cmap-header-link-no-border;
     color: $cmap_blue;
-    opacity: 1;
-    border-left: solid 1px white;
     &:hover{
         color: lighten( $cmap_blue, 10% );
+    }
+    &:before{
+        content: " ";
+        position: absolute;
+        z-index: 0;
+        top: 0px;
+        left: -4px;
+        right: -4px;
+        bottom: -9px;
+        border: 1px solid white;
     }
 }
 
