@@ -218,10 +218,9 @@ body {
 }
 
 .cmap-header-splitter {
-  top: 0px;
-  left: -4px;
-  right: -4px;
-  bottom: -9px;
+  margin-bottom: 0;
+  height: 60px;
+  opacity: 0.87;
   border: 1px solid white;
 }
 
