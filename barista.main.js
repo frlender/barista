@@ -5354,7 +5354,7 @@ function program3(depth0,data) {
   if (stack1 = helpers.user) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.user; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p><span class=\"caret\"></span>\n							<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"username\">\n						    <li role=\"presentation\"><a id=\"logout\" role=\"menuitem\" tabindex=\"-1\" href=\"/signout\">Logout</a></li>\n							<li role=\"presentation\"><a id=\"settings\" role=\"menuitem\" tabindex=\"-1\" href=\"/settings\">Account settings</a></li>\n						  </ul>\n						</div>\n					";
+    + "<span class=\"caret\"></span></p>\n							<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"username\">\n						    <li role=\"presentation\"><a id=\"logout\" role=\"menuitem\" tabindex=\"-1\" href=\"/signout\">Logout</a></li>\n							<li role=\"presentation\"><a id=\"settings\" role=\"menuitem\" tabindex=\"-1\" href=\"/settings\">Account settings</a></li>\n						  </ul>\n						</div>\n					";
   return buffer;
   }
 
