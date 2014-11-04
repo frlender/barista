@@ -212,6 +212,8 @@ body {
 
 .cmap-header-username {
   color: #40B1D6;
+  opacity: 1;
+  border-left: solid 1px white;
 }
 .cmap-header-username:hover {
   color: #6ac2df;
