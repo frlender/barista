@@ -196,7 +196,7 @@ body {
   color: white;
   padding-left: 10px;
   padding-right: 10px;
-  opacity: 0.54;
+  opacity: 0.87;
   position: relative;
   top: 14px;
   cursor: pointer;
@@ -207,7 +207,7 @@ body {
   transition: all 0.1s ease-out;
 }
 .cmap-header-link-no-border:hover, .cmap-header-username:hover, .cmap-header-link-left-border:hover, .cmap-header-link-right-border:hover {
-  opacity: 0.87;
+  opacity: 1;
 }
 
 .cmap-header-username {
