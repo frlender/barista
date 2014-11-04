@@ -4143,12 +4143,12 @@ if (typeof(CanvasRenderingContext2D) != 'undefined') {
 }
 /* Blob.js
  * A Blob implementation.
- * 2013-06-20
- * 
+ * 2014-07-24
+ *
  * By Eli Grey, http://eligrey.com
- * By Devin Samarin, https://github.com/eboyjr
+ * By Devin Samarin, https://github.com/dsamarin
  * License: X11/MIT
- *   See LICENSE.md
+ *   See https://github.com/eligrey/Blob.js/blob/master/LICENSE.md
  */
 
 /*global self, unescape */
@@ -4157,12 +4157,21 @@ if (typeof(CanvasRenderingContext2D) != 'undefined') {
 
 /*! @source http://purl.eligrey.com/github/Blob.js/blob/master/Blob.js */
 
-if (typeof Blob !== "function" || typeof URL === "undefined")
-if (typeof Blob === "function" && typeof webkitURL !== "undefined") var URL = webkitURL;
-else var Blob = (function (view) {
+(function (view) {
 	"use strict";
 
-	var BlobBuilder = view.BlobBuilder || view.WebKitBlobBuilder || view.MozBlobBuilder || view.MSBlobBuilder || (function(view) {
+	view.URL = view.URL || view.webkitURL;
+
+	if (view.Blob && view.URL) {
+		try {
+			new Blob;
+			return;
+		} catch (e) {}
+	}
+
+	// Internally we use a BlobBuilder implementation to base Blob off of
+	// in order to support older browsers that only have BlobBuilder
+	var BlobBuilder = view.BlobBuilder || view.WebKitBlobBuilder || view.MozBlobBuilder || (function(view) {
 		var
 			  get_class = function(object) {
 				return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
@@ -4193,25 +4202,34 @@ else var Blob = (function (view) {
 			, URL = real_URL
 			, btoa = view.btoa
 			, atob = view.atob
-			, can_apply_typed_arrays = false
-			, can_apply_typed_arrays_test = function(pass) {
-				can_apply_typed_arrays = !pass;
-			}
-			
+
 			, ArrayBuffer = view.ArrayBuffer
 			, Uint8Array = view.Uint8Array
+
+			, origin = /^[\w-]+:\/*\[?[\w\.:-]+\]?(?::[0-9]+)?/
 		;
 		FakeBlob.fake = FB_proto.fake = true;
 		while (file_ex_code--) {
 			FileException.prototype[file_ex_codes[file_ex_code]] = file_ex_code + 1;
 		}
-		try {
-			if (Uint8Array) {
-				can_apply_typed_arrays_test.apply(0, new Uint8Array(1));
-			}
-		} catch (ex) {}
+		// Polyfill URL
 		if (!real_URL.createObjectURL) {
-			URL = view.URL = {};
+			URL = view.URL = function(uri) {
+				var
+					  uri_info = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+					, uri_origin
+				;
+				uri_info.href = uri;
+				if (!("origin" in uri_info)) {
+					if (uri_info.protocol.toLowerCase() === "data:") {
+						uri_info.origin = null;
+					} else {
+						uri_origin = uri.match(origin);
+						uri_info.origin = uri_origin && uri_origin[1];
+					}
+				}
+				return uri_info;
+			};
 		}
 		URL.createObjectURL = function(blob) {
 			var
@@ -4245,19 +4263,16 @@ else var Blob = (function (view) {
 			var bb = this.data;
 			// decode data to a binary string
 			if (Uint8Array && (data instanceof ArrayBuffer || data instanceof Uint8Array)) {
-				if (can_apply_typed_arrays) {
-					bb.push(String.fromCharCode.apply(String, new Uint8Array(data)));
-				} else {
-					var
-						  str = ""
-						, buf = new Uint8Array(data)
-						, i = 0
-						, buf_len = buf.length
-					;
-					for (; i < buf_len; i++) {
-						str += String.fromCharCode(buf[i]);
-					}
+				var
+					  str = ""
+					, buf = new Uint8Array(data)
+					, i = 0
+					, buf_len = buf.length
+				;
+				for (; i < buf_len; i++) {
+					str += String.fromCharCode(buf[i]);
 				}
+				bb.push(str);
 			} else if (get_class(data) === "Blob" || get_class(data) === "File") {
 				if (FileReaderSync) {
 					var fr = new FileReaderSync;
@@ -4305,10 +4320,14 @@ else var Blob = (function (view) {
 		FB_proto.toString = function() {
 			return "[object Blob]";
 		};
+		FB_proto.close = function() {
+			this.size = 0;
+			delete this.data;
+		};
 		return FakeBlobBuilder;
 	}(view));
 
-	return function Blob(blobParts, options) {
+	view.Blob = function(blobParts, options) {
 		var type = options ? (options.type || "") : "";
 		var builder = new BlobBuilder();
 		if (blobParts) {
@@ -4318,7 +4337,8 @@ else var Blob = (function (view) {
 		}
 		return builder.getBlob(type);
 	};
-}(self));
+}(typeof self !== "undefined" && self || typeof window !== "undefined" && window || this.content || this));
+
 /* canvas-toBlob.js
  * A canvas.toBlob() implementation.
  * 2011-07-13
