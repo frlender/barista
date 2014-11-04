@@ -216,9 +216,10 @@ body {
 .cmap-header-username:hover {
   color: #6ac2df;
 }
-.cmap-header-username:before {
+.cmap-header-username:after {
   content: " ";
   position: absolute;
+  opacity: 1;
   z-index: 0;
   top: 0px;
   left: -4px;
