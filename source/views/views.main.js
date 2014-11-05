@@ -2265,7 +2265,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.data = this.model.get('tree_object');
 
 		// if there are no children in the tree_object, dim the view
-		conosle.log(this.data)
+		console.log(this.data)
 		if (this.data.children === undefined){
 			if (this.data.children[0] === undefined){
 			this.top_svg.transition().duration(1).attr("opacity",0);
