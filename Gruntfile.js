@@ -85,7 +85,8 @@ module.exports = function(grunt) {
         dest: 'external_source/external.js'
       },
       js_barista_main_no_external: {
-        src: ['templates/barista_templates.js',
+        src: [
+            //   'templates/barista_templates.js',
               'source/barista.js'],
         dest: 'source/barista.main.js'
       },
