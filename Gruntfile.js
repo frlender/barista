@@ -91,7 +91,7 @@ module.exports = function(grunt) {
       },
       js_barista_main_plus_external: {
         src: ['external_source/external.js',
-              'templates/barista_templates.js',
+            //   'templates/barista_templates.js',
               'source/barista.js'],
         dest: 'barista.main.js'
       },
