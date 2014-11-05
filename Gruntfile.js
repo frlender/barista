@@ -60,7 +60,7 @@ module.exports = function(grunt) {
         dest: 'source/barista.js'
       },
       js_external: {
-        src: ['external_source/jquery-1.9.1.min.js',
+        src: ['bower_components/jquery/dist/jquery.min.js',
               'external_source/underscore-min.js',
               'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
               'external_source/backgrid.min.js',
               'external_source/chardinjs.min.js',
               'external_source/d3.parcoords.js',
-              'external_source/FileSaver.min.js',
+              'bower_components/FileSaver/FileSaver.min.js',
               'external_source/handlebars_runtime.js',
               'external_source/intro.min.js',
               'external_source/canvas2svg.js',
