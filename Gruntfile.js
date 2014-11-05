@@ -64,7 +64,7 @@ module.exports = function(grunt) {
               'external_source/underscore-min.js',
               'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
-              'external_source/d3.v3.min.js',
+              'bower_components/d3/d3.min.js',
               'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
               'external_source/chardinjs.min.js',
@@ -226,11 +226,11 @@ module.exports = function(grunt) {
   // load the plugin that provides the "sass" task
   grunt.loadNpmTasks('grunt-contrib-sass');
 
-  // nodoc task
+  // by default, do everything but doc and external dependency builds
   grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
-  // task to concat and minimized external sources
-  grunt.registerTask('build_external',['concat:js_external','uglify:external']);
+  // task to concat and minimized external sources and then run the default pipeline
+  grunt.registerTask('build_external',['concat:js_external','uglify:external','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
   // standard internal concat task (does not concat external)
   grunt.registerTask('concat_internal', ['concat:js_barista_datasets',
