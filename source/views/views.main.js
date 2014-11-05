@@ -2207,7 +2207,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// grab the data from the model and plot the state of the treemap
 		this.data = this.model.get('tree_object');
 
-		// if there are no cildren in the tree_object, dim the view
+		// if there are no children in the tree_object, dim the view
 		if (this.data !== undefined){
 			if (this.data.children[0] === undefined){
 				this.top_svg.transition().duration(1).attr("opacity",0);
