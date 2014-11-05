@@ -5457,8 +5457,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.data = this.model.get('tree_object');
 
 		// if there are no children in the tree_object, dim the view
-		console.log(this.data);
-		if (this.data.children === undefined){
+		if (this.data.area === 0){
 			this.top_svg.transition().duration(1).attr("opacity",0);
 		}else{
 			this.top_svg.transition().duration(500).attr("opacity",1);
@@ -5513,7 +5512,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		this.data = this.model.get('tree_object');
 
 		// if there are no children in the tree_object, dim the view
-		if (this.data.children === undefined){
+		if (this.data.area === 0){
 			this.top_svg.transition().duration(1).attr("opacity",0);
 		}else{
 			this.top_svg.transition().duration(500).attr("opacity",1);
