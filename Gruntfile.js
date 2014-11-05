@@ -70,7 +70,7 @@ module.exports = function(grunt) {
             //   'external_source/chardinjs.min.js',
             //   'external_source/d3.parcoords.js',
             //   'bower_components/FileSaver/FileSaver.min.js',
-            //   'external_source/handlebars_runtime.js',
+              'external_source/handlebars_runtime.js',
             //   'external_source/intro.min.js',
             //   'external_source/canvas2svg.js',
             //   'bower_components/canvg/dist/canvg.bundle.min.js',
