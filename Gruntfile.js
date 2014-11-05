@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                                   'css/external/introjs.min.css',
                                   'bower_components/bootstrap/dist/css/bootstrap.min.css',
                                   'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css',
-                                  'css/external/typeahead.js-bootstrap.css',
+                                //   'css/external/typeahead.js-bootstrap.css',
                                   'bower_components/offline/themes/offline-theme-default.css',
                                   'bower_components/offline/themes/offline-language-english.css',
                               ]
