@@ -77,7 +77,7 @@ module.exports = function(grunt) {
             //   'bower_components/Blob/Blob.js',
             //   'bower_components/canvas-toBlob.js/canvas-toBlob.js',
             //   'external_source/typeahead.min.js',
-            //   'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
+              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
             //   'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
             //   'bower_components/jquery.cookie/jquery.cookie.js',
             //   'bower_components/offline/offline.min.js'
