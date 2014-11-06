@@ -49,50 +49,50 @@ module.exports = function(grunt) {
       },
       js_barista: {
         src: ['source/preamble.js',
-            //   'source/datasets/datasets.main.js',
-            //   'source/utils/utils.main.js',
-            //   'source/models/models.main.js',
-            //   'source/collections/collections.main.js',
-            //   'source/views/views.main.js',
-            //   'source/tile.js',
-            //   'source/afterword.js'
+              'source/datasets/datasets.main.js',
+              'source/utils/utils.main.js',
+              'source/models/models.main.js',
+              'source/collections/collections.main.js',
+              'source/views/views.main.js',
+              'source/tile.js',
+              'source/afterword.js'
               ],
         dest: 'source/barista.js'
       },
       js_external: {
         src: ['bower_components/jquery/dist/jquery.min.js',
-            //   'bower_components/underscore/underscore-min.js',
+              'bower_components/underscore/underscore-min.js',
               'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
-            //   'bower_components/d3/d3.min.js',
-            //   'external_source/backbone-min.js',
-            //   'external_source/backgrid.min.js',
+              'bower_components/d3/d3.min.js',
+              'external_source/backbone-min.js',
+              'external_source/backgrid.min.js',
             //   'external_source/chardinjs.min.js',
             //   'external_source/d3.parcoords.js',
-            //   'bower_components/FileSaver/FileSaver.min.js',
-            //   'external_source/handlebars_runtime.js',
-            //   'external_source/intro.min.js',
-            //   'external_source/canvas2svg.js',
-            //   'bower_components/canvg/dist/canvg.bundle.min.js',
-            //   'bower_components/Blob/Blob.js',
-            //   'bower_components/canvas-toBlob.js/canvas-toBlob.js',
-            //   'external_source/typeahead.min.js',
-            //   'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
-            //   'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
-            //   'bower_components/jquery.cookie/jquery.cookie.js',
-            //   'bower_components/offline/offline.min.js'
+              'bower_components/FileSaver/FileSaver.min.js',
+              'external_source/handlebars_runtime.js',
+              'external_source/intro.min.js',
+              'external_source/canvas2svg.js',
+              'bower_components/canvg/dist/canvg.bundle.min.js',
+              'bower_components/Blob/Blob.js',
+              'bower_components/canvas-toBlob.js/canvas-toBlob.js',
+              'external_source/typeahead.min.js',
+              'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
+              'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
+              'bower_components/jquery.cookie/jquery.cookie.js',
+              'bower_components/offline/offline.min.js'
               ],
         dest: 'external_source/external.js'
       },
       js_barista_main_no_external: {
         src: [
-            //   'templates/barista_templates.js',
+              'templates/barista_templates.js',
               'source/barista.js'],
         dest: 'source/barista.main.js'
       },
       js_barista_main_plus_external: {
         src: ['external_source/external.js',
-            //   'templates/barista_templates.js',
+              'templates/barista_templates.js',
               'source/barista.js'],
         dest: 'barista.main.js'
       },
@@ -236,13 +236,13 @@ module.exports = function(grunt) {
 
   // standard internal concat task (does not concat external)
   grunt.registerTask('concat_internal', [
-                                    //   'concat:js_barista_datasets',
-                                    //   'concat:js_barista_utils',
-                                    //   'concat:js_barista_models',
-                                    //   'concat:js_barista_views',
-                                    //   'concat:js_barista_collections',
-                                    //   'concat:js_barista',
-                                    //   'concat:js_barista_main_no_external',
+                                      'concat:js_barista_datasets',
+                                      'concat:js_barista_utils',
+                                      'concat:js_barista_models',
+                                      'concat:js_barista_views',
+                                      'concat:js_barista_collections',
+                                      'concat:js_barista',
+                                      'concat:js_barista_main_no_external',
                                       'concat:js_barista_main_plus_external']);
 
   // concat_main task (combines external and internal minimized code)
