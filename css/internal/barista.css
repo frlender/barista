@@ -168,7 +168,7 @@ body {
 }
 
 .cmap-header-app-name {
-  font-family: "Open Sans", Cambria, serif;
+  font-family: "Roboto Slab", Cambria, serif;
   font-size: 1.714285714em;
   font-weight: 700;
   color: #fff;
@@ -191,7 +191,7 @@ body {
 }
 
 .cmap-header-link-no-border, .cmap-header-username, .cmap-header-link-left-border, .cmap-header-link-right-border {
-  font-family: "Open Sans", Cambria, serif;
+  font-family: "Roboto Slab", Cambria, serif;
   font-size: 20px;
   color: white;
   padding-left: 10px;
@@ -229,7 +229,7 @@ body {
 }
 
 .cmap-header-subtitle {
-  font-family: "Open Sans", Cambria, serif;
+  font-family: "Roboto Slab", Cambria, serif;
   font-weight: 400;
   font-size: 1em;
   color: white;
