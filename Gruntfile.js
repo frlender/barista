@@ -67,8 +67,6 @@ module.exports = function(grunt) {
               'bower_components/d3/d3.min.js',
               'external_source/backbone-min.js',
               'external_source/backgrid.min.js',
-            //   'external_source/chardinjs.min.js',
-            //   'external_source/d3.parcoords.js',
               'bower_components/FileSaver/FileSaver.min.js',
               'external_source/handlebars_runtime.js',
               'external_source/intro.min.js',
@@ -106,7 +104,8 @@ module.exports = function(grunt) {
     // configure uglification of files
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
+        footer: 'Barista.packageDate = <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>'
       },
       external: {
         src: ['external_source/external.js'],
