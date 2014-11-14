@@ -105,7 +105,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
-        footer: 'Barista.packageDate = <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>'
+        footer: 'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"'
       },
       external: {
         src: ['external_source/external.js'],
