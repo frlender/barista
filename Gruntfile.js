@@ -1,9 +1,13 @@
 module.exports = function(grunt) {
-
   // Project configuration.
   grunt.initConfig({
     // grab info from the package.json file
     pkg: grunt.file.readJSON('package.json'),
+
+    "gitinfo": {
+        options: {},
+        files:{}
+    },
 
     // configure the compilation of handlebars templates
     handlebars: {
@@ -105,7 +109,12 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
-        footer: 'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"'
+        footer: [
+                 'Barista.packageBranch = "<%= gitinfo.local.branch.current.name %>";',
+                 'Barista.packageShortSHA = "<%= gitinfo.local.branch.current.shortSHA %>";',
+                 'Barista.packageSHA = "<%= gitinfo.local.branch.current.SHA %>";',
+                 'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"',
+                ].join()
       },
       external: {
         src: ['external_source/external.js'],
@@ -227,8 +236,11 @@ module.exports = function(grunt) {
   // load the plugin that provides the "sass" task
   grunt.loadNpmTasks('grunt-contrib-sass');
 
+  //register a task to grab some git information that we will use later
+  grunt.loadNpmTasks('grunt-gitinfo');
+
   // by default, do everything but doc and external dependency builds
-  grunt.registerTask('default', ['handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
+  grunt.registerTask('default', ['gitinfo','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
   // task to concat and minimized external sources and then run the default pipeline
   grunt.registerTask('build_external',['concat:js_external','uglify:external','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
@@ -249,7 +261,5 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('doc', ['handlebars','concat_internal','uglify:main','concat_main','sass','cssmin','groc']);
-
-
 
 };
