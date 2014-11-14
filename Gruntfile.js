@@ -114,7 +114,7 @@ module.exports = function(grunt) {
                  'Barista.packageShortSHA = "<%= gitinfo.local.branch.current.shortSHA %>";',
                  'Barista.packageSHA = "<%= gitinfo.local.branch.current.SHA %>";',
                  'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"',
-                ].join()
+                ].join("")
       },
       external: {
         src: ['external_source/external.js'],
