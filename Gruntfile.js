@@ -82,7 +82,8 @@ module.exports = function(grunt) {
               'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
               'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
               'bower_components/jquery.cookie/jquery.cookie.js',
-              'bower_components/offline/offline.min.js'
+              'bower_components/offline/offline.min.js',
+              'bower_components/jquery-deparam/jquery-deparam.min.js'
               ],
         dest: 'external_source/external.js'
       },
@@ -108,7 +109,13 @@ module.exports = function(grunt) {
     // configure uglification of files
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
+        footer: [
+                 'Barista.packageBranch = "<%= gitinfo.local.branch.current.name %>";',
+                 'Barista.packageShortSHA = "<%= gitinfo.local.branch.current.shortSHA %>";',
+                 'Barista.packageSHA = "<%= gitinfo.local.branch.current.SHA %>";',
+                 'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"',
+                ].join("")
       },
       external: {
         src: ['external_source/external.js'],
