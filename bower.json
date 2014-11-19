@@ -30,7 +30,7 @@
     "FileSaver": "*",
     "jquery-mousewheel": "~3.1.12",
     "underscore": "~1.7.0",
-    "jquery.bbq": "~1.2.1"
+    "jquery-bbq-deparam": "~1.2.1"
   },
   "resolutions": {
     "bootstrap": "~3.3.0"
