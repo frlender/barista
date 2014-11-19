@@ -4899,9 +4899,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 		});
 	},
 
-	set_val: function(new_val){
+	set_val: function(new_val,new_type){
+		new_type = (new_type !== undefined) ? new_type : "single";
 		$("#search",this.el).val(new_val);
-		this.trigger("search:DidType",{val: new_val,type: 'single'});
+		this.trigger("search:DidType",{val: new_val,type: new_type});
 	},
 
 	/**
