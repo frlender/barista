@@ -83,7 +83,7 @@ module.exports = function(grunt) {
               'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
               'bower_components/jquery.cookie/jquery.cookie.js',
               'bower_components/offline/offline.min.js',
-              'bower_components/jquery-deparam/jquery-deparam.min.js'
+              'bower_components/jquery-bbq-deparam/jquery-deparam.min.js'
               ],
         dest: 'external_source/external.js'
       },
