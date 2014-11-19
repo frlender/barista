@@ -108,22 +108,22 @@ module.exports = function(grunt) {
 
     // configure uglification of files
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
-        footer: [
-                 'Barista.packageBranch = "<%= gitinfo.local.branch.current.name %>";',
-                 'Barista.packageShortSHA = "<%= gitinfo.local.branch.current.shortSHA %>";',
-                 'Barista.packageSHA = "<%= gitinfo.local.branch.current.SHA %>";',
-                 'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"',
-                ].join("")
-      },
       external: {
         src: ['external_source/external.js'],
         dest: 'external_source/external.min.js'
       },
       main: {
-        src: ['source/barista.main.js'],
-        dest: 'source/<%= pkg.name %>.main.min.js'
+          options: {
+            banner: '/*! <%= pkg.name %> <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n',
+            footer: [
+                     'Barista.packageBranch = "<%= gitinfo.local.branch.current.name %>";',
+                     'Barista.packageShortSHA = "<%= gitinfo.local.branch.current.shortSHA %>";',
+                     'Barista.packageSHA = "<%= gitinfo.local.branch.current.SHA %>";',
+                     'Barista.packageDate = "<%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>"',
+                    ].join("")
+          },
+          src: ['source/barista.main.js'],
+          dest: 'source/<%= pkg.name %>.main.min.js'
       }
     },
 
