@@ -82,7 +82,8 @@ module.exports = function(grunt) {
               'bower_components/hogan/web/builds/2.0.0/hogan-2.0.0.js',
               'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
               'bower_components/jquery.cookie/jquery.cookie.js',
-              'bower_components/offline/offline.min.js'
+              'bower_components/offline/offline.min.js',
+              'bower_components/jquery-deparam/jquery-deparam.min.js'
               ],
         dest: 'external_source/external.js'
       },
@@ -243,7 +244,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['gitinfo','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
   // task to concat and minimized external sources and then run the default pipeline
-  grunt.registerTask('build_external',['concat:js_external','uglify:external','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
+  grunt.registerTask('build_external',['gitinfo','concat:js_external','uglify:external','handlebars','concat_internal','uglify:main','concat_main','sass','cssmin']);
 
   // standard internal concat task (does not concat external)
   grunt.registerTask('concat_internal', [
