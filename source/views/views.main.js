@@ -831,13 +831,13 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
         this.badges.forEach(function(badge){
             switch(badge){
                 case "active":
-                    self.badge_urls.push("//coreyflynn.github.io/Bellhop/ai/badges/active.svg");
+                    self.badge_urls.push("https://coreyflynn.github.io/Bellhop/ai/badges/active.svg");
                     break;
                 case "developer":
-                    self.badge_urls.push("//coreyflynn.github.io/Bellhop/ai/badges/developer.svg");
+                    self.badge_urls.push("https://coreyflynn.github.io/Bellhop/ai/badges/developer.svg");
                     break;
                 case "explorer":
-                    self.badge_urls.push("//coreyflynn.github.io/Bellhop/ai/badges/explorer.svg");
+                    self.badge_urls.push("https://coreyflynn.github.io/Bellhop/ai/badges/explorer.svg");
                     break;
             }
         });
