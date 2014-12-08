@@ -145,9 +145,11 @@ Barista.setUserKey = function(key) {
 	var key_request = $.ajax(key,{dataType: 'json',async: false});
 	key_request.done(function(res){
 		Barista.user_key = res.user_key;
+		return Barista.user_key;
 	});
 	key_request.fail(function(){
 		console.log("could not find a file at " + key + "; setting Barista.user_key to " + key);
 		Barista.user_key = key;
+		return null;
 	});
 };

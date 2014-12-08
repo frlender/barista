@@ -3,7 +3,10 @@
 (function (){
 
     //set the user_key from a local file called barista_config if it is present
-    Barista.setUserKey('barista_config.json');
+    //at either / or /public
+    if (!Barista.setUserKey('barista_config.json')){
+      Barista.setUserKey('/public/barista_config.json');
+    };
 
     //find all of the barista_target div elements on the page
     var all_divs = $('div');
@@ -17,10 +20,10 @@
     });
 
     //for each barista target element, instantiate the view and attempt to call the
-    //fetch method of its model. For some views this will not work, but many will. 
+    //fetch method of its model. For some views this will not work, but many will.
     //The idea is that we want to populate the views with data when we can on page load
     //since the user is not instantiating the view via javascript.  For each target
-    //Element we will also try to bind it to any views that it asks to be bound to. The 
+    //Element we will also try to bind it to any views that it asks to be bound to. The
     //binding is assumed to be a binding between the any events coming out of the source view.
     //the event's 'val' attribute is fed to the view's model.fetch method
     barista_targets.forEach(function(target){
@@ -38,13 +41,13 @@
             view_name = view_type + view_num;
         }
 
-        //    instantiate the view and register it to the generatedViews object in 
+        //    instantiate the view and register it to the generatedViews object in
         //    Barista
         var view_params = _.extend({el: target},$(target).data());
         Barista.generatedViews[view_name] = new Barista.Views[view_type](view_params);
 
         //    try to call the view's fetch method and ignore errors that come up since
-        //    we expect them for views that don't have models supporting a fetch 
+        //    we expect them for views that don't have models supporting a fetch
         //    operation
         try {
             Barista.generatedViews[view_name].model.fetch('');
