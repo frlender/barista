@@ -127,6 +127,7 @@ Barista.setAPIURL = function(url) {
         url = '//' + url;
     }
     Barista.APIURL = url;
+    Barista.APIPrefilter(url);
 };
 
 // # **setUserKey**
