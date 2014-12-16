@@ -1,0 +1,4 @@
+define([
+  './BaristaBaseView',
+  './GridView'
+],function (){})
