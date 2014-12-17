@@ -1,5 +1,5 @@
 define([
-    './expectViewAttributesFactory'
+    '../common/expectViewAttributesFactory'
 ], function (expectViewAttributesFactory) {
         var attributesToTest = [
           'name',

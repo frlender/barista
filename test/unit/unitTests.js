@@ -1,0 +1,3 @@
+define([
+  './views/viewUnitTests'
+],function (){})

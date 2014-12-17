@@ -1,4 +1,0 @@
-define([
-  './BaristaBaseView',
-  './GridView'
-],function (){})
