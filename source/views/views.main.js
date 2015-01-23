@@ -6737,12 +6737,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .append('circle')
       .attr('r', 5)
       .attr('fill', '#F89838')
-      .attr('dx', function(d) {
+      .attr('cx', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.index / totalLength;
         return positionPct * (this.width - 10) + 5;
       })
-      .attr("dy",this.height / 2 - 5);
+      .attr("cy",this.height / 2 - 5);
   }
 
 });
