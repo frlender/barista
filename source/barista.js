@@ -9629,6 +9629,15 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
    * template, bind model changes to view updates, and render the view
    */
   initialize: function(){
+    // set up parameters
+    this.modificationColors = (this.options.modificationColors !== undefined) ? this.options.modificationColors : undefined;
+    if (this.modificationColors === undefined) {
+      this.modificationColors = {
+        'ac': '#ff9933',
+        'ox': '00ccff'
+      }
+    }
+
     // initialize the base view
     this.base_initialize();
   },
@@ -9689,7 +9698,14 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .data(this.model.get('modifications').models).enter()
       .append('circle')
       .attr('r', 10)
-      .attr('fill', '#F89838')
+      .attr('fill', function(d) {
+        var color = self.modificationColors(d.get('modification'));
+        if (color === undefined) {
+          return '#DBDBDB'
+        } else {
+          return color;
+        }
+      })
       .attr('cx', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
