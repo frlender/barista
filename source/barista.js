@@ -9688,14 +9688,14 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
       .append('circle')
-      .attr('r', 5)
+      .attr('r', 10)
       .attr('fill', '#F89838')
       .attr('cx', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
-        return positionPct * (self.width - 10) + 5;
+        return positionPct * (self.width - 10) + 10;
       })
-      .attr("cy",this.height / 2 - 5);
+      .attr("cy",this.height / 2 - 9);
   }
 
 });
