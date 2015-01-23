@@ -12517,6 +12517,80 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 });
 
 /**
+ * A view the displays both sequence structure and modifications
+ */
+
+Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
+  /**
+   * give the view a name to be used throughout the View's functions when it needs to know what its class name is
+   * @type {String}
+   */
+  name: "SequenceView",
+
+  /**
+   * the default model for the view
+   * @type {backbone.Model}
+   */
+  model: new Barista.Models.SequenceModel(),
+
+  /**
+   * Overide the default Backbone.View initialize method to handle optional arguments, compile the view
+   * template, bind model changes to view updates, and render the view
+   */
+  initialize: function(){
+    // initialize the base view
+    this.base_initialize();
+  },
+
+  /**
+   * completely render the view. Updates both static and dynamic content in the view.
+   * @return {SequenceView} A reference to this to support chaining
+   */
+  render: function(){
+    var self = this;
+    // call BaristaBaseView's render function first so we can layer on top of it
+    this.base_render();
+
+    // render a sequence line
+    this.renderSequenceLine();
+
+    // render modifications
+    this.renderModifications();
+
+    return this;
+  },
+
+  /**
+   * update the dynamic potions of the view
+   * @return {SequenceView} A reference to this to support chaining
+   */
+  update: function(){
+    this.render();
+
+    return this;
+  },
+
+  /**
+   * render the line depicting the base sequence
+   * @return {SequenceView} A reference to this to support chaining
+   */
+  renderSequenceLine: function() {
+    this.fg_layer.selectAll('.sequenceLine').data([]).exit().remove();
+    this.fg_layer.selectAll('.sequenceLine').data([1]).enter()
+      .append('rect')
+      .attr("class","sequenceLine")
+      .attr("height", 2)
+      .attr("width",this.width - 10)
+      .attr("x",5)
+      .attr("y",this.height / 2 - 2)
+      .attr("fill","#BFBFBF");
+
+    return this;
+  }
+
+});
+
+/**
 Tile constructor
 @param {object} [options={}] options object to set properties
 @classdesc A Tile that displays simple information and serves as a front door to the an underlying app.  The 
