@@ -5170,6 +5170,22 @@ Barista.Models.TickModel = Backbone.Model.extend({
 		data_object: {}
 	}
 });
+/**
+ * Model to represent a sequence and the modifications on that sequence
+ */
+Barista.Models.SequenceModel = Backbone.Model.extend({
+
+  /**
+   * the default options for the model
+   * @type {Object}
+   */
+  defaults: {
+    rawSequence: '',
+    displaySequence: '',
+    modifications: new Backbone.Collection()
+  }
+});
+
 // # **AnalysisHistoryCollection**
 // A Backbone.Collection that represents a set of analysis history objects.  This collection is suitable for
 // internal use in GridView.
