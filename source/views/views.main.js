@@ -6693,7 +6693,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.renderSequenceLine();
 
     // render modifications
-    // this.renderModifications();
+    this.renderModifications();
 
     return this;
   },
@@ -6724,6 +6724,24 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .attr("fill","#BFBFBF");
 
     return this;
+  },
+
+  /**
+   * render the modifications on the sequence
+   */
+  renderModifications: function() {
+    this.fg_layer.selectAll('.sequenceModification').data([]).exit().remove();
+    this.fg_layer.selectAll('.sequenceModification')
+      .data(this.model.get('modifications').models).enter()
+      .append('circle')
+      .attr('r', 5)
+      .attr('fill', '#F89838')
+      .attr('x', function(d) {
+        var totalLength = self.model.get('displaySequence').length,
+            positionPct = d.index / totalLength;
+        return positionPct * (this.width - 10) + 5;
+      })
+      .attr("y",this.height / 2 - 5);
   }
 
 });
