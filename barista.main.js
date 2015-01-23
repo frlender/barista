@@ -12592,6 +12592,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
    * render the modifications on the sequence
    */
   renderModifications: function() {
+    var self = this;
     this.fg_layer.selectAll('.sequenceModification').data([]).exit().remove();
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
