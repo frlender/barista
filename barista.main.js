@@ -12604,7 +12604,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
             positionPct = d.get('index') / totalLength;
         return positionPct * (self.width - 10) + 10;
       })
-      .attr("cy",this.height / 2 - 9);
+      .attr("cy",this.height / 2);
   }
 
 });
