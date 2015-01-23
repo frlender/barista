@@ -6746,7 +6746,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .append('circle')
       .attr('r', 10)
       .attr('fill', function(d) {
-        var color = self.modificationColors(d.get('modification'));
+        var color = self.modificationColors[d.get('modification')];
         if (color === undefined) {
           return '#DBDBDB'
         } else {
