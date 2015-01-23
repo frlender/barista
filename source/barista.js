@@ -9646,7 +9646,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.renderSequenceLine();
 
     // render modifications
-    this.renderModifications();
+    // this.renderModifications();
 
     return this;
   },
