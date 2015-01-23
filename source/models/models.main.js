@@ -980,6 +980,7 @@ Barista.Models.SequenceModel = Backbone.Model.extend({
       mod = sequence.slice(index + 1,index + 3);
       sequence = [sequence.slice(0,index),sequence.slice(index + 4,sequence.length)].join('');
       modObjects.push({index: index, modification: mod});
+      numMods += 1;
     });
 
     modifications.add(modObjects);
