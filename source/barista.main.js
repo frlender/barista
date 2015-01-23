@@ -10078,10 +10078,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .attr('cx', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
-        console.log(d);
-        console.log(totalLength);
-        console.log(positionPct);
-        return positionPct * (this.width - 10) + 5;
+        return positionPct * (self.width - 10) + 5;
       })
       .attr("cy",this.height / 2 - 5);
   }
