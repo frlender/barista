@@ -2683,7 +2683,7 @@ Barista.Models.SequenceModel = Backbone.Model.extend({
     modifications.reset();
 
     // remove leading and trailing underscores
-    seqeunce = sequence.replace(/_/g,'');
+    sequence = sequence.replace(/_/g,'');
 
     // find all occurances of '(' in the sequence, these are the modifications
     for(var i=0; i<sequence.length;i++) {
