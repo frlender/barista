@@ -6681,7 +6681,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     if (this.modificationColors === undefined) {
       this.modificationColors = {
         'ac': '#ff9933',
-        'ox': '00ccff'
+        'ox': '#00ccff'
       }
     }
 
@@ -6748,7 +6748,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .attr('fill', function(d) {
         var color = self.modificationColors[d.get('modification')];
         if (color === undefined) {
-          return '#DBDBDB'
+          return '#BDBDBD';
         } else {
           return color;
         }
