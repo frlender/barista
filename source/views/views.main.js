@@ -6695,9 +6695,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     //set up default sequenceUnitSize
     this.sequenceUnitSize = (this.options.sequenceUnitSize !== undefined) ? this.options.sequenceUnitSize : 5;
 
-
     // initialize the base view
     this.base_initialize();
+
+    // add a class to denote the widget type
+    var $div = $("#" + this.div_string);
+    $div.addClass("barista-sequence-view");
   },
 
   /**
