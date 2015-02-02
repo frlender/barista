@@ -6802,6 +6802,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
 
     // function for handling zoom event
     function zoomHandler() {
+      console.log('zoom:',d3.event.translate,d3.event.scale);
       self.vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 
