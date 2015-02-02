@@ -6807,8 +6807,8 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModificationText').data([]).exit().remove();
     this.fg_layer.selectAll('.sequenceModificationText')
       .data(this.model.get('modifications').models).enter()
-      .attr("class","sequenceModificationText")
       .append('text')
+      .attr("class","sequenceModificationText")
       .attr('x', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
