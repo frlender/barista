@@ -10116,6 +10116,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification').data([]).exit().remove();
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
+      .append('g')
       .each(function(d) {
 
         d3.select(this)
