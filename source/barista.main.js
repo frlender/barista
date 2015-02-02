@@ -10033,6 +10033,9 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     // render modifications
     this.renderModifications();
 
+    // configure zooming
+    this.setupZoom();
+
     return this;
   },
 
@@ -10081,6 +10084,24 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
         return positionPct * (self.width - 10) + 10;
       })
       .attr("cy",this.height / 2);
+  },
+
+  /**
+   * configure zoom behavior
+   */
+  setupZoom: function () {
+    // create the zoom listener
+    var zoomListener = d3.behavior.zoom()
+      .scaleExtent([0.1, 3])
+      .on("zoom", zoomHandler);
+
+    // function for handling zoom event
+    function zoomHandler() {
+      this.vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    // apply the zoom behavior to the svg image
+    zoomListener(this.vis);
   }
 
 });
