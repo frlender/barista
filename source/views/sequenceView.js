@@ -134,7 +134,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     var self = this;
     // create the zoom listener
     var zoomListener = d3.behavior.zoom()
-      .scaleExtent([0.1, 3])
+      .scaleExtent([1, 3])
       .on("zoom", zoomHandler);
 
     // function for handling zoom event
