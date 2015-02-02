@@ -12641,6 +12641,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
       .append('circle')
+      .attr("class","sequenceModification")
       .attr('r', 10)
       .attr('fill', function(d) {
         var color = self.modificationColors[d.get('modification')];
@@ -12668,15 +12669,16 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModificationText').data([]).exit().remove();
     this.fg_layer.selectAll('.sequenceModificationText')
       .data(this.model.get('modifications').models).enter()
+      .attr("class","sequenceModificationText")
       .append('text')
-      .attr('cx', function(d) {
+      .attr('x', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
         return positionPct * (renderLength) + 10;
       })
-      .attr("cy",this.height / 2)
+      .attr("y",this.height / 2)
       .text(function (d) {
-        return self.model.get('displaySequence')[d.get('index')];
+        return self.model.get('displaySequence')[d.get('index') - 1];
       });
 
   },
