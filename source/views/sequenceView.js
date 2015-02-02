@@ -134,19 +134,19 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .attr("cy",this.height / 2)
       .append('text')
       .attr("class","sequenceModificationText")
-      .attr('x', function(d) {
-        var totalLength = self.model.get('displaySequence').length,
-            positionPct = d.get('index') / totalLength;
-        switch (self.model.get('displaySequence')[d.get('index') - 1]) {
-          case 'M':
-            return positionPct * (renderLength) + 4;
-            break;
-          default:
-            return positionPct * (renderLength) + 5;
-        }
-
-      })
-      .attr("y",this.height / 2 + 5)
+      // .attr('x', function(d) {
+      //   var totalLength = self.model.get('displaySequence').length,
+      //       positionPct = d.get('index') / totalLength;
+      //   switch (self.model.get('displaySequence')[d.get('index') - 1]) {
+      //     case 'M':
+      //       return positionPct * (renderLength) + 4;
+      //       break;
+      //     default:
+      //       return positionPct * (renderLength) + 5;
+      //   }
+      //
+      // })
+      // .attr("y",this.height / 2 + 5)
       .text(function (d) {
         return self.model.get('displaySequence')[d.get('index') - 1];
       })
