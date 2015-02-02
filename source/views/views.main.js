@@ -6877,22 +6877,6 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
 
     // apply the zoom behavior to the svg image
     zoomListener(this.vis);
-  },
-
-  /**
-   * save any transforms on the view before saving it out and clear them
-   */
-  save_png_pre: function(){
-    this.transform = this.fg_layer.attr("transform");
-    console.log(this.transform);
-    this.fg_layer.attr("transform",null);
-  },
-
-  /**
-   * restore any transforms on the view that were there before saving the png
-   */
-  save_png_post: function(){
-    this.fg_layer.attr("transform",this.transform);
-  },
+  }
 
 });
