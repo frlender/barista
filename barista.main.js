@@ -12641,12 +12641,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
       .append('g')
-      .attr('cx', function(d) {
+      .attr('x', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
         return positionPct * (renderLength) + 10;
       })
-      .attr("cy",this.height / 2)
+      .attr("y",this.height / 2)
       .each(function(d) {
 
         d3.select(this)
