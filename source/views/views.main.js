@@ -6796,15 +6796,18 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
   setupZoom: function () {
     var self = this;
     // create the zoom listener
-    this.vis.call(d3.behavior.zoom()
+    var zoomListener = d3.behavior.zoom()
       .scaleExtent([0.1, 3])
-      .on("zoom", zoomHandler));
+      .on("zoom", zoomHandler);
 
     // function for handling zoom event
     function zoomHandler() {
+      console.log(d3.event.translate,d3.event.scale);
       self.vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 
+    // apply the zoom behavior to the svg image
+    zoomListener(this.vis);
   }
 
 });
