@@ -221,6 +221,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
    */
   save_png_pre: function(){
     this.transform = this.fg_layer.attr("transform");
+    console.log(this.transform);
     this.fg_layer.attr("transform",null);
   },
 
