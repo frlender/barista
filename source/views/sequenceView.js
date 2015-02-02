@@ -149,9 +149,9 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
       .attr('x', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
-        return positionPct * (renderLength) + 10;
+        return positionPct * (renderLength) + 5;
       })
-      .attr("y",this.height / 2)
+      .attr("y",this.height / 2 + 5)
       .text(function (d) {
         return self.model.get('displaySequence')[d.get('index') - 1];
       });
