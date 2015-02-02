@@ -9672,7 +9672,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.renderModifications();
 
     // render modifications text
-    this.renderModificationsText();
+    // this.renderModificationsText();
 
     // configure zooming
     this.setupZoom();
@@ -9747,7 +9747,28 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
             positionPct = d.get('index') / totalLength;
         return positionPct * (renderLength) + 10;
       })
-      .attr("cy",this.height / 2);
+      .attr("cy",this.height / 2)
+      .append('text')
+      .attr("class","sequenceModificationText")
+      .attr('x', function(d) {
+        var totalLength = self.model.get('displaySequence').length,
+            positionPct = d.get('index') / totalLength;
+        switch (self.model.get('displaySequence')[d.get('index') - 1]) {
+          case 'M':
+            return positionPct * (renderLength) + 4;
+            break;
+          default:
+            return positionPct * (renderLength) + 5;
+        }
+
+      })
+      .attr("y",this.height / 2 + 5)
+      .text(function (d) {
+        return self.model.get('displaySequence')[d.get('index') - 1];
+      })
+      .attr('fill','white')
+      .attr('font-family','Open Sans')
+      .attr('font-weight', 'bold');
   },
 
   /**
