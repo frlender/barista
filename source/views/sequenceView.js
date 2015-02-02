@@ -116,6 +116,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
       .append('g')
+      .attr('cx', function(d) {
+        var totalLength = self.model.get('displaySequence').length,
+            positionPct = d.get('index') / totalLength;
+        return positionPct * (renderLength) + 10;
+      })
+      .attr("cy",this.height / 2)
       .each(function(d) {
 
         d3.select(this)
@@ -129,33 +135,27 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
           } else {
             return color;
           }
-        })
-        .attr('cx', function(d) {
-          var totalLength = self.model.get('displaySequence').length,
-              positionPct = d.get('index') / totalLength;
-          return positionPct * (renderLength) + 10;
-        })
-        .attr("cy",this.height / 2);
+        });
 
         d3.select(this)
         .append('text')
         .attr("class","sequenceModificationText")
-        .attr('x', function(d) {
-          var totalLength = self.model.get('displaySequence').length,
-              positionPct = d.get('index') / totalLength;
-          switch (self.model.get('displaySequence')[d.get('index') - 1]) {
-            case 'M':
-              return positionPct * (renderLength) + 4;
-              break;
-            default:
-              return positionPct * (renderLength) + 5;
-          }
-
-        })
-        .attr("y",this.height / 2 + 5)
-        .text(function (d) {
-          return self.model.get('displaySequence')[d.get('index') - 1];
-        })
+        // .attr('x', function(d) {
+        //   var totalLength = self.model.get('displaySequence').length,
+        //       positionPct = d.get('index') / totalLength;
+        //   switch (self.model.get('displaySequence')[d.get('index') - 1]) {
+        //     case 'M':
+        //       return positionPct * (renderLength) + 4;
+        //       break;
+        //     default:
+        //       return positionPct * (renderLength) + 5;
+        //   }
+        //
+        // })
+        // .attr("y",this.height / 2 + 5)
+        // .text(function (d) {
+        //   return self.model.get('displaySequence')[d.get('index') - 1];
+        // })
         .attr('fill','white')
         .attr('font-family','Open Sans')
         .attr('font-weight', 'bold');
