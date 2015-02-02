@@ -9779,7 +9779,7 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
         return self.model.get('displaySequence')[d.get('index') - 1];
       })
       .attr('fill','white')
-      .attr('font','Open Sans')
+      .attr('font-family','Open Sans')
       .attr('font-weight', 'bold');
   },
 
