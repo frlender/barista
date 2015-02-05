@@ -32,9 +32,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     //set up default sequenceUnitSize
     this.sequenceUnitSize = (this.options.sequenceUnitSize !== undefined) ? this.options.sequenceUnitSize : 5;
 
-
     // initialize the base view
     this.base_initialize();
+
+    // add a class to denote the widget type
+    var $div = $("#" + this.div_string);
+    $div.addClass("barista-sequence-view");
   },
 
   /**
@@ -51,6 +54,12 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
 
     // render modifications
     this.renderModifications();
+
+    // render modifications text
+    // this.renderModificationsText();
+
+    // configure zooming
+    this.setupZoom();
 
     return this;
   },
@@ -106,22 +115,104 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
     this.fg_layer.selectAll('.sequenceModification').data([]).exit().remove();
     this.fg_layer.selectAll('.sequenceModification')
       .data(this.model.get('modifications').models).enter()
-      .append('circle')
-      .attr('r', 10)
-      .attr('fill', function(d) {
-        var color = self.modificationColors[d.get('modification')];
-        if (color === undefined) {
-          return '#BDBDBD';
-        } else {
-          return color;
-        }
-      })
-      .attr('cx', function(d) {
+      .append('g')
+      .each(function(d) {
+
+        d3.select(this)
+        .append('circle')
+        .attr("class","sequenceModification")
+        .attr('r', 10)
+        .attr('fill', function(d) {
+          var color = self.modificationColors[d.get('modification')];
+          if (color === undefined) {
+            return '#BDBDBD';
+          } else {
+            return color;
+          }
+        })
+        .attr('cx', function(d) {
+          var totalLength = self.model.get('displaySequence').length,
+              positionPct = d.get('index') / totalLength;
+          return positionPct * (renderLength) + 10;
+        })
+        .attr("cy",self.height / 2);
+
+        d3.select(this)
+        .append('text')
+        .attr("class","sequenceModificationText")
+        .attr('x', function(d) {
+          var totalLength = self.model.get('displaySequence').length,
+              positionPct = d.get('index') / totalLength;
+          switch (self.model.get('displaySequence')[d.get('index') - 1]) {
+            case 'M':
+              return positionPct * (renderLength) + 4;
+              break;
+            default:
+              return positionPct * (renderLength) + 5;
+          }
+
+        })
+        .attr("y",self.height / 2 + 5)
+        .text(function (d) {
+          return self.model.get('displaySequence')[d.get('index') - 1];
+        })
+        .attr('fill','white')
+        .attr('font-family','Open Sans')
+        .attr('font-weight', 'bold');
+
+      });
+  },
+
+  /**
+   * renders text overlays for modifications
+   */
+  renderModificationsText: function() {
+    var self = this,
+        renderLength = this.getRenderLength();
+
+    this.fg_layer.selectAll('.sequenceModificationText').data([]).exit().remove();
+    this.fg_layer.selectAll('.sequenceModificationText')
+      .data(this.model.get('modifications').models).enter()
+      .append('text')
+      .attr("class","sequenceModificationText")
+      .attr('x', function(d) {
         var totalLength = self.model.get('displaySequence').length,
             positionPct = d.get('index') / totalLength;
-        return positionPct * (renderLength) + 10;
+        switch (self.model.get('displaySequence')[d.get('index') - 1]) {
+          case 'M':
+            return positionPct * (renderLength) + 4;
+            break;
+          default:
+            return positionPct * (renderLength) + 5;
+        }
+
       })
-      .attr("cy",this.height / 2);
+      .attr("y",this.height / 2 + 5)
+      .text(function (d) {
+        return self.model.get('displaySequence')[d.get('index') - 1];
+      })
+      .attr('fill','white')
+      .attr('font-family','Open Sans')
+      .attr('font-weight', 'bold');
+  },
+
+  /**
+   * configure zoom behavior
+   */
+  setupZoom: function () {
+    var self = this;
+    // create the zoom listener
+    var zoomListener = d3.behavior.zoom()
+      .scaleExtent([1, 3])
+      .on("zoom", zoomHandler);
+
+    // function for handling zoom event
+    function zoomHandler() {
+      self.fg_layer.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    // apply the zoom behavior to the svg image
+    zoomListener(this.vis);
   }
 
 });
