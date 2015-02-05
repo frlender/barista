@@ -4172,6 +4172,7 @@ Barista.getQueryVariable = function(variable)
 Barista.numberWithCommas = function(x){
     // first check to see if something was passed. if so, convert it
     if (x){
+        console.log('x == 0: ' + x == 0);
         if (x == 0) {
           return 0;
         } else {
