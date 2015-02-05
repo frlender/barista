@@ -1263,7 +1263,11 @@ Barista.getQueryVariable = function(variable)
 Barista.numberWithCommas = function(x){
     // first check to see if something was passed. if so, convert it
     if (x){
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (x === 0) {
+          return 0;
+        } else {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
+        }
     }
 };
 
