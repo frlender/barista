@@ -27,6 +27,9 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
 
   // ## initialize
   // custom initialization to make sure we have the correct url for jsonp
+  /**
+   * custom initialization to make sure we have the correct url for jsonp
+   */
   initialize: function(){
     var re = new RegExp("/?callback=/?");
     if (!re.test(this.get("url"))){
@@ -37,6 +40,10 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // ### fetch
   // fetches new data from the API.  the count is updated with a new
   // count based on the results of the api call
+  /**
+   * fetches new data from the API
+   * @param  {string}  search_string  value to search for
+   */
   fetch: function(search_string){
     // update the model's search string attribute
     this.set("search_string",search_string);

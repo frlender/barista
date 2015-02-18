@@ -14,6 +14,14 @@
 Barista.Models.GeneDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters
+    /**
+   * describes the model's default parameters
+   * @param {string} pert_id       the compound's perturbagen identifier
+   * @param {string} pert_iname    the compound's standardized name
+   * @param {string} pert_summary  a short description of the compound
+   * @param {string} pubchem_cid   the PubChem identifier associated with the compound
+   * @param {string} wiki_url      wikipedia url
+   */
 
   defaults: {
     cell_id: [],
@@ -47,6 +55,10 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
   // ### fetch
   // fetches new data from the pert_info api. All fields are replaced by the first item
   // that matches the api search_string
+  /**
+   * fetches new data from the pert_info api
+   * @param  {string}  search_string  value to search for
+   */
   fetch: function(search_string){
     // set up a deferred object that can be used by outside functions.  This deferred will be
     // resolved with the contents of the model attributes
@@ -108,6 +120,11 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
     // ### fetch_pert_type
     // fetches new data from the pert_info API for the given pert_type.
+      /**
+   * fetches new data from the cell_info api
+   * @param  {string}  search_string  value to search for
+   * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
+   */
     fetch_pert_type: function(search_string,pert_type){
         // set up a deferred object that we can use in the fetch function above
         var deferred = $.Deferred();

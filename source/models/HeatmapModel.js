@@ -30,6 +30,15 @@ Barista.Models.HeatmapModel = Backbone.Model.extend({
 	// 3.  {Array}  **cid**  the column labels to use in the heatmap. defualts to *['1','2']*
 	// 4.  {Array}  **annots**  optional annotations categories to show under the heatmap. defualts to *undefined*
 	// 5.  {String}  **title**  the title to use in the plot, defaults to *""*
+
+	/**
+   * describes the model's default parameters
+   * @param {array}  data    the data object to use in the heatmap. defualts to *[[1,2],[3,4]]*
+   * @param {array}  rid     the row labels to use in the heatmap. defualts to *['1','2']*
+   * @param {array}  cid     the column labels to use in the heatmap. defualts to *['1','2']*
+   * @param {array}  annots  optional annotations categories to show under the heatmap. defualts to *undefined*
+   * @param {string} title   the title to use in the plot, defaults to *""*
+   */
 	defaults: {
 		data: [[1,2],[3,4]],
 		rid: ['1','2'],

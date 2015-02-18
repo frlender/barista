@@ -5,6 +5,11 @@
 Barista.Models.CellModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the cell_id of the perturbagen
+	/**
+	 * Overides the base Model's initialize method to set the model's cid to the cell_id of the perturbagen
+	 * @param  {string}  attributes
+	 * @param  {string}  options
+	 */
 	initialize: function(attributes, options) {
 		this.cid = this.get('cell_id');
   }
