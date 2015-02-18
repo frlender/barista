@@ -1,4 +1,5 @@
-// # **BarPlotModel**
+//test 
+# **BarPlotModel**
 // A Backbone.Model to hold the information needed to make a simple bar plot.  The model includes a title,
 // axis title, data, data_labels, and an optional object for metadata on the points in the data.  The meta
 // data object should contain attributes for each meta data category and an array of values matching the size
