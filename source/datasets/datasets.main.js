@@ -23,7 +23,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: "",
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/cellinfo?',
@@ -33,7 +37,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];
@@ -98,7 +105,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url, query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/cellinfo?',
@@ -108,7 +119,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				} ,
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];
@@ -173,7 +187,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/cellinfo?',
@@ -183,7 +201,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				} ,
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];
@@ -248,7 +269,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/cellinfo?',
@@ -257,7 +282,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = response;
@@ -316,7 +344,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/pertinfo?',
@@ -327,7 +359,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
 					var datum_list = [];
@@ -423,7 +458,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/pertinfo?',
@@ -434,7 +473,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
 					var datum_list = [];
@@ -530,7 +572,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
                     return [Barista.APIURL + '/compute_status?',
@@ -540,7 +586,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 },
 
                 dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
                 filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
@@ -605,7 +654,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
                 reomote: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
                     return [Barista.APIURL + '/compute_status?',
@@ -615,7 +668,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 },
 
                 dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
                 filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
@@ -680,7 +736,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
                     return [Barista.APIURL + '/compute_status?',
@@ -690,7 +750,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 },
 
                 dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
                 filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
@@ -755,7 +818,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return ['//prefix:8080/p100/v1/profileinfo?',
@@ -766,7 +833,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];
@@ -836,7 +906,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/prism/v1/profileinfo?',
@@ -847,7 +921,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];
@@ -917,7 +994,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use pertinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/pertinfo?',
@@ -928,7 +1009,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
 					var datum_list = [];
@@ -1024,7 +1108,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
                     return [Barista.APIURL + '/compute_status?',
@@ -1034,7 +1122,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 },
 
                 dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
                 filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
@@ -1099,7 +1190,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
             remote: {
                 // set the remote data source to use cellinfo with custom query params
                 url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
                 replace: function(url,query){
                     query = (query[0] === "*") ? query.replace("*",".*") : query;
                     return [Barista.APIURL + '/compute_status?',
@@ -1109,7 +1204,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
                 },
 
                 dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
                 filter: function(response){
                     var datum_list = [];
                     var auto_data = [];

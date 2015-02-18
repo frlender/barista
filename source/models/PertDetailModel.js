@@ -11,6 +11,10 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // ### defaults
   // describes the model's default parameters.  This an incomplete list of defaults, only those
   // that are common to all perturbagens
+  /**
+   * describes the model's default parameters
+   * this an incomplete list of defaults, only those that are common to all perturbagens
+   */
   defaults: {
     cell_id: [],
     num_gold: null,
@@ -35,6 +39,12 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // fetches new data from the pert_info API. depending on the model_type parameter,
   // the method calls the appropriate fetch method for the given sub model type and fills
   // the PertDetailModel's attributes with that of the sub model
+    /**
+   * fetches new data from the pert_info api
+   * depending on the model_type parameter,the method calls the appropriate fetch method for the given sub model type and fills the PertDetailModel's attributes with that of the sub model
+   * @param  {string}  search_string  value to search for
+   * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
+   */
   fetch: function(search_string, model_type){
       var self = this;
       var deferred = $.Deferred();

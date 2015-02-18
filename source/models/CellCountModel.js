@@ -34,6 +34,7 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // is replaced with new data coming from the api call
   /**
    * fetches new data from the cell_info api
+   * the count and pert_types data is replaced with new data coming from the api call
    * @param  {string}  search_string  value to search for
    * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
    */

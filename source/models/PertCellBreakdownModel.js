@@ -24,7 +24,8 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
   // ### fetch
   // fetches new data from the pert_info api.  the tree_object data is updated
     /**
-   * fetches new data from the cell_info api
+   * fetches new data from the pert_info api
+   * the tree_object data is updated
    * @param  {string}  search_string  value to search for
    * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
    */

@@ -1,5 +1,9 @@
 // utility function to grab url parameters.
 // taken from http://css-tricks.com/snippets/javascript/get-url-variables/
+/**
+ * utility function to grab url parameters
+ * @param  {[type]}  variable
+ */
 Barista.getQueryVariable = function(variable)
 {
        var query = window.location.search.substring(1);

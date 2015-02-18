@@ -16,6 +16,9 @@
 
 Barista.Collections.CellCollection = Backbone.Collection.extend({
     // #### initialize
+    /**
+     * add description
+     */
     initialize: function(){
         // #### url
         // the url from which model data is fetched
@@ -45,6 +48,13 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
     // 2.  {string}  **search\_column**  the column to query the search_string against, defaults to "cell_id"
     // 3.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 4.  {number}  **limit**  the number of models to be fetched, defaults to *30*
+    /**
+   * Gets additional data from the specified url and stores them as models in the collection
+   * the count and pert_types data is replaced with new data coming from the api call
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_column  the column to query the search_string against, defaults to "cell_id"
+   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   */
 
     getData: function(search_string,search_column,limit){
         var self = this;

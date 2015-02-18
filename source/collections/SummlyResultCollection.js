@@ -16,6 +16,9 @@
 
 Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 	// #### initialize
+    /**
+     * add description
+     */
 	initialize: function(){
 		// #### url
 		// the url from which model data is fetched
@@ -46,6 +49,13 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // arguments
     //
     // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
+      /**
+   * Generates additional fake data objects and stores them as models in the collection
+   * the count and pert_types data is replaced with new data coming from the api call
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
+   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   */
     getData: function(search_string,search_type,limit){
 		var self = this;
 		// set **isLoading** to true so we don't constantly make api calls before the data comes back

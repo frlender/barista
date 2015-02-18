@@ -23,7 +23,11 @@ Barista.Datasets = _.extend(Barista.Datasets,
 			remote: {
 				// set the remote data source to use cellinfo with custom query params
 				url: '',
-
+				  /**
+  					* set the remote data source to use cellinfo with custom query params
+  					* @param  {string}  url
+  					* @param  {string}  query
+  					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
 					return [Barista.APIURL + '/a2/cellinfo?',
@@ -32,7 +36,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				},
 
 				dataType: 'jsonp',
-
+				/**
+				 * add description
+				 * @param {string} response 
+				 */
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = response;

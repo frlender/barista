@@ -32,7 +32,7 @@ Barista.Models.HeatmapModel = Backbone.Model.extend({
 	// 5.  {String}  **title**  the title to use in the plot, defaults to *""*
 
 	/**
-   * describes the model's default parameters
+   * set up defaults for model values
    * @param {array}  data    the data object to use in the heatmap. defualts to *[[1,2],[3,4]]*
    * @param {array}  rid     the row labels to use in the heatmap. defualts to *['1','2']*
    * @param {array}  cid     the column labels to use in the heatmap. defualts to *['1','2']*

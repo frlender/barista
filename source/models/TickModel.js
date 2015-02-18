@@ -15,6 +15,11 @@ Barista.Models.TickModel = Backbone.Model.extend({
 
 	// 1.  {String}  **title**  the title to use in the plot, defaults to *""*
 	// 2.  {Object}  **data_object**  the data object to use when plotting. defualts to *{}*
+   /**
+   * set up defaults for model values
+   * @param {string} title        the title to use in the plot, defaults to *""*
+   * @param {object} data_object  the data object to use when plotting. defualts to *{}*
+   */
 	defaults: {
 		title: "",
 		data_object: {}

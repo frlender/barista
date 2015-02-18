@@ -57,6 +57,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
   // that matches the api search_string
   /**
    * fetches new data from the pert_info api
+   * All fields are replaced by the first item that matches the api search_string
    * @param  {string}  search_string  value to search for
    */
   fetch: function(search_string){
@@ -121,7 +122,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
     // ### fetch_pert_type
     // fetches new data from the pert_info API for the given pert_type.
       /**
-   * fetches new data from the cell_info api
+   * fetches new data from the pert_info API for the given pert_type
    * @param  {string}  search_string  value to search for
    * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
    */

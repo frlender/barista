@@ -5,6 +5,11 @@
 Barista.Models.SignatureModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the sig_id of the perturbagen
+	/**
+     * Overides the base Model's initialize method to add the model's cid to the sig_id of the perturbagen
+     * @param  {string}  attributes
+     * @param  {string}  options
+     */
 	initialize: function(attributes, options) {
 		// set the unique collection identifier to match the sig_id
 		this.cid = this.get('sig_id');

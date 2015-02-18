@@ -1,5 +1,9 @@
 // # **NumbersToSubscript**
 // a utility to map numbers in an input string to subscript
+/**
+ * a utility to map numbers in an input string to subscript
+ * @param {string} s  input string to apply subscript to
+ */
 Barista.NumbersToSubscript = function(s) {
     if (!s){
         return s;

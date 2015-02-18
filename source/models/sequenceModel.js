@@ -5,7 +5,6 @@ Barista.Models.SequenceModel = Backbone.Model.extend({
 
   /**
    * the default options for the model
-   * @type {Object}
    */
   defaults: {
     sequence: '',
