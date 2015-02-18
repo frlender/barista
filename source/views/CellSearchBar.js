@@ -11,7 +11,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "CellSearchBar",
-
+/**
+ * add description
+ */
 	initialize: function(){
 		var self = this;
 
@@ -36,6 +38,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 			self.render();
 
 			// once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
+			/**
+			 * once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
+			 */
 			var change_callback = function () {
 				var val  = $("#search",self.el).val();
 				var type = "";
@@ -72,6 +77,10 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
     @method get_val
     **/
+
+    /**
+     * Gets the current text entered in the view's search bar
+     */
 	get_val: function(){
 		return $("#search",this.el).val();
 	},
@@ -80,6 +89,10 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
 
     @method random_val
+    **/
+
+    	/**
+    fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
     **/
 	random_val: function(){
 		var self = this;
@@ -93,7 +106,9 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 			self.trigger("search:DidType",{val: val,search_column: 'cell_id'});
 		});
 	},
-
+/**
+ * add description
+ */
 	set_val: function(new_val){
 		$("#search",this.el).val(new_val);
 		this.trigger("search:DidType",{val: new_val,search_column: undefined }); //TODO need to find search column info
@@ -103,6 +118,10 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
     renders the view
 
     @method render
+    **/
+
+    	/**
+    renders the view
     **/
 	render: function(){
 		var self = this;

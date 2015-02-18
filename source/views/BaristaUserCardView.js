@@ -20,6 +20,9 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
     // ## initialize
     // overide the view's default initialize method in order to catch options and
     // render a custom template
+    /**
+     * overide the view's default initialize method in order to catch options and render a custom template
+     */
     initialize: function(){
         // set up defaults
         this.realName = (this.options.realName !== undefined) ? this.options.realName : "Name";
@@ -34,6 +37,9 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
 
     // ### compile_template
     // use Handlebars to compile the template for the view
+    /**
+     * use Handlebars to compile the template for the view
+     */
     compile_template: function(){
         var self = this;
         this.div_string = 'barista_view' + new Date().getTime();;
@@ -46,6 +52,9 @@ Barista.Views.BaristaUserCardView = Backbone.View.extend({
 
     // ### map_badges
     // translate the passed array of badge names into image urls
+    /**
+     * translate the passed array of badge names into image urls
+     */
     map_badges: function(){
         var self = this;
         this.badge_urls = [];

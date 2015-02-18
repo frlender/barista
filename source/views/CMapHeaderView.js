@@ -24,6 +24,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	/**
+	 * overide the default Backbone.View initialize function to compile a built in template and then render the view
+	 */
 	initialize: function(){
         var self = this;
 
@@ -52,6 +55,9 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the specified template for the view
+	/**
+	 * use Handlebars to compile the specified template for the view
+	 */
 	compile_template: function(){
 		var self = this;
 		// grab the template

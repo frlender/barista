@@ -38,7 +38,16 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	//					//your code here
 	//					}
 	//
-
+/**
+ * initialize the view
+ * Views that extend BaristaBaseView should impliment code overiding this method
+ * If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should call it in their redraw method
+ * As an example:
+ * initialize: function(){
+				this.base_initialize();
+				//your code here
+				}
+ */
 	initialize: function(){
 		this.base_initialize();
 	},
@@ -57,6 +66,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view.  This method is provided so it
 	// can be used in view that extend BaristaBaseView
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * This method is provided so it can be used in view that extend BaristaBaseView
+	 */
 	base_initialize: function(){
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
@@ -99,6 +112,9 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		var self = this;
 		this.div_string = 'barista_view' + new Date().getTime();
@@ -119,7 +135,17 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	//					//your code here
 	//					}
 	//
-
+/**
+ * completely render the view
+ * Updates both static and dynamic content in the view
+ * Views that extend BaristaBaseView should impliment draw code overiding this method
+ * If extended BaristaBaseViews want to use the built in base_render method of BaristaBaseView, they should call it in their render method
+ * As an example:
+ * render: function(){
+			this.base_render();
+			//your code here
+			}
+ */
 	render: function(){
 		this.base_render();
 		return this;
@@ -128,6 +154,11 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// ### base_render
 	// completely redraw the view. Updates both static and dynamic content in the view.
 	// This method is provided so it can be used in view that extend BaristaBaseView
+	/**
+	 * completely redraw the view
+	 * Updates both static and dynamic content in the view
+	 * This method is provided so it can be used in view that extend BaristaBaseView
+	 */
 	base_render: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -185,13 +216,19 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	},
 
 	// ### update
-	// update the dynamic potions of the view
+	// update the dynamic portions of the view
+	/**
+	 * update the dynamic portions of the view
+	 */
 	update: function(){
 		return this;
 	},
 
 	// ### savePng
 	// save the current state of the view into a png image
+	/**
+	 * save the current state of the view into a png image
+	 */
 	save_png: function(){
 		// do any pre save work that the child class may require
 		this.save_png_pre();
@@ -236,17 +273,27 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	},
 
 	// ### save_png_pre
-	// dummy method that should be overiden if there is any work to do before
+	// dummy method that should be overridden if there is any work to do before
 	// saving the png image of the view.  For example, removing elements that
 	// will not render properly could be done before saving the image.  This
 	// function is called as the first step of *save_png*
+	/**
+	 * dummy method that should be overridden if there is any work to do before saving the png image of the view
+	 * For example, removing elements that will not render properly could be done before saving the image
+	 * This function is called as the first step of *save_png*
+	 */
 	save_png_pre: function(){},
 
 	// ### save_png_post
-	// dummy method that should be overiden if there is any work to do after
+	// dummy method that should be overridden if there is any work to do after
 	// saving the png image of the view.  For example, restoring elements that
 	// were removed before saving could be done after saving the image.  This
 	// function is called as the last step of *save_png*
+		/**
+	 * dummy method that should be overridden if there is any work to do after saving the png image of the view
+	 * For example, restoring elements that were removed before saving could be done after saving the image
+	 * This function is called as the last step of *save_png*
+	 */
 	save_png_post: function(){},
 
 
@@ -258,6 +305,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *1*
 
 	//		pert_detail_view.hide(duration);
+	/**
+	 * hides the view by dimming the opacity and hiding it in the DOM
+	 * @param  {number} duration  the time in ms for the hide animation. defualts to *1*
+	 */
 	hide: function(duration){
 		duration = (duration !== undefined) ? duration : 1;
 		var self = this;
@@ -273,6 +324,10 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *1*
 
 	//		pert_detail_view.show(duration);
+	/**
+	 * shows the view by brightening the opacity and showing it in the DOM
+	 * @param  {number} duration  the time in ms for the hide animation. defualts to *1*
+	 */
 	show: function(duration){
 		duration = (duration !== undefined) ? duration : 1;
 		this.$el.show();

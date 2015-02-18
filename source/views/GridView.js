@@ -2,7 +2,9 @@ Barista.Views.GridView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "GridView",
-
+/**
+ * add description
+ */
 	initialize: function(){
 		var self = this;
 		// default search value
@@ -36,10 +38,17 @@ Barista.Views.GridView = Backbone.View.extend({
 			events: {
 				"click": "onClick"
 			},
+			/**
+			 *  build the grid on the template using a clickable row
+			 *  If a row is clicked, a grid:RowClick event is fired with the row's model as the passed data
+			 */
 			onClick: function () {
 				self.trigger("grid:RowClick", this.model);
 			},
 			// overide Backgrid.Row's native render method
+			/**
+			 * overide Backgrid.Row's native render method
+			 */
 			render: function () {
 				this.$el.empty();
 				var fragment = document.createDocumentFragment();
@@ -56,6 +65,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			},
 
 			// overide Backgrid.Row's native remove method
+			/**
+			 * overide Backgrid.Row's native remove method
+			 */
 			remove: function () {
 				this.$el.addClass("cmap-active-grid-row");
 				this.$el.animate({"opacity":0},1000);
@@ -112,6 +124,9 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	// ### add_scroll_to_top_button
 	// adds a UI control to scroll the top of the grid
+	/**
+	 * adds a UI control to scroll the top of the grid
+	 */
 	add_scroll_to_top_button: function(){
 		var self = this;
 		this.scroll_to_top_button_id = this.div_string + 'scroll_button';
@@ -125,6 +140,10 @@ Barista.Views.GridView = Backbone.View.extend({
 	// argurments:
 
 	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+	/**
+	 * scrolls the grid to the top of its container
+	 * @param  {number} duration  the duration of the scroll animation in ms, defaults to *500*
+	 */
 	scroll_to_top: function(duration){
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.div_string).animate({scrollTop:0},duration);
@@ -136,6 +155,10 @@ Barista.Views.GridView = Backbone.View.extend({
 	// argurments:
 
 	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+		/**
+	 * scrolls the grid to the bottom of its container
+	 * @param  {number} duration  the duration of the scroll animation in ms, defaults to *500*
+	 */
 	show_scroll_to_top_button: function(duration){
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.scroll_to_top_button_id).clearQueue();
@@ -147,13 +170,22 @@ Barista.Views.GridView = Backbone.View.extend({
 	// argurments:
 
 	// 1.  {number}  **duration**  the duration of the scroll animation in ms, defaults to *500*
+		/**
+	 * hides the scroll to top button
+	 * @param  {number} duration  the duration of the scroll animation in ms, defaults to *500*
+	 */
 	hide_scroll_to_top_button: function(duration){
 		var self= this;
 		duration = (duration !== undefined) ? duration : 500;
 		$("#" + this.scroll_to_top_button_id).clearQueue();
 		$("#" + this.scroll_to_top_button_id).animate({opacity:0},duration);
 	},
-
+/**
+ * add description
+ * @param  {string} search_val   [description]
+ * @param  {string} search_type  [description]
+ * @param  {number} limit        [description]
+ */
 	replace_collection: function(search_val,search_type,limit){
 		var getData_promise;
 		var self = this;
@@ -179,7 +211,12 @@ Barista.Views.GridView = Backbone.View.extend({
 		});
 		return getData_promise;
 	},
-
+/**
+ * add description
+ * @param  {string} search_val   [description]
+ * @param  {string} search_type  [description]
+ * @param  {number} limit        [description]
+ */
 	update_collection: function(search_val,search_type,limit){
 		var getData_promise;
 		if (this.collection.models.length < this.collection.maxCount){
@@ -198,7 +235,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			return getData_promise;
 		}
 	},
-
+/**
+ * add description
+ */
 	clear_collection: function(){
 		var self = this;
 		this.collection.skip = 0;
@@ -217,7 +256,9 @@ Barista.Views.GridView = Backbone.View.extend({
 
 		},500);
 	},
-
+/**
+ * add description
+ */
 	resize_div: function(){
 		var self = this;
 		var container_height =  $("#" + this.div_string).height();
@@ -229,7 +270,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			$("#" + self.div_string).animate({height:target_height},500);
 		},500);
 	},
-
+/**
+ * add description
+ */
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
@@ -241,7 +284,9 @@ Barista.Views.GridView = Backbone.View.extend({
 													   edit: this.edit,
 													}));
 	},
-
+/**
+ * add description
+ */
 	slice_all_table_data: function(){
 		var self = this;
 		// change the button state to progress
@@ -269,6 +314,10 @@ Barista.Views.GridView = Backbone.View.extend({
 			dataType: 'json',
 			url: sig_slice,
 			data: {q: self.collection.q_param,l: 1000},
+			/**
+			 * add description
+			 * @param  {[type]} res [description]
+			 */
 			success: function(res){
 				if (res.file_url){
 					self.change_slice_button_state("link",res.file_url);
@@ -276,6 +325,9 @@ Barista.Views.GridView = Backbone.View.extend({
 					self.change_slice_button_state("fail");
 				}
 			},
+			/**
+			 * add description
+			 */
 			error: function(){
 				self.change_slice_button_state("fail");
 			}
@@ -289,7 +341,11 @@ Barista.Views.GridView = Backbone.View.extend({
 			self.change_slice_button_state("fail");
 		},60000);
 	},
-
+/**
+ * add descriotion
+ * @param  {string} state [description]
+ * @param  {string} link  [description]
+ */
 	change_slice_button_state: function (state,link){
 		var self = this;
 		// unbind an handlers on the button
@@ -339,7 +395,9 @@ Barista.Views.GridView = Backbone.View.extend({
 		}
 
 	},
-
+/**
+ * add description
+ */
 	download_table: function(){
 		var self = this;
 		// indicate we are downloading something
@@ -398,6 +456,9 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	// ### open_edit_table
 	// open up a column to show editing buttons
+	/**
+	 * open up a column to show editing buttons
+	 */
 	open_edit_table: function(){
 		var self = this;
 		console.log("opening edit");
@@ -409,6 +470,9 @@ Barista.Views.GridView = Backbone.View.extend({
 
 	// ### close_edit_table
 	// close column showing editing buttons
+	/**
+	 * close column showing editing buttons
+	 */
 	close_edit_table: function(){
 		var self = this;
 		var idCol = this.grid.columns.where({ name: "edit" });
@@ -426,6 +490,10 @@ Barista.Views.GridView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *500*
 
 	//		pert_detail_view.hide(duration);
+	/**
+	 * hides the view by dimming the opacity and hiding it in the DOM
+	 * @param  {number} duration  the time in ms for the hide animation. defualts to *500*
+	 */
 	hide: function(duration){
 		var self = this;
 		this.$el.animate({opacity:0},duration);
@@ -440,6 +508,10 @@ Barista.Views.GridView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *500*
 
 	//		pert_detail_view.show(duration);
+		/**
+	 * shows the view by brightening the opacity and showing it in the DOM
+	 * @param  {number} duration  the time in ms for the hide animation. defualts to *500*
+	 */
 	show: function(duration){
 		this.$el.show();
 		this.$el.animate({opacity:1},duration);

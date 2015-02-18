@@ -12,6 +12,9 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
+	/**
+	 * overide the default Backbone.View initialize function to compile a built in template and then render the view
+	 */
 	initialize: function(){
         var self = this;
 
@@ -38,6 +41,9 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
     // ### wrap_content
     // wrap all existing content in the elements we need to work
     // the slide out navigation that we are going to build
+    /**
+     * wrap all existing content in the elements we need to work the slide out navigation that we are going to build
+     */
     wrap_content: function(){
         $("body").children().wrapAll('<div class="cmap-navigation-content"/>');
         $(".cmap-navigation-content").wrapAll('<div class="cmap-navigation-wrapper"/>');
@@ -45,6 +51,9 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 
     // ### build navigation
     // build the navigation pane using all reuested menu items and links
+    /**
+     * build the navigation pane using all reuested menu items and links
+     */
     build_navigation: function(){
         var self = this;
         $(".cmap-navigation-wrapper").prepend('<div class="cmap-navigation-menu"></div>');
@@ -58,7 +67,11 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 			$(".cmap-navigation-wrapper").toggleClass("show-nav");
 		});
 	},
-
+/**
+ * add description
+ * @param {string} text  
+ * @param {string} route 
+ */
 	addLink: function(text,route) {
 		var $el = $(".cmap-navigation-menu");
 		$el.append('<a href="' + route + '" class="col-xs-12 cmap-navigation-menu-item">' + text + '</a>');

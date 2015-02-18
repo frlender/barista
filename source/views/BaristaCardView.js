@@ -34,6 +34,9 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 	// ## initialize
 	// overide the view's default initialize method in order to catch options and
 	// render a custom template
+	/**
+	 * overide the view's default initialize method in order to catch options and render a custom template
+	 */
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.fg_color = (this.options.fg_color !== undefined) ? this.options.fg_color : "#1b9e77";
@@ -62,6 +65,9 @@ Barista.Views.BaristaCardView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		var self = this;
 		this.div_string = 'barista_view' + new Date().getTime();;

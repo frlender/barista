@@ -41,6 +41,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// set up x and y range and determine if are going to draw the axes dynamically
 		this.range = (this.options.range !== undefined) ? this.options.x_range : undefined;
@@ -79,6 +82,10 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### redraw
 	// completely redraw the view. Updates both static and dynamic content in the view.
+	/**
+	 * completely redraw the view
+	 * Updates both static and dynamic content in the view
+	 */
 	render: function(){
 		this.base_render();
 		this.init_plot();
@@ -87,6 +94,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### init_plot
 	// initialize the static parts of the view's panel
+	/**
+	 * initialize the static parts of the view's panel
+	 */
 	init_plot: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -122,6 +132,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update
 	// update the dynamic potions of the view
+	/**
+	 * update the dynamic potions of the view
+	 */
 	update: function(){
 		var self = this;
 		
@@ -147,6 +160,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### set_ranges
 	// utility function used to get the x and y ranges used in the plot
+	/**
+	 * utility function used to get the x and y ranges used in the plot
+	 */
 	set_ranges: function(){
 		var data,min,max;
 		// calculate the range. If we need to caluclate it dynamically, check the lock and expand
@@ -188,6 +204,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### set_scales
 	// utility function used to get the x and y scales used in the plot
+	/**
+	 * utility function used to get the x and y scales used in the plot
+	 */
 	set_scales: function(){
 		if (this.log){
 			this.x_scale=d3.scale.log().domain([this.range[0],this.range[1]]).range([this.margin, this.width - this.margin]);
@@ -203,6 +222,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### build_axes
 	// utility function used to build x and y axes
+	/**
+	 * utility function used to build x and y axes
+	 */
 	build_axes: function(){
 		var self = this;
 
@@ -230,6 +252,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### style axes
 	// utility function to apply custom styles to axis components
+	/**
+	 * utility function to apply custom styles to axis components
+	 */
 	style_axes: function(){
 		this.vis.selectAll('.axis').selectAll("path")
 			.style("fill","none")
@@ -248,6 +273,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render_vertical_bars
 	// draws bars in vertical mode
+	/**
+	 * draws bars in vertical mode
+	 */
 	render_vertical_bars: function(){
 		var self = this;
 		// get the model's data
@@ -298,6 +326,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render_horizontal_bars
 	// draws bars in horizontal mode
+	/**
+	 * draws bars in horizontal mode
+	 */
 	render_horizontal_bars: function(){
 		var self = this;
 		// get the model's data
@@ -331,6 +362,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update_vertical_bars
 	// updates the data in the bars in vertical orientation
+	/**
+	 * updates the data in the bars in vertical orientation
+	 */
 	update_vertical_bars: function(){
 		var self = this;
 		// build Axes
@@ -394,6 +428,9 @@ Barista.Views.BarPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update_horizontal_bars
 	// updates the data in the bars in vertical orientation
+	/**
+	 * updates the data in the bars in vertical orientation
+	 */
 	update_horizontal_bars: function(){
 		var self = this;
 		// figure out how tall each bar will be
