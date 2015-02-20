@@ -13,8 +13,10 @@
 /**
  * a utility function to convert standard perturbagen type descriptors into more human friendly strings
  * Given an input type string, an object is returned with field names of 'name' and 'acronym'
- * If the passed string is not a recoqnized type, the 'name' and 'acronym' fields are set to the passed string
- * @param {string} input_type  type of object (must be recognized type from cases below, or an error will occur)
+ * If the passed string is not a recoqnized type, the 'name' and 'acronym' fields are set to the passed
+ * string
+ * @param {string} input_type  type of object (must be recognized type from cases below, or an error will
+ *                             occur)
  */
 Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){
@@ -131,7 +133,8 @@ Barista.numberWithCommas = function(x){
 // 1.  {string}  **api_endpoint**  The location of the API endpoint to prefilter call from. defaults to *"api.lincscloud.org"*
 /**
  * a utility function to set up ajax calls to api.lincscloud.org to pass Barista.user_key as a parameter
- * @param {string} api_endpoint  The location of the API endpoint to prefilter call from. defaults to *"api.lincscloud.org"*
+ * @param {string} api_endpoint  The location of the API endpoint to prefilter call from. defaults to
+ *                               *"api.lincscloud.org"*
  */
 Barista.setAPIPrefilter = function(api_endpoint) {
     api_endpoint = (api_endpoint !== undefined) ? api_endpoint : 'api.lincscloud.org';
@@ -179,8 +182,10 @@ Barista.setAPIURL = function(url) {
 //
 // 1.  {string}  **key**  The user_key to use or a path to a JSON file containing a user_key attribute, defaults to *""*
 /**
- * a utility function to set a user_key attribute on the Barista object and set up ajax calls to api.lincscloud.org to pass that user_key as a parameter
- * @param {string} key  The user_key to use or a path to a JSON file containing a user_key attribute, defaults to *""*
+ * a utility function to set a user_key attribute on the Barista object and set up ajax calls to
+ * api.lincscloud.org to pass that user_key as a parameter
+ * @param {string} key  The user_key to use or a path to a JSON file containing a user_key attribute,
+ *                      defaults to *""*
  */
 Barista.setUserKey = function(key) {
 	Barista.setAPIPrefilter();

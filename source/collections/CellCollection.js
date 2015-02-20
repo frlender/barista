@@ -17,7 +17,7 @@
 Barista.Collections.CellCollection = Backbone.Collection.extend({
     // #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
     initialize: function(){
         // #### url
@@ -27,14 +27,25 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 
     // #### model
     // the model used for the collection objects.
+    /**
+     * the model used for the collection objects
+     */
     model: Barista.Models.CellModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ## getData
@@ -48,14 +59,14 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
     // 2.  {string}  **search\_column**  the column to query the search_string against, defaults to "cell_id"
     // 3.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 4.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-    /**
+/**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
-   * @param  {string}  search_column  the column to query the search_string against, defaults to "cell_id"
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
+   * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
-
     getData: function(search_string,search_column,limit){
         var self = this;
         // set **isLoading** to true so we don't constantly make api calls before the data comes back

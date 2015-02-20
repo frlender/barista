@@ -18,9 +18,9 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
   /**
    * [defaults description]
-   * @param {number} pert\_count   the number of perturbagens matching an api query, defaults to *0*
-   * @param {array}  pert\_types   an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
-   * @param {date}   last\_update  a timestamp of the latest model update, defaults to the current time
+   * @param {number} count   the number of perturbagens matching an api query, defaults to *0*
+   * @param {array}  pert_types   an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
+   * @param {date}   last_update  a timestamp of the latest model update, defaults to the current time
    */
   defaults: {
     count: 0,

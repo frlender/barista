@@ -46,10 +46,18 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
   // ### kd_fields
   // kd specific model fields
+  /**
+   * kd specific model fields
+   * @type {Array}
+   */
   kd_fields: ['clone_name','oligo_seq','seed_seq6','seed_seq7','target_region','target_seq','vector_id'],
 
   // ### array_fields
   // fields that are arrays
+  /**
+   * fields that are arrays
+   * @type {Array}
+   */
   array_fields: ['cell_id','sig_id','sig_id_gold'],
 
   // ### fetch
@@ -124,7 +132,7 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
       /**
    * fetches new data from the pert_info API for the given pert_type
    * @param  {string}  search_string  value to search for
-   * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
+   * @param  {string}  pert_type      one of 'multi', 'single', or 'cell'
    */
     fetch_pert_type: function(search_string,pert_type){
         // set up a deferred object that we can use in the fetch function above

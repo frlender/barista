@@ -13,8 +13,10 @@
 /**
  * a utility function to convert standard perturbagen type descriptors into more human friendly strings
  * Given an input type string, an object is returned with field names of 'name' and 'acronym'
- * If the passed string is not a recoqnized type, the 'name' and 'acronym' fields are set to the passed string
- * @param {string} input_type  type of object (must be recognized type from cases below, or an error will occur)
+ * If the passed string is not a recoqnized type, the 'name' and 'acronym' fields are set to the passed
+ * string
+ * @param {string} input_type  type of object (must be recognized type from cases below, or an error will
+ *                             occur)
  */
 Barista.CMapPertTypeAlias = function(input_type){
 	switch(input_type){

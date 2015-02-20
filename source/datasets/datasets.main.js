@@ -9,15 +9,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellHistology:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'CellHistology',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -91,15 +106,31 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellID:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'CellID',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 * @type {[type]}
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -173,15 +204,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellLineage:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'CellLineage',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -255,15 +301,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CellMutation:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'CellMutation',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -330,15 +391,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ CompoundPertIName:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'CompoundPertIName',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -444,15 +520,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ GeneticPertIName:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'GeneticPertIName',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -558,15 +649,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
     { JobID:
             {
             // only return 6 items at a time in the autocomplete dropdown
+            /**
+             * only return 6 items at a time in the autocomplete dropdown
+             * @type {Number}
+             */
             limit: 6,
 
             // provide a name for the default typeahead data source
+            /**
+             * provide a name for the default typeahead data source
+             * @type {String}
+             */
             name: 'JobID',
 
             // the template to render for all results
+            /**
+             * the template to render for all results
+             * @type {String}
+             */
             template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
             // use twitter's hogan.js to compile the template for the typeahead results
+            /**
+             * use twitter's hogan.js to compile the template for the typeahead results
+             */
             engine: Hogan,
 
             remote: {
@@ -640,15 +746,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
     { JobName:
             {
             // only return 6 items at a time in the autocomplete dropdown
+            /**
+             * only return 6 items at a time in the autocomplete dropdown
+             * @type {Number}
+             */
             limit: 6,
 
             // provide a name for the default typeahead data source
+            /**
+             * provide a name for the default typeahead data source
+             * @type {String}
+             */
             name: 'JobName',
 
             // the template to render for all results
+            /**
+             * the template to render for all results
+             * @type {String}
+             */
             template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
             // use twitter's hogan.js to compile the template for the typeahead results
+            /**
+             * use twitter's hogan.js to compile the template for the typeahead results
+             */
             engine: Hogan,
 
             remote: {
@@ -722,15 +843,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
     { JobStatus:
             {
             // only return 6 items at a time in the autocomplete dropdown
+            /**
+             * only return 6 items at a time in the autocomplete dropdown
+             * @type {Number}
+             */
             limit: 6,
 
             // provide a name for the default typeahead data source
+            /**
+             * provide a name for the default typeahead data source
+             * @type {String}
+             */
             name: 'JobStatus',
 
             // the template to render for all results
+            /**
+             * the template to render for all results
+             * @type {String}
+             */
             template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
             // use twitter's hogan.js to compile the template for the typeahead results
+            /**
+             * use twitter's hogan.js to compile the template for the typeahead results
+             */
             engine: Hogan,
 
             remote: {
@@ -804,15 +940,31 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ P100PertIName:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'P100PertIName',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: #7bd9e4">P100</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 * @type {[type]}
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -892,15 +1044,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ PRISMPertIName:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'PRISMPertIName',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: #8387e6">PRISM</span><span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -980,15 +1147,30 @@ Barista.Datasets = _.extend(Barista.Datasets,
 	{ PertIName:
 			{
 			// only return 6 items at a time in the autocomplete dropdown
+			/**
+			 * only return 6 items at a time in the autocomplete dropdown
+			 * @type {Number}
+			 */
 			limit: 6,
 
 			// provide a name for the default typeahead data source
+			/**
+			 * provide a name for the default typeahead data source
+			 * @type {String}
+			 */
 			name: 'PertIName',
 
 			// the template to render for all results
+			/**
+			 * the template to render for all results
+			 * @type {String}
+			 */
 			template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
 			// use twitter's hogan.js to compile the template for the typeahead results
+			/**
+			 * use twitter's hogan.js to compile the template for the typeahead results
+			 */
 			engine: Hogan,
 
 			remote: {
@@ -1094,15 +1276,31 @@ Barista.Datasets = _.extend(Barista.Datasets,
     { ToolID:
             {
             // only return 6 items at a time in the autocomplete dropdown
+            /**
+             * only return 6 items at a time in the autocomplete dropdown
+             * @type {Number}
+             */
             limit: 6,
 
             // provide a name for the default typeahead data source
+            /**
+             * provide a name for the default typeahead data source
+             * @type {String}
+             */
             name: 'ToolID',
 
             // the template to render for all results
+            /**
+             * the template to render for all results
+             * @type {String}
+             */
             template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
             // use twitter's hogan.js to compile the template for the typeahead results
+            /**
+             * use twitter's hogan.js to compile the template for the typeahead results
+             * @type {[type]}
+             */
             engine: Hogan,
 
             remote: {
@@ -1176,15 +1374,31 @@ Barista.Datasets = _.extend(Barista.Datasets,
     { UserID:
             {
             // only return 6 items at a time in the autocomplete dropdown
+            /**
+             * only return 6 items at a time in the autocomplete dropdown
+             * @type {Number}
+             */
             limit: 6,
 
             // provide a name for the default typeahead data source
+            /**
+             * provide a name for the default typeahead data source
+             * @type {String}
+             */
             name: 'UserID',
 
             // the template to render for all results
+            /**
+             * the template to render for all results
+             * @type {String}
+             */
             template: '<span class="label" style="background-color: {{ color }}">{{ type }}</span> {{ value }}',
 
             // use twitter's hogan.js to compile the template for the typeahead results
+            /**
+             * use twitter's hogan.js to compile the template for the typeahead results
+             * @type {[type]}
+             */
             engine: Hogan,
 
             remote: {

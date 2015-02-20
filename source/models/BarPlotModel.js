@@ -24,7 +24,8 @@ Barista.Models.BarPlotModel = Backbone.Model.extend({
 	 * @param {string}  axis_title   the title of the x_axis. Defaults to *""*
 	 * @param {array}   data         an array of data for the x_axis. Defaults to *[]*
 	 * @param {array}   data_labels  an array of data for the y_axis. Defaults to *[]*
-	 * @param {object}  meta_data    object containing meta data for the points in the plot. Defaults to *{}*
+	 * @param {object}  meta_data    object containing meta data for the points in the plot
+	 *                               Defaults to *{}*
 	 */
 	defaults: {
 		title: "",

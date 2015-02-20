@@ -6,7 +6,8 @@ Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
     // ### initialize
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
     /**
-     * Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+     * Overides the base Model's initialize method to add the models date attribute and set the cid to
+     * the mongo _id field
      * @param  {string}  attributes
      * @param  {string}  options
      */
@@ -82,7 +83,8 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
    /**
    * describes the model's default parameters
    * @param {number} count        the number of perturbagens matching an api query, defaults to *0*
-   * @param {array}  pert_types   an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
+   * @param {array}  pert_types   an array of objects representing pert\_type categories to keep track of,
+   *                              defaults to *[{}}]*
    * @param {date}   last_update  a timestamp of the latest model update, defaults to the current time
    */
   defaults: {
@@ -497,8 +499,10 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   // 2.  {string}  **url**  the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
   /**
    * describes the model's default parameters
-   * @param {string} search_field  the document field the model with count over upon fetching data, defaults to *"pert_iname"*
-   * @param {string} url           the url of the api service to fetch data from, defaults to *"//api.lincscloud.org/a2/pertinfo"*
+   * @param {string} search_field  the document field the model with count over upon fetching data,
+   *                               defaults to *"pert_iname"*
+   * @param {string} url           the url of the api service to fetch data from, defaults to 
+   *                               *"//api.lincscloud.org/a2/pertinfo"*
    */
   defaults: {
     "search_field": "pert_iname",
@@ -565,7 +569,8 @@ Barista.Models.GenericMongoModel = Backbone.Model.extend({
     // ### initialize
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
         /**
-     * Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+     * Overides the base Model's initialize method to add the models date attribute and set the cid to
+     * the mongo _id field
      * @param  {string}  attributes
      * @param  {string}  options
      */
@@ -612,7 +617,8 @@ Barista.Models.HeatmapModel = Backbone.Model.extend({
    * @param {array}  data    the data object to use in the heatmap. defualts to *[[1,2],[3,4]]*
    * @param {array}  rid     the row labels to use in the heatmap. defualts to *['1','2']*
    * @param {array}  cid     the column labels to use in the heatmap. defualts to *['1','2']*
-   * @param {array}  annots  optional annotations categories to show under the heatmap. defualts to *undefined*
+   * @param {array}  annots  optional annotations categories to show under the heatmap. defualts to
+   *                         *undefined*
    * @param {string} title   the title to use in the plot, defaults to *""*
    */
 	defaults: {
@@ -640,7 +646,8 @@ Barista.Models.PertCellBreakdownModel = Backbone.Model.extend({
   /**
    * describes the model's default parameters
    * @param {string} filter       the current filter to be used with api calls, defaults to *""*
-   * @param {object} tree_object  an object that describes the structured tree data representing cell_line counts, defaults to *{children:[]}*
+   * @param {object} tree_object  an object that describes the structured tree data representing
+   *                              cell_line counts, defaults to *{children:[]}*
    */
   defaults: {
     "filter": "",
@@ -713,10 +720,14 @@ Barista.Models.PertCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
       /**
    * describes the model's default parameters
-   * @param {string} type_string      the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
+   * @param {string} type_string      the string of pert_types that will be search upon fetching data,
+   *                                  defaults to *'["trt_sh","trt_oe"]'*
    * @param {number} count            the number of perturbagens matching an api query, defaults to *0*
-   * @param {array}  pert_types       an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
-   * @param {string} pert_type_field  a field name over which to look for pert_types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert_icollection'*
+   * @param {array}  pert_types       an array of objects representing pert\_type categories to keep track
+   *                                  of, defaults to *[{}}]*
+   * @param {string} pert_type_field  a field name over which to look for pert_types.  This runs an
+   *                                  aggregated count over the specified field name in the Connectivity
+   *                                  Map database, defaults to *'pert_icollection'*
    * @param {date}   last_update      a timestamp of the latest model update, defaults to the current time
    */
   defaults: {
@@ -817,7 +828,8 @@ Barista.Models.PertDetailModel = Backbone.Model.extend({
   // the PertDetailModel's attributes with that of the sub model
     /**
    * fetches new data from the pert_info api
-   * depending on the model_type parameter, the method calls the appropriate fetch method for the given sub model type and fills the PertDetailModel's attributes with that of the sub model
+   * depending on the model_type parameter, the method calls the appropriate fetch method for the given
+   * sub model type and fills the PertDetailModel's attributes with that of the sub model
    * @param  {string}  search_string  value to search for
    * @param  {string}  model_type     one of 'compound' or 'gene'
    */
@@ -893,7 +905,8 @@ Barista.Models.ScatterPlotModel = Backbone.Model.extend({
    * @param {string} y_axis-title  the title of the y_axis. Defaults to *""*
    * @param {array}  x_data        an array of data for the x_axis. Defaults to *[]*
    * @param {array}  y_data        an array of data for the y_axis. Defaults to *[]*
-   * @param {object} meta-data     object containing meta data for the points in the plot. Defaults to *{}*
+   * @param {object} meta-data     object containing meta data for the points in the plot
+   *                               Defaults to *{}*
    */
 	defaults: {
 		title: "",
@@ -927,10 +940,14 @@ Barista.Models.SigCountModel = Backbone.Model.extend({
   // 5.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
    /**
    * describes the model's default parameters
-   * @param {string} type_string      the string of pert_types that will be search upon fetching data, defaults to *'["trt_sh","trt_oe"]'*
+   * @param {string} type_string      the string of pert_types that will be search upon fetching data,
+   *                                  defaults to *'["trt_sh","trt_oe"]'*
    * @param {number} count            the number of perturbagens matching an api query, defaults to *0*
-   * @param {array}  pert_types       an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
-   * @param {string} pert_type_field  a field name over which to look for pert_types.  This runs an aggregated count over the specified field name in the Connectivity Map database, defaults to *'pert_icollection'*
+   * @param {array}  pert_types       an array of objects representing pert\_type categories to keep track
+   *                                  of, defaults to *[{}}]*
+   * @param {string} pert_type_field  a field name over which to look for pert_types.  This runs an
+   *                                  aggregated count over the specified field name in the Connectivity
+   *                                  Map database, defaults to *'pert_icollection'*
    * @param {date}   last_update      a timestamp of the latest model update, defaults to the current time
    */
   defaults: {
@@ -1044,8 +1061,10 @@ Barista.Models.SummlyResultModel = Backbone.Model.extend({
    * @param {string} target            the target perturbagen (pert_iname), defaults to *""*
    * @param {number} summly_score      summarized connectivity score across cell types, defaults to *-666*
    * @param {number} summly_rank       summarized percent rank across cell types, defaults to *-666*
-   * @param {number} specificity       fraction of background queries that score/rank higher than the observed connection, defaults to *-666*
-   * @param {object} cell_line_scores  the connectivity map scores in each cell line for the target perturbagen , defaults to *{}*
+   * @param {number} specificity       fraction of background queries that score/rank higher than the
+   *                                   observed connection, defaults to *-666*
+   * @param {object} cell_line_scores  the connectivity map scores in each cell line for the target
+   *                                   perturbagen , defaults to *{}*
    */
 	defaults: {
 		query: "",

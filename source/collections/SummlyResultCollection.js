@@ -17,7 +17,7 @@
 Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 	// #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
 	initialize: function(){
 		// #### url
@@ -27,18 +27,34 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
 	// ### model
 	// the model used for collection objects
+    /**
+     * the model used for collection objects
+     */
 	model: Barista.Models.SummlyResultModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ## getDataMock
@@ -49,10 +65,11 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // arguments
     //
     // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-      /**
-   * Generates additional fake data objects and stores them as models in the collection
+  /**
+   * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */

@@ -12,7 +12,7 @@
 Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
     initialize: function(){
         // #### url
@@ -22,22 +22,43 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 
     // #### model
     // the model used for the collection objects.
+    /**
+     * the model used for the collection objects
+     */
     model: Barista.Models.AnalysisHistoryModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ### user_id
     // the user_id to search jobs for. Forcing this to be set prevents us from searching other users jobs
+    /**
+     * the user_id to search jobs for
+     * Forcing this to be set prevents us from searching other users jobs
+     * @type {string}
+     */
     user: undefined,
 
     // ## getData
@@ -50,10 +71,11 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-   /**
+/**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
@@ -143,7 +165,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
 Barista.Collections.CellCollection = Backbone.Collection.extend({
     // #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
     initialize: function(){
         // #### url
@@ -153,14 +175,25 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 
     // #### model
     // the model used for the collection objects.
+    /**
+     * the model used for the collection objects
+     */
     model: Barista.Models.CellModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ## getData
@@ -174,11 +207,12 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
     // 2.  {string}  **search\_column**  the column to query the search_string against, defaults to "cell_id"
     // 3.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 4.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-    /**
+ /**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
-   * @param  {string}  search_column  the column to query the search_string against, defaults to "cell_id"
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
+   * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_column,limit){
@@ -236,22 +270,42 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
 Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 	// ### model
 	// the model used for collection objects
+    /**
+     * the model used for collection objects
+     */
 	model: Barista.Models.PertModel,
 
 	// #### url
     // the url from which model data is fetched
+    /**
+     * the url from which model data is fetched
+     * @type {String}
+     */
     url: 'data.json',
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated. 
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation. 
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ## getData
@@ -264,10 +318,11 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-    /**
+ /**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
@@ -317,8 +372,8 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
 
 Barista.Collections.PertCollection = Backbone.Collection.extend({
     // #### initialize
-    /**
-     * add description
+ /**
+     * fetch model data from assigned url
      */
     initialize: function(){
         // #### url
@@ -328,18 +383,34 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 
     // #### model
     // the model used for the collection objects.
+    /**
+     * the model used for the collection objects
+     */
     model: Barista.Models.PertModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ## getData
@@ -352,14 +423,14 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
     // 1.  {string}  **search\_string**  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
     // 2.  {string}  **search\_type**  the type of search that will be performed, defaults to *"single"*
     // 3.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-      /**
+/**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
-
     getData: function(search_string,search_type,limit){
         var self = this;
         // set **isLoading** to true so we don't constantly make api calls before the data comes back
@@ -437,7 +508,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
 Barista.Collections.SignatureCollection = Backbone.Collection.extend({
     // #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
     initialize: function(){
         // #### url
@@ -447,22 +518,42 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 
     // #### model
     // the model used for the collection objects.
+    /**
+     * the model used for the collection objects
+     */
     model: Barista.Models.SignatureModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ### gold_only
     // boolean flag telling the collection to only include gold Connectivity Map signatures
+    /**
+     * boolean flag telling the collection to only include gold Connectivity Map signatures
+     * @type {Boolean}
+     */
     gold_only: true,
 
     // ### getData
@@ -478,7 +569,8 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
   /**
    * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */
@@ -574,7 +666,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
 Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 	// #### initialize
     /**
-     * add description
+     * fetch model data from assigned url
      */
 	initialize: function(){
 		// #### url
@@ -584,18 +676,34 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
 
 	// ### model
 	// the model used for collection objects
+    /**
+     * the model used for collection objects
+     */
 	model: Barista.Models.SummlyResultModel,
 
     // #### skip
     // the skip parameter used in api calls when the collection is updated.
+    /**
+     * the skip parameter used in api calls when the collection is updated
+     * @type {Number}
+     */
     skip: 0,
 
     // #### isLoading
     // indicates wether or not the collection is in the middle of a fetch operation.
+    /**
+     * indicates wether or not the collection is in the middle of a fetch operation
+     * @type {Boolean}
+     */
     isLoading: false,
 
     // ### maxCount
     // the maximum size of the collection. defaults to Infinity
+    /**
+     * the maximum size of the collection
+     * defaults to Infinity
+     * @type {Number}
+     */
     maxCount: Infinity,
 
     // ## getDataMock
@@ -606,10 +714,11 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
     // arguments
     //
     // 1.  {number}  **limit**  the number of models to be fetched, defaults to *30*
-      /**
-   * Generates additional fake data objects and stores them as models in the collection
+  /**
+   * Gets additional data from the specified url and stores them as models in the collection
    * the count and pert_types data is replaced with new data coming from the api call
-   * @param  {string}  search_string  the string on which a regex search into the api at the collections url will be performed, defaults to *""*
+   * @param  {string}  search_string  the string on which a regex search into the api at the collections
+   *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
    * @param  {number} limit           the number of models to be fetched, defaults to *30*
    */

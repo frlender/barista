@@ -7,7 +7,8 @@ Barista.Models.GenericMongoModel = Backbone.Model.extend({
     // ### initialize
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
     /**
-	 * Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+	 * Overides the base Model's initialize method to add the models date attribute and set the cid to
+     * the mongo _id field
 	 * @param  {string}  attributes
 	 * @param  {string}  options
 	 */
