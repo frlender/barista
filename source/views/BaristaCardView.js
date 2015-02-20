@@ -25,10 +25,20 @@
 Barista.Views.BaristaCardView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "BaristaCardView",
 
 	// ## model
 	// supply a base model for the view.  Overide this if you need to use it for dynamic content
+	/**
+	 * supply a base model for the view
+	 * Overide this if you need to use it for dynamic content
+	 * @type {Backbone}
+	 */
 	model: new Backbone.Model(),
 
 	// ## initialize

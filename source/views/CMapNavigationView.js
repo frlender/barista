@@ -8,12 +8,18 @@
 Barista.Views.CMapNavigationView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "CMapNavigationView",
 
 	// ### initialize
 	// overide the default Backbone.View initialize function to compile a built in template and then render the view
 	/**
-	 * overide the default Backbone.View initialize function to compile a built in template and then render the view
+	 * overide the default Backbone.View initialize function to compile a built in template and then render
+	 * the view
 	 */
 	initialize: function(){
         var self = this;
@@ -42,7 +48,8 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
     // wrap all existing content in the elements we need to work
     // the slide out navigation that we are going to build
     /**
-     * wrap all existing content in the elements we need to work the slide out navigation that we are going to build
+     * wrap all existing content in the elements we need to work the slide out navigation that we are going
+     * to build
      */
     wrap_content: function(){
         $("body").children().wrapAll('<div class="cmap-navigation-content"/>');
@@ -68,9 +75,9 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 		});
 	},
 /**
- * add description
- * @param {string} text  
- * @param {string} route 
+ * adds a new attribute to the element that is comprised of an href with link text, and visible text
+ * @param {string} text   visible text of the element
+ * @param {string} route  href value of the element
  */
 	addLink: function(text,route) {
 		var $el = $(".cmap-navigation-menu");

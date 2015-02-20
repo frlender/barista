@@ -17,17 +17,27 @@
 Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "CompoundDetailView",
 
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.CompoundDetailModel(),
 
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
 	/**
-	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window resize events to view re-draws, compile the template, and render the view
+	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window
+	 * resize events to view re-draws, compile the template, and render the view
 	 */
 	initialize: function(){
 		// set up the plot height
@@ -293,15 +303,19 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
 	// pass the value in model_field as text instead of serching for it in the model
 	/**
-	 * utility function to draw a standard label and value for that label under the main pert_iname and pert_id text
-	 * If pass_model_field_as_text is true, pass the value in model_field as text instead of serching for it in the model
-	 * @param  {[type]} class_name_base          [description]
-	 * @param  {[type]} label_text               [description]
-	 * @param  {[type]} model_field              [description]
-	 * @param  {[type]} pass_model_field_as_text [description]
-	 * @param  {[type]} x_pos_base               [description]
-	 * @param  {[type]} value_link               [description]
-	 */
+	* utility function to draw a standard label and value for that label under the main pert_iname and
+	* pert_id text
+	* If pass_model_field_as_text is true, pass the value in model_field as text instead of serching for
+	* it in the model
+	* @param  {string}  class_name_base           base of the class name of the attribute
+	* @param  {string}  label_text                visible text that labels the element on screen
+	* @param  {string}  model_field               text to appear in the model field
+	* @param  {boolean} pass_model_field_as_text  determines whether the value in model_field will appear
+	*                                             as text (true) or if the value must be obtained by
+	*                                             searching (false)
+	* @param  {number}  x_pos_base                base position for the x_label set
+	* @param  {[type]}  value_link                iff supplied, used as a link on the visible text
+*/
 	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link){
 		// set up a local variable to keep our scope straight
 		var self = this;
@@ -466,11 +480,11 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// utility function to draw tags given an array.
 	/**
 	 * utility function to draw tags given an array
-	 * @param  {[type]} class_name_base 
-	 * @param  {[type]} label_text      
-	 * @param  {[type]} data            
-	 * @param  {[type]} fg_color        
-	 * @param  {[type]} tag_color       
+	 * @param  {string} class_name_base  base of the class name of the attribute
+	 * @param  {string} label_text       visible text that labels the element on screen
+	 * @param  {array}  data             array of data
+	 * @param  {string} fg_color         fill color of label
+	 * @param  {string} tag_color        color for background layer of tags 
 	 */
 	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
 		var x_offsets = [10];

@@ -10,6 +10,11 @@ search view's input, a "search:DidType" event is fired.
 Barista.Views.CellSearchBar = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "CellSearchBar",
 /**
  * add description
@@ -39,7 +44,8 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 
 			// once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
 			/**
-			 * once the view is rendered, bind a change event to trigger a "search:DidType" event from the view
+			 * once the view is rendered, bind a change event to trigger a "search:DidType" event from
+			 * the view
 			 */
 			var change_callback = function () {
 				var val  = $("#search",self.el).val();
@@ -49,13 +55,15 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 				}
 
 				/**
-				Fired when the text in the view's search box changes
-
-				@event search:DidType
-				@param {Object} [msg={val:"",type:""}] an object containing the message of the event
-				@param {String} [msg.val=""] the string val of the views search bar at the time of the event
-				@param {String} [msg.type=""] the type of message being passed, either "" or "cell". "cell" is passed, if the string matches a cell line and match\_cell\_lines is set
-				**/
+				 * Fired when the text in the view's search box changes
+				 * @event search:DidType
+				 * @param {Object} [msg={val:"",type:""}] an object containing the message of the event
+				 * @param {String} [msg.val=""] the string val of the views search bar at the time of
+				 *                              the event
+				 * @param {String} [msg.type=""] the type of message being passed, either "" or "cell"
+				 *                               "cell"is passed, if the string matches a cell line and
+				 *                               match\_cell\_lines is set
+				 */
 				self.trigger("search:DidType",{val: val,search_column: undefined});
 			};
 
@@ -108,6 +116,7 @@ Barista.Views.CellSearchBar = Backbone.View.extend({
 	},
 /**
  * add description
+ * @param {} new_val [description]
  */
 	set_val: function(new_val){
 		$("#search",this.el).val(new_val);

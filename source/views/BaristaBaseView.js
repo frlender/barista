@@ -41,7 +41,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 /**
  * initialize the view
  * Views that extend BaristaBaseView should impliment code overiding this method
- * If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they should call it in their redraw method
+ * If extended BaristaBaseViews want to use the built in base_initialize method of BaristaBaseView, they
+ * should call it in their redraw method
  * As an example:
  * initialize: function(){
 				this.base_initialize();
@@ -60,6 +61,12 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// default model to Backbone.Model.  This default is only provided to make the view
 	// functional as a un-extended standalone.  An appropriate data model should be
 	// supplied for all views that extend BaristaBaseView
+	/**
+	 * default model to Backbone.Model
+	 * This default is only provided to make the view functional as a un-extended standalone
+	 * An appropriate data model should be supplied for all views that extend BaristaBaseView
+	 * @type {Backbone}
+	 */
 	model: new Backbone.Model(),
 
 	// ### base_initialize
@@ -67,7 +74,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// template, bind model changes to view updates, and render the view.  This method is provided so it
 	// can be used in view that extend BaristaBaseView
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	 * template, bind model changes to view updates, and render the view
 	 * This method is provided so it can be used in view that extend BaristaBaseView
 	 */
 	base_initialize: function(){
@@ -139,7 +147,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
  * completely render the view
  * Updates both static and dynamic content in the view
  * Views that extend BaristaBaseView should impliment draw code overiding this method
- * If extended BaristaBaseViews want to use the built in base_render method of BaristaBaseView, they should call it in their render method
+ * If extended BaristaBaseViews want to use the built in base_render method of BaristaBaseView, they should
+ * call it in their render method
  * As an example:
  * render: function(){
 			this.base_render();
@@ -278,7 +287,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// will not render properly could be done before saving the image.  This
 	// function is called as the first step of *save_png*
 	/**
-	 * dummy method that should be overridden if there is any work to do before saving the png image of the view
+	 * dummy method that should be overridden if there is any work to do before saving the png image of
+	 * the view
 	 * For example, removing elements that will not render properly could be done before saving the image
 	 * This function is called as the first step of *save_png*
 	 */
@@ -290,7 +300,8 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 	// were removed before saving could be done after saving the image.  This
 	// function is called as the last step of *save_png*
 		/**
-	 * dummy method that should be overridden if there is any work to do after saving the png image of the view
+	 * dummy method that should be overridden if there is any work to do after saving the png image of
+	 * the view
 	 * For example, restoring elements that were removed before saving could be done after saving the image
 	 * This function is called as the last step of *save_png*
 	 */

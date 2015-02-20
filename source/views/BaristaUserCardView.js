@@ -15,6 +15,11 @@
 Barista.Views.BaristaUserCardView = Backbone.View.extend({
     // ### name
     // give the view a name to be used throughout the View's functions when it needs to know what its class name is
+    /**
+     * give the view a name to be used throughout the View's functions when it needs to know what its class
+     * name is
+     * @type {String}
+     */
     name: "BaristaUserCardView",
 
     // ## initialize
