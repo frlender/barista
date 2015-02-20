@@ -37,6 +37,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#ffffff";
@@ -95,6 +98,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		this.div_string = 'd3_target' + new Date().getTime();
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
@@ -104,6 +110,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 
 	// ### redraw
 	// completely redraw the view.
+	/**
+	 * completely redraw the view
+	 */
 	redraw: function(){
 		this.init_panel();
 		this.render();
@@ -111,6 +120,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 
 	// ### init_panel
 	// initialize the static parts of the view's panel
+	/**
+	 * initialize the static parts of the view's panel
+	 */
 	init_panel: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -227,7 +239,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
 	},
-
+/**
+ * add description
+ */
 	render: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -286,6 +300,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 
 	// ### savePng
 	// save the current state of the view into a png image
+	/**
+	 * save the current state of the view into a png image
+	 */
 	save_png: function(){
 		//set the animate the div containing the view by applying and then removing
 		// css classes that defined the transitions we want

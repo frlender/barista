@@ -40,6 +40,9 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// initialize the base view
 		this.base_initialize();
@@ -69,6 +72,10 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render
 	// completely render the view. Updates both static and dynamic content in the view.
+	/**
+	 * completely render the view
+	 * Updates both static and dynamic content in the view
+	 */
 	render: function(){
 		var self = this;
 		// call BaristaBaseView's render function first so we can layer on top of it
@@ -91,6 +98,9 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update
 	// update the dynamic potions of the view
+	/**
+	 * update the dynamic potions of the view
+	 */
 	update: function(){
 		var self = this;
 		// call BaristaBaseView's render function first so we can layer on top of it
@@ -113,6 +123,9 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 
 	// ### fit_height
 	// fits the view height to the height taken by the tags displayed
+	/**
+	 * fits the view height to the height taken by the tags displayed
+	 */
 	fit_height: function(){
 		// set the view's height attribute based on the number of rows in the
 		// vis
@@ -130,6 +143,9 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 
 	// ### draw tags
 	// utility function to draw tags diven a data set.  
+	/**
+	 * utility function to draw tags diven a data set
+	 */
 	draw_tags: function(){
 		var self = this;
 		// draw the foreground text of all the tags

@@ -26,6 +26,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
+	/**
+	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window resize events to view re-draws, compile the template, and render the view
+	 */
 	initialize: function(){
 		var self = this;
 		// set up the plot height
@@ -46,6 +49,10 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render
 	// completely render the view. Updates both static and dynamic content in the view.
+	/**
+	 * completely render the view
+	 * Updates both static and dynamic content in the view
+	 */
 	render: function(){
 		// keep track of our scope at this level
 		var self = this;
@@ -141,6 +148,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render_compound
 	// utility to render the compound specific parts of the view
+	/**
+	 * utility to render the compound specific parts of the view
+	 */
 	render_compound: function(){
 		this.clear_label_and_text();
 		var self = this;
@@ -297,6 +307,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render_gene
 	// utility to render the gene specific parts of the view
+	/**
+	 * utility to render the gene specific parts of the view
+	 */
 	render_gene: function(){
 		this.clear_label_and_text();
 		var self = this;
@@ -435,6 +448,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update
 	// update the dynamic potions of the view
+	/**
+	 * update the dynamic potions of the view
+	 */
 	update: function(){
 		this.render();
 		return this;
@@ -444,6 +460,17 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// utility function to draw a standard label and value for that label under
 	// the main pert_iname and pert_id text.  If pass_model_field_as_text is true,
 	// pass the value in model_field as text instead of serching for it in the model
+	/**
+	 * utility function to draw a standard label and value for that label under the main pert_iname and pert_id text
+	 * If pass_model_field_as_text is true, pass the value in model_field as text instead of serching for it in the model
+	 * @param  {[type]} class_name_base          [description]
+	 * @param  {[type]} label_text               [description]
+	 * @param  {[type]} model_field              [description]
+	 * @param  {[type]} pass_model_field_as_text [description]
+	 * @param  {[type]} x_pos_base               [description]
+	 * @param  {[type]} value_link               [description]
+	 * @param  {[type]} increment_y              [description]
+	 */
 	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link,increment_y){
 		// set up a local variable to keep our scope straight
 		var self = this;
@@ -527,6 +554,10 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// 3.  {left}  **left**  the x position to place the **left** edge of text, defaults to *this.width - 500*
 	// 4.  {top}  **top**  the y position to place the **top** edge of text, defaults to *0*
 	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
+	/**
+	 * utility function to break a long summary string into a multiline and draw it at the desired location
+	 * @param  {[type]} options [description]
+	 */
 	render_summary: function(options){
 		var self = this;
 
@@ -580,6 +611,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### toggle_panel_state
 	// utility to open or close the view
+	/**
+	 * utility to open or close the view
+	 */
 	toggle_panel_state: function(){
 		var self = this;
 		var h;
@@ -605,6 +639,14 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### draw tags
 	// utility function to draw tags given an array.
+	/**
+	 * utility function to draw tags given an array
+	 * @param  {[type]} class_name_base [description]
+	 * @param  {[type]} label_text      [description]
+	 * @param  {[type]} data            [description]
+	 * @param  {[type]} fg_color        [description]
+	 * @param  {[type]} tag_color       [description]
+	 */
 	draw_tags: function(class_name_base, label_text, data, fg_color, tag_color){
 		var x_offsets = [10];
 		var row_number = 0;
@@ -660,6 +702,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 
 	// ### clear_summary
 	// utility function to clear the pert summary
+	/**
+	 * utility function to clear the pert summary
+	 */
 	clear_summary: function(){
 		this.fg_layer.selectAll('.summary_text').data([]).exit().remove();
 	},
@@ -667,6 +712,9 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### clear_label_and_text
 	// utility function to clear all of the labels and text generated with the
 	// render_label_and_value function
+	/**
+	 * utility function to clear all of the labels and text generated with the render_label_and_value function
+	 */
 	clear_label_and_text: function(){
 		this.fg_layer.selectAll('.label_and_text').data([]).exit().remove();
 	}

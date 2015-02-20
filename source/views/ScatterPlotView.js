@@ -53,6 +53,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// set up x and y range and determine if are going to draw the axes dynamically
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
@@ -97,6 +100,10 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### redraw
 	// completely redraw the view. Updates both static and dynamic content in the view.
+	/**
+	 * completely redraw the view
+	 * Updates both static and dynamic content in the view
+	 */
 	render: function(){
 		this.base_render();
 		this.init_plot();
@@ -105,6 +112,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### init_plot
 	// initialize the static parts of the view's panel
+	/**
+	 * initialize the static parts of the view's panel
+	 */
 	init_plot: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -192,6 +202,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update
 	// update the dynamic potions of the view
+	/**
+	 * update the dynamic potions of the view
+	 */
 	update: function(){
 	var self = this;
 	
@@ -243,6 +256,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### set_ranges
 	// utility function used to get the x and y ranges used in the plot
+	/**
+	 * utility function used to get the x and y ranges used in the plot
+	 */
 	set_ranges: function(){
 		var x_data,y_data,min,max;
 		// calculate the x_range. If we need to caluclate it dynamically, check the lock and expand
@@ -320,6 +336,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### set_scales
 	// utility function used to get the x and y scales used in the plot
+	/**
+	 * utility function used to get the x and y scales used in the plot
+	 */
 	set_scales: function(){
 		if (this.x_log){
 			this.x_scale=d3.scale.log().domain([this.x_range[0],this.x_range[1]]).range([this.margin, this.width - this.margin]);
@@ -335,6 +354,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### build_axes
 	// utility function used to build x and y axes
+	/**
+	 * utility function used to build x and y axes
+	 */
 	build_axes: function(){
 		this.xAxis = d3.svg.axis()
 			.scale(this.x_scale)
@@ -346,6 +368,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### set_scaling_function
 	// utility function to compute a radius scaling funciton to use in plots
+	/**
+	 * utility function to compute a radius scaling funciton to use in plots
+	 */
 	set_scaling_function: function(){
 		var self = this;
 		if (this.scale_by !== undefined){
@@ -362,6 +387,9 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### style axes
 	// utility function to apply custom styles to axis components
+	/**
+	 * utility function to apply custom styles to axis components
+	 */
 	style_axes: function(){
 		this.vis.selectAll('.axis').selectAll("path")
 			.style("fill","none")

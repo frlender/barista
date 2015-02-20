@@ -30,6 +30,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// set up color and font defaults
 		this.white_color = "#ffffff";
@@ -184,6 +187,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		this.div_string = 'd3_target' + new Date().getTime();
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
@@ -193,11 +199,19 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 	// ### redraw
 	// completely redraw the view.
+	/**
+	 * completely redraw the view
+	 */
 	redraw: function(){
 		this.init_panel();
 		this.render();
 	},
 	
+	/**
+	 * add description
+	 * @param  {[type]} font   [description]
+	 * @param  {[type]} target [description]
+	 */
 	apply_font: function(font, target) {
 		return target.attr("font-family", font.family)
 			.attr("font-weight", font.weight)
@@ -206,7 +220,10 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 			.attr("letter-spacing", font.spacing)
 			.attr("fill", font.color);
 	},
-	
+	/**
+	 * add description
+	 * @param  {[type]} font [description]
+	 */
 	font_to_css_style: function(font) {
 		return "font:"+ font.weight +" " + font.size + " " + font.family + "; "
 			+ "color:" + font.color + "; " 
@@ -216,6 +233,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 	// ### init_panel
 	// initialize the static parts of the view's panel
+	/**
+	 * initialize the static parts of the view's panel
+	 */
 	init_panel: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -360,7 +380,12 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 							.style("background-color", this.bg_color)
 							.html("<a href='"+this.details_url+"' target='"+this.details_target+"' style=\"" + this.control_css_style + "\"><i class='icon-chevron-sign-right'></i> "+this.details_text+"</a>");
 	},
-	
+	/**
+	 * add description
+	 * @param  {[type]} message    [description]
+	 * @param  {[type]} icon_class [description]
+	 * @param  {[type]} handler    [description]
+	 */
 	render_export_control: function(message, icon_class, handler) {
 		this.controls_layer.selectAll('.export_text').data([]).exit().remove();
 		return this.controls_layer.selectAll('.export_text').data([1])
@@ -379,6 +404,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 
 	// ### download_table
 	// download the backing data that matches the current model state.
+	/**
+	 * download the backing data that matches the current model state
+	 */
 	download_table: function() {
 		var self = this;
 
@@ -418,7 +446,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 			self.render_export_control(self.export_text, "icon-download", function(){self.download_table();});
 		});
 	},
-	
+	/**
+	 * add description
+	 */
 	render: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -455,6 +485,10 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	// 4.  {top}  **top**  the y position to place the **top** edge of text, defaults to *0*
 	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
 	// 6.  {node_class}  **node_class**  the class used for locating the text node within fg_layer, defaults to *""*
+	/**
+	 * utility function to break a long description string into a multiline and draw it at the desired location
+	 * @param  {[type]} options [description]
+	 */
 	render_description: function(options){
 		var self = this;
 
@@ -509,6 +543,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	
 	// ### savePng
 	// save the current state of the view into a png image
+	/**
+	 * save the current state of the view into a png image
+	 */
 	save_png: function(){
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.width;

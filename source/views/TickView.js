@@ -36,6 +36,9 @@ Barista.Views.TickView = Backbone.View.extend({
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
+	/**
+	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window resize events to view re-draws, compile the template, and render the view
+	 */
 	initialize: function(){
 		// set up color options.  default if not specified
 		this.bg_color = (this.options.bg_color !== undefined) ? this.options.bg_color : "#eeeeee";
@@ -57,6 +60,9 @@ Barista.Views.TickView = Backbone.View.extend({
 	// use Handlebars to compile the template for the view and draw it for the first time
 
 	//		tick_view.compile_template_and_draw();
+	/**
+	 * use Handlebars to compile the template for the view and draw it for the first time
+	 */
 	compile_template_and_draw: function(){
 		var self = this;
 		this.isCompiling = true;
@@ -80,6 +86,10 @@ Barista.Views.TickView = Backbone.View.extend({
 	// initializing them again from scratch.
 
 	//		tick_view.redraw();
+	/**
+	 * perform a full redraw of the view, including wiping out all d3 drawn components in the view and 
+	// initializing them again from scratch
+	 */
 	redraw: function(){
 		var self = this;
 		// set up the panel's width and height via animation
@@ -99,6 +109,10 @@ Barista.Views.TickView = Backbone.View.extend({
 	// with defualt values
 
 	//		tick_view.init_view();
+	/**
+	 * set up the view from scratch
+	 * Draw a background panel and place all dynamic content on that panel with defualt values
+	 */
 	init_view: function(){
 		// stuff "this" into a variable for use inside of scoped funcitons
 		var self = this;
@@ -240,6 +254,9 @@ Barista.Views.TickView = Backbone.View.extend({
 	// render the dynamic content of the view based on the current state of the view's data model
 
 	//		tick_view.render();
+	/**
+	 * render the dynamic content of the view based on the current state of the view's data model
+	 */
 	render: function(){
 		// grab data from the model and sort it according to the values in the object
 		var data_array = _.pairs(this.model.get('data_object'));
@@ -278,6 +295,10 @@ Barista.Views.TickView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the hide animation. defualts to *1*
 
 	//		pert_detail_view.hide(duration);
+	/**
+	 * hides the view by dimming the opacity and hiding it in the DOM
+	 * @param  {number} duration  the time in ms for the hide animation. defualts to *1*
+	 */
 	hide: function(duration){
 		duration = (duration !== undefined) ? duration : 1;
 		var self = this;
@@ -300,6 +321,10 @@ Barista.Views.TickView = Backbone.View.extend({
 	// 1.  {number}  **duration**  the time in ms for the show animation. defualts to *1*
 
 	//		pert_detail_view.show(duration);
+	/**
+	 * shows the view by brightening the opacity and showing it in the DOM
+	 * @param  {number} duration  the time in ms for the show animation. defualts to *1*
+	 */
 	show: function(duration){
 		duration = (duration !== undefined) ? duration : 1;
 		this.$el.show();
@@ -310,6 +335,9 @@ Barista.Views.TickView = Backbone.View.extend({
 	// save the current state of the view into a png image
 
 	//		tick_view.save_png();
+	/**
+	 * save the current state of the view into a png image
+	 */
 	save_png: function(){
 		// build a canvas element to store the image temporarily while we save it
 		var width = this.vis.attr("width");

@@ -11,7 +11,9 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
 	name: "PertSearchBar",
-
+/**
+ * add description
+ */
 	initialize: function(){
 		var self = this;
 
@@ -81,6 +83,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
     @method get_val
     **/
+
+    	/**
+    Gets the current text entered in the view's search bar
+    **/
 	get_val: function(){
 		return $("#search",this.el).val();
 	},
@@ -89,6 +95,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
     fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
 
     @method random_val
+    **/
+
+    	/**
+    fills the view's search bar with a random pert_iname and triggers a "search:DidType" event
     **/
 	random_val: function(){
 		var self = this;
@@ -104,7 +114,11 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 			self.trigger("search:DidType",{val: val,type: 'single'});
 		});
 	},
-
+/**
+ * add description
+ * @param {[type]} new_val  [description]
+ * @param {[type]} new_type [description]
+ */
 	set_val: function(new_val,new_type){
 		new_type = (new_type !== undefined) ? new_type : "single";
 		$("#search",this.el).val(new_val);
@@ -115,6 +129,10 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
     renders the view
 
     @method render
+    **/
+
+    	/**
+    renders the view
     **/
 	render: function(){
 		var self = this;

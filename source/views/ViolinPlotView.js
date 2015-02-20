@@ -35,6 +35,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
+	/**
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 */
 	initialize: function(){
 		// set up x and y range
 		this.x_range = (this.options.x_range !== undefined) ? this.options.x_range : undefined;
@@ -80,6 +83,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### compile_template
 	// use Handlebars to compile the template for the view
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		var self = this;
 		this.div_string = 'd3_target' + new Date().getTime();;
@@ -91,6 +97,10 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### render
 	// completely render the view. Updates both static and dynamic content in the view.
+	/**
+	 * completely render the view
+	 * Updates both static and dynamic content in the view
+	 */
 	render: function(){
 		this.base_render();
 		this.init_plot();
@@ -99,6 +109,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### init_plot
 	// initialize the static parts of the view's panel
+	/**
+	 * initialize the static parts of the view's panel
+	 */
 	init_plot: function(){
 		// stuff this into a variable for later use
 		var self = this;
@@ -236,6 +249,9 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### update
 	// update the dynamic potions of the view
+	/**
+	 * update the dynamic potions of the view
+	 */
 	update: function(){
 		var self = this;
 		// grab data from the model and package it such that we can iterate over it
@@ -256,6 +272,11 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 
 	// ### path data sorter
 	// internal method used to sort path_data list elements by the x attribute
+	/**
+	 * internal method used to sort path_data list elements by the x attribute
+	 * @param  {[type]} a  first element to compare
+	 * @param  {[type]} b  second element to compare
+	 */
 	path_data_sorter: function(a,b) {
 		if (a.x < b.x){
 			return -1;
