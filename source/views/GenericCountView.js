@@ -15,7 +15,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * set up the view's default model
    * @type {Barista.Models.GenericCoutModel}
    */
-  // model: new Barista.Models.GenericCountModel(),
+  model: new Barista.Models.PertCountModel(),
 
   /**
    * overide the default Backbone.View initialize method to handle
@@ -91,7 +91,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-weight","500")
       .attr("font-size","37px")
       .attr("fill",this.fg_color)
-      .text(Barista.numberWithCommas(143905));
+      .text(Barista.numberWithCommas(count));
 
     return this;
   }
