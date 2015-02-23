@@ -5949,16 +5949,30 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
     return this;
   },
 
-  // ### redraw
-  // completely redraw the view.
-
   /**
    * completely re-render the view
    * @return {Barista.Views.GenericCountView} a reference to this
    */
   render: function(){
     this.base_render();
+    this.drawlabel();
+  },
 
+  /**
+   * draw the static label at the top of the view
+   */
+  drawLabel: function() {
+    this.fg_layer.selectAll('.label').data([]).exit().remove();
+    this.fg_layer.selectAll('.label').data([1])
+      .enter().append("text")
+      .attr("class","label")
+      .attr("x",10)
+      .attr("y",14)
+      .attr("font-family","'Open Sans")
+      .attr("font-weight","500")
+      .attr("font-size","21pt")
+      .attr("fill",this.fg_color)
+      .text(this.label.charAt(0).toUpperCase() + this.slice(1));
   }
 
 });
