@@ -5953,14 +5953,18 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * @return {Barista.Views.GenericCountView} a reference to this
    */
   render: function(){
-    this.base_render().drawLabel();
+    this.base_render()
+      .renderLabel()
+      .rednerCount();
+
+    return this;
   },
 
   /**
    * draw the static label at the top of the view
+   * @return {Barista.Views.GenericCountView} a reference to this
    */
-  drawLabel: function() {
-    var self = this;
+  renderLabel: function() {
     this.fg_layer.selectAll('.genericCountViewLabel').data([]).exit().remove();
     this.fg_layer.selectAll('.genericCountViewLabel').data([1])
       .enter().append("text")
@@ -5968,10 +5972,38 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("x",10)
       .attr("y",20)
       .attr("font-family","'Open Sans")
+      .attr("font-weight","700")
+      .attr("font-size","21px")
+      .attr("fill",'#222222')
+      .text(this.label);
+
+    return this;
+  },
+
+  /**
+   * draw the count from scratch
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  renderCount: function() {
+    // get the count from the model. If it is undefined, assume it is 0
+    var count = this.model.get('count');
+    if (typeof(count) !== 'number'){
+      count = 0;
+    }
+
+    // draw the count
+    this.fg_layer.selectAll('.genericCountViewCount').data([]).exit().remove();
+    this.fg_layer.selectAll('.genericCountViewCount').data([1])
+      .enter().append("text")
+      .attr("class","genericCountViewCount")
+      .attr("x",10)
+      .attr("y",55)
+      .attr("font-family","'Open Sans")
       .attr("font-weight","500")
       .attr("font-size","37px")
-      .attr("fill",'#222222')
-      .text(self.label);
+      .attr("fill",this.fg_color)
+      .text(count);
+
     return this;
   }
 
