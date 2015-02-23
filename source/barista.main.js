@@ -6002,7 +6002,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-weight","500")
       .attr("font-size","37px")
       .attr("fill",this.fg_color)
-      .text(count);
+      .text(Barista.numberWithCommas(143905));
 
     return this;
   }
