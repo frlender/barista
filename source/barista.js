@@ -5558,7 +5558,6 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
 
     // bind window resize events to redraw.
     var self = this;
-    // $(window).off('resize', self.render());
     $(window).resize(function() {self.update();} );
 
     return this;
@@ -5587,7 +5586,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-weight","500")
       .attr("font-size","1.31463rem")
       .attr("fill",'#222222')
-      .text(self.label.charAt(0) + self.label.slice(1));
+      .text(self.label);
     return this;
   }
 
