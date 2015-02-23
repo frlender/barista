@@ -8479,7 +8479,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
   render: function(){
     this.base_render()
       .renderLabel()
-      .rednerCount();
+      .renderCount();
 
     return this;
   },
