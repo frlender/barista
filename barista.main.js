@@ -8490,10 +8490,10 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .enter().append("text")
       .attr("class","genericCountViewLabel")
       .attr("x",10)
-      .attr("y",14)
+      .attr("y",20)
       .attr("font-family","'Open Sans")
       .attr("font-weight","500")
-      .attr("font-size","1.31463rem")
+      .attr("font-size","37px")
       .attr("fill",'#222222')
       .text(self.label);
     return this;
