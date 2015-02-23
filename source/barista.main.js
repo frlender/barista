@@ -5935,11 +5935,11 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * @return {Barista.Views.GenericCountView} a reference to this
    */
   initialize: function(){
-    // call the the base view initialize function
-    this.base_initialize();
-
     // set up static text, default if not specified
     this.label = (this.options.label !== undefined) ? this.options.label : 'Signatures';
+
+    // call the the base view initialize function
+    this.base_initialize();
 
     // bind window resize events to redraw.
     var self = this;
