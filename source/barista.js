@@ -5569,8 +5569,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * @return {Barista.Views.GenericCountView} a reference to this
    */
   render: function(){
-    this.base_render();
-    this.drawlabel();
+    this.base_render().drawLabel();
   },
 
   /**
@@ -5588,6 +5587,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-size","21pt")
       .attr("fill",this.fg_color)
       .text(this.label.charAt(0).toUpperCase() + this.label.slice(1));
+    return this;
   }
 
 });
