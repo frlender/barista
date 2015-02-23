@@ -57,5 +57,10 @@ Barista.Views.CMapNavigationView = Backbone.View.extend({
 		$(".cmap-navigation-menu-item",$el).on("click",function(){
 			$(".cmap-navigation-wrapper").toggleClass("show-nav");
 		});
-    }
+	},
+
+	addLink: function(text,route) {
+		var $el = $(".cmap-navigation-menu");
+		$el.append('<a href="' + route + '" class="col-xs-12 cmap-navigation-menu-item">' + text + '</a>');
+	}
 });

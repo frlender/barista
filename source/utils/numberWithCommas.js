@@ -5,6 +5,12 @@
 Barista.numberWithCommas = function(x){
     // first check to see if something was passed. if so, convert it
     if (x){
+      if (x == 0) {
+        return '0';
+      } else {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    } else {
+      return '0';
     }
 };

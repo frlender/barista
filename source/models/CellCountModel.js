@@ -16,6 +16,12 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // 1.  {Number}  **pert\_count**  the number of perturbagens matching an api query, defaults to *0*
   // 2.  {Array}  **pert\_types**  an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
   // 3.  {Date}  **last\_update**  a timestamp of the latest model update, defaults to the current time
+  /**
+   * [defaults description]
+   * @param {number} pert\_count   the number of perturbagens matching an api query, defaults to *0*
+   * @param {array}  pert\_types   an array of objects representing pert\_type categories to keep track of, defaults to *[{}}]*
+   * @param {date}   last\_update  a timestamp of the latest model update, defaults to the current time
+   */
   defaults: {
     count: 0,
     pert_types: [{}],
@@ -26,6 +32,11 @@ Barista.Models.CellCountModel = Backbone.Model.extend({
   // ### fetch
   // fetches new data from the cell_info api.  the count and pert_types data
   // is replaced with new data coming from the api call
+  /**
+   * fetches new data from the cell_info api
+   * @param  {string}  search_string  value to search for
+   * @param  {string}  search_type    one of 'multi', 'single', or 'cell'
+   */
   fetch: function(search_string,search_type){
     // depending on the type of query we are making, set up the pert_params for the api call.
     // if we are doing a single query, match that query as a regular expression. If we are

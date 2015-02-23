@@ -5,6 +5,11 @@
 Barista.Models.AnalysisHistoryModel = Backbone.Model.extend({
     // ### initialize
     // Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+    /**
+     * Overides the base Model's initialize method to add the models date attribute and set the cid to the mongo _id field
+     * @param  {string}  attributes
+     * @param  {string}  options
+     */
     initialize: function(attributes, options) {
         this.cid = this.get('_id')
         this.set("date", new Date(parseInt(this.cid.substring(0,8), 16)*1000));
