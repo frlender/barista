@@ -5554,7 +5554,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
     this.label = (this.options.label !== undefined) ? this.options.label : 'Signatures';
 
     // set up the top bar color, default to gray if not specified
-    this.top_bar_color = (this.options.top_bar_color !== undefined) ? this.options.top_bar_color : '#444444';
+    this.top_bar_color = (this.options.top_bar_color !== undefined) ? this.options.top_bar_color : '#BDBDBD';
 
     // call the the base view initialize function
     this.base_initialize();
