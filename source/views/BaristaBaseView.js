@@ -177,7 +177,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 			.text("png")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-			.on("click",function(){self.save_png();});	
+			.on("click",function(){self.save_png();});
 		}
 
 

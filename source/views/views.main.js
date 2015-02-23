@@ -177,7 +177,7 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 			.text("png")
 			.on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1).attr("fill","#56B4E9");})
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
-			.on("click",function(){self.save_png();});	
+			.on("click",function(){self.save_png();});
 		}
 
 
@@ -2468,6 +2468,60 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		// make the png label on the image visible again
 		png_selection.attr("opacity",png_opacity);
 	}
+});
+
+/**********************************************************
+ * Generic Count View                                     *
+ * a view that supports a single label and a single count *
+ **********************************************************/
+
+Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
+  /**
+   * give the view a name to be used throughout the View's functions when
+   * it needs to know what its class name is
+   * @type {String}
+   */
+  name: "GenericCountView",
+
+  /**
+   * set up the view's default model
+   * @type {Barista.Models.GenericCoutModel}
+   */
+  // model: new Barista.Models.GenericCountModel(),
+
+  /**
+   * overide the default Backbone.View initialize method to handle
+   * optional arguments, compile the view template, bind model changes
+   * to view updates and render the view
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  initialize: function(){
+    // call the the base view initialize function
+    this.base_initialize();
+
+    // set up static text, default if not specified
+    this.label = (this.options.label !== undefined) ? this.options.label : 'Signatures';
+
+    // bind window resize events to redraw.
+    var self = this;
+    $(window).off('resize', self.render());
+    $(window).resize(function() {self.update();} );
+
+    return this;
+  },
+
+  // ### redraw
+  // completely redraw the view.
+
+  /**
+   * completely re-render the view
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  render: function(){
+    this.base_render();
+
+  }
+
 });
 
 Barista.Views.GridView = Backbone.View.extend({
@@ -5896,7 +5950,7 @@ Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 // 6.  {string}  **display_field**  the model attribute to display for each model in the view's colleciton.  defualts to *'cid'*
 
 //		tag_list_view = new TagListView({el: $("target_selector",
-//									bg_color:"#ffffff", 
+//									bg_color:"#ffffff",
 //									fg_color: "white",
 //									tag_color: "gray",
 //									span_class: "col-lg-12",
@@ -5922,14 +5976,16 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	initialize: function(){
 		// initialize the base view
 		this.base_initialize();
-		
-		// set up a display attribute 
+
+		// set up a display attribute
 		this.display_attribute = (this.options.display_attribute !== undefined) ? this.options.display_attribute : 'cid';
 
-		// set up a tag color to use 
+		// set up a tag color to use
 		this.tag_color = (this.options.tag_color !== undefined) ? this.options.tag_color : 'black';
 
 		// look for custom listeners
+		this.listener = (this.options.listener !== undefined) ? this.options.listener : undefined;
+
 		this.listener = (this.options.listener !== undefined) ? this.options.listener : undefined;
 
 		// clear built in listeners
@@ -5974,7 +6030,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		var self = this;
 		// call BaristaBaseView's render function first so we can layer on top of it
 		this.base_render();
-		
+
 		// add a text element for each unique item in the collection
 		this.x_offsets = [5];
 		this.row_number = 0;
@@ -5986,7 +6042,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		});
 		this.tags = _.unique(this.tags);
 		this.draw_tags();
-		
+
 		return this;
 	},
 
@@ -6004,11 +6060,11 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1])
 			.transition(500)
 			.attr("y",this.height - 10);
-		
+
 	},
 
 	// ### draw tags
-	// utility function to draw tags diven a data set.  
+	// utility function to draw tags diven a data set.
 	draw_tags: function(){
 		var self = this;
 		// draw the foreground text of all the tags
@@ -6052,7 +6108,6 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		return this
 	}
 });
-
 
 // # **TickView**
 

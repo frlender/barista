@@ -17,7 +17,7 @@
 // 6.  {string}  **display_field**  the model attribute to display for each model in the view's colleciton.  defualts to *'cid'*
 
 //		tag_list_view = new TagListView({el: $("target_selector",
-//									bg_color:"#ffffff", 
+//									bg_color:"#ffffff",
 //									fg_color: "white",
 //									tag_color: "gray",
 //									span_class: "col-lg-12",
@@ -43,14 +43,16 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 	initialize: function(){
 		// initialize the base view
 		this.base_initialize();
-		
-		// set up a display attribute 
+
+		// set up a display attribute
 		this.display_attribute = (this.options.display_attribute !== undefined) ? this.options.display_attribute : 'cid';
 
-		// set up a tag color to use 
+		// set up a tag color to use
 		this.tag_color = (this.options.tag_color !== undefined) ? this.options.tag_color : 'black';
 
 		// look for custom listeners
+		this.listener = (this.options.listener !== undefined) ? this.options.listener : undefined;
+
 		this.listener = (this.options.listener !== undefined) ? this.options.listener : undefined;
 
 		// clear built in listeners
@@ -95,7 +97,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		var self = this;
 		// call BaristaBaseView's render function first so we can layer on top of it
 		this.base_render();
-		
+
 		// add a text element for each unique item in the collection
 		this.x_offsets = [5];
 		this.row_number = 0;
@@ -107,7 +109,7 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		});
 		this.tags = _.unique(this.tags);
 		this.draw_tags();
-		
+
 		return this;
 	},
 
@@ -125,11 +127,11 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		this.controls_layer.selectAll("." + this.div_string + "png_export").data([1])
 			.transition(500)
 			.attr("y",this.height - 10);
-		
+
 	},
 
 	// ### draw tags
-	// utility function to draw tags diven a data set.  
+	// utility function to draw tags diven a data set.
 	draw_tags: function(){
 		var self = this;
 		// draw the foreground text of all the tags
@@ -173,4 +175,3 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 		return this
 	}
 });
-
