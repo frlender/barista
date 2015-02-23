@@ -24,8 +24,11 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * @return {Barista.Views.GenericCountView} a reference to this
    */
   initialize: function(){
-    // set up static text, default if not specified
+    // set up label, default if not specified
     this.label = (this.options.label !== undefined) ? this.options.label : 'Signatures';
+
+    // set up the top bar color, default to gray if not specified
+    this.top_bar_color = (this.options.top_bar_color !== undefined) ? this.options.top_bar_color : '#444444';
 
     // call the the base view initialize function
     this.base_initialize();
@@ -69,7 +72,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
     .attr("class","genericCountViewTopBar")
     .attr("height",'2px')
     .attr("width",this.width)
-    .attr("fill",this.fg_color);
+    .attr("fill",this.top_bar_color);
 
     return this;
   },
