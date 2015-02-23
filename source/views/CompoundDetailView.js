@@ -395,7 +395,7 @@ Barista.Views.CompoundDetailView = Barista.Views.BaristaBaseView.extend({
 	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
 	/**
 	 * utility function to break a long summary string into a multiline and draw it at the desired location
-	 * @param  {string} options 
+	 * @param  {object} options  describes the options for drawing a string to the screen
 	 */
 	render_summary: function(options){
 		var self = this;

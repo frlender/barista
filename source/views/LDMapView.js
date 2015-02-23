@@ -30,17 +30,27 @@
 Barista.Views.LDMapView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "LDMapView",
 
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.HeatmapModel(),
 
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
 	/**
-	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window resize events to view re-draws, compile the template, and render the view
+	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window
+	 * resize events to view re-draws, compile the template, and render the view
 	 */
 	initialize: function(){
 		// set up color options.  default if not specified
@@ -297,8 +307,9 @@ Barista.Views.LDMapView = Backbone.View.extend({
 	// internal utility function to express 2D array data as a flat data array of objects with array
 	// coordinates and data value as attributes.
 	/**
-	 * internal utility function to express 2D array data as a flat data array of objects with array coordinates and data value as attributes
-	 * @param  {array} data [description]
+	 * internal utility function to express 2D array data as a flat data array of objects with array
+	 * coordinates and data value as attributes
+	 * @param {array} data  2D array of data
 	 */
 	unravel_data: function(data){
 		unraveled_data = [];

@@ -257,7 +257,7 @@ Barista.Views.GridView = Backbone.View.extend({
 		},500);
 	},
 /**
- * add description
+ * changes the height of the grid based on the number of elements it holds
  */
 	resize_div: function(){
 		var self = this;
@@ -270,9 +270,9 @@ Barista.Views.GridView = Backbone.View.extend({
 			$("#" + self.div_string).animate({height:target_height},500);
 		},500);
 	},
-/**
- * add description
- */
+	/**
+	 * use Handlebars to compile the template for the view
+	 */
 	compile_template: function(){
 		this.div_string = 'backgrid_target' + new Date().getTime();;
 		this.$el.append(BaristaTemplates.CMapBaseGrid({div_string: this.div_string,
@@ -285,7 +285,8 @@ Barista.Views.GridView = Backbone.View.extend({
 													}));
 	},
 /**
- * add description
+ * attempts to return data from a slice, and returns the slice button to its previous state if a failure
+ * is detected
  */
 	slice_all_table_data: function(){
 		var self = this;
@@ -342,13 +343,13 @@ Barista.Views.GridView = Backbone.View.extend({
 		},60000);
 	},
 /**
- * add descriotion
- * @param  {string} state [description]
- * @param  {string} link  [description]
+ * changes the state of the slice button based on the current state
+ * @param  {string} state  current state of the slice button (i.e. slice, progress, or link)
+ * @param  {string} link   link to the slice
  */
 	change_slice_button_state: function (state,link){
 		var self = this;
-		// unbind an handlers on the button
+		// unbind any handlers on the button
 		$("#" + self.div_string + "_slice",self.el).unbind();
 
 		// handle the re-binding of handlers and update the button text and icon
@@ -395,9 +396,9 @@ Barista.Views.GridView = Backbone.View.extend({
 		}
 
 	},
-/**
- * add description
- */
+	/**
+	 * download the backing data that matches the current model state
+	 */
 	download_table: function(){
 		var self = this;
 		// indicate we are downloading something
@@ -492,7 +493,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	//		pert_detail_view.hide(duration);
 	/**
 	 * hides the view by dimming the opacity and hiding it in the DOM
-	 * @param  {number} duration  the time in ms for the hide animation. defualts to *500*
+	 * @param  {number}  duration  the time in ms for the hide animation. defualts to *500*
 	 */
 	hide: function(duration){
 		var self = this;
@@ -510,7 +511,7 @@ Barista.Views.GridView = Backbone.View.extend({
 	//		pert_detail_view.show(duration);
 		/**
 	 * shows the view by brightening the opacity and showing it in the DOM
-	 * @param  {number} duration  the time in ms for the hide animation. defualts to *500*
+	 * @param  {number}  duration  the time in ms for the hide animation. defualts to *500*
 	 */
 	show: function(duration){
 		this.$el.show();

@@ -28,17 +28,27 @@
 Barista.Views.PertCountView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "PertCountView",
 
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.PertCountModel(),
 
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	 * template, bind model changes to view updates, and render the view
 	 */
 	initialize: function(){
 		// set up color options.  default if not specified
@@ -239,9 +249,9 @@ Barista.Views.PertCountView = Backbone.View.extend({
 			.on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.25).attr("fill","#000000");})
 			.on("click",function(){self.save_png();});
 	},
-/**
- * add description
- */
+	/**
+	 * update the dynamic potions of the view
+	 */
 	render: function(){
 		// stuff this into a variable for later use
 		var self = this;

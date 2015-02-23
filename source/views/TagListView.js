@@ -31,17 +31,26 @@ Barista.Views.TagListView = Barista.Views.BaristaBaseView.extend({
 
 	// ### model
 	// set of the default model for the view
+	/**
+	 * set of the default model for the view
+	 * @type {Backbone}
+	 */
 	model: new Backbone.Model(),
 
 	// ### collection
 	// set up a default collection for the view to work with
+	/**
+	 * set up a default collection for the view to work with
+	 * @type {Backbone}
+	 */
 	collection: new Backbone.Collection(),
 
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	 * template, bind model changes to view updates, and render the view
 	 */
 	initialize: function(){
 		// initialize the base view

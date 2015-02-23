@@ -10,6 +10,11 @@ search view's input, a "search:DidType" event is fired.
 Barista.Views.PertSearchBar = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "PertSearchBar",
 /**
  * add description
@@ -20,7 +25,6 @@ Barista.Views.PertSearchBar = Backbone.View.extend({
 
 		/**
 		determines wether or not the search view will match cell lines for autocomplete
-
 		@property match_cell_lines
 		@default true
 		@type Boolean

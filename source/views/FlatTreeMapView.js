@@ -1,6 +1,11 @@
 Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "FlatTreeMapView",
 
 		model: new Barista.Models.PertCellBreakdownModel(),
@@ -60,9 +65,8 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 	},
 
 	/**
-	 * add description
+	 * use Handlebars to compile the template for the view
 	 */
-
 	compile_template: function(){
 		this.div_string = 'd3_target' + new Date().getTime();
 		this.$el.append(BaristaTemplates.d3_target({div_string: this.div_string,
@@ -206,13 +210,13 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 
 	},
 /**
- * add description
+ * inserts tooltips that display the cell id and count for non-empty datasets
  */
 	add_tooltips: function(){
 		// make a selection of all cells in the treemap
 		var cell_selection = $('.' + this.div_string + '_cell');
 
-		// remove existing tooltips so we don confuse the labels
+		// remove existing tooltips so we don't confuse the labels
 		cell_selection.each(function(){
 			$(this).tooltip('destroy');
 		});
@@ -231,7 +235,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 		}
 	},
 /**
- * add description
+ * clear visible text in fields
  */
 	clear_text: function(){
 		this.vis.data([this.data]).selectAll("text.name").data([]).exit().remove();
@@ -278,7 +282,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			})
 	},
 /**
- * add description
+ * draws text to the screen based on treemap data
  */
 	draw_text: function(){
 		this.vis.data([this.data]).selectAll("text.name").data([]).exit().remove();
@@ -326,7 +330,7 @@ Barista.Views.FlatTreeMapView = Backbone.View.extend({
 			.transition().duration(500).attr("opacity",1);
 	},
 /**
- * add description
+ * saves the target svg on the screen to a png file
  */
 	savePng: function(){
 		//set the animate the div containing the view by applying and then removing

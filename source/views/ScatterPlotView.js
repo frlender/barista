@@ -48,13 +48,18 @@
 Barista.Views.ScatterPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.ScatterPlotModel(),
 
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	 * template, bind model changes to view updates, and render the view
 	 */
 	initialize: function(){
 		// set up x and y range and determine if are going to draw the axes dynamically

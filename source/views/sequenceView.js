@@ -4,7 +4,8 @@
 
 Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
   /**
-   * give the view a name to be used throughout the View's functions when it needs to know what its class name is
+   * give the view a name to be used throughout the View's functions when it needs to know what its class
+   * name is
    * @type {String}
    */
   name: "SequenceView",
@@ -41,7 +42,8 @@ Barista.Views.SequenceView = Barista.Views.BaristaBaseView.extend({
   },
 
   /**
-   * completely render the view. Updates both static and dynamic content in the view.
+   * completely render the view
+   * Updates both static and dynamic content in the view
    * @return {SequenceView} A reference to this to support chaining
    */
   render: function(){

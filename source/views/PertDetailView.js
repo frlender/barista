@@ -17,17 +17,27 @@
 Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// ### name
 	// give the view a name to be used throughout the View's functions when it needs to know what its class name is
+	/**
+	 * give the view a name to be used throughout the View's functions when it needs to know what its class
+	 * name is
+	 * @type {String}
+	 */
 	name: "PertDetailView",
 
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.PertDetailModel(),
 
 	// ### initialize
 	// overide the defualt Backbone.View initialize method to bind the view to model changes, bind
 	// window resize events to view re-draws, compile the template, and render the view
 	/**
-	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window resize events to view re-draws, compile the template, and render the view
+	 * overide the defualt Backbone.View initialize method to bind the view to model changes, bind window
+	 * resize events to view re-draws, compile the template, and render the view
 	 */
 	initialize: function(){
 		var self = this;
@@ -472,7 +482,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	*                                             as text (true) or if the value must be obtained by
 	*                                             searching (false)
 	* @param  {number}  x_pos_base                base position for the x_label set
-	* @param  {[type]}  value_link                iff supplied, used as a link on the visible text
+	* @param  {string}  value_link                if supplied, used as a link on the visible text
 */
 	render_label_and_value: function(class_name_base, label_text, model_field, pass_model_field_as_text, x_pos_base, value_link,increment_y){
 		// set up a local variable to keep our scope straight
@@ -559,7 +569,7 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
 	/**
 	 * utility function to break a long summary string into a multiline and draw it at the desired location
-	 * @param  {[type]} options [description]
+	 * @param  {object} options  describes the options for drawing a string to the screen
 	 */
 	render_summary: function(options){
 		var self = this;
@@ -716,7 +726,8 @@ Barista.Views.PertDetailView = Barista.Views.BaristaBaseView.extend({
 	// utility function to clear all of the labels and text generated with the
 	// render_label_and_value function
 	/**
-	 * utility function to clear all of the labels and text generated with the render_label_and_value function
+	 * utility function to clear all of the labels and text generated with the render_label_and_value
+	 * function
 	 */
 	clear_label_and_text: function(){
 		this.fg_layer.selectAll('.label_and_text').data([]).exit().remove();

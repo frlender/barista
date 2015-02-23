@@ -30,13 +30,18 @@
 Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// ### model
 	// set up the view's default model
+	/**
+	 * set up the view's default model
+	 * @type {Barista}
+	 */
 	model: new Barista.Models.ScatterPlotModel(),
 
 	// ### initialize
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view 
+	 * template, bind model changes to view updates, and render the view
 	 */
 	initialize: function(){
 		// set up x and y range
@@ -274,8 +279,8 @@ Barista.Views.ViolinPlotView = Barista.Views.BaristaBaseView.extend({
 	// internal method used to sort path_data list elements by the x attribute
 	/**
 	 * internal method used to sort path_data list elements by the x attribute
-	 * @param  {[type]} a  first element to compare
-	 * @param  {[type]} b  second element to compare
+	 * @param  {object} a  first element to compare
+	 * @param  {object} b  second element to compare
 	 */
 	path_data_sorter: function(a,b) {
 		if (a.x < b.x){

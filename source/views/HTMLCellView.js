@@ -25,7 +25,8 @@
 // A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed
 // to the string version of the rawinput 
 /**
- * A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed to the string version of the rawinput
+ * A formatter that extends Backgrid.CellFormatter to return exactly the raw input value as opposed to the
+ * string version of the rawinput
  */
 Barista.HTMLFormatter = Backgrid.HTMLFormatter = function () {};
 Barista.HTMLFormatter.prototype = new Backgrid.CellFormatter();

@@ -31,7 +31,8 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	// overide the default Backbone.View initialize method to handle optional arguments, compile the view
 	// template, bind model changes to view updates, and render the view
 	/**
-	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view template, bind model changes to view updates, and render the view
+	 * overide the default Backbone.View initialize method to handle optional arguments, compile the view
+	 * template, bind model changes to view updates, and render the view
 	 */
 	initialize: function(){
 		// set up color and font defaults
@@ -208,9 +209,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	},
 	
 	/**
-	 * add description
-	 * @param  {[type]} font   [description]
-	 * @param  {[type]} target [description]
+	 * applies the given font to the text at the given target
+	 * @param  {font} font      font to apply
+	 * @param  {string} target  text target to apply font to
 	 */
 	apply_font: function(font, target) {
 		return target.attr("font-family", font.family)
@@ -222,7 +223,7 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	},
 	/**
 	 * add description
-	 * @param  {[type]} font [description]
+	 * @param  {font} font  font object
 	 */
 	font_to_css_style: function(font) {
 		return "font:"+ font.weight +" " + font.size + " " + font.family + "; "
@@ -382,9 +383,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	},
 	/**
 	 * add description
-	 * @param  {[type]} message    [description]
-	 * @param  {[type]} icon_class [description]
-	 * @param  {[type]} handler    [description]
+	 * @param  {string}   message     visible text
+	 * @param  {string}   icon_class  value of the class attribute
+	 * @param  {function} handler     function associated with click
 	 */
 	render_export_control: function(message, icon_class, handler) {
 		this.controls_layer.selectAll('.export_text').data([]).exit().remove();
@@ -486,8 +487,9 @@ Barista.Views.PlatformSummaryView = Backbone.View.extend({
 	// 5.  {bottom}  **bottom**  the y position to place the **bottom** edge of text, defaults to *100*
 	// 6.  {node_class}  **node_class**  the class used for locating the text node within fg_layer, defaults to *""*
 	/**
-	 * utility function to break a long description string into a multiline and draw it at the desired location
-	 * @param  {[type]} options [description]
+	 * utility function to break a long description string into a multiline and draw it at the desired
+	 * location
+	 * @param  {object} options  describes the options for drawing a string to the screen
 	 */
 	render_description: function(options){
 		var self = this;
