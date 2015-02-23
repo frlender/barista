@@ -58,7 +58,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("y",14)
       .attr("font-family","'Open Sans")
       .attr("font-weight","500")
-      .attr("font-size","21pt")
+      .attr("font-size","1.31463rem")
       .attr("fill",this.fg_color)
       .text('foo');
     return this;
