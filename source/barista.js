@@ -5569,6 +5569,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    */
   render: function() {
     this.base_render()
+      .renderTopBar()
       .renderLabel()
       .renderCount();
 
@@ -5581,6 +5582,22 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    */
   update: function() {
     this.updateCount();
+  },
+
+  /**
+   * draw the top bar of the view
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  renderTopBar: function() {
+    this.fg_layer.selectAll('.genericCountViewTopBar').data([]).exit().remove();
+    this.fg_layer.selectAll('.genericCountViewTopBar').data([1])
+    .enter().append("rect")
+    .attr("class","genericCountViewTopBar")
+    .attr("height",'2px')
+    .attr("width",this.width)
+    .attr("fill",this.fg_color);
+
+    return this;
   },
 
   /**
