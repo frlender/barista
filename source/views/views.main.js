@@ -2527,15 +2527,15 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * draw the static label at the top of the view
    */
   drawLabel: function() {
-    this.fg_layer.selectAll('.label').data([]).exit().remove();
-    this.fg_layer.selectAll('.label').data([1])
+    this.fg_layer.selectAll('.genericCountViewLabel').data([]).exit().remove();
+    this.fg_layer.selectAll('.genericCountViewLabel').data([1])
       .enter().append("text")
-      .attr("class","label")
+      .attr("class","genericCountViewLabel")
       .attr("x",10)
       .attr("y",14)
       .attr("font-family","'Open Sans")
       .attr("font-weight","500")
-      .attr("font-size","21px")
+      .attr("font-size","1.31463rem")
       .attr("fill",this.fg_color)
       .text('foo');
     return this;
