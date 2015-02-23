@@ -2518,12 +2518,20 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
    * completely re-render the view
    * @return {Barista.Views.GenericCountView} a reference to this
    */
-  render: function(){
+  render: function() {
     this.base_render()
       .renderLabel()
       .renderCount();
 
     return this;
+  },
+
+  /**
+   * update only the dynamic portions of the view
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  update: function() {
+    this.updateCount();
   },
 
   /**
@@ -2569,6 +2577,31 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-size","37px")
       .attr("fill",this.fg_color)
       .text(Barista.numberWithCommas(count));
+
+    return this;
+  },
+
+  /**
+   * update the count from the model. If if is undefined, assume it is 0
+   * @return {Barista.Views.GenericCountView} a reference to this
+   */
+  updateCount: function() {
+    // get the count from the model. If it is undefined, assume it is 0
+    var count = this.model.get('count');
+    if (typeof(count) !== 'number'){
+      count = 0;
+    }
+
+
+    // transition the count to the new value
+    this.fg_layer.selectAll('.genericCountViewCount').data([1])
+      .transition().duration(500)
+      .tween("text", function() {
+          var i = d3.interpolate(this.label.replace(",",""), count);
+          return function(t) {
+            this.label = Barista.numberWithCommas(Math.round(i(t)));
+          };
+      });
 
     return this;
   }
