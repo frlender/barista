@@ -53,8 +53,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract cell histology from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -151,8 +151,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract cell id from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -248,8 +248,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract cell lineage from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -344,8 +344,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract mutation data from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -436,8 +436,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
@@ -565,8 +565,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
@@ -693,10 +693,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract job id from
 				 */
-                filter: function(response){
+				filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
                     var object_map = {};
@@ -790,10 +790,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract job id from
 				 */
-                filter: function(response){
+				filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
                     var object_map = {};
@@ -887,10 +887,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract status from
 				 */
-                filter: function(response){
+				filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
                     var object_map = {};
@@ -986,8 +986,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -1089,8 +1089,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var datum_list = [];
@@ -1192,8 +1192,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];
@@ -1321,10 +1321,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract tool id from
 				 */
-                filter: function(response){
+				filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
                     var object_map = {};
@@ -1419,10 +1419,10 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
                 dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract job id from
 				 */
-                filter: function(response){
+				filter: function(response){
                     var datum_list = [];
                     var auto_data = [];
                     var object_map = {};

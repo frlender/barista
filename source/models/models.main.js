@@ -370,10 +370,18 @@ Barista.Models.GeneDetailModel = Backbone.Model.extend({
 
   // ### kd_fields
   // kd specific model fields
+  /**
+   * kd specific model fields
+   * @type {Array}
+   */
   kd_fields: ['clone_name','oligo_seq','seed_seq6','seed_seq7','target_region','target_seq','vector_id'],
 
   // ### array_fields
   // fields that are arrays
+  /**
+   * fields that are arrays
+   * @type {Array}
+   */
   array_fields: ['cell_id','sig_id','sig_id_gold'],
 
   // ### fetch

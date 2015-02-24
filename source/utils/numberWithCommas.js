@@ -4,7 +4,7 @@
 // credit to Elias Zamaria http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
 /**
  * a utility function to return a number with commas every three digits
- * @param  {number} x  nuymber to add commas to
+ * @param  {number} x  number to add commas to
  */
 Barista.numberWithCommas = function(x){
     // first check to see if something was passed. if so, convert it

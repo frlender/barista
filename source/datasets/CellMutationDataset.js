@@ -52,8 +52,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract mutation data from
 				 */
 				filter: function(response){
 					var datum_list = [];

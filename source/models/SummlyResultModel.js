@@ -41,6 +41,7 @@ Barista.Models.SummlyResultModel = Backbone.Model.extend({
      * Overides the base Model's initialize method to add the model's cid to the summly_id
      * @param  {string}  attributes
      * @param  {string}  options
+     * are these even used?
      */
 	initialize: function(attributes,options){
 		this.cid = this.get('target');

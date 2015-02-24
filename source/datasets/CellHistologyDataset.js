@@ -41,8 +41,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 				  /**
 				   * !!!
   					* set the remote data source to use cellinfo with custom query params
-  					* @param  {string}  url
-  					* @param  {string}  query
+  					* @param  {string}  url    (used?)
+  					* @param  {string}  query  custom query
   					*/ 
 				replace: function(url,query){
 					query = (query[0] === "*") ? query.replace("*",".*") : query;
@@ -54,11 +54,9 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * !!!
-				 * returns the processed list of datums for the autocomplete
-				 * @param {array} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract cell histology from
 				 */
-
 				filter: function(response){
 					var datum_list = [];
 					var auto_data = [];

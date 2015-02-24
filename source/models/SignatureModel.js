@@ -6,7 +6,6 @@ Barista.Models.SignatureModel = Backbone.Model.extend({
 	// ### initialize
 	// Overides the base Model's initialize method to set the model's cid to the sig_id of the perturbagen
 	/**
-	 * !!!
      * Overides the base Model's initialize method to add the model's cid to the sig_id of the perturbagen
      * @param  {string}  attributes
      * @param  {string}  options

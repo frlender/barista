@@ -39,8 +39,8 @@ Barista.Datasets = _.extend(Barista.Datasets,
 
 				dataType: 'jsonp',
 				/**
-				 * add description
-				 * @param {string} response 
+				 * returns the processed list of data for the autocomplete
+				 * @param {array} response  array of data to extract pert_iname from
 				 */
 				filter: function(response){
 					var genetic_types = ["trt_sh","trt_oe","trt_sh.cgs"];

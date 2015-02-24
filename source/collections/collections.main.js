@@ -77,7 +77,7 @@ Barista.Collections.AnalysisHistoryCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_type,limit){
         var self = this;
@@ -213,7 +213,7 @@ Barista.Collections.CellCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_column,limit){
         var self = this;
@@ -324,7 +324,7 @@ Barista.Collections.GenericJSONCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_type,limit){
         var self = this;
@@ -429,7 +429,7 @@ Barista.Collections.PertCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_type,limit){
         var self = this;
@@ -572,7 +572,7 @@ Barista.Collections.SignatureCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_type,limit){
         var self = this;
@@ -720,7 +720,7 @@ Barista.Collections.SummlyResultCollection = Backbone.Collection.extend({
    * @param  {string}  search_string  the string on which a regex search into the api at the collections
    *                                  url will be performed, defaults to *""*
    * @param  {string}  search_type    the type of search that will be performed, defaults to *"single"*
-   * @param  {number} limit           the number of models to be fetched, defaults to *30*
+   * @param  {number}  limit          the number of models to be fetched, defaults to *30*
    */
     getData: function(search_string,search_type,limit){
 		var self = this;

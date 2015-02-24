@@ -366,12 +366,12 @@ Barista.Views.BaristaBaseView = Backbone.View.extend({
 // 3.  {String}  **span\_class**  a bootstrap span class to size the width of the view, defaults to *"span12"*
 // 4.  {Array}  **range**  a two element array specifying the plotting bounds of the plot, defaults to *[min(data),max(data)]*
 // 5.  {Bool}  **log**  if set to true, plots the data on a log scale, defaults to *false*
-// 6. {Number} **min_lock** if set, locks the minimum of the range at the given value. Ignored if range is set. defaults to *undefined*
-// 7. {Number} **max_lock** if set, locks the maximum of the range at the given value. Ignored if range is set. defaults to *undefined*
-// 8. {Bool} **min_expand** if set, allows the minimum of the range to expand if data is found below it. defaults to *false*
-// 9. {Bool} **max_expand** if set, allows the maximum of the range to expand if data is found above it. defaults to *false*
+// 6.  {Number} **min_lock** if set, locks the minimum of the range at the given value. Ignored if range is set. defaults to *undefined*
+// 7.  {Number} **max_lock** if set, locks the maximum of the range at the given value. Ignored if range is set. defaults to *undefined*
+// 8.  {Bool} **min_expand** if set, allows the minimum of the range to expand if data is found below it. defaults to *false*
+// 9.  {Bool} **max_expand** if set, allows the maximum of the range to expand if data is found above it. defaults to *false*
 // 10. {String} **orientation** sets the orientation of the bar plot. options are 'horizontal' or 'vertical'. defaults to *'vertical'*
-// 11.  {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
+// 11. {Number}  **plot_height**  the height of the plot in pixels, defaults to *120*
 
 //		bar_plot_view = new BarPlotView({el: $("target_selector",
 //									bg_color:"#ffffff", 
