@@ -5616,7 +5616,7 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .attr("font-family","'Open Sans")
       .attr("font-weight","300")
       .attr("font-size","16px")
-      .attr("fill",'#222222')
+      .attr("fill",'#444444')
       .text(this.label);
 
     return this;
