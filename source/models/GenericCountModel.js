@@ -17,11 +17,20 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
   },
 
   initialize:function(attrs){
-    this.listenTo(attrs.source,'update',function(){
-      if(attrs.source.getCount(attrs.key))
-      this.set('count',attrs.source.getCount(attrs.key));
-      else this.set('count',0);
-    });
+    this.setListeners();
+  },
+
+  setListeners: function() {
+    var source = this.get('source');
+    if (source) {
+      this.listenTo(source,'update',function(){
+        if(attrs.source.getCount(attrs.key)) {
+          this.set('count',attrs.source.getCount(attrs.key));
+        } else {
+          this.set('count',0);
+        }
+      });
+    };
   }
 });
 
@@ -41,4 +50,4 @@ Barista.Models.GenericSourceModel = Backbone.Model.extend({
       self.trigger('update');
     })
   }
-})
+});
