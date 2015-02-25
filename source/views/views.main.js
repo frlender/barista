@@ -1228,7 +1228,7 @@ Barista.Views.CMapHeaderView = Backbone.View.extend({
 		this.compile_template();
 
 		// register an event for clicking on the menu button
-        $("#cmapHeaderMenuButton",this.$el).on("click",function(){
+        $(".cmapHeaderMenuButton",this.$el).on("click",function(){
             self.trigger("cmapHeaderMenuButton:DidClick");
 			$(".cmap-navigation-wrapper").toggleClass("show-nav");
         });
