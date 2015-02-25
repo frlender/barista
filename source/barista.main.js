@@ -2241,12 +2241,16 @@ Barista.Models.GenericCountModel = Backbone.Model.extend({
       });
     };
   }
-
 });
 
 Barista.Models.GenericSourceModel = Backbone.Model.extend({
   initialize:function(attrs){
-    this.url = 'http://10.125.171.42:8080/' + attrs.key;
+    this.setKey();
+  },
+
+  setKey: function() {
+    var key = this.get('key');
+    this.url = 'http://10.125.171.42:8080/' + key;
   },
 
   getCount:function(inputKey){
@@ -2260,7 +2264,7 @@ Barista.Models.GenericSourceModel = Backbone.Model.extend({
       self.trigger('update');
     })
   }
-})
+});
 
 // # **GenericMongoModel**
 
