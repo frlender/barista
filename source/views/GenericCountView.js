@@ -27,6 +27,10 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
     // set up label, default if not specified
     this.label = (this.options.label !== undefined) ? this.options.label : 'Signatures';
 
+    // set the animation duration for count.
+    this.duration = (this.options.duration != undefined) ? this.options.duration : 500;
+
+
     // set up the top bar color, default to gray if not specified
     this.top_bar_color = (this.options.top_bar_color !== undefined) ? this.options.top_bar_color : 'white';
 
@@ -87,10 +91,6 @@ Barista.Views.GenericCountView = Barista.Views.BaristaBaseView.extend({
       .enter().append("text")
       .attr("class","genericCountViewLabel")
       .attr("y",25)
-      .attr("font-family","'Open Sans")
-      .attr("font-weight","300")
-      .attr("font-size","16px")
-      .attr("fill",'#444444')
       .text(this.label);
 
     return this;
